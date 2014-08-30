@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 
@@ -20,6 +21,9 @@ namespace Warehouse.Silverlight
         protected override void ConfigureModuleCatalog()
         {
             base.ConfigureModuleCatalog();
+
+            ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            moduleCatalog.AddModule(typeof(MainModule.MainModule));
         }
     }
 }
