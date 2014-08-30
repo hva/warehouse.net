@@ -4,7 +4,7 @@ using Warehouse.Models;
 
 namespace Warehouse.Server.Controllers
 {
-    public class DefaultController : ApiController
+    public class TaxonomyController : ApiController
     {
         public IEnumerable<Taxonomy> Get()
         {
