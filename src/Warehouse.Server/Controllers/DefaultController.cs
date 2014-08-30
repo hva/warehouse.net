@@ -2,11 +2,10 @@
 using System.Web.Http;
 using Warehouse.Models;
 
-namespace Warehouse.Mvc.Controllers
+namespace Warehouse.Server.Controllers
 {
     public class DefaultController : ApiController
     {
-        // GET api/values
         public IEnumerable<Taxonomy> Get()
         {
             return new[]
