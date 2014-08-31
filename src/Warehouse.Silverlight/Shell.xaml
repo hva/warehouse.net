@@ -4,10 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Regions="http://www.codeplex.com/prism"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
-    <ItemsControl Name="MainRegion" Regions:RegionManager.RegionName="MainRegion"/>
+    <!--<ItemsControl Name="MainRegion" Regions:RegionManager.RegionName="MainRegion"/>-->
+    <Grid>
+        <Rectangle Height="45" Fill="#111111" VerticalAlignment="Top" />
+        <Grid MaxWidth="1000">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <controls:MainMenuItem Content="Склад" IsChecked="True" />
+                <controls:MainMenuItem Content="Номенклатура" />
+            </StackPanel>
+        </Grid>
+    </Grid>
 
 </UserControl>

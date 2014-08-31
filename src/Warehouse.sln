@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server", "Warehou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.MainModule", "Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj", "{F77D538B-1F2E-4F01-951F-DBA2B45CB937}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.Controls", "Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj", "{B0774D98-9D1C-4E60-8855-09A42CBE186A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F77D538B-1F2E-4F01-951F-DBA2B45CB937}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F77D538B-1F2E-4F01-951F-DBA2B45CB937}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F77D538B-1F2E-4F01-951F-DBA2B45CB937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0774D98-9D1C-4E60-8855-09A42CBE186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0774D98-9D1C-4E60-8855-09A42CBE186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0774D98-9D1C-4E60-8855-09A42CBE186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0774D98-9D1C-4E60-8855-09A42CBE186A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

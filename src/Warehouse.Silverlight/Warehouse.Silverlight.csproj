@@ -148,6 +148,10 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
+      <Project>{B0774D98-9D1C-4E60-8855-09A42CBE186A}</Project>
+      <Name>Warehouse.Silverlight.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj">
       <Project>{F77D538B-1F2E-4F01-951F-DBA2B45CB937}</Project>
       <Name>Warehouse.Silverlight.MainModule</Name>
