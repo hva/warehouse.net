@@ -12,7 +12,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
+                <ControlTemplate TargetType="controls:MainMenuItem">
                     <Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -47,6 +47,19 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="{TemplateBinding Padding}"/>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:MainMenuDivider">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MainMenuDivider">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="1" Fill="#000000" HorizontalAlignment="Left" />
+                        <Rectangle Width="1" Fill="#2b2b2b" HorizontalAlignment="Right" />
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

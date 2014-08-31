@@ -17,8 +17,11 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
+                <controls:MainMenuDivider />
                 <controls:MainMenuItem Content="Склад" IsChecked="True" />
+                <controls:MainMenuDivider />
                 <controls:MainMenuItem Content="Номенклатура" />
+                <controls:MainMenuDivider />
             </StackPanel>
         </Grid>
     </Grid>
