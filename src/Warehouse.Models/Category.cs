@@ -1,7 +1,8 @@
 ﻿namespace Warehouse.Models
 {
-    public class Taxonomy
+    public class Category
     {
         public int Id { get; set; }
+        public string Title { get; set; }
     }
 }

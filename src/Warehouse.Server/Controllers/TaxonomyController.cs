@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Warehouse.Models;
+using Warehouse.Server.Data;
 
 namespace Warehouse.Server.Controllers
 {
     public class TaxonomyController : ApiController
     {
-        public IEnumerable<Taxonomy> Get()
+        public IEnumerable<Category> Get()
         {
-            return new[]
-            {
-                new Taxonomy { Id = 1 },
-                new Taxonomy { Id = 2 },
-            };
+            var context = new SklContext();
+            return context.Categories.ToArray();
         }
     }
 }
