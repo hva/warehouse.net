@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server.Data", "Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server.Models", "Warehouse.Server.Models\Warehouse.Server.Models.csproj", "{D1B1DE82-23E9-4266-BD6B-812D094965D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.NavigationModule", "Warehouse.Silverlight.NavigationModule\Warehouse.Silverlight.NavigationModule.csproj", "{5B0E4F0F-7646-40AF-AF9B-AF6E50793864}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D1B1DE82-23E9-4266-BD6B-812D094965D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1B1DE82-23E9-4266-BD6B-812D094965D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1B1DE82-23E9-4266-BD6B-812D094965D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0E4F0F-7646-40AF-AF9B-AF6E50793864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0E4F0F-7646-40AF-AF9B-AF6E50793864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0E4F0F-7646-40AF-AF9B-AF6E50793864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0E4F0F-7646-40AF-AF9B-AF6E50793864}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
