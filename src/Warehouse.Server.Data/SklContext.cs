@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Warehouse.Models;
+using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Data
 {
@@ -11,6 +11,6 @@ namespace Warehouse.Server.Data
             Configuration.LazyLoadingEnabled = false;
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Taxonomy> Taxonomy { get; set; }
     }
 }

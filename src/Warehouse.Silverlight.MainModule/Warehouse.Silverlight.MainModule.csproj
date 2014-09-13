@@ -78,12 +78,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Models\Warehouse.Models.csproj">
-      <Project>{46244539-8E73-4698-9FC4-4891087C7EE4}</Project>
-      <Name>Warehouse.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

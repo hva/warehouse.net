@@ -139,13 +139,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Models\Warehouse.Models.csproj">
-      <Project>{46244539-8E73-4698-9FC4-4891087C7EE4}</Project>
-      <Name>Warehouse.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Server.Data\Warehouse.Server.Data.csproj">
       <Project>{BB08A735-138E-4EE9-97C3-F096DC6579E9}</Project>
       <Name>Warehouse.Server.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Server.Models\Warehouse.Server.Models.csproj">
+      <Project>{D1B1DE82-23E9-4266-BD6B-812D094965D0}</Project>
+      <Name>Warehouse.Server.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Warehouse.Models;
+using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Data
 {
@@ -16,11 +16,12 @@ namespace Warehouse.Server.Data
 
         private static void AddTaxonomy(SklContext db)
         {
-            db.Categories.AddRange(new[]
+            db.Taxonomy.AddRange(new[]
             {
-                new Category { Title = "Taxonomy 1"},
-                new Category { Title = "Taxonomy 2"},
-                new Category { Title = "Taxonomy 3"},
+                new Taxonomy { Title = "Трубы", Sortorder = 0 },
+                new Taxonomy { Title = "Листы", Sortorder = 1 },
+                new Taxonomy { Title = "Квадрат", Sortorder = 2 },
+                new Taxonomy { Title = "Арматура", Sortorder = 3 },
             });
         }
     }

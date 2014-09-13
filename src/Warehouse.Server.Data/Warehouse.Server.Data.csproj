@@ -47,9 +47,9 @@
     <Compile Include="SklContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Models\Warehouse.Models.csproj">
-      <Project>{46244539-8E73-4698-9FC4-4891087C7EE4}</Project>
-      <Name>Warehouse.Models</Name>
+    <ProjectReference Include="..\Warehouse.Server.Models\Warehouse.Server.Models.csproj">
+      <Project>{D1B1DE82-23E9-4266-BD6B-812D094965D0}</Project>
+      <Name>Warehouse.Server.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
