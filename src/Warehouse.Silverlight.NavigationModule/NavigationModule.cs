@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.NavigationModule.Views;
@@ -16,6 +17,7 @@ namespace Warehouse.Silverlight.NavigationModule
         public void Initialize()
         {
             RegionManager.RegisterViewWithRegion("NavigationRegion", () => Container.Resolve<TopMenu>());
+            RegionManager.RequestNavigate("MainRegion", new Uri("MainView", UriKind.Relative));
         }
     }
 }
