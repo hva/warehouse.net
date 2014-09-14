@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
-      <Project>{B0774D98-9D1C-4E60-8855-09A42CBE186A}</Project>
+      <Project>{b0774d98-9d1c-4e60-8855-09a42cbe186a}</Project>
       <Name>Warehouse.Silverlight.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj">
@@ -131,6 +131,9 @@
       <Project>{5b0e4f0f-7646-40af-af9b-af6e50793864}</Project>
       <Name>Warehouse.Silverlight.NavigationModule</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
