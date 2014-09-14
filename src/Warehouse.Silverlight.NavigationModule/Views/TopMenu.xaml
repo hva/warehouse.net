@@ -3,15 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.NavigationModule.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
     <StackPanel Orientation="Horizontal" Height="45">
-        <controls:MainMenuDivider />
-        <controls:MainMenuItem Content="Склад" IsChecked="True" />
-        <controls:MainMenuDivider />
-        <controls:MainMenuItem Content="Номенклатура" />
-        <controls:MainMenuDivider />
+        <controls:TopMenuDivider />
+        <controls:TopMenuItem Content="Склад" IsChecked="True" />
+        <controls:TopMenuDivider />
     </StackPanel>
 </UserControl>

@@ -76,6 +76,12 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TopMenuDivider.xaml.cs">
+      <DependentUpon>TopMenuDivider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopMenuItem.xaml.cs">
+      <DependentUpon>TopMenuItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\TopMenu.xaml.cs">
@@ -86,17 +92,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\TopMenuDivider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopMenuItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TopMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
-      <Project>{B0774D98-9D1C-4E60-8855-09A42CBE186A}</Project>
-      <Name>Warehouse.Silverlight.Controls</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
