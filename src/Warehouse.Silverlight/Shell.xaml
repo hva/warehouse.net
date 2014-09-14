@@ -14,9 +14,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
                 <RowDefinition />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ContentControl regions:RegionManager.RegionName="NavigationRegion" />
             <ContentControl Grid.Row="1" regions:RegionManager.RegionName="MainRegion" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+            <TextBlock Grid.Row="2" x:Name="VersionTextBlock" Foreground="#bbb" />
         </Grid>
     </Grid>
 

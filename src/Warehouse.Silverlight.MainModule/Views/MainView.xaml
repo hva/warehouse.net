@@ -7,6 +7,5 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="main view" />
     </Grid>
 </UserControl>
