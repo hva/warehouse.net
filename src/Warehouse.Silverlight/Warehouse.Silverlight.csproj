@@ -79,6 +79,9 @@
       <HintPath>..\packages\Unity.2.1.505.2\lib\SL30\Microsoft.Practices.Unity.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core">
@@ -119,6 +122,10 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.DataService\Warehouse.Silverlight.DataService.csproj">
+      <Project>{BA022A52-7003-4D5D-BDA9-660088620190}</Project>
+      <Name>Warehouse.Silverlight.DataService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj">
       <Project>{F77D538B-1F2E-4F01-951F-DBA2B45CB937}</Project>
       <Name>Warehouse.Silverlight.MainModule</Name>
