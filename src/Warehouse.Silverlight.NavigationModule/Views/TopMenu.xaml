@@ -9,7 +9,7 @@
 
     <StackPanel Orientation="Horizontal" Height="45">
         <controls:TopMenuDivider />
-        <controls:TopMenuItem Content="Склад" IsChecked="True" />
+        <controls:TopMenuItem Content="Остатки" IsChecked="True" />
         <controls:TopMenuDivider />
     </StackPanel>
 </UserControl>
