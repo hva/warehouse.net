@@ -6,7 +6,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class MainViewModel : NotificationObject // : INavigationAware 
     {
-        private Taxonomy[] items;
+        private Product[] items;
         private readonly IDataService service;
 
         public MainViewModel(IDataService service)
@@ -15,7 +15,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             LoadData();
         }
 
-        public Taxonomy[] Items
+        public Product[] Items
         {
             get { return items; }
             set { items = value; RaisePropertyChanged(() => Items); }
@@ -23,7 +23,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void LoadData()
         {
-            Items = await service.GetTaxonomyAsync();
+            Items = await service.GetProductsAsync();
         }
     }
 }

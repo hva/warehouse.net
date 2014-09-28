@@ -5,6 +5,6 @@ namespace Warehouse.Silverlight.DataService
 {
     public interface IDataService
     {
-        Task<Taxonomy[]> GetTaxonomyAsync();
+        Task<Product[]> GetProductsAsync();
     }
 }
