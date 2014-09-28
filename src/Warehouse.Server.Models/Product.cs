@@ -1,13 +1,13 @@
-﻿using System.Runtime.Serialization;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Warehouse.Server.Models
 {
     public class Product
     {
         [BsonId]
-        [IgnoreDataMember]
+        [JsonIgnore]
         public ObjectId MongoId { get; set; }
 
         public string Id
@@ -31,21 +31,26 @@ namespace Warehouse.Server.Models
         [BsonElement("price_rozn")]
         public int PriceRozn { get; set; }
 
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("weight")]
         public double Weight { get; set; }
 
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("count")]
         public int Count { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [BsonElement("nd")]
         public double[] Nd { get; set; }
 
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("length")]
         public double Length { get; set; }
 
         [BsonElement("1C")]
-        public object Link1C { get; set; }
+        public string Internal { get; set; }
 
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("price_income")]
         public long PriceIcome { get; set; }
     }
