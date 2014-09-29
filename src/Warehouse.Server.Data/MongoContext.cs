@@ -9,7 +9,7 @@ namespace Warehouse.Server.Data
 
         public MongoContext()
         {
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient("mongodb://localhost:27017");
             var server = client.GetServer();
             database = server.GetDatabase("skill");
         }
