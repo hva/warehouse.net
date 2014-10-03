@@ -11,13 +11,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         private Product[] items;
         private readonly IDataService service;
-        private readonly InteractionRequest<Notification> notificationRequst = new InteractionRequest<Notification>();
+        private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
+        private readonly ICommand openProductCommand;
 
         public MainViewModel(IDataService service)
         {
             this.service = service;
 
-            OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
+            editProductRequest = new InteractionRequest<ProductEditViewModel>();
+            openProductCommand = new DelegateCommand<Product>(OpenProduct);
 
             LoadData();
         }
@@ -28,9 +30,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             set { items = value; RaisePropertyChanged(() => Items); }
         }
 
-        public ICommand OpenProductCommand { get; private set; }
-
-        public IInteractionRequest NotificationRequst { get { return notificationRequst; } }
+        public ICommand OpenProductCommand { get { return openProductCommand; } }
+        public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
 
         private async void LoadData()
         {
@@ -39,13 +40,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            notificationRequst.Raise(
-                new Notification {Title = "title", Content = "content"},
-                x =>
-                {
-                    
-                }
-            );
+            editProductRequest.Raise(new ProductEditViewModel(p));
         }
     }
 }
