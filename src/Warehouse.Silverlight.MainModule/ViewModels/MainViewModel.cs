@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.Models;
 
@@ -12,6 +14,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public MainViewModel(IDataService service)
         {
             this.service = service;
+
+            OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
+
             LoadData();
         }
 
@@ -21,9 +26,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             set { items = value; RaisePropertyChanged(() => Items); }
         }
 
+        public ICommand OpenProductCommand { get; private set; }
+
         private async void LoadData()
         {
             Items = await service.GetProductsAsync();
+        }
+
+        private void OpenProduct(Product p)
+        {
+            
         }
     }
 }

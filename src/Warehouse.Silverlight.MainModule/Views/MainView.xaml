@@ -7,11 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
     xmlns:models="clr-namespace:Warehouse.Silverlight.Models;assembly=Warehouse.Silverlight.Models"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.MainModule.Behaviors"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
     <Grid Margin="0,10">
         <sdk:DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
+            </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" d:DataContext="{d:DesignInstance Type=models:Product}" />
