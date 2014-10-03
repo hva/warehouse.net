@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.Models;
@@ -10,6 +11,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         private Product[] items;
         private readonly IDataService service;
+        private readonly InteractionRequest<Notification> notificationRequst = new InteractionRequest<Notification>();
 
         public MainViewModel(IDataService service)
         {
@@ -28,6 +30,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public ICommand OpenProductCommand { get; private set; }
 
+        public IInteractionRequest NotificationRequst { get { return notificationRequst; } }
+
         private async void LoadData()
         {
             Items = await service.GetProductsAsync();
@@ -35,7 +39,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            
+            notificationRequst.Raise(
+                new Notification {Title = "title", Content = "content"},
+                x =>
+                {
+                    
+                }
+            );
         }
     }
 }
