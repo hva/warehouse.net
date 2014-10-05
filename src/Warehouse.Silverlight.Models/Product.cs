@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Warehouse.Silverlight.Models
 {
@@ -19,16 +17,6 @@ namespace Warehouse.Silverlight.Models
         public string Internal { get; set; }
         public long PriceIcome { get; set; }
 
-        public string NdTotal
-        {
-            get
-            {
-                if (Nd == null || Nd.Length == 0)
-                {
-                    return null;
-                }
-                return Nd.Sum().ToString(CultureInfo.InvariantCulture);
-            }
-        }
+        public double NdTotal { get { return Nd == null ? 0 : Nd.Sum(); } }
     }
 }
