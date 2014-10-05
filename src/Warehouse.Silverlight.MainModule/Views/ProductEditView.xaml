@@ -8,6 +8,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
+    xmlns:interactivity="http://www.codeplex.com/prism"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title}"
@@ -45,10 +46,14 @@
                     </Grid.RowDefinitions>
 
                     <sdk:Label Content="Наимнование" />
-                    <TextBox Grid.Column="1" Text="{Binding Product.Name, Mode=TwoWay}" />
+                    <TextBox Grid.Column="1" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
 
-                    <sdk:Label Grid.Row="1" Content="Размер" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Product.Size, Mode=TwoWay}" />
+                    <!--<sdk:Label Grid.Row="1" Content="Размер" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Product.Size, Mode=TwoWay}" />-->
 
                 </Grid>
             </sdk:TabItem>

@@ -114,7 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
-    <Compile Include="Infrastructure\InteractionRequestViewModel.cs" />
+    <Compile Include="Infrastructure\InteractionRequestObject.cs" />
+    <Compile Include="Infrastructure\InteractionRequestValidationObject.cs" />
+    <Compile Include="Infrastructure\Validate.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

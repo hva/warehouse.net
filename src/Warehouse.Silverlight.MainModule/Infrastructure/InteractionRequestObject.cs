@@ -6,7 +6,7 @@ using Microsoft.Practices.Prism.ViewModel;
 
 namespace Warehouse.Silverlight.MainModule.Infrastructure
 {
-    public abstract class InteractionRequestViewModel : Confirmation, INotifyPropertyChanged
+    public abstract class InteractionRequestObject : Confirmation, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -18,7 +18,7 @@ namespace Warehouse.Silverlight.MainModule.Infrastructure
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> lambda)
         {
-            var name = PropertySupport.ExtractPropertyName<T>(lambda);
+            var name = PropertySupport.ExtractPropertyName(lambda);
             OnPropertyChanged(name);
         }
     }
