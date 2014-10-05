@@ -1,5 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using Warehouse.Silverlight.MainModule.Infrastructure;
 using Warehouse.Silverlight.Models;
@@ -33,16 +38,26 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
-        private void Save(ChildWindow window)
+        private async void Save(ChildWindow window)
         {
             ValidateName();
 
             if (HasErrors) return;
 
+            // prevent closing while awaiting
+            window.Closing += WindowClosing;
 
+            await TaskEx.Delay(TimeSpan.FromSeconds(5));
 
-            Confirmed = true;
-            window.Close();
+            window.Closing -= WindowClosing;
+
+            //Confirmed = true;
+            //window.Close();
+        }
+
+        private void WindowClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
         }
 
         private void ValidateName()

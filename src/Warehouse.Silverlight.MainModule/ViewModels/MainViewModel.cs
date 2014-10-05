@@ -35,7 +35,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void LoadData()
         {
-            Items = await service.GetProductsAsync();
+            var task = await service.GetProductsAsync();
+            if (task.Success)
+            {
+                Items = task.Result;
+            }
         }
 
         private void OpenProduct(Product p)
