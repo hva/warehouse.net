@@ -14,6 +14,12 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
+    <UserControl.Resources>
+        <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
+
     <i:Interaction.Triggers>
 
         <prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
@@ -32,17 +38,17 @@
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
             </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Цена&#10;без НДС (опт)" Binding="{Binding PriceOpt}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Кол-во&#10;(шт.)" Binding="{Binding Count}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Длина" Binding="{Binding Length}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="1C" Binding="{Binding Internal}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Цена&#10;без НДС (опт)" Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Кол-во&#10;(шт.)" Binding="{Binding Count, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Длина" Binding="{Binding Length, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <!--<sdk:DataGridTextColumn Header="1C" Binding="{Binding Internal}" d:DataContext="{d:DesignInstance Type=models:Product}" />-->
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
     </Grid>

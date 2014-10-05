@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
+using System.Windows.Markup;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
@@ -16,6 +18,7 @@ namespace Warehouse.Silverlight
         protected override void InitializeShell()
         {
             base.InitializeShell();
+            ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             Application.Current.RootVisual = (UIElement)Shell;
         }
 
