@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Windows.Controls;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 using Warehouse.Silverlight.MainModule.Infrastructure;
 using Warehouse.Silverlight.Models;
 
@@ -6,27 +8,41 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ProductEditViewModel : InteractionRequestValidationObject
     {
-        private readonly Product product;
+        private string name;
 
         public ProductEditViewModel(Product product)
         {
-            this.product = product;
+            name = product.Name;
+
             Title = string.Format("{0} {1}", product.Name, product.Size);
+            SaveCommand = new DelegateCommand<ChildWindow>(Save);
         }
 
-        [Required]
+        public ICommand SaveCommand { get; private set; }
+
         public string Name
         {
-            get { return product.Name; }
+            get { return name; }
             set
             {
-                if (product.Name != value)
+                if (name != value)
                 {
-                    product.Name = value;
+                    name = value;
                     ValidateName();
-                    RaisePropertyChanged(() => Name);
                 }
             }
+        }
+
+        private void Save(ChildWindow window)
+        {
+            ValidateName();
+
+            if (HasErrors) return;
+
+
+
+            Confirmed = true;
+            window.Close();
         }
 
         private void ValidateName()
