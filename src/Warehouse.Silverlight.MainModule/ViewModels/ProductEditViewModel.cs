@@ -7,7 +7,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         public ProductEditViewModel(Product product)
         {
+            Product = product;
             Title = string.Format("{0} {1}", product.Name, product.Size);
         }
+
+        public Product Product { get; private set; }
     }
 }

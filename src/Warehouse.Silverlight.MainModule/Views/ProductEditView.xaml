@@ -14,7 +14,17 @@
     d:DataContext="{d:DesignInstance Type=viewModels:ProductEditViewModel}"
     x:Name="confirmationWindow">
 
-    <Grid MinWidth="600" MinHeight="300">
+    <sdk:ChildWindow.Resources>
+        <Style TargetType="sdk:Label">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+    </sdk:ChildWindow.Resources>
+
+    <Grid MinWidth="400" MinHeight="300">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="7" />
@@ -22,7 +32,26 @@
         </Grid.RowDefinitions>
 
         <sdk:TabControl>
-            <sdk:TabItem Header="Параметры" />
+            <sdk:TabItem Header="Параметры">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <sdk:Label Content="Наимнование" />
+                    <TextBox Grid.Column="1" Text="{Binding Product.Name, Mode=TwoWay}" />
+
+                    <sdk:Label Grid.Row="1" Content="Размер" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Product.Size, Mode=TwoWay}" />
+
+                </Grid>
+            </sdk:TabItem>
         </sdk:TabControl>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
