@@ -26,6 +26,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public ICommand SaveCommand { get; private set; }
 
+        public string Id { get { return id; } }
+
         public string Name
         {
             get { return name; }

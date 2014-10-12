@@ -28,6 +28,18 @@ namespace Warehouse.Silverlight.DataService
             }
         }
 
+        public async Task<AsyncResult<Product>> GetProductAsync(string id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
+                var uri = new Uri(string.Concat("api/products/", id), UriKind.Relative);
+                var str = await client.GetStringAsync(uri);
+                var res = JsonConvert.DeserializeObject<Product>(str);
+                return new AsyncResult<Product> { Result = res, Success = true };
+            }
+        }
+
         public async Task<AsyncResult> SaveProductAsync(Product product)
         {
             using (var client = new HttpClient())

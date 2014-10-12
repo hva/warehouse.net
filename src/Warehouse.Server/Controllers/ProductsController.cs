@@ -18,6 +18,17 @@ namespace Warehouse.Server.Controllers
             return data;
         }
 
+        public HttpResponseMessage Get(string id)
+        {
+            var context = new MongoContext();
+            var data = context.Products.FindOneById(new ObjectId(id));
+            if (data != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
         public HttpResponseMessage Put(string id, [FromBody] Product product)
         {
             var context = new MongoContext();
