@@ -44,7 +44,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            editProductRequest.Raise(new ProductEditViewModel(p));
+            editProductRequest.Raise(new ProductEditViewModel(p, service));
         }
     }
 }

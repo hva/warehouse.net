@@ -13,5 +13,9 @@ namespace Warehouse.Server.Controllers
             var data = context.Products.FindAll();
             return data;
         }
+
+        public void Put(string id, [FromBody] Product product)
+        {
+        }
     }
 }

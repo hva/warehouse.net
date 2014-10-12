@@ -1,11 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
+using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.MainModule.Infrastructure;
 using Warehouse.Silverlight.Models;
 
@@ -13,10 +10,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ProductEditViewModel : InteractionRequestValidationObject
     {
+        private readonly IDataService dataService;
+        private readonly string id;
         private string name;
 
-        public ProductEditViewModel(Product product)
+        public ProductEditViewModel(Product product, IDataService dataService)
         {
+            this.dataService = dataService;
+
+            id = product.Id;
             name = product.Name;
 
             Title = string.Format("{0} {1}", product.Name, product.Size);
@@ -47,7 +49,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             // prevent closing while awaiting
             window.Closing += WindowClosing;
 
-            await TaskEx.Delay(TimeSpan.FromSeconds(5));
+            var product = new Product
+            {
+                Id = id,
+                Name = name,
+            };
+            await dataService.SaveProductAsync(product);
 
             window.Closing -= WindowClosing;
 
