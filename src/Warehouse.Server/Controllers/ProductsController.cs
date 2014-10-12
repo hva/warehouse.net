@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
@@ -16,12 +18,14 @@ namespace Warehouse.Server.Controllers
             return data;
         }
 
-        public void Put(string id, [FromBody] Product product)
+        public HttpResponseMessage Put(string id, [FromBody] Product product)
         {
             var context = new MongoContext();
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
             var update = Update<Product>.Set(p => p.Name, product.Name);
             var res = context.Products.Update(query, update);
+            var code = res.Ok ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
+            return Request.CreateResponse(code);
         }
     }
 }
