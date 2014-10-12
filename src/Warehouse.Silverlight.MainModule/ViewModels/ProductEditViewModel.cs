@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Warehouse.Silverlight.DataService;
@@ -46,25 +45,18 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             if (HasErrors) return;
 
-            // prevent closing while awaiting
-            window.Closing += WindowClosing;
-
             var product = new Product
             {
                 Id = id,
                 Name = name,
             };
-            await dataService.SaveProductAsync(product);
 
-            window.Closing -= WindowClosing;
-
-            //Confirmed = true;
-            //window.Close();
-        }
-
-        private void WindowClosing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
+            var task = await dataService.SaveProductAsync(product);
+            if (task.Success)
+            {
+                Confirmed = true;
+                window.Close();
+            }
         }
 
         private void ValidateName()

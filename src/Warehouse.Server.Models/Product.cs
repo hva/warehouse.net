@@ -7,14 +7,7 @@ namespace Warehouse.Server.Models
     public class Product
     {
         [BsonId]
-        [JsonIgnore]
-        public ObjectId MongoId { get; set; }
-
-        public string Id
-        {
-            get { return MongoId.ToString(); }
-            set { MongoId = ObjectId.Parse(value); }
-        }
+        public ObjectId Id { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; }
