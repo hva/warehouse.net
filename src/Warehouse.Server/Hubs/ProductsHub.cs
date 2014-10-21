@@ -4,9 +4,9 @@ namespace Warehouse.Server.Hubs
 {
     public class ProductsHub : Hub
     {
-        public void Hello()
+        public void RaiseProductUpdated(string id)
         {
-            Clients.All.hello();
+            Clients.Others.OnProductUpdated(id + "_server");
         }
     }
 }

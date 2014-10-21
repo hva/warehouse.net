@@ -40,11 +40,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             var hubConnection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
             IHubProxy stockTickerHubProxy = hubConnection.CreateHubProxy("ProductsHub");
-            stockTickerHubProxy.On<string>("UpdateStockPrice", stock =>
+            stockTickerHubProxy.On<string>("OnProductUpdated", id =>
             {
 
             });
             await hubConnection.Start();
+
+            await stockTickerHubProxy.Invoke("RaiseProductUpdated", "123123123");
 
             var task = await service.GetProductsAsync();
             if (task.Success)

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using Warehouse.Server.Hubs;
+using Warehouse.Server;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace Warehouse.Server.Hubs
+namespace Warehouse.Server
 {
     public class Startup
     {

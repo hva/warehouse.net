@@ -143,7 +143,7 @@
     </Compile>
     <Compile Include="Hubs\ProductsHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Hubs\Startup.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
