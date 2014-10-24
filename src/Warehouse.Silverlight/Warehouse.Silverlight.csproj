@@ -170,6 +170,10 @@
       <Project>{5b0e4f0f-7646-40af-af9b-af6e50793864}</Project>
       <Name>Warehouse.Silverlight.NavigationModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.SignalRModule\Warehouse.Silverlight.SignalRModule.csproj">
+      <Project>{521B5402-727A-4598-A29B-DFD0312944DB}</Project>
+      <Name>Warehouse.Silverlight.SignalRModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

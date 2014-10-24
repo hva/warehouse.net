@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.ViewModel;
@@ -38,16 +37,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void LoadData()
         {
-            var hubConnection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
-            IHubProxy stockTickerHubProxy = hubConnection.CreateHubProxy("ProductsHub");
-            stockTickerHubProxy.On<string>("OnProductUpdated", id =>
-            {
-
-            });
-            await hubConnection.Start();
-
-            await stockTickerHubProxy.Invoke("RaiseProductUpdated", "123123123");
-
             var task = await service.GetProductsAsync();
             if (task.Success)
             {
