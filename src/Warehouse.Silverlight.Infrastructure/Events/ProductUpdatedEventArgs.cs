@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Silverlight.SignalRModule.Events
+﻿namespace Warehouse.Silverlight.Infrastructure.Events
 {
     public class ProductUpdatedEventArgs
     {

@@ -11,7 +11,7 @@ namespace Warehouse.Silverlight
             var assembly = Assembly.GetExecutingAssembly();
             var assemblyName = new AssemblyName(assembly.FullName);
             var version = assemblyName.Version.ToString().TrimEnd(".0".ToCharArray());
-            VersionTextBlock.Text = string.Concat("v.", version);
+            VersionTextBlock.Text = string.Concat("client v.", version);
         }
     }
 }

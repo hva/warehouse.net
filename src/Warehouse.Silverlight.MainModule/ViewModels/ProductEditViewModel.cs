@@ -1,7 +1,9 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.DataService;
+using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.MainModule.Infrastructure;
 using Warehouse.Silverlight.Models;
 
@@ -10,12 +12,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     public class ProductEditViewModel : InteractionRequestValidationObject
     {
         private readonly IDataService dataService;
+        private readonly IEventAggregator eventAggregator;
         private readonly string id;
         private string name;
 
-        public ProductEditViewModel(Product product, IDataService dataService)
+        public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
             this.dataService = dataService;
+            this.eventAggregator = eventAggregator;
 
             id = product.Id;
             name = product.Name;
@@ -56,6 +60,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var task = await dataService.SaveProductAsync(product);
             if (task.Success)
             {
+                eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(new ProductUpdatedEventArgs(id));
                 Confirmed = true;
                 window.Close();
             }
