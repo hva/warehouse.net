@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client;
+﻿using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.SignalRModule.Events;
 
@@ -16,18 +15,27 @@ namespace Warehouse.Silverlight.SignalRModule
 
         private readonly IEventAggregator eventAggregator;
 
-        public SignalRClient(/*IEventAggregator eventAggregator*/)
+        public SignalRClient(IEventAggregator eventAggregator)
         {
-            //this.eventAggregator = eventAggregator;
+            this.eventAggregator = eventAggregator;
             SubscribeLocal();
         }
 
-        public async Task StartAsync()
+        public void Start()
         {
             var hubConnection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
             hubProxy = hubConnection.CreateHubProxy(ProductsHub);
             SubscribeRemote();
-            await hubConnection.Start();
+            hubConnection.Start().Wait();
+        }
+
+        public void OnProductUpdatedLocal(ProductUpdatedEventArgs e)
+        {
+            if (e.FromRemote) return;
+
+            // product updated locally
+            // we need to notify other clients
+            hubProxy.Invoke(RaiseProductUpdated, e.ProductId).Wait();
         }
 
         private void SubscribeLocal()
@@ -38,15 +46,6 @@ namespace Warehouse.Silverlight.SignalRModule
         private void SubscribeRemote()
         {
             hubProxy.On<string>(OnProductUpdated, OnProductUpdatedRemote);
-        }
-
-        private void OnProductUpdatedLocal(ProductUpdatedEventArgs e)
-        {
-            if (e.FromRemote) return;
-
-            // product updated locally
-            // we need to notify other clients
-            // await hubProxy.Invoke(RaiseProductUpdated, e.ProductId);
         }
 
         private void OnProductUpdatedRemote(string productId)
