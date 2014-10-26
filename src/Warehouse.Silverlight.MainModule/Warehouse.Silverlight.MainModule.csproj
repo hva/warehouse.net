@@ -117,6 +117,7 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\ChildWindowBehavior.cs" />
     <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
     <Compile Include="Infrastructure\InteractionRequestObject.cs" />
     <Compile Include="Infrastructure\InteractionRequestValidationObject.cs" />

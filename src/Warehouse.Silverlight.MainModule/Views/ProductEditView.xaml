@@ -9,11 +9,16 @@
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
     xmlns:interactivity="http://www.codeplex.com/prism"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.MainModule.Behaviors"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title}"
     d:DataContext="{d:DesignInstance Type=viewModels:ProductEditViewModel}"
     x:Name="confirmationWindow">
+
+    <i:Interaction.Behaviors>
+        <behaviors:ChildWindowBehavior />
+    </i:Interaction.Behaviors>
 
     <sdk:ChildWindow.Resources>
         <Style TargetType="sdk:Label">
