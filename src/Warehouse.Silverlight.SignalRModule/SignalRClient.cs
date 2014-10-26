@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR.Client;
+﻿using System.Windows;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.Infrastructure.Events;
 
@@ -50,10 +51,13 @@ namespace Warehouse.Silverlight.SignalRModule
 
         private void OnProductUpdatedRemote(string productId)
         {
-            // product updated remotely
-            // we need to notify local modules
-            var e = new ProductUpdatedEventArgs(productId, true);
-            eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(e);
+            Deployment.Current.Dispatcher.BeginInvoke(delegate
+            {
+                // product updated remotely
+                // we need to notify local modules
+                var e = new ProductUpdatedEventArgs(productId, true);
+                eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(e);
+            });
         }
     }
 }
