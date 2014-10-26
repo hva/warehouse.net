@@ -33,7 +33,10 @@ namespace Warehouse.Server.Controllers
         {
             var context = new MongoContext();
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
-            var update = Update<Product>.Set(p => p.Name, product.Name);
+            var update = Update<Product>
+                .Set(p => p.Name, product.Name)
+                .Set(p => p.Size, product.Size)
+            ;
             var res = context.Products.Update(query, update);
             var code = res.Ok ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
             return Request.CreateResponse(code);

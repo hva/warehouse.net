@@ -15,6 +15,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly string id;
         private string name;
+        private string size;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
@@ -23,6 +24,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             id = product.Id;
             name = product.Name;
+            size = product.Size;
 
             Title = string.Format("{0} {1}", product.Name, product.Size);
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
@@ -31,6 +33,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand SaveCommand { get; private set; }
 
         public string Id { get { return id; } }
+
+        #region Name
 
         public string Name
         {
@@ -45,9 +49,41 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
+        private void ValidateName()
+        {
+            errorsContainer.ClearErrors(() => Name);
+            errorsContainer.SetErrors(() => Name, Validate.Required(Name));
+        }
+
+        #endregion
+
+        #region Size
+
+        public string Size
+        {
+            get { return size; }
+            set
+            {
+                if (size != value)
+                {
+                    size = value;
+                    ValidateSize();
+                }
+            }
+        }
+
+        private void ValidateSize()
+        {
+            errorsContainer.ClearErrors(() => Size);
+            errorsContainer.SetErrors(() => Size, Validate.Required(Size));
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
+            ValidateSize();
 
             if (HasErrors) return;
 
@@ -55,6 +91,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 Id = id,
                 Name = name,
+                Size = size,
             };
 
             var task = await dataService.SaveProductAsync(product);
@@ -64,12 +101,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Confirmed = true;
                 window.Close();
             }
-        }
-
-        private void ValidateName()
-        {
-            errorsContainer.ClearErrors(() => Name);
-            errorsContainer.SetErrors(() => Name, Validate.Required(Name));
         }
     }
 }
