@@ -3,7 +3,6 @@ using Owin;
 using Warehouse.Server;
 
 [assembly: OwinStartup(typeof(Startup))]
-
 namespace Warehouse.Server
 {
     public class Startup
@@ -11,6 +10,7 @@ namespace Warehouse.Server
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
+            app.ConfigureAuth();
         }
     }
 }
