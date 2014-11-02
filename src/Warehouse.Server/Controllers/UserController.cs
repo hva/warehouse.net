@@ -10,7 +10,7 @@ namespace Warehouse.Server.Controllers
 {
     public class UserController : Controller
     {
-        private const string LoginError = "The password you entered is incorrect. Please try again.";
+        private const string LoginError = "The password you entered is incorrect.<br />Please try again.";
 
         [HttpGet]
         public ActionResult Login(string returnUrl)
@@ -31,7 +31,7 @@ namespace Warehouse.Server.Controllers
             var user = await userManager.FindByNameAsync(login);
             if (user == null || !await userManager.CheckPasswordAsync(user, password))
             {
-                ModelState.AddModelError(string.Empty, LoginError);
+                ViewBag.Error = LoginError;
                 return View();
             }
 

@@ -148,9 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Warehouse.Silverlight.xap" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\img\arrow.png" />
-    <Content Include="Content\img\bg.png" />
+    <Content Include="Content\css\foundation.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Silverlight.js" />
     <Content Include="Web.config" />
