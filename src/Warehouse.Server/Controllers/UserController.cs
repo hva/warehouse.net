@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Warehouse.Server.Identity;
 
 namespace Warehouse.Server.Controllers
@@ -25,15 +27,28 @@ namespace Warehouse.Server.Controllers
             ViewBag.Login = login;
 
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var user = await userManager.FindByNameAsync(login);
 
-            if (user == null)
+            var user = await userManager.FindByNameAsync(login);
+            if (user == null || !await userManager.CheckPasswordAsync(user, password))
             {
                 ModelState.AddModelError(string.Empty, LoginError);
                 return View();
             }
 
-            return View();
+            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
+            var userIdentity = await user.GenerateUserIdentityAsync(userManager);
+            authenticationManager.SignIn(userIdentity);
+            return RedirectToLocal(returnUrl);
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
