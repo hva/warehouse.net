@@ -2,7 +2,7 @@
 using AspNet.Identity.MongoDB;
 using MongoDB.Driver;
 
-namespace Warehouse.Server
+namespace Warehouse.Server.Auth
 {
     public class ApplicationIdentityContext : IdentityContext, IDisposable
     {

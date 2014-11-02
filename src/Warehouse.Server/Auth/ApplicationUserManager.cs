@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace Warehouse.Server
+namespace Warehouse.Server.Auth
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {

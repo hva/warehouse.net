@@ -1,9 +1,9 @@
-﻿using AspNet.Identity.MongoDB;
-using Microsoft.AspNet.Identity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNet.Identity.MongoDB;
+using Microsoft.AspNet.Identity;
 
-namespace Warehouse.Server
+namespace Warehouse.Server.Auth
 {
     public class ApplicationUser : IdentityUser, IUser
     {
