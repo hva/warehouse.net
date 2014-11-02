@@ -87,7 +87,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Warehouse.Utils.CreateUser_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Server.Identity\Warehouse.Server.Identity.csproj">

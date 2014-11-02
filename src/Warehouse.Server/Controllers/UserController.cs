@@ -12,7 +12,6 @@ namespace Warehouse.Server.Controllers
     {
         private const string LoginError = "The password you entered is incorrect.<br />Please try again.";
 
-        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -35,11 +34,21 @@ namespace Warehouse.Server.Controllers
                 return View();
             }
 
-            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
-            authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
             var userIdentity = await user.GenerateUserIdentityAsync(userManager);
-            authenticationManager.SignIn(userIdentity);
+            AuthenticationManager.SignIn(userIdentity);
             return RedirectToLocal(returnUrl);
+        }
+
+        public ActionResult Logout()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get { return HttpContext.GetOwinContext().Authentication; }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

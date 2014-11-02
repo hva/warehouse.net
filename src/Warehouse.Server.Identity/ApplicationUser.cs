@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Warehouse.Server.Identity
 {
-    public class ApplicationUser : IdentityUser, IUser
+    public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
