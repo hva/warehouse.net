@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
 
-namespace Warehouse.Server.Auth
+namespace Warehouse.Server.Identity
 {
     public class ApplicationUser : IdentityUser, IUser
     {

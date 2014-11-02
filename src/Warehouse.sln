@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.Signa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.Infrastructure", "Warehouse.Silverlight.Infrastructure\Warehouse.Silverlight.Infrastructure.csproj", "{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server.Identity", "Warehouse.Server.Identity\Warehouse.Server.Identity.csproj", "{B714EE38-6495-41D5-9D1B-03F3F69411C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B714EE38-6495-41D5-9D1B-03F3F69411C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B714EE38-6495-41D5-9D1B-03F3F69411C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B714EE38-6495-41D5-9D1B-03F3F69411C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B714EE38-6495-41D5-9D1B-03F3F69411C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{EF2E0DBE-C33B-4479-82DA-004236EFC0C8} = {9D9B19C0-75CE-45F4-9765-D24353D074B5}
 		{521B5402-727A-4598-A29B-DFD0312944DB} = {EF2E0DBE-C33B-4479-82DA-004236EFC0C8}
 		{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B} = {9D9B19C0-75CE-45F4-9765-D24353D074B5}
+		{B714EE38-6495-41D5-9D1B-03F3F69411C6} = {7AEF54B0-3361-45D4-84D9-BB33BDE2D94D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
