@@ -172,8 +172,9 @@ label {
   letter-spacing: 1px;
 }
 
-.forgot-password {
+.forgot-password, .validation-summary-errors {
   padding-left: 100px;
+  padding-bottom: 20px;
   font-size: 13px;
   font-weight: 100;
   letter-spacing: 1px;
