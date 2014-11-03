@@ -74,8 +74,6 @@
   <ItemGroup>
     <Compile Include="ApplicationIdentityContext.cs" />
     <Compile Include="ApplicationUser.cs" />
-    <Compile Include="ApplicationUserManager.cs" />
-    <Compile Include="IdentityConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

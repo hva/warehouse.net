@@ -6,8 +6,9 @@ using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Warehouse.Server.Identity;
 
-namespace Warehouse.Server.Identity
+namespace Warehouse.Server
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {

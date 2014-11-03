@@ -1,7 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
 using Warehouse.Server;
-using Warehouse.Server.Identity;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace Warehouse.Server

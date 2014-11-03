@@ -10,11 +10,6 @@ namespace Warehouse.Server.Identity
         {
         }
 
-        //public ApplicationIdentityContext(MongoCollection users, MongoCollection roles)
-        //    : base(users, roles)
-        //{
-        //}
-
         public static ApplicationIdentityContext Create()
         {
             // todo add settings where appropriate to switch server & database in your own application
