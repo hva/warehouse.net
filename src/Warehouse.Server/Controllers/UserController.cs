@@ -27,19 +27,21 @@ namespace Warehouse.Server.Controllers
 
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-            var user = await userManager.FindByNameAsync(login);
-            if (user == null || !await userManager.CheckPasswordAsync(user, password))
+            var user = await userManager.FindAsync(login, password);
+            if (user == null)
             {
                 ViewBag.Error = LoginError;
                 return View();
             }
 
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var userIdentity = await user.GenerateUserIdentityAsync(userManager);
             AuthenticationManager.SignIn(userIdentity);
             return RedirectToLocal(returnUrl);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();

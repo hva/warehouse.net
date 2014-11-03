@@ -40,15 +40,15 @@ namespace Warehouse.Server.Identity
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
-            manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "Your security code is: {0}"
-            });
-            manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "SecurityCode",
-                BodyFormat = "Your security code is {0}"
-            });
+            //manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>
+            //{
+            //    MessageFormat = "Your security code is: {0}"
+            //});
+            //manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
+            //{
+            //    Subject = "SecurityCode",
+            //    BodyFormat = "Your security code is {0}"
+            //});
             //manager.EmailService = new EmailService();
             //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
