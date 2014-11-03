@@ -12,8 +12,8 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken();
-        <div class="row" style="margin-top: 200px;">
-            <div class="small-6 columns">
+        <div class="row" style="margin-top: 100px;">
+            <div class="small-5 small-offset-3 columns">
                 @if (ViewBag.Error != null)
                 {
                     <div class="row">
