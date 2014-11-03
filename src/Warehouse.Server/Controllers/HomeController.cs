@@ -2,7 +2,6 @@
 
 namespace Warehouse.Server.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
