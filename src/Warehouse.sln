@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight", "Warehouse.Silverlight\Warehouse.Silverlight.csproj", "{ACA10940-D0C4-44DC-8012-703E69F58422}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server", "Warehouse.Server\Warehouse.Server.csproj", "{BD82060C-1D5E-4D6C-80AA-54FF96C5570C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ACA10940-D0C4-44DC-8012-703E69F58422} = {ACA10940-D0C4-44DC-8012-703E69F58422}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.MainModule", "Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj", "{F77D538B-1F2E-4F01-951F-DBA2B45CB937}"
 EndProject
