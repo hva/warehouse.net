@@ -207,10 +207,6 @@
       <Project>{F77D538B-1F2E-4F01-951F-DBA2B45CB937}</Project>
       <Name>Warehouse.Silverlight.MainModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Silverlight.NavigationModule\Warehouse.Silverlight.NavigationModule.csproj">
-      <Project>{5b0e4f0f-7646-40af-af9b-af6e50793864}</Project>
-      <Name>Warehouse.Silverlight.NavigationModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Navigation\Warehouse.Silverlight.Navigation.csproj">
       <Project>{2DF14E2D-041C-47A7-BF0C-BC23C2FBCD25}</Project>
       <Name>Warehouse.Silverlight.Navigation</Name>
