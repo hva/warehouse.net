@@ -8,24 +8,28 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:LoginViewModel}">
 
-    <Grid Width="300" Margin="0,300,0,0">
+    <Grid Width="230">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="300" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Имя пользователя: " HorizontalAlignment="Right" />
-        <TextBox Grid.Column="1" Text="{Binding Login, Mode=TwoWay}" />
+        <TextBlock Grid.ColumnSpan="2" Opacity="{Binding MessageOpacity}" Text="Пароль, который вы ввели, неверный. Пожалуйста, попробуйте еще раз." VerticalAlignment="Bottom" Foreground="DarkRed" TextWrapping="Wrap" />
 
-        <TextBlock Text="Пароль: " Grid.Row="1" HorizontalAlignment="Right" />
-        <PasswordBox Grid.Row="1" Grid.Column="1" Password="{Binding Password, Mode=TwoWay}" />
+        <TextBlock Grid.Row="2" Text="Логин: " HorizontalAlignment="Right" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Login, Mode=TwoWay}" />
 
-        <Button Grid.Column="1" Grid.Row="2" Content="Войти" HorizontalAlignment="Left" Command="{Binding LoginCommand}" />
+        <TextBlock Grid.Row="3" Text="Пароль: " HorizontalAlignment="Right" />
+        <PasswordBox Grid.Row="3" Grid.Column="1" Password="{Binding Password, Mode=TwoWay}" />
+
+        <Button Grid.Row="4" Grid.Column="1" Content="Войти" HorizontalAlignment="Left" Command="{Binding LoginCommand}" />
     </Grid>
 
 </UserControl>
