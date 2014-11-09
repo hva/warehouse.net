@@ -44,7 +44,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
             var task = await service.GetProductAsync(e.ProductId);
-            if (task.Success)
+            if (task.Succeed)
             {
                 var current = task.Result;
                 var old = Items.FirstOrDefault(x => x.Id == current.Id);
@@ -65,7 +65,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private async void LoadData()
         {
             var task = await service.GetProductsAsync();
-            if (task.Success)
+            if (task.Succeed)
             {
                 Items = new ObservableCollection<Product>(task.Result);
             }

@@ -22,7 +22,7 @@ namespace Warehouse.Silverlight.ViewModels
         private async void DoLogin()
         {
             var task = await authService.Login(Login, Password);
-            if (task.Success)
+            if (task.Succeed)
             {
                 
             }

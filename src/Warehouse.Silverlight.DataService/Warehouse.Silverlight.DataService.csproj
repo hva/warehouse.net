@@ -96,6 +96,8 @@
     <Compile Include="Auth\IAuthService.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Infrastructure\AsyncResult.cs" />
+    <Compile Include="Log\BrowserLogger.cs" />
+    <Compile Include="Log\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

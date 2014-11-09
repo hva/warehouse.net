@@ -8,6 +8,7 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.DataService.Auth;
+using Warehouse.Silverlight.DataService.Log;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Navigation;
 using Warehouse.Silverlight.Views;
@@ -59,6 +60,7 @@ namespace Warehouse.Silverlight
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<object, LoginView>(Consts.LoginView);
             Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);

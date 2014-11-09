@@ -17,7 +17,7 @@ namespace Warehouse.Silverlight.DataService
                 client.BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
                 var str = await client.GetStringAsync(new Uri("api/products", UriKind.Relative));
                 var res = JsonConvert.DeserializeObject<Product[]>(str);
-                return new AsyncResult<Product[]> { Result = res, Success = true };
+                return new AsyncResult<Product[]> { Result = res, Succeed = true };
             }
         }
 
@@ -29,7 +29,7 @@ namespace Warehouse.Silverlight.DataService
                 var uri = new Uri(string.Concat("api/products/", id), UriKind.Relative);
                 var str = await client.GetStringAsync(uri);
                 var res = JsonConvert.DeserializeObject<Product>(str);
-                return new AsyncResult<Product> { Result = res, Success = true };
+                return new AsyncResult<Product> { Result = res, Succeed = true };
             }
         }
 
@@ -43,7 +43,7 @@ namespace Warehouse.Silverlight.DataService
                 {
                     var uri = new Uri(string.Concat("api/products/", product.Id), UriKind.Relative);
                     await client.PutAsync(uri, content);
-                    return new AsyncResult { Success = true };
+                    return new AsyncResult { Succeed = true };
                 }
             }
         }

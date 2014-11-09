@@ -95,7 +95,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             };
 
             var task = await dataService.SaveProductAsync(product);
-            if (task.Success)
+            if (task.Succeed)
             {
                 eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(new ProductUpdatedEventArgs(id));
                 Confirmed = true;

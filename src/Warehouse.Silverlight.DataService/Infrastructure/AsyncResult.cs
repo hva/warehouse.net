@@ -2,7 +2,7 @@
 {
     public class AsyncResult
     {
-        public bool Success { get; set; }
+        public bool Succeed { get; set; }
     }
 
     public class AsyncResult<T> : AsyncResult

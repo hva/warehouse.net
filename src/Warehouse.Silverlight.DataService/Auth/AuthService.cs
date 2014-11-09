@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Net;
@@ -6,11 +7,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Warehouse.Silverlight.DataService.Infrastructure;
+using Warehouse.Silverlight.DataService.Log;
 
 namespace Warehouse.Silverlight.DataService.Auth
 {
     public class AuthService : IAuthService
     {
+        private AuthToken token;
+        private readonly ILogger logger;
+
+        public AuthService(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
         public bool IsValid()
         {
             return false;
@@ -33,19 +43,40 @@ namespace Warehouse.Silverlight.DataService.Auth
                 {
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        StreamReader streamReader = new StreamReader(await resp.Content.ReadAsStreamAsync());
-                        JsonReader reader = new JsonTextReader(streamReader);
-                        JsonSerializer serializer = new JsonSerializer();
-                        var token = serializer.Deserialize<AuthToken>(reader);
-                        //using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                        //using (var file = store.OpenFile("auth", FileMode.Create))
-                        //{
-                        //    await resp.Content.CopyToAsync(file);
-                        //}
+                        using (var stream = await resp.Content.ReadAsStreamAsync())
+                        using (var streamReader = new StreamReader(stream))
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            JsonSerializer serializer = new JsonSerializer();
+                            token = serializer.Deserialize<AuthToken>(jsonReader);
+                            if (token != null)
+                            {
+                                TrySaveToken();
+                                result.Succeed = true;
+                            }
+                        }
                     }
                 }
             }
             return result;
+        }
+
+        private void TrySaveToken()
+        {
+            try
+            {
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var file = store.OpenFile("auth", FileMode.Create))
+                using (var writer = new StreamWriter(file))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(writer, token);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Log(e);
+            }
         }
     }
 }
