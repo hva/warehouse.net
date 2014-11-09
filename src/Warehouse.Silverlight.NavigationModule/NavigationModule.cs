@@ -18,10 +18,10 @@ namespace Warehouse.Silverlight.NavigationModule
         public void Initialize()
         {
             // registering view types
-            Container.RegisterType<object, LoginView>(Consts.LoginView);
+            //Container.RegisterType<object, LoginView>(Consts.LoginView);
 
             // init view
-            RegionManager.RequestNavigate(Consts.RootRegion, new Uri(Consts.LoginView, UriKind.Relative));
+            //RegionManager.RequestNavigate(Consts.RootRegion, new Uri(Consts.LoginView, UriKind.Relative));
 
             //RegionManager.RegisterViewWithRegion("NavigationRegion", () => Container.Resolve<TopMenu>());
             //RegionManager.RequestNavigate("MainRegion", new Uri("MainView", UriKind.Relative));

@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
-namespace Warehouse.Silverlight.NavigationModule.Views
+namespace Warehouse.Silverlight.Views
 {
-    public partial class WorkingShell
+    public partial class LoggedInView
     {
-        public WorkingShell()
+        public LoggedInView()
         {
             InitializeComponent();
 

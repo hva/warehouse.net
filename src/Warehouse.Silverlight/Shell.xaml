@@ -7,7 +7,6 @@
     xmlns:regions="http://www.codeplex.com/prism"
     mc:Ignorable="d">
 
-    <!--region to display LoginPage or WorkingShell-->
     <ContentControl regions:RegionManager.RegionName="RootRegion" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
 
 </UserControl>

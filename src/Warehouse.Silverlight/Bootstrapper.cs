@@ -5,6 +5,9 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.DataService;
+using Warehouse.Silverlight.Infrastructure;
+using Warehouse.Silverlight.Navigation;
+using Warehouse.Silverlight.Views;
 
 namespace Warehouse.Silverlight
 {
@@ -20,6 +23,17 @@ namespace Warehouse.Silverlight
             base.InitializeShell();
             ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             Application.Current.RootVisual = (UIElement)Shell;
+
+            var authService = Container.Resolve<IAuthService>();
+            var navigationService = Container.Resolve<INavigationService>();
+            if (authService.IsValid())
+            {
+                navigationService.OpenLandingPage();
+            }
+            else
+            {
+                navigationService.OpenLoginPage();
+            }
         }
 
         protected override void ConfigureModuleCatalog()
@@ -28,7 +42,7 @@ namespace Warehouse.Silverlight
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
             //moduleCatalog.AddModule(typeof(MainModule.MainModule));
-            moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
+            //moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
             //moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
         }
 
@@ -36,7 +50,12 @@ namespace Warehouse.Silverlight
         {
             base.ConfigureContainer();
 
+            Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<object, LoginView>(Consts.LoginView);
+            Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
         }
     }
 }

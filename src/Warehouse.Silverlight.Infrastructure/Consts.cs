@@ -6,7 +6,8 @@
         public const string RootRegion = "RootRegion";
 
         // views
-        public const string MainView = "MainView";
         public const string LoginView = "LoginView";
+        public const string LoggedInView = "LoggedInView";
+        public const string MainView = "MainView";
     }
 }
