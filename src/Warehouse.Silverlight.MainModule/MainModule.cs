@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
+using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.MainModule.Views;
 
 namespace Warehouse.Silverlight.MainModule
@@ -11,7 +12,7 @@ namespace Warehouse.Silverlight.MainModule
 
         public void Initialize()
         {
-            Container.RegisterType<object, MainView>("MainView");
+            Container.RegisterType<object, MainView>(Consts.MainView);
         }
     }
 }

@@ -27,9 +27,9 @@ namespace Warehouse.Silverlight
             base.ConfigureModuleCatalog();
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            moduleCatalog.AddModule(typeof(MainModule.MainModule));
+            //moduleCatalog.AddModule(typeof(MainModule.MainModule));
             moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
-            moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
+            //moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
         }
 
         protected override void ConfigureContainer()
