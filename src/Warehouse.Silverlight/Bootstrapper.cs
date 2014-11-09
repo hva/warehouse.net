@@ -64,6 +64,7 @@ namespace Warehouse.Silverlight
 
             Container.RegisterType<object, LoginView>(Consts.LoginView);
             Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
+            Container.RegisterType<object, TopMenu>(Consts.TopMenu);
         }
     }
 }
