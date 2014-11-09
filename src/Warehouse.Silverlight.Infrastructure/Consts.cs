@@ -5,6 +5,7 @@
         // regions
         public const string RootRegion = "RootRegion";
         public const string TopMenuRegion = "TopMenuRegion";
+        public const string MainRegion = "MainRegion";
 
         // views
         public const string LoginView = "LoginView";

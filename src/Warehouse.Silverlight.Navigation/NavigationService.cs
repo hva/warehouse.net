@@ -20,7 +20,9 @@ namespace Warehouse.Silverlight.Navigation
         public void OpenLandingPage()
         {
             regionManager.RequestNavigate(Consts.RootRegion, Consts.LoggedInView);
+
             regionManager.RequestNavigate(Consts.TopMenuRegion, Consts.TopMenu);
+            regionManager.RequestNavigate(Consts.MainRegion, Consts.MainView);
         }
     }
 }

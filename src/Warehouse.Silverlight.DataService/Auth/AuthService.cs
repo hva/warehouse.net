@@ -13,6 +13,8 @@ namespace Warehouse.Silverlight.DataService.Auth
 {
     public class AuthService : IAuthService
     {
+        private const string TokenFileName = "auth_token";
+
         private AuthToken token;
         private readonly ILogger logger;
 
@@ -21,8 +23,24 @@ namespace Warehouse.Silverlight.DataService.Auth
             this.logger = logger;
         }
 
+        public string AccessToken { get { return token.AccessToken; } }
+
         public bool IsValid()
         {
+            // checking in-memory token
+            if (token != null)
+            {
+                return IsValid(token);
+            }
+
+            TryLoadToken();
+
+            // checking saved token
+            if (token != null)
+            {
+                return IsValid(token);
+            }
+
             return false;
         }
 
@@ -66,7 +84,7 @@ namespace Warehouse.Silverlight.DataService.Auth
             try
             {
                 using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                using (var file = store.OpenFile("auth", FileMode.Create))
+                using (var file = store.OpenFile(TokenFileName, FileMode.Create))
                 using (var writer = new StreamWriter(file))
                 {
                     JsonSerializer serializer = new JsonSerializer();
@@ -77,6 +95,30 @@ namespace Warehouse.Silverlight.DataService.Auth
             {
                 logger.Log(e);
             }
+        }
+
+        private void TryLoadToken()
+        {
+            try
+            {
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var file = store.OpenFile(TokenFileName, FileMode.Open))
+                using (var reader = new StreamReader(file))
+                using (var jsonReader = new JsonTextReader(reader))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    token = serializer.Deserialize<AuthToken>(jsonReader);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Log(e);
+            }
+        }
+
+        private static bool IsValid(AuthToken token)
+        {
+            return token.Expires > DateTime.UtcNow;
         }
     }
 }

@@ -17,19 +17,12 @@ namespace Warehouse.Silverlight
 {
     public class Bootstrapper : UnityBootstrapper
     {
-        protected override DependencyObject CreateShell()
+        public override void Run(bool runWithDefaultConfiguration)
         {
-            return Container.Resolve<Shell>();
-        }
-
-        protected override void InitializeShell()
-        {
-            base.InitializeShell();
+            base.Run(runWithDefaultConfiguration);
 
             ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
-
-            Application.Current.RootVisual = (UIElement)Shell;
 
             var authService = Container.Resolve<IAuthService>();
             var navigationService = Container.Resolve<INavigationService>();
@@ -48,8 +41,7 @@ namespace Warehouse.Silverlight
             base.ConfigureModuleCatalog();
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            //moduleCatalog.AddModule(typeof(MainModule.MainModule));
-            //moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
+            moduleCatalog.AddModule(typeof(MainModule.MainModule));
             //moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
         }
 
@@ -65,6 +57,17 @@ namespace Warehouse.Silverlight
             Container.RegisterType<object, LoginView>(Consts.LoginView);
             Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
             Container.RegisterType<object, TopMenu>(Consts.TopMenu);
+        }
+
+        protected override DependencyObject CreateShell()
+        {
+            return Container.Resolve<Shell>();
+        }
+
+        protected override void InitializeShell()
+        {
+            base.InitializeShell();
+            Application.Current.RootVisual = (UIElement)Shell;
         }
     }
 }
