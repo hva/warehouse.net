@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Warehouse.Silverlight.DataService;
+using Warehouse.Silverlight.DataService.Auth;
 
 namespace Warehouse.Silverlight.ViewModels
 {

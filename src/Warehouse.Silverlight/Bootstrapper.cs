@@ -1,10 +1,13 @@
-﻿using System.Threading;
+﻿using System.Net;
+using System.Net.Browser;
+using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.DataService;
+using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Navigation;
 using Warehouse.Silverlight.Views;
@@ -21,7 +24,10 @@ namespace Warehouse.Silverlight
         protected override void InitializeShell()
         {
             base.InitializeShell();
+
             ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
+            WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
+
             Application.Current.RootVisual = (UIElement)Shell;
 
             var authService = Container.Resolve<IAuthService>();

@@ -89,9 +89,11 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthService.cs" />
+    <Compile Include="Auth\AuthService.cs" />
+    <Compile Include="Auth\AuthToken.cs" />
     <Compile Include="DataService.cs" />
-    <Compile Include="IAuthService.cs" />
+    <Compile Include="DataServiceHttpClient.cs" />
+    <Compile Include="Auth\IAuthService.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Infrastructure\AsyncResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

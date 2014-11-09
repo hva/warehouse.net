@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Warehouse.Silverlight.DataService.Infrastructure;
 
-namespace Warehouse.Silverlight.DataService
+namespace Warehouse.Silverlight.DataService.Auth
 {
     public interface IAuthService
     {

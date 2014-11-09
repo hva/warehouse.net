@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Browser;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +10,6 @@ namespace Warehouse.Silverlight.DataService
 {
     public class DataService : IDataService
     {
-        public DataService()
-        {
-            WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
-        }
-
         public async Task<AsyncResult<Product[]>> GetProductsAsync()
         {
             using (var client = new HttpClient())
