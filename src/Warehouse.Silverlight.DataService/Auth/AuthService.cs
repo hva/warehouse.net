@@ -23,7 +23,7 @@ namespace Warehouse.Silverlight.DataService.Auth
             this.logger = logger;
         }
 
-        public string AccessToken { get { return token.AccessToken; } }
+        public AuthToken Token { get { return token; } }
 
         public bool IsValid()
         {
@@ -79,6 +79,15 @@ namespace Warehouse.Silverlight.DataService.Auth
             return result;
         }
 
+        public void Logout()
+        {
+            // removing from memory
+            token = null;
+
+            // removing from storage
+            TryRemoveToken();
+        }
+
         private void TrySaveToken()
         {
             try
@@ -108,6 +117,21 @@ namespace Warehouse.Silverlight.DataService.Auth
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     token = serializer.Deserialize<AuthToken>(jsonReader);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Log(e);
+            }
+        }
+
+        private void TryRemoveToken()
+        {
+            try
+            {
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    store.DeleteFile(TokenFileName);
                 }
             }
             catch (Exception e)

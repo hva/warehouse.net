@@ -6,7 +6,8 @@ namespace Warehouse.Silverlight.DataService.Auth
     public interface IAuthService
     {
         bool IsValid();
-        string AccessToken { get; }
+        AuthToken Token { get; }
         Task<AsyncResult> Login(string login, string password);
+        void Logout();
     }
 }

@@ -10,5 +10,8 @@ namespace Warehouse.Silverlight.DataService.Auth
 
         [JsonProperty(".expires")]
         public DateTime Expires { get; set; }
+
+        [JsonProperty("userName")]
+        public string UserName { get; set; }
     }
 }
