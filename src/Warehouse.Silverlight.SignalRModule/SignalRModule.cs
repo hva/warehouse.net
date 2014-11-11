@@ -10,8 +10,7 @@ namespace Warehouse.Silverlight.SignalRModule
 
         public void Initialize()
         {
-            var client = Container.Resolve<SignalRClient>();
-            client.Start();
+            Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
         }
     }
 }

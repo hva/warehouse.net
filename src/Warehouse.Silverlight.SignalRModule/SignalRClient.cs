@@ -5,7 +5,7 @@ using Warehouse.Silverlight.Infrastructure.Events;
 
 namespace Warehouse.Silverlight.SignalRModule
 {
-    public class SignalRClient
+    public class SignalRClient : ISignalRClient
     {
         // remote consts
         private const string ProductsHub = "ProductsHub";
@@ -19,11 +19,12 @@ namespace Warehouse.Silverlight.SignalRModule
         public SignalRClient(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            SubscribeLocal();
         }
 
         public void Start()
         {
+            SubscribeLocal();
+
             var hubConnection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
             hubProxy = hubConnection.CreateHubProxy(ProductsHub);
             SubscribeRemote();

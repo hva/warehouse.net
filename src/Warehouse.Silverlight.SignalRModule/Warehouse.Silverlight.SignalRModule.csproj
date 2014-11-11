@@ -110,6 +110,7 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISignalRClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalRClient.cs" />
     <Compile Include="SignalRModule.cs" />
