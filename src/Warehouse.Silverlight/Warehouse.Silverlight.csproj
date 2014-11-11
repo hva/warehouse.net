@@ -159,6 +159,10 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
+      <Project>{a9e3e722-a7cc-4a04-a9c4-a4c87dd18aa8}</Project>
+      <Name>Warehouse.Silverlight.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.DataService\Warehouse.Silverlight.DataService.csproj">
       <Project>{BA022A52-7003-4D5D-BDA9-660088620190}</Project>
       <Name>Warehouse.Silverlight.DataService</Name>

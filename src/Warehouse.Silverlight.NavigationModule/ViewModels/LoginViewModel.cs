@@ -70,14 +70,16 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         private async void DoLogin()
         {
+            MessageOpacity = 0;
             var task = await authService.Login(Login, Password);
+
             if (task.Succeed)
             {
-                MessageOpacity = 0;
                 navigationService.OpenLandingPage();
             }
             else
             {
+                Password = string.Empty;
                 MessageOpacity = 1;
             }
         }

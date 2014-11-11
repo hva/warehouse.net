@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 using Warehouse.Silverlight.NavigationModule.ViewModels;
 
 namespace Warehouse.Silverlight.NavigationModule.Views
@@ -16,16 +15,6 @@ namespace Warehouse.Silverlight.NavigationModule.Views
             DataContext = viewModel;
 
             Loaded += OnLoaded;
-
-            login.KeyUp += OnKeyUp;
-        }
-
-        private void OnKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                
-            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

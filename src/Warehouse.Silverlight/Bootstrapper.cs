@@ -53,7 +53,6 @@ namespace Warehouse.Silverlight
             base.ConfigureContainer();
 
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
         }

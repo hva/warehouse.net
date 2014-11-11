@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight", "Warehouse.Silverlight\Warehouse.Silverlight.csproj", "{ACA10940-D0C4-44DC-8012-703E69F58422}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8} = {A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}
+		{23145441-7B98-4921-82E0-4786CD3374CD} = {23145441-7B98-4921-82E0-4786CD3374CD}
+		{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B} = {11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Server", "Warehouse.Server\Warehouse.Server.csproj", "{BD82060C-1D5E-4D6C-80AA-54FF96C5570C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -37,6 +42,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Utils.CreateUser", "Warehouse.Utils.CreateUser\Warehouse.Utils.CreateUser.csproj", "{C561D7F2-EC3A-4BF1-8298-FBAE256D25CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.NavigationModule", "Warehouse.Silverlight.NavigationModule\Warehouse.Silverlight.NavigationModule.csproj", "{A45884A7-CA8D-4B1E-B51B-30BDC46319B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.Controls", "Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj", "{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +99,10 @@ Global
 		{A45884A7-CA8D-4B1E-B51B-30BDC46319B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A45884A7-CA8D-4B1E-B51B-30BDC46319B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A45884A7-CA8D-4B1E-B51B-30BDC46319B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +121,7 @@ Global
 		{B714EE38-6495-41D5-9D1B-03F3F69411C6} = {7AEF54B0-3361-45D4-84D9-BB33BDE2D94D}
 		{C561D7F2-EC3A-4BF1-8298-FBAE256D25CB} = {3D80D4C1-4309-4614-AE1B-4EA43D168AE4}
 		{A45884A7-CA8D-4B1E-B51B-30BDC46319B0} = {EF2E0DBE-C33B-4479-82DA-004236EFC0C8}
+		{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8} = {9D9B19C0-75CE-45F4-9765-D24353D074B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
