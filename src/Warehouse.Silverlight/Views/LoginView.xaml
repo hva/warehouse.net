@@ -24,7 +24,7 @@
         <TextBlock Grid.ColumnSpan="2" Opacity="{Binding MessageOpacity}" Text="Пароль, который вы ввели, неверный. Пожалуйста, попробуйте еще раз." VerticalAlignment="Bottom" Foreground="DarkRed" TextWrapping="Wrap" />
 
         <TextBlock Grid.Row="2" Text="Логин: " HorizontalAlignment="Right" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Login, Mode=TwoWay}" />
+        <TextBox x:Name="login" Grid.Row="2" Grid.Column="1" Text="{Binding Login, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="3" Text="Пароль: " HorizontalAlignment="Right" />
         <PasswordBox Grid.Row="3" Grid.Column="1" Password="{Binding Password, Mode=TwoWay}" />

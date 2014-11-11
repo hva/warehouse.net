@@ -12,5 +12,8 @@
         public const string LoggedInView = "LoggedInView";
         public const string MainView = "MainView";
         public const string TopMenu = "TopMenu";
+
+        // settings
+        public const string SettingsLoginKey = "Login";
     }
 }

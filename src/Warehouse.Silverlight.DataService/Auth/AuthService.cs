@@ -111,12 +111,17 @@ namespace Warehouse.Silverlight.DataService.Auth
             try
             {
                 using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                using (var file = store.OpenFile(TokenFileName, FileMode.Open))
-                using (var reader = new StreamReader(file))
-                using (var jsonReader = new JsonTextReader(reader))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    token = serializer.Deserialize<AuthToken>(jsonReader);
+                    if (store.FileExists(TokenFileName))
+                    {
+                        using (var file = store.OpenFile(TokenFileName, FileMode.Open))
+                        using (var reader = new StreamReader(file))
+                        using (var jsonReader = new JsonTextReader(reader))
+                        {
+                            JsonSerializer serializer = new JsonSerializer();
+                            token = serializer.Deserialize<AuthToken>(jsonReader);
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -131,7 +136,10 @@ namespace Warehouse.Silverlight.DataService.Auth
             {
                 using (var store = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    store.DeleteFile(TokenFileName);
+                    if (store.FileExists(TokenFileName))
+                    {
+                        store.DeleteFile(TokenFileName);
+                    }
                 }
             }
             catch (Exception e)
