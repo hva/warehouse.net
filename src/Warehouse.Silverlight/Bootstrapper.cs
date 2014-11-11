@@ -9,9 +9,7 @@ using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.DataService.Log;
-using Warehouse.Silverlight.Infrastructure;
-using Warehouse.Silverlight.Navigation;
-using Warehouse.Silverlight.Views;
+using Warehouse.Silverlight.NavigationModule;
 
 namespace Warehouse.Silverlight
 {
@@ -43,6 +41,7 @@ namespace Warehouse.Silverlight
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(MainModule.MainModule));
             //moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
+            moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
         }
 
         protected override void ConfigureContainer()
@@ -53,10 +52,6 @@ namespace Warehouse.Silverlight
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
-
-            Container.RegisterType<object, LoginView>(Consts.LoginView);
-            Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
-            Container.RegisterType<object, TopMenu>(Consts.TopMenu);
         }
 
         protected override DependencyObject CreateShell()

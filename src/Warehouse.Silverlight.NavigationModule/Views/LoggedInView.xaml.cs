@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Warehouse.Silverlight.Views
+namespace Warehouse.Silverlight.NavigationModule.Views
 {
     public partial class LoggedInView
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Regions;
 using Warehouse.Silverlight.Infrastructure;
 
-namespace Warehouse.Silverlight.Navigation
+namespace Warehouse.Silverlight.NavigationModule
 {
     public class NavigationService : INavigationService
     {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Warehouse.Silverlight.Navigation")]
+[assembly: AssemblyTitle("Warehouse.Silverlight.NavigationModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Warehouse.Silverlight.Navigation")]
+[assembly: AssemblyProduct("Warehouse.Silverlight.NavigationModule")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2df14e2d-041c-47a7-bf0c-bc23c2fbcd25")]
+[assembly: Guid("a45884a7-ca8d-4b1e-b51b-30bdc46319b0")]
 
 // Version information for an assembly consists of the following four values:
 //

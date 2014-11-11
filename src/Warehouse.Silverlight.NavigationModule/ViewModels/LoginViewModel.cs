@@ -5,9 +5,8 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.Infrastructure;
-using Warehouse.Silverlight.Navigation;
 
-namespace Warehouse.Silverlight.ViewModels
+namespace Warehouse.Silverlight.NavigationModule.ViewModels
 {
     public class LoginViewModel : NotificationObject, INavigationAware
     {

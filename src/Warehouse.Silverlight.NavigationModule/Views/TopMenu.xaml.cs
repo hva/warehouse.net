@@ -1,6 +1,6 @@
-﻿using Warehouse.Silverlight.ViewModels;
+﻿using Warehouse.Silverlight.NavigationModule.ViewModels;
 
-namespace Warehouse.Silverlight.Views
+namespace Warehouse.Silverlight.NavigationModule.Views
 {
     public partial class TopMenu
     {
