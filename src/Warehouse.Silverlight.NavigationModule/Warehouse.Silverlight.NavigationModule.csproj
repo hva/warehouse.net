@@ -133,9 +133,9 @@
       <Project>{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}</Project>
       <Name>Warehouse.Silverlight.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Silverlight.DataService\Warehouse.Silverlight.DataService.csproj">
-      <Project>{BA022A52-7003-4D5D-BDA9-660088620190}</Project>
-      <Name>Warehouse.Silverlight.DataService</Name>
+    <ProjectReference Include="..\Warehouse.Silverlight.Data\Warehouse.Silverlight.Data.csproj">
+      <Project>{0C80B2FE-F560-41A3-B450-9AA2D5564325}</Project>
+      <Name>Warehouse.Silverlight.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Infrastructure\Warehouse.Silverlight.Infrastructure.csproj">
       <Project>{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}</Project>

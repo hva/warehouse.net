@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
-using Warehouse.Silverlight.DataService.Auth;
+using Warehouse.Silverlight.Data.Auth;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Navigation;
 

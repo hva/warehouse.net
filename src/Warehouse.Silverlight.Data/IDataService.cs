@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Warehouse.Silverlight.DataService.Infrastructure;
+using Warehouse.Silverlight.Data.Infrastructure;
 using Warehouse.Silverlight.Models;
 
-namespace Warehouse.Silverlight.DataService
+namespace Warehouse.Silverlight.Data
 {
     public interface IDataService
     {

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Warehouse.Silverlight.DataService.Http
+namespace Warehouse.Silverlight.Data.Http
 {
     public class BaseHttpClient : HttpClient
     {

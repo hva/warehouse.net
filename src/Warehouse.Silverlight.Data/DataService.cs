@@ -3,13 +3,13 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Warehouse.Silverlight.DataService.Auth;
-using Warehouse.Silverlight.DataService.Http;
-using Warehouse.Silverlight.DataService.Infrastructure;
+using Warehouse.Silverlight.Data.Auth;
+using Warehouse.Silverlight.Data.Http;
+using Warehouse.Silverlight.Data.Infrastructure;
 using Warehouse.Silverlight.Models;
 using Warehouse.Silverlight.Navigation;
 
-namespace Warehouse.Silverlight.DataService
+namespace Warehouse.Silverlight.Data
 {
     public class DataService : IDataService
     {

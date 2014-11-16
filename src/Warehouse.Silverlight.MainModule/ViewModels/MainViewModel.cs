@@ -6,7 +6,7 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
-using Warehouse.Silverlight.DataService;
+using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.Models;
 using Warehouse.Silverlight.SignalR;

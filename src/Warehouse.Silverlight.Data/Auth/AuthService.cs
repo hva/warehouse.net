@@ -6,11 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Warehouse.Silverlight.DataService.Http;
-using Warehouse.Silverlight.DataService.Infrastructure;
-using Warehouse.Silverlight.DataService.Log;
+using Warehouse.Silverlight.Data.Http;
+using Warehouse.Silverlight.Data.Infrastructure;
+using Warehouse.Silverlight.Data.Log;
 
-namespace Warehouse.Silverlight.DataService.Auth
+namespace Warehouse.Silverlight.Data.Auth
 {
     public class AuthService : IAuthService
     {

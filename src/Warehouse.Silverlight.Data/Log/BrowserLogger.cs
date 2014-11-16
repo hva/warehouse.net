@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Warehouse.Silverlight.DataService.Log
+namespace Warehouse.Silverlight.Data.Log
 {
     public class BrowserLogger : ILogger
     {
