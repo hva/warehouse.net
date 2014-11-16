@@ -10,6 +10,7 @@ using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.DataService.Log;
 using Warehouse.Silverlight.NavigationModule;
+using Warehouse.Silverlight.SignalR;
 
 namespace Warehouse.Silverlight
 {
@@ -40,7 +41,6 @@ namespace Warehouse.Silverlight
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(MainModule.MainModule));
-            moduleCatalog.AddModule(typeof(SignalRModule.SignalRModule));
             moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
         }
 
@@ -50,6 +50,7 @@ namespace Warehouse.Silverlight
 
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Warehouse.Silverlight.SignalRModule
+namespace Warehouse.Silverlight.SignalR
 {
     public interface ISignalRClient
     {

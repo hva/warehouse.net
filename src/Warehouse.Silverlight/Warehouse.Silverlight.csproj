@@ -175,9 +175,9 @@
       <Project>{A45884A7-CA8D-4B1E-B51B-30BDC46319B0}</Project>
       <Name>Warehouse.Silverlight.NavigationModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Silverlight.SignalRModule\Warehouse.Silverlight.SignalRModule.csproj">
-      <Project>{521B5402-727A-4598-A29B-DFD0312944DB}</Project>
-      <Name>Warehouse.Silverlight.SignalRModule</Name>
+    <ProjectReference Include="..\Warehouse.Silverlight.SignalR\Warehouse.Silverlight.SignalR.csproj">
+      <Project>{D459A7BC-6E54-4FA9-9E12-67CE3D90394F}</Project>
+      <Name>Warehouse.Silverlight.SignalR</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

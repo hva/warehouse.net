@@ -159,6 +159,10 @@
       <Project>{23145441-7B98-4921-82E0-4786CD3374CD}</Project>
       <Name>Warehouse.Silverlight.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.SignalR\Warehouse.Silverlight.SignalR.csproj">
+      <Project>{D459A7BC-6E54-4FA9-9E12-67CE3D90394F}</Project>
+      <Name>Warehouse.Silverlight.SignalR</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

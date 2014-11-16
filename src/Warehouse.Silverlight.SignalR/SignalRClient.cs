@@ -4,7 +4,7 @@ using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.Infrastructure.Events;
 
-namespace Warehouse.Silverlight.SignalRModule
+namespace Warehouse.Silverlight.SignalR
 {
     public class SignalRClient : ISignalRClient
     {

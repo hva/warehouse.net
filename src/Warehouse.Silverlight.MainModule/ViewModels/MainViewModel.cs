@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.Models;
+using Warehouse.Silverlight.SignalR;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
 {
@@ -16,14 +17,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         private readonly IDataService service;
         private readonly IEventAggregator eventAggregator;
+        private readonly ISignalRClient signalRClient;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly ICommand openProductCommand;
         private ObservableCollection<Product> items;
 
-        public MainViewModel(IDataService service, IEventAggregator eventAggregator)
+        public MainViewModel(IDataService service, IEventAggregator eventAggregator, ISignalRClient signalRClient)
         {
             this.service = service;
             this.eventAggregator = eventAggregator;
+            this.signalRClient = signalRClient;
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             openProductCommand = new DelegateCommand<Product>(OpenProduct);
@@ -79,9 +82,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #region INavigationAware
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
-
+            await signalRClient.StartAsync();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -91,7 +94,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-
+            signalRClient.Stop();
         }
 
         #endregion
