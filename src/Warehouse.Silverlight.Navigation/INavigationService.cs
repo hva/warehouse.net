@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Silverlight.NavigationModule
+﻿namespace Warehouse.Silverlight.Navigation
 {
     public interface INavigationService
     {

@@ -30,10 +30,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             openProductCommand = new DelegateCommand<Product>(OpenProduct);
-
-            Subscribe();
-
-            LoadData();
         }
 
         public ObservableCollection<Product> Items
@@ -66,6 +62,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             eventAggregator.GetEvent<ProductUpdatedEvent>().Subscribe(OnProductUpdated);
         }
 
+        private void Unsubscribe()
+        {
+            eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdated);
+        }
+
         private async void LoadData()
         {
             var task = await service.GetProductsAsync();
@@ -84,6 +85,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public async void OnNavigatedTo(NavigationContext navigationContext)
         {
+            LoadData();
+            Subscribe();
             await signalRClient.StartAsync();
         }
 
@@ -94,6 +97,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            Unsubscribe();
             signalRClient.Stop();
         }
 

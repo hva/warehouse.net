@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Warehouse.Silverlight.DataService.Http;
 using Warehouse.Silverlight.DataService.Infrastructure;
 using Warehouse.Silverlight.DataService.Log;
 
@@ -47,7 +48,7 @@ namespace Warehouse.Silverlight.DataService.Auth
         public async Task<AsyncResult> Login(string login, string password)
         {
             var result = new AsyncResult();
-            using (var client = new DataServiceHttpClient())
+            using (var client = new BaseHttpClient())
             {
                 var data = new Dictionary<string, string>
                 {

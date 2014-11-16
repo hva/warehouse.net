@@ -9,6 +9,7 @@ using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.DataService.Log;
+using Warehouse.Silverlight.Navigation;
 using Warehouse.Silverlight.NavigationModule;
 using Warehouse.Silverlight.SignalR;
 
@@ -49,6 +50,7 @@ namespace Warehouse.Silverlight
             base.ConfigureContainer();
 
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDataService, DataService.DataService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());

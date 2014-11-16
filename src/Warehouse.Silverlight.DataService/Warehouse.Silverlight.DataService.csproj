@@ -92,8 +92,9 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\AuthToken.cs" />
     <Compile Include="DataService.cs" />
-    <Compile Include="DataServiceHttpClient.cs" />
+    <Compile Include="Http\BaseHttpClient.cs" />
     <Compile Include="Auth\IAuthService.cs" />
+    <Compile Include="Http\BearerHttpClient.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Infrastructure\AsyncResult.cs" />
     <Compile Include="Log\BrowserLogger.cs" />
@@ -105,12 +106,17 @@
       <Project>{23145441-7B98-4921-82E0-4786CD3374CD}</Project>
       <Name>Warehouse.Silverlight.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.Navigation\Warehouse.Silverlight.Navigation.csproj">
+      <Project>{28F2DF8B-3C3B-411E-AF20-5A027F0F8776}</Project>
+      <Name>Warehouse.Silverlight.Navigation</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -12,8 +12,6 @@ namespace Warehouse.Silverlight.NavigationModule
 
         public void Initialize()
         {
-            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
-
             Container.RegisterType<object, LoginView>(Consts.LoginView);
             Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
             Container.RegisterType<object, TopMenu>(Consts.TopMenu);

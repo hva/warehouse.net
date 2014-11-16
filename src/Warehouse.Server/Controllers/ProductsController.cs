@@ -9,6 +9,7 @@ using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Controllers
 {
+    [Authorize]
     public class ProductsController : ApiController
     {
         public IEnumerable<Product> Get()

@@ -111,9 +111,7 @@
     <Compile Include="Controls\TopMenuItem.xaml.cs">
       <DependentUpon>TopMenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="INavigationService.cs" />
     <Compile Include="NavigationModule.cs" />
-    <Compile Include="NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
@@ -142,6 +140,10 @@
     <ProjectReference Include="..\Warehouse.Silverlight.Infrastructure\Warehouse.Silverlight.Infrastructure.csproj">
       <Project>{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}</Project>
       <Name>Warehouse.Silverlight.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.Navigation\Warehouse.Silverlight.Navigation.csproj">
+      <Project>{28F2DF8B-3C3B-411E-AF20-5A027F0F8776}</Project>
+      <Name>Warehouse.Silverlight.Navigation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

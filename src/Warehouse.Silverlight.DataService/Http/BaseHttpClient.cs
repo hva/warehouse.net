@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 
-namespace Warehouse.Silverlight.DataService
+namespace Warehouse.Silverlight.DataService.Http
 {
-    public class DataServiceHttpClient : HttpClient
+    public class BaseHttpClient : HttpClient
     {
-        public DataServiceHttpClient()
+        public BaseHttpClient()
         {
             BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
         }
