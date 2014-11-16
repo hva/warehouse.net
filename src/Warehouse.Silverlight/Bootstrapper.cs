@@ -10,7 +10,6 @@ using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.DataService.Auth;
 using Warehouse.Silverlight.DataService.Log;
 using Warehouse.Silverlight.NavigationModule;
-using Warehouse.Silverlight.SignalRModule;
 
 namespace Warehouse.Silverlight
 {
@@ -33,9 +32,6 @@ namespace Warehouse.Silverlight
             {
                 navigationService.OpenLoginPage();
             }
-
-            var signalR = Container.Resolve<ISignalRClient>();
-            signalR.Start();
         }
 
         protected override void ConfigureModuleCatalog()

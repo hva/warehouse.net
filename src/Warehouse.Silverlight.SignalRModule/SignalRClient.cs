@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.Infrastructure.Events;
@@ -9,26 +10,37 @@ namespace Warehouse.Silverlight.SignalRModule
     {
         // remote consts
         private const string ProductsHub = "ProductsHub";
-        private const string OnProductUpdated = "OnProductUpdated";
+        private const string ProductUpdatedEvent = "OnProductUpdated";
         private const string RaiseProductUpdated = "RaiseProductUpdated";
 
-        private IHubProxy hubProxy;
+        private readonly IHubProxy hubProxy;
+        private readonly HubConnection connection;
 
         private readonly IEventAggregator eventAggregator;
 
         public SignalRClient(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
+
+            connection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
+            hubProxy = connection.CreateHubProxy(ProductsHub);
+
+            hubProxy.On<string>(ProductUpdatedEvent, OnProductUpdatedRemote);
         }
 
-        public void Start()
+        public async Task StartAsync()
         {
             SubscribeLocal();
+            await connection.Start();
+        }
 
-            var hubConnection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
-            hubProxy = hubConnection.CreateHubProxy(ProductsHub);
-            SubscribeRemote();
-            hubConnection.Start().Wait();
+        public void Stop()
+        {
+            UnsubscribeLocal();
+            if (connection != null)
+            {
+                connection.Stop();
+            }
         }
 
         public void OnProductUpdatedLocal(ProductUpdatedEventArgs e)
@@ -45,9 +57,9 @@ namespace Warehouse.Silverlight.SignalRModule
             eventAggregator.GetEvent<ProductUpdatedEvent>().Subscribe(OnProductUpdatedLocal);
         }
 
-        private void SubscribeRemote()
+        private void UnsubscribeLocal()
         {
-            hubProxy.On<string>(OnProductUpdated, OnProductUpdatedRemote);
+            eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdatedLocal);
         }
 
         private void OnProductUpdatedRemote(string productId)

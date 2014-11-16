@@ -1,7 +1,10 @@
-﻿namespace Warehouse.Silverlight.SignalRModule
+﻿using System.Threading.Tasks;
+
+namespace Warehouse.Silverlight.SignalRModule
 {
     public interface ISignalRClient
     {
-        void Start();
+        Task StartAsync();
+        void Stop();
     }
 }

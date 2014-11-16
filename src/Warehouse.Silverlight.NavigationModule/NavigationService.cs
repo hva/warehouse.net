@@ -14,6 +14,10 @@ namespace Warehouse.Silverlight.NavigationModule
 
         public void OpenLoginPage()
         {
+            // navigating MainRegion to fake view to invoke OnNavigatedFrom on current view
+            // TODO: think about another way
+            regionManager.RequestNavigate(Consts.MainRegion, string.Empty);
+
             regionManager.RequestNavigate(Consts.RootRegion, Consts.LoginView);
         }
 

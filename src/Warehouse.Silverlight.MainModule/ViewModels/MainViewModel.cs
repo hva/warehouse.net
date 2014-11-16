@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.DataService;
 using Warehouse.Silverlight.Infrastructure.Events;
@@ -11,7 +12,7 @@ using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
 {
-    public class MainViewModel : NotificationObject // : INavigationAware 
+    public class MainViewModel : NotificationObject, INavigationAware
     {
         private readonly IDataService service;
         private readonly IEventAggregator eventAggregator;
@@ -75,5 +76,24 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             editProductRequest.Raise(new ProductEditViewModel(p, service, eventAggregator));
         }
+
+        #region INavigationAware
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
+        }
+
+        #endregion
     }
 }
