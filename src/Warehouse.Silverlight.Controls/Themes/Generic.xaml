@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls">
+
+    <Style TargetType="controls:H1">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0,20,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:H1">
+                    <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                        <TextBlock Text="{TemplateBinding Title}" FontSize="18" Foreground="Gray" LineStackingStrategy="BlockLineHeight" LineHeight="54" />
+                        <Rectangle Height="1" Fill="Gray" />
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

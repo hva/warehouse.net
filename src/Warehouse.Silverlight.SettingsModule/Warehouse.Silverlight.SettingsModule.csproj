@@ -121,6 +121,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
+      <Project>{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}</Project>
+      <Name>Warehouse.Silverlight.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Data\Warehouse.Silverlight.Data.csproj">
       <Project>{0C80B2FE-F560-41A3-B450-9AA2D5564325}</Project>
       <Name>Warehouse.Silverlight.Data</Name>

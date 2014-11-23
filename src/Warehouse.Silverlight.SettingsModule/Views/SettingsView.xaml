@@ -5,36 +5,49 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.SettingsModule.ViewModels"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:SettingsViewModel}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="160" />
-        </Grid.ColumnDefinitions>
+    <StackPanel Width="400" HorizontalAlignment="Left">
+        <controls:H1 Title="Изменить пароль">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="160" />
+                </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-        <TextBlock Grid.ColumnSpan="3" Text="Изменить пароль" Style="{StaticResource H1}" />
+                <TextBlock Text="Логин:" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="2" Text="{Binding UserName}" />
 
-        <TextBlock Grid.Row="1" Text="Логин:" HorizontalAlignment="Right" />
-        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding UserName}" />
+                <TextBlock Grid.Row="1" Text="Новый пароль:" HorizontalAlignment="Right" />
+                <PasswordBox Grid.Row="1" Grid.Column="2" Password="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
 
-        <TextBlock Grid.Row="2" Text="Новый пароль:" HorizontalAlignment="Right" />
-        <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                <TextBlock Grid.Row="2" Text="Повторите пароль:" HorizontalAlignment="Right" />
+                <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding Password2, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
 
-        <TextBlock Grid.Row="3" Text="Повторите пароль:" HorizontalAlignment="Right" />
-        <PasswordBox Grid.Row="3" Grid.Column="2" Password="{Binding Password2, Mode=TwoWay}" />
+                <Button Grid.Row="3" Grid.Column="2" Content="Изменить" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
+            </Grid>
+        </controls:H1>
+    </StackPanel>
 
-        <Button Grid.Row="4" Grid.Column="2" Content="Изменить" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
-    </Grid>
 </UserControl>

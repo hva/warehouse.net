@@ -17,16 +17,10 @@
         <!--TextBlock-->
         <Style x:Key="TextBlock_Default" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontSize" Value="11" />
         </Style>
 
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock_Default}" />
-
-        <Style x:Key="H1" TargetType="TextBlock" BasedOn="{StaticResource TextBlock_Default}">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="Foreground" Value="Gray" />
-            <Setter Property="Margin" Value="0,10" />
-        </Style>
 
         <!--TextBox-->
         <Style TargetType="TextBox">
