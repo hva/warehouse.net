@@ -41,6 +41,7 @@ namespace Warehouse.Silverlight
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(MainModule.MainModule));
+            moduleCatalog.AddModule(typeof(SettingsModule.SettingsModule));
             moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
         }
 

@@ -7,25 +7,27 @@
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls"
     xmlns:viewModels1="clr-namespace:Warehouse.Silverlight.NavigationModule.ViewModels"
     mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModels1:TopMenuViewModel}">
+    d:DataContext="{d:DesignInstance Type=viewModels1:TopMenuViewModel}">
 
     <Grid Height="45">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <controls:TopMenuDivider />
-        <controls:TopMenuItem Grid.Column="1" Content="Остатки" IsChecked="True" />
-        <controls:TopMenuDivider Grid.Column="2" />
+        <StackPanel Orientation="Horizontal">
+            <controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
+            <controls:TopMenuDivider />
+        </StackPanel>
 
-        <controls:TopMenuDivider Grid.Column="4" />
-        <controls:TopMenuItem Grid.Column="5" Content="{Binding LogoutContent}" Command="{Binding LogoutCommand}" />
-        <controls:TopMenuDivider Grid.Column="6" />
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
+            <controls:TopMenuDivider />
+            <controls:TopMenuItem Content="{Binding LogoutContent}" Command="{Binding LogoutCommand}" />
+            <controls:TopMenuDivider />
+        </StackPanel>
     </Grid>
 </UserControl>
