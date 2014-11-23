@@ -3,13 +3,13 @@ using System.Collections;
 using System.ComponentModel;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Warehouse.Silverlight.MainModule.Infrastructure
+namespace Warehouse.Silverlight.Infrastructure
 {
-    public abstract class InteractionRequestValidationObject : InteractionRequestObject, INotifyDataErrorInfo
+    public abstract class ValidationObject : INotifyDataErrorInfo
     {
         protected ErrorsContainer<string> errorsContainer;
 
-        protected InteractionRequestValidationObject()
+        protected ValidationObject()
         {
             errorsContainer = new ErrorsContainer<string>(RaiseErrorsChanged);
         }
