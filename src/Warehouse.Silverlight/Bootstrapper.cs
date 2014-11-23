@@ -9,6 +9,7 @@ using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Data.Auth;
 using Warehouse.Silverlight.Data.Log;
+using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Navigation;
 using Warehouse.Silverlight.SignalR;
 
@@ -54,6 +55,7 @@ namespace Warehouse.Silverlight
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
         }
 
         protected override DependencyObject CreateShell()

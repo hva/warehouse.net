@@ -25,27 +25,35 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Логин:" HorizontalAlignment="Right" />
                 <TextBlock Grid.Column="2" Text="{Binding UserName}" />
 
-                <TextBlock Grid.Row="1" Text="Новый пароль:" HorizontalAlignment="Right" />
-                <PasswordBox Grid.Row="1" Grid.Column="2" Password="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                <TextBlock Grid.Row="1" Text="Старый пароль:" HorizontalAlignment="Right" />
+                <PasswordBox Grid.Row="1" Grid.Column="2" Password="{Binding OldPassword, Mode=TwoWay}">
                     <i:Interaction.Behaviors>
                         <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
                     </i:Interaction.Behaviors>
                 </PasswordBox>
 
-                <TextBlock Grid.Row="2" Text="Повторите пароль:" HorizontalAlignment="Right" />
-                <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding Password2, Mode=TwoWay}">
+                <TextBlock Grid.Row="2" Text="Новый пароль:" HorizontalAlignment="Right" />
+                <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding NewPassword, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                     <i:Interaction.Behaviors>
                         <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
                     </i:Interaction.Behaviors>
                 </PasswordBox>
 
-                <Button Grid.Row="3" Grid.Column="2" Content="Изменить" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="3" Text="Повторите пароль:" HorizontalAlignment="Right" />
+                <PasswordBox Grid.Row="3" Grid.Column="2" Password="{Binding NewPassword2, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+
+                <Button Grid.Row="4" Grid.Column="2" Content="Изменить" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
             </Grid>
         </controls:H1>
     </StackPanel>

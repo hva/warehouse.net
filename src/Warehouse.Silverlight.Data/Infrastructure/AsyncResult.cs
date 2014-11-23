@@ -3,6 +3,7 @@
     public class AsyncResult
     {
         public bool Succeed { get; set; }
+        public string ErrorMessage { get; set; }
     }
 
     public class AsyncResult<T> : AsyncResult
