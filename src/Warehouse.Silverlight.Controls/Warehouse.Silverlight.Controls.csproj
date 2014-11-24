@@ -58,6 +58,8 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertBox.cs" />
+    <Compile Include="AlertType.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
     <Compile Include="H1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
