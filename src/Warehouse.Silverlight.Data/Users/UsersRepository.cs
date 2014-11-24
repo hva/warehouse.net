@@ -51,7 +51,18 @@ namespace Warehouse.Silverlight.Data.Users
                         {
                             result.ErrorMessage = "Прежний пароль введён неправильно";
                         }
-                        // handle other errors
+                        else if (err.IndexOf("Passwords must have at least one lowercase", StringComparison.InvariantCultureIgnoreCase) > -1)
+                        {
+                            result.ErrorMessage = "Пароль должен содержать хотя бы одну букву";
+                        }
+                        else if (err.IndexOf("Passwords must have at least one digit", StringComparison.InvariantCultureIgnoreCase) > -1)
+                        {
+                            result.ErrorMessage = "Пароль должен содержать хотя бы одну цифру";
+                        }
+                        else
+                        {
+                            result.ErrorMessage = "Что-то пошло не так... Сообщите специалисту.";
+                        }
                     }
                     return result;
                 }

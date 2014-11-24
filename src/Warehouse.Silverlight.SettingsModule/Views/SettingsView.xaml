@@ -32,14 +32,15 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.ColumnSpan="4" Margin="0,0,0,10">
-                    <controls:AlertBox Type="Success" Content="This is error message" />
+                    <controls:AlertBox Content="{Binding ErrorMessage}" Opacity="{Binding ErrorMessageOpacity}" />
+                    <controls:AlertBox Type="Success" Content="{Binding SuccessMessage}" Opacity="{Binding SuccessMessageOpacity}" />
                 </Grid>
 
                 <TextBlock Grid.Row="1" Text="Логин:" HorizontalAlignment="Right" />
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding UserName}" />
 
                 <TextBlock Grid.Row="2" Text="Старый пароль:" HorizontalAlignment="Right" />
-                <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding OldPassword, Mode=TwoWay}">
+                <PasswordBox Grid.Row="2" Grid.Column="2" Password="{Binding OldPassword, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                     <i:Interaction.Behaviors>
                         <behaviors:EnterPressedBehavior Command="{Binding SaveCommand}" />
                     </i:Interaction.Behaviors>

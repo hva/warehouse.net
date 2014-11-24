@@ -5,7 +5,7 @@ using Microsoft.Practices.Prism.ViewModel;
 
 namespace Warehouse.Silverlight.Infrastructure
 {
-    public abstract class ValidationObject : INotifyDataErrorInfo
+    public abstract class ValidationObject : NotificationObject, INotifyDataErrorInfo
     {
         protected ErrorsContainer<string> errorsContainer;
 
