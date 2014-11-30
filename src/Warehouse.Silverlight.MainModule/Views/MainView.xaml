@@ -43,7 +43,7 @@
                 <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Цена&#10;без НДС (опт.)" Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.###}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Кол-во&#10;(шт.)" Binding="{Binding Count, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Длина (м)" Binding="{Binding Length, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />

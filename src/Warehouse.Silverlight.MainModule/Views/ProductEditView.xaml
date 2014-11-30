@@ -127,7 +127,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Кол-во (кг.)" />
-                        <TextBox Text="{Binding Weight}" IsReadOnly="True" />
+                        <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.###}'}" />
                     </StackPanel>
 
                     <Rectangle Height="1" Fill="#ddd" Margin="3,5" />

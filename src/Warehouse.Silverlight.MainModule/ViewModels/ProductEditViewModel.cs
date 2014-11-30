@@ -24,7 +24,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string k;
         private string priceOpt;
         private long priceRozn;
-        private string weight;
+        private double weight;
         private string count;
         private string nd;
         private string length;
@@ -100,6 +100,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                     k = value;
                     ValidateK();
                     UpdatePriceRozn();
+                    UpdateWeight();
                 }
             }
         }
@@ -159,10 +160,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
             else
             {
-                var opt = decimal.Parse(priceOpt);
-                var koeff = decimal.Parse(k);
-                var rozn = opt * koeff / 1000m * 1.2m;
-                PriceRozn = (long) (decimal.Round(rozn / 100, 0) * 100);
+                var _priceOpt = decimal.Parse(priceOpt);
+                var _k = decimal.Parse(k);
+                var rozn = _priceOpt * _k / 1000m * 1.2m;
+                PriceRozn = (long) (decimal.Ceiling(rozn / 100) * 100);
             }
         }
 
@@ -170,16 +171,34 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #region Weight
 
-        public string Weight
+        public double Weight
         {
             get { return weight; }
-            set { weight = value; ValidateWeight(); }
+            set
+            {
+                if (Math.Abs(weight - value) > double.Epsilon)
+                {
+                    weight = value;
+                    RaisePropertyChanged(() => Weight);
+                }
+            }
         }
 
-        private void ValidateWeight()
+        private void UpdateWeight()
         {
-            errorsContainer.ClearErrors(() => Weight);
-            errorsContainer.SetErrors(() => Weight, Validate.Double(Weight));
+            if (errorsContainer.HasErrors)
+            {
+                Weight = 0;
+            }
+            else
+            {
+                var _count = int.Parse(count);
+                var _length = double.Parse(length);
+                var _nd = GetTotalNd();
+                var _k = double.Parse(k);
+
+                Weight = Math.Round( (_count * _length + _nd) * _k, 3);
+            }
         }
 
         #endregion
@@ -189,7 +208,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string Count
         {
             get { return count; }
-            set { count = value; ValidateCount(); }
+            set
+            {
+                if (count != value)
+                {
+                    count = value;
+                    ValidateCount();
+                    UpdateWeight();
+                }
+            }
         }
 
         private void ValidateCount()
@@ -205,7 +232,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string Nd
         {
             get { return nd; }
-            set { nd = value; ValidateNd(); }
+            set
+            {
+                if (nd != value)
+                {
+                    nd = value;
+                    ValidateNd();
+                    UpdateWeight();
+                }
+            }
         }
 
         private void ValidateNd()
@@ -230,7 +265,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string Length
         {
             get { return length; }
-            set { length = value; ValidateLength(); }
+            set
+            {
+                if (length != value)
+                {
+                    length = value;
+                    ValidateLength();
+                    UpdateWeight();
+                }
+            }
         }
 
         private void ValidateLength()
@@ -247,7 +290,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string PriceIcome
         {
             get { return priceIcome; }
-            set { priceIcome = value; ValidatePriceIcome(); }
+            set
+            {
+                if (priceIcome != value)
+                {
+                    priceIcome = value;
+                    ValidatePriceIcome();
+                }
+            }
         }
 
         private void ValidatePriceIcome()
@@ -270,7 +320,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidateSize();
             ValidateK();
             ValidatePriceOpt();
-            ValidateWeight();
             ValidateCount();
             ValidateNd();
             ValidateLength();
@@ -297,7 +346,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             k = product.K.ToString("0.##");
             priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
             priceRozn = product.PriceRozn;
-            weight = product.Weight.ToString("0");
+            weight = product.Weight;
             count = product.Count.ToString(CultureInfo.InvariantCulture);
             if (product.Nd != null)
             {
@@ -318,7 +367,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 K = Math.Round(double.Parse(k), 2),
                 PriceOpt = long.Parse(priceOpt),
                 PriceRozn = priceRozn,
-                Weight = double.Parse(weight),
+                Weight = weight,
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
                 Length = Math.Round(double.Parse(length), 2),
@@ -334,6 +383,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 .Select(double.Parse)
                 .OrderByDescending(x => x)
                 .ToArray();
+        }
+
+        private double GetTotalNd()
+        {
+            if (string.IsNullOrEmpty(nd))
+            {
+                return 0;
+            }
+            return nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).Sum();
         }
     }
 }
