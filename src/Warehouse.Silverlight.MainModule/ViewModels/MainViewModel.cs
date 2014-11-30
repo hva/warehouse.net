@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -20,7 +23,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly ISignalRClient signalRClient;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly ICommand openProductCommand;
-        private ObservableCollection<Product> items;
+        private readonly CollectionViewSource cvs;
+        private readonly ObservableCollection<Product> items;
+
 
         public MainViewModel(IDataService service, IEventAggregator eventAggregator, ISignalRClient signalRClient)
         {
@@ -30,13 +35,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             openProductCommand = new DelegateCommand<Product>(OpenProduct);
+
+            cvs = new CollectionViewSource();
+            items = new ObservableCollection<Product>();
+            cvs.Source = items;
+            cvs.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            cvs.SortDescriptions.Add(new SortDescription("Size", ListSortDirection.Ascending));
         }
 
-        public ObservableCollection<Product> Items
-        {
-            get { return items; }
-            set { items = value; RaisePropertyChanged(() => Items); }
-        }
+        public ICollectionView Items { get { return cvs.View; } }
 
         public ICommand OpenProductCommand { get { return openProductCommand; } }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
@@ -47,12 +54,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             if (task.Succeed)
             {
                 var current = task.Result;
-                var old = Items.FirstOrDefault(x => x.Id == current.Id);
+                var old = items.FirstOrDefault(x => x.Id == current.Id);
                 if (old != null)
                 {
-                    var index = Items.IndexOf(old);
-                    Items.RemoveAt(index);
-                    Items.Insert(index, current);
+                    var index = items.IndexOf(old);
+                    items.RemoveAt(index);
+                    items.Insert(index, current);
                 }
             }
         }
@@ -72,7 +79,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var task = await service.GetProductsAsync();
             if (task.Succeed)
             {
-                Items = new ObservableCollection<Product>(task.Result);
+                items.AddRange(task.Result);
             }
         }
 
