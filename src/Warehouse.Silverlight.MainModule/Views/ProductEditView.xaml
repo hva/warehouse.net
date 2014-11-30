@@ -65,6 +65,13 @@
                         </i:Interaction.Behaviors>
                     </TextBox>
 
+                    <sdk:Label Content="K" Grid.Row="2" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding K, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
                 </Grid>
             </sdk:TabItem>
         </sdk:TabControl>

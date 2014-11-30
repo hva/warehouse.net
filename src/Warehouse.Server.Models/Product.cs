@@ -19,10 +19,10 @@ namespace Warehouse.Server.Models
         public double K { get; set; }
 
         [BsonElement("price_opt")]
-        public int PriceOpt { get; set; }
+        public long PriceOpt { get; set; }
 
         [BsonElement("price_rozn")]
-        public int PriceRozn { get; set; }
+        public long PriceRozn { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("weight")]

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -14,26 +15,24 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         private readonly IDataService dataService;
         private readonly IEventAggregator eventAggregator;
-        private readonly string id;
+
+        private string id;
         private string name;
         private string size;
+        private string k;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
             this.dataService = dataService;
             this.eventAggregator = eventAggregator;
 
-            id = product.Id;
-            name = product.Name;
-            size = product.Size;
-
             Title = string.Format("{0} {1}", product.Name, product.Size);
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
+
+            ProductToProps(product);
         }
 
         public ICommand SaveCommand { get; private set; }
-
-        public string Id { get { return id; } }
 
         #region Name
 
@@ -81,27 +80,58 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region K
+
+        public string K
+        {
+            get { return k; }
+            set { k = value; ValidateK(); }
+        }
+
+        private void ValidateK()
+        {
+            errorsContainer.ClearErrors(() => K);
+            errorsContainer.SetErrors(() => K, Validate.Double(K));
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
             ValidateSize();
+            ValidateK();
 
             if (HasErrors) return;
 
-            var product = new Product
-            {
-                Id = id,
-                Name = name,
-                Size = size,
-            };
+            var changed = PropsToProduct();
 
-            var task = await dataService.SaveProductAsync(product);
+            var task = await dataService.SaveProductAsync(changed);
             if (task.Succeed)
             {
                 eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(new ProductUpdatedEventArgs(id));
                 Confirmed = true;
                 window.Close();
             }
+        }
+
+        private void ProductToProps(Product product)
+        {
+            id = product.Id;
+            name = product.Name;
+            size = product.Size;
+            k = product.K.ToString("0.##");
+        }
+
+        private Product PropsToProduct()
+        {
+            return new Product
+            {
+                Id = id,
+                Name = name,
+                Size = size,
+                K = Math.Round(double.Parse(k), 2),
+            };
         }
     }
 }

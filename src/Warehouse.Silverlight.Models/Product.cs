@@ -8,8 +8,8 @@ namespace Warehouse.Silverlight.Models
         public string Name { get; set; }
         public string Size { get; set; }
         public double K { get; set; }
-        public int PriceOpt { get; set; }
-        public int PriceRozn { get; set; }
+        public long PriceOpt { get; set; }
+        public long PriceRozn { get; set; }
         public double Weight { get; set; }
         public int Count { get; set; }
         public double[] Nd { get; set; }

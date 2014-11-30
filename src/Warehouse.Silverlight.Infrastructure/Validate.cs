@@ -29,5 +29,14 @@ namespace Warehouse.Silverlight.Infrastructure
                 yield return "пароль должен быть не менее 6 символов в длину";
             }
         }
+
+        public static IEnumerable<string> Double(string value)
+        {
+            double d;
+            if (!double.TryParse(value, out d))
+            {
+                yield return "дробное число";
+            }
+        }
     }
 }
