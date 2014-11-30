@@ -47,5 +47,14 @@ namespace Warehouse.Silverlight.Infrastructure
                 yield return "целое число";
             }
         }
+
+        public static IEnumerable<string> Int(string value)
+        {
+            int i;
+            if (!int.TryParse(value, out i))
+            {
+                yield return "целое число";
+            }
+        }
     }
 }
