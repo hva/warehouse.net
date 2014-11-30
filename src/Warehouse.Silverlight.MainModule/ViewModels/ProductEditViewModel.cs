@@ -246,14 +246,17 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void ValidateNd()
         {
             errorsContainer.ClearErrors(() => Nd);
-            var parts = nd.Split(new [] {" "}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var x in parts)
+            if (!string.IsNullOrEmpty(nd))
             {
-                var errors = Validate.Double(x).ToArray();
-                if (errors.Length > 0)
+                var parts = nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var x in parts)
                 {
-                    errorsContainer.SetErrors(() => Nd, new[] {"дробные числа, разделенные пробелом"});
-                    break;
+                    var errors = Validate.Double(x).ToArray();
+                    if (errors.Length > 0)
+                    {
+                        errorsContainer.SetErrors(() => Nd, new[] { "дробные числа, разделенные пробелом" });
+                        break;
+                    }
                 }
             }
         }
@@ -378,7 +381,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private static double[] ParseNd(string nd)
         {
-            return nd
+            return (nd ?? string.Empty)
                 .Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(double.Parse)
                 .OrderByDescending(x => x)
