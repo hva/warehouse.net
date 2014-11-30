@@ -23,16 +23,20 @@
     <sdk:ChildWindow.Resources>
         <Style TargetType="sdk:Label">
             <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="Margin" Value="10,8" />
             <Setter Property="Width" Value="150" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,5" />
             <Setter Property="Width" Value="200" />
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
     </sdk:ChildWindow.Resources>
 
-    <Grid MinWidth="400" MinHeight="300">
+    <Grid MinWidth="300" MinHeight="300">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="7" />
@@ -41,7 +45,9 @@
 
         <sdk:TabControl>
             <sdk:TabItem Header="Параметры">
-                <StackPanel>
+                <StackPanel HorizontalAlignment="Stretch">
+
+                    <!--Name-->
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Наимнование" />
@@ -60,6 +66,10 @@
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
+
+                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
+
+                    <!--Price-->
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="K" />
@@ -81,25 +91,25 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена с НДС (розн.)" />
-                        <TextBox IsReadOnly="True" Text="{Binding PriceRozn, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
-                            <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
+                        <TextBlock Text="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Кол-во (кг.)" />
-                        <TextBox Text="{Binding Weight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
-                            <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
+                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
+
+                    <!--Amount-->
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Кол-во (шт.)" />
                         <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                            <i:Interaction.Behaviors>
+                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <sdk:Label Content="Длина (м)" />
+                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
                             </i:Interaction.Behaviors>
@@ -116,13 +126,13 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Длина (м)" />
-                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
-                            <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
+                        <sdk:Label Content="Кол-во (кг.)" />
+                        <TextBox Text="{Binding Weight}" IsReadOnly="True" />
                     </StackPanel>
+
+                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
+
+                    <!--Other-->
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена приходная" />

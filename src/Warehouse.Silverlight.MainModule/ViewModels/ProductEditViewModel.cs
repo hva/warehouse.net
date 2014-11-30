@@ -23,7 +23,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string size;
         private string k;
         private string priceOpt;
-        private string priceRozn;
+        private long priceRozn;
         private string weight;
         private string count;
         private string nd;
@@ -93,7 +93,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string K
         {
             get { return k; }
-            set { k = value; ValidateK(); }
+            set
+            {
+                if (k != value)
+                {
+                    k = value;
+                    ValidateK();
+                    UpdatePriceRozn();
+                }
+            }
         }
 
         private void ValidateK()
@@ -109,7 +117,15 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public string PriceOpt
         {
             get { return priceOpt; }
-            set { priceOpt = value; ValidatePriceOpt(); }
+            set
+            {
+                if (priceOpt != value)
+                {
+                    priceOpt = value;
+                    ValidatePriceOpt();
+                    UpdatePriceRozn();
+                }
+            }
         }
 
         private void ValidatePriceOpt()
@@ -122,16 +138,32 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #region PriceRozn
 
-        public string PriceRozn
+        public long PriceRozn
         {
             get { return priceRozn; }
-            set { priceRozn = value; ValidatePriceRozn(); }
+            set
+            {
+                if (priceRozn != value)
+                {
+                    priceRozn = value;
+                    RaisePropertyChanged(() => PriceRozn);
+                }
+            }
         }
 
-        private void ValidatePriceRozn()
+        private void UpdatePriceRozn()
         {
-            errorsContainer.ClearErrors(() => PriceRozn);
-            errorsContainer.SetErrors(() => PriceRozn, Validate.Long(PriceRozn));
+            if (errorsContainer.HasErrors)
+            {
+                PriceRozn = 0;
+            }
+            else
+            {
+                var opt = decimal.Parse(priceOpt);
+                var koeff = decimal.Parse(k);
+                var rozn = opt * koeff / 1000m * 1.2m;
+                PriceRozn = (long) (decimal.Round(rozn / 100, 0) * 100);
+            }
         }
 
         #endregion
@@ -238,7 +270,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidateSize();
             ValidateK();
             ValidatePriceOpt();
-            ValidatePriceRozn();
             ValidateWeight();
             ValidateCount();
             ValidateNd();
@@ -265,7 +296,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             size = product.Size;
             k = product.K.ToString("0.##");
             priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
-            priceRozn = product.PriceRozn.ToString(CultureInfo.InvariantCulture);
+            priceRozn = product.PriceRozn;
             weight = product.Weight.ToString("0");
             count = product.Count.ToString(CultureInfo.InvariantCulture);
             if (product.Nd != null)
@@ -286,7 +317,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Size = size,
                 K = Math.Round(double.Parse(k), 2),
                 PriceOpt = long.Parse(priceOpt),
-                PriceRozn = long.Parse(priceRozn),
+                PriceRozn = priceRozn,
                 Weight = double.Parse(weight),
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Markup;
 
 namespace Warehouse.Silverlight.MainModule.Views
 {
@@ -6,6 +8,7 @@ namespace Warehouse.Silverlight.MainModule.Views
     {
         public ProductEditView()
         {
+            Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             InitializeComponent();
         }
     }
