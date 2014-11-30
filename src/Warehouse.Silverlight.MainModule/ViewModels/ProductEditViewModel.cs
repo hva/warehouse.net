@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -25,6 +26,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string priceRozn;
         private string weight;
         private string count;
+        private string nd;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
@@ -165,6 +167,31 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Nd
+
+        public string Nd
+        {
+            get { return nd; }
+            set { nd = value; ValidateNd(); }
+        }
+
+        private void ValidateNd()
+        {
+            errorsContainer.ClearErrors(() => Nd);
+            var parts = nd.Split(new [] {" "}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var x in parts)
+            {
+                var errors = Validate.Double(x).ToArray();
+                if (errors.Length > 0)
+                {
+                    errorsContainer.SetErrors(() => Nd, new[] {"дробные числа, разделенные пробелом"});
+                    break;
+                }
+            }
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
@@ -174,6 +201,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidatePriceRozn();
             ValidateWeight();
             ValidateCount();
+            ValidateNd();
 
             if (HasErrors) return;
 
@@ -198,6 +226,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             priceRozn = product.PriceRozn.ToString(CultureInfo.InvariantCulture);
             weight = product.Weight.ToString("0");
             count = product.Count.ToString(CultureInfo.InvariantCulture);
+            if (product.Nd != null)
+            {
+                nd = string.Join(" ", product.Nd);
+            }
         }
 
         private Product PropsToProduct()
@@ -212,7 +244,17 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 PriceRozn = long.Parse(priceRozn),
                 Weight = double.Parse(weight),
                 Count = int.Parse(count),
+                Nd = ParseNd(nd),
             };
+        }
+
+        private static double[] ParseNd(string nd)
+        {
+            return nd
+                .Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(double.Parse)
+                .OrderByDescending(x => x)
+                .ToArray();
         }
     }
 }
