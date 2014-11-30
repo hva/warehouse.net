@@ -55,6 +55,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -121,8 +122,15 @@
                         </i:Interaction.Behaviors>
                     </TextBox>
 
-                    <sdk:Label Content="1C" Grid.Row="9" />
-                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Internal, Mode=TwoWay}" />
+                    <sdk:Label Content="Цена приходная" Grid.Row="9" />
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
+                    <sdk:Label Content="1C" Grid.Row="10" />
+                    <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Internal, Mode=TwoWay}" />
 
                 </Grid>
             </sdk:TabItem>

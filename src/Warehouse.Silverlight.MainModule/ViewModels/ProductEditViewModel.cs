@@ -209,6 +209,23 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region PriceIcome
+        private string priceIcome;
+
+        public string PriceIcome
+        {
+            get { return priceIcome; }
+            set { priceIcome = value; ValidatePriceIcome(); }
+        }
+
+        private void ValidatePriceIcome()
+        {
+            errorsContainer.ClearErrors(() => PriceIcome);
+            errorsContainer.SetErrors(() => PriceIcome, Validate.Long(PriceIcome));
+        }
+
+        #endregion
+
         #region Internal
 
         public string Internal { get; set; }
@@ -226,6 +243,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidateCount();
             ValidateNd();
             ValidateLength();
+            ValidatePriceIcome();
 
             if (HasErrors) return;
 
@@ -255,6 +273,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 nd = string.Join(" ", product.Nd);
             }
             length = product.Length.ToString("0.##");
+            priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
             Internal = product.Internal;
         }
 
@@ -272,6 +291,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
                 Length = Math.Round(double.Parse(length), 2),
+                PriceIcome = long.Parse(priceIcome),
                 Internal = Internal,
             };
         }
