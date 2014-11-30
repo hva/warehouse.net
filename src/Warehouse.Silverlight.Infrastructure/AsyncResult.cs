@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Silverlight.Data.Infrastructure
+﻿namespace Warehouse.Silverlight.Infrastructure
 {
     public class AsyncResult
     {

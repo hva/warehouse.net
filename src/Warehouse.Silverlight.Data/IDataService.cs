@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Warehouse.Silverlight.Data.Infrastructure;
+using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.Data

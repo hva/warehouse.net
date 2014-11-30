@@ -95,7 +95,6 @@
     <Compile Include="Http\BaseHttpClient.cs" />
     <Compile Include="Http\BearerHttpClient.cs" />
     <Compile Include="IDataService.cs" />
-    <Compile Include="Infrastructure\AsyncResult.cs" />
     <Compile Include="Log\BrowserLogger.cs" />
     <Compile Include="Log\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +105,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Infrastructure\Warehouse.Silverlight.Infrastructure.csproj">
+      <Project>{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}</Project>
+      <Name>Warehouse.Silverlight.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Models\Warehouse.Silverlight.Models.csproj">
       <Project>{23145441-7B98-4921-82E0-4786CD3374CD}</Project>
       <Name>Warehouse.Silverlight.Models</Name>

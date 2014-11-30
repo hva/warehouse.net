@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Warehouse.Silverlight.Data.Auth;
 using Warehouse.Silverlight.Data.Http;
-using Warehouse.Silverlight.Data.Infrastructure;
+using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.Data.Users
 {

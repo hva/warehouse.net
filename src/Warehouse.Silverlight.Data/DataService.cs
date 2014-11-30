@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Warehouse.Silverlight.Data.Auth;
 using Warehouse.Silverlight.Data.Http;
-using Warehouse.Silverlight.Data.Infrastructure;
+using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 using Warehouse.Silverlight.Navigation;
 
