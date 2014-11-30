@@ -27,6 +27,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string weight;
         private string count;
         private string nd;
+        private string length;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
@@ -192,6 +193,22 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Length
+
+        public string Length
+        {
+            get { return length; }
+            set { length = value; ValidateLength(); }
+        }
+
+        private void ValidateLength()
+        {
+            errorsContainer.ClearErrors(() => Length);
+            errorsContainer.SetErrors(() => Length, Validate.Double(Length));
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
@@ -202,6 +219,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidateWeight();
             ValidateCount();
             ValidateNd();
+            ValidateLength();
 
             if (HasErrors) return;
 
@@ -230,6 +248,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 nd = string.Join(" ", product.Nd);
             }
+            length = product.Length.ToString("0.##");
         }
 
         private Product PropsToProduct()
@@ -245,6 +264,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Weight = double.Parse(weight),
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
+                Length = Math.Round(double.Parse(length), 2),
             };
         }
 

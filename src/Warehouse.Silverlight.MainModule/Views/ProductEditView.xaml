@@ -53,6 +53,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -107,6 +108,13 @@
 
                     <sdk:Label Content="Н/Д" Grid.Row="7" />
                     <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
+                    <sdk:Label Content="Длина (м)" Grid.Row="8" />
+                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                         <i:Interaction.Behaviors>
                             <interactivity:UpdateTextBindingOnPropertyChanged />
                         </i:Interaction.Behaviors>

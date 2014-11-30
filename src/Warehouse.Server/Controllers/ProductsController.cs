@@ -43,6 +43,7 @@ namespace Warehouse.Server.Controllers
                 .Set(p => p.Weight, product.Weight)
                 .Set(p => p.Count, product.Count)
                 .Set(p => p.Nd, product.Nd)
+                .Set(p => p.Length, product.Length)
             ;
             var res = context.Products.Update(query, update);
             var code = res.Ok ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
