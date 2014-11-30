@@ -209,6 +209,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Internal
+
+        public string Internal { get; set; }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
@@ -249,6 +255,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 nd = string.Join(" ", product.Nd);
             }
             length = product.Length.ToString("0.##");
+            Internal = product.Internal;
         }
 
         private Product PropsToProduct()
@@ -265,6 +272,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
                 Length = Math.Round(double.Parse(length), 2),
+                Internal = Internal,
             };
         }
 

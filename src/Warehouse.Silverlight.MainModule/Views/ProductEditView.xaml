@@ -54,6 +54,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -119,6 +120,9 @@
                             <interactivity:UpdateTextBindingOnPropertyChanged />
                         </i:Interaction.Behaviors>
                     </TextBox>
+
+                    <sdk:Label Content="1C" Grid.Row="9" />
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Internal, Mode=TwoWay}" />
 
                 </Grid>
             </sdk:TabItem>
