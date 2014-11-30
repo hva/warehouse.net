@@ -38,5 +38,14 @@ namespace Warehouse.Silverlight.Infrastructure
                 yield return "дробное число";
             }
         }
+
+        public static IEnumerable<string> Long(string value)
+        {
+            long l;
+            if (!long.TryParse(value, out l))
+            {
+                yield return "целое число";
+            }
+        }
     }
 }

@@ -48,6 +48,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -67,6 +68,13 @@
 
                     <sdk:Label Content="K" Grid.Row="2" />
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding K, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
+                    <sdk:Label Content="Цена без НДС (опт)" Grid.Row="3" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                         <i:Interaction.Behaviors>
                             <interactivity:UpdateTextBindingOnPropertyChanged />
                         </i:Interaction.Behaviors>

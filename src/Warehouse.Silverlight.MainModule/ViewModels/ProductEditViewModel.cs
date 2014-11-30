@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -20,6 +21,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string name;
         private string size;
         private string k;
+        private string priceOpt;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
@@ -96,11 +98,28 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region PriceOpt
+
+        public string PriceOpt
+        {
+            get { return priceOpt; }
+            set { priceOpt = value; ValidatePriceOpt(); }
+        }
+
+        private void ValidatePriceOpt()
+        {
+            errorsContainer.ClearErrors(() => PriceOpt);
+            errorsContainer.SetErrors(() => PriceOpt, Validate.Long(PriceOpt));
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
             ValidateSize();
             ValidateK();
+            ValidatePriceOpt();
 
             if (HasErrors) return;
 
@@ -121,6 +140,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             name = product.Name;
             size = product.Size;
             k = product.K.ToString("0.##");
+            priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
         }
 
         private Product PropsToProduct()
@@ -131,6 +151,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Name = name,
                 Size = size,
                 K = Math.Round(double.Parse(k), 2),
+                PriceOpt = long.Parse(priceOpt),
             };
         }
     }
