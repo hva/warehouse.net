@@ -40,6 +40,7 @@ namespace Warehouse.Server.Controllers
                 .Set(p => p.K, product.K)
                 .Set(p => p.PriceOpt, product.PriceOpt)
                 .Set(p => p.PriceRozn, product.PriceRozn)
+                .Set(p => p.Weight, product.Weight)
             ;
             var res = context.Products.Update(query, update);
             var code = res.Ok ? HttpStatusCode.OK : HttpStatusCode.BadRequest;

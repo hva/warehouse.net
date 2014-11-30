@@ -50,6 +50,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -83,6 +84,13 @@
 
                     <sdk:Label Content="Цена с НДС (розн.)" Grid.Row="4" />
                     <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True" Text="{Binding PriceRozn, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <i:Interaction.Behaviors>
+                            <interactivity:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
+                    <sdk:Label Content="Кол-во (кг.)" Grid.Row="5" />
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Weight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                         <i:Interaction.Behaviors>
                             <interactivity:UpdateTextBindingOnPropertyChanged />
                         </i:Interaction.Behaviors>

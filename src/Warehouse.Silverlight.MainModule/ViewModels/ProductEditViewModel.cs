@@ -23,6 +23,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string k;
         private string priceOpt;
         private string priceRozn;
+        private string weight;
 
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
@@ -131,6 +132,22 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Weight
+
+        public string Weight
+        {
+            get { return weight; }
+            set { weight = value; ValidateWeight(); }
+        }
+
+        private void ValidateWeight()
+        {
+            errorsContainer.ClearErrors(() => Weight);
+            errorsContainer.SetErrors(() => Weight, Validate.Double(Weight));
+        }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
@@ -138,6 +155,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidateK();
             ValidatePriceOpt();
             ValidatePriceRozn();
+            ValidateWeight();
 
             if (HasErrors) return;
 
@@ -160,6 +178,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             k = product.K.ToString("0.##");
             priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
             priceRozn = product.PriceRozn.ToString(CultureInfo.InvariantCulture);
+            weight = product.Weight.ToString("0");
         }
 
         private Product PropsToProduct()
@@ -172,6 +191,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 K = Math.Round(double.Parse(k), 2),
                 PriceOpt = long.Parse(priceOpt),
                 PriceRozn = long.Parse(priceRozn),
+                Weight = double.Parse(weight)
             };
         }
     }
