@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
+using Warehouse.Server.Data;
 using Warehouse.Server.Identity;
 
 namespace Warehouse.Utils.CreateUser
@@ -23,7 +24,8 @@ namespace Warehouse.Utils.CreateUser
             var username = args[0];
             var password = args[1];
 
-            var context = ApplicationIdentityContext.Create();
+            var mongoContext = new MongoContext();
+            var context = new ApplicationIdentityContext(mongoContext);
             var store = new UserStore<IdentityUser>(context);
             var manager = new UserManager<IdentityUser>(store);
 

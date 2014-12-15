@@ -80,12 +80,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationIdentityContext.cs" />
+    <Compile Include="ApplicationOAuthProvider.cs" />
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="OwinExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Server.Data\Warehouse.Server.Data.csproj">
+      <Project>{BB08A735-138E-4EE9-97C3-F096DC6579E9}</Project>
+      <Name>Warehouse.Server.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,15 +1,16 @@
 ﻿using Microsoft.Owin;
 using Owin;
 using Warehouse.Server;
+using Warehouse.Server.Identity;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace Warehouse.Server
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            app.ConfigureAuth();
             app.MapSignalR();
         }
     }

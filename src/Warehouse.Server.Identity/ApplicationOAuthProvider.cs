@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using Warehouse.Server.Identity;
 
-namespace Warehouse.Server.Providers
+namespace Warehouse.Server.Identity
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

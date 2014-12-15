@@ -92,6 +92,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Server.Data\Warehouse.Server.Data.csproj">
+      <Project>{BB08A735-138E-4EE9-97C3-F096DC6579E9}</Project>
+      <Name>Warehouse.Server.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Server.Identity\Warehouse.Server.Identity.csproj">
       <Project>{B714EE38-6495-41D5-9D1B-03F3F69411C6}</Project>
       <Name>Warehouse.Server.Identity</Name>

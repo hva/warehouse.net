@@ -3,13 +3,20 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNet.Identity.Owin;
+using Warehouse.Server.Identity;
 
 namespace Warehouse.Server.Controllers
 {
     [Authorize]
     public class UsersController : ApiController
     {
+        private readonly ApplicationUserManager userManager;
+
+        public UsersController(ApplicationUserManager userManager)
+        {
+            this.userManager = userManager;
+        }
+
         [Route("api/users/{login}/changePassword")]
         [HttpPost]
         public async Task<HttpResponseMessage> ChangePassword(string login, ChangePassword model)
@@ -19,7 +26,6 @@ namespace Warehouse.Server.Controllers
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
 
-            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             if (userManager == null) return new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
             var user = await userManager.FindByNameAsync(login);

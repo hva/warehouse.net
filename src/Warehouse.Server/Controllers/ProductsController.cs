@@ -12,16 +12,20 @@ namespace Warehouse.Server.Controllers
     [Authorize]
     public class ProductsController : ApiController
     {
+        private readonly IMongoContext context;
+
+        public ProductsController(IMongoContext context)
+        {
+            this.context = context;
+        }
+
         public IEnumerable<Product> Get()
         {
-            var context = new MongoContext();
-            var data = context.Products.FindAll();
-            return data;
+            return context.Products.FindAll();
         }
 
         public HttpResponseMessage Get(string id)
         {
-            var context = new MongoContext();
             var data = context.Products.FindOneById(new ObjectId(id));
             if (data != null)
             {
@@ -32,7 +36,6 @@ namespace Warehouse.Server.Controllers
 
         public HttpResponseMessage Put(string id, [FromBody] Product product)
         {
-            var context = new MongoContext();
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
             var update = Update<Product>
                 .Set(p => p.Name, product.Name)
