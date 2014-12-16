@@ -24,8 +24,8 @@ namespace Warehouse.Utils.CreateUser
             var username = args[0];
             var password = args[1];
 
-            var mongoContext = new MongoContext();
-            var context = new ApplicationIdentityContext(mongoContext);
+
+            var context = new ApplicationIdentityContext(new MongoContext());
             var store = new UserStore<IdentityUser>(context);
             var manager = new UserManager<IdentityUser>(store);
 

@@ -4,18 +4,16 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Warehouse.Server.Data;
 
 namespace Warehouse.Server.Identity
 {
     public static class OwinExtensions
     {
-        public static void ConfigureAuth(this IAppBuilder app)
+        public static void ConfigureAuth(this IAppBuilder app, ApplicationOAuthProvider provider)
         {
             // Configure the db context, user manager and role manager to use a single instance per request
-            app.CreatePerOwinContext(MongoContext.Create);
-            app.CreatePerOwinContext<ApplicationIdentityContext>(ApplicationIdentityContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            //app.CreatePerOwinContext(ApplicationIdentityContext.Create);
+            //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             //app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
@@ -25,11 +23,11 @@ namespace Warehouse.Server.Identity
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow
-            const string publicClientId = "self";
+            //const string publicClientId = "self";
             var OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(publicClientId),
+                Provider = provider,
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true

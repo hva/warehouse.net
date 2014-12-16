@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Warehouse.Server.Identity;
+using Warehouse.Server.ViewModels;
 
 namespace Warehouse.Server.Controllers
 {
@@ -42,11 +43,5 @@ namespace Warehouse.Server.Controllers
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
-    }
-
-    public class ChangePassword
-    {
-        public string OldPassword { get; set; }
-        public string NewPassword { get; set; }
     }
 }

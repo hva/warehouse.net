@@ -1,9 +1,6 @@
 using System;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Practices.Unity;
 using Warehouse.Server.Data;
-using Warehouse.Server.Identity;
 
 namespace Warehouse.Server
 {
@@ -13,7 +10,7 @@ namespace Warehouse.Server
     public class UnityConfig
     {
         #region Unity Container
-        private static Lazy<IUnityContainer> _container = new Lazy<IUnityContainer>(() =>
+        private static readonly Lazy<IUnityContainer> _container = new Lazy<IUnityContainer>(() =>
         {
             var container = new UnityContainer();
             RegisterTypes(container);
@@ -38,12 +35,7 @@ namespace Warehouse.Server
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterType<IMongoContext>(
-                new InjectionFactory(c => HttpContext.Current.GetOwinContext().Get<MongoContext>())
-            );
-            container.RegisterType<ApplicationUserManager>(
-                new InjectionFactory(c => HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>())
-            );
+            container.RegisterType<IMongoContext, MongoContext>(new HierarchicalLifetimeManager());
 
             // http://stackoverflow.com/questions/26947371/dependency-injecting-signinmanager-does-not-work-with-unity-works-when-using-o
             //container.RegisterType<IAuthenticationManager>(

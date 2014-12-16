@@ -6,7 +6,7 @@ namespace Warehouse.Server.Data
 {
     public class MongoContext : IMongoContext, IDisposable
     {
-        private MongoDatabase database;
+        private readonly MongoDatabase database;
 
         public MongoContext()
         {
@@ -21,15 +21,6 @@ namespace Warehouse.Server.Data
         {
             get { return database.GetCollection<Product>("products"); }
         }
-
-        #region Owin
-
-        public static MongoContext Create()
-        {
-            return new MongoContext();
-        }
-
-        #endregion
 
         public void Dispose()
         {
