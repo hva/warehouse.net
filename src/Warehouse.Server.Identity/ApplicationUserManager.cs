@@ -10,6 +10,11 @@ namespace Warehouse.Server.Identity
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+            : this(store, null)
+        {
+        }
+
         public ApplicationUserManager(IUserStore<ApplicationUser> store, IDataProtectionProvider dataProtectionProvider)
             : base(store)
         {

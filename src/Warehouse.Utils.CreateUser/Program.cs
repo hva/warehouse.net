@@ -24,15 +24,18 @@ namespace Warehouse.Utils.CreateUser
             var username = args[0];
             var password = args[1];
 
-
-            var context = new ApplicationIdentityContext(new MongoContext());
-            var store = new UserStore<IdentityUser>(context);
-            var manager = new UserManager<IdentityUser>(store);
+            var mongoContext = new MongoContext();
+            var identityContext = new ApplicationIdentityContext(mongoContext);
+            var store = new UserStore<ApplicationUser>(identityContext);
+            var manager = new ApplicationUserManager(store);
 
             var user = new ApplicationUser { UserName = username };
             var result = manager.Create(user, password);
             if (result.Succeeded)
             {
+                var roleResult = manager.AddUserToRolesAsync(user.Id, new[] {"admin"});
+                roleResult.Wait();
+
                 Console.WriteLine("user created!");
                 Console.ReadKey();
                 return;
