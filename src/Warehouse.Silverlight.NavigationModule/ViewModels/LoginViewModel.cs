@@ -6,21 +6,26 @@ using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Auth;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Navigation;
+using Warehouse.Silverlight.SignalR;
 
 namespace Warehouse.Silverlight.NavigationModule.ViewModels
 {
     public class LoginViewModel : NotificationObject, INavigationAware
     {
         private int messageOpacity;
+
         private readonly IAuthService authService;
         private readonly INavigationService navigationService;
+        private readonly ISignalRClient signalRClient;
+
         private string login;
         private string password;
 
-        public LoginViewModel(IAuthService authService, INavigationService navigationService)
+        public LoginViewModel(IAuthService authService, INavigationService navigationService, ISignalRClient signalRClient)
         {
             this.authService = authService;
             this.navigationService = navigationService;
+            this.signalRClient = signalRClient;
 
             LoginCommand = new DelegateCommand(DoLogin);
         }
@@ -76,6 +81,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
             if (task.Succeed)
             {
+                await signalRClient.StartAsync();
                 navigationService.OpenLandingPage();
             }
             else

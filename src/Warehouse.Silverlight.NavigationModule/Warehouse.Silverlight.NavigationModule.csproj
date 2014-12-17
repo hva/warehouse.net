@@ -145,6 +145,10 @@
       <Project>{28F2DF8B-3C3B-411E-AF20-5A027F0F8776}</Project>
       <Name>Warehouse.Silverlight.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.SignalR\Warehouse.Silverlight.SignalR.csproj">
+      <Project>{D459A7BC-6E54-4FA9-9E12-67CE3D90394F}</Project>
+      <Name>Warehouse.Silverlight.SignalR</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\TopMenuDivider.xaml">

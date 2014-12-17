@@ -76,6 +76,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void LoadData()
         {
+            items.Clear();
             var task = await service.GetProductsAsync();
             if (task.Succeed)
             {
@@ -94,7 +95,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             LoadData();
             Subscribe();
-            await signalRClient.StartAsync();
+
+            await signalRClient.EnsureConnection();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -105,7 +107,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             Unsubscribe();
-            signalRClient.Stop();
         }
 
         #endregion

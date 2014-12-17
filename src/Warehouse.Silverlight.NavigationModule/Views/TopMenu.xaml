@@ -26,7 +26,7 @@
             <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
             <controls:TopMenuDivider />
-            <controls:TopMenuItem Content="{Binding LogoutContent}" Command="{Binding LogoutCommand}" />
+            <controls:TopMenuItem Content="Выйти" Command="{Binding LogoutCommand}" />
             <controls:TopMenuDivider />
         </StackPanel>
     </Grid>

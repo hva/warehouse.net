@@ -34,6 +34,15 @@ namespace Warehouse.Silverlight.SignalR
             await connection.Start();
         }
 
+        public async Task EnsureConnection()
+        {
+            if (connection.State == ConnectionState.Disconnected)
+            {
+                UnsubscribeLocal();
+                await StartAsync();
+            }
+        }
+
         public void Stop()
         {
             UnsubscribeLocal();
