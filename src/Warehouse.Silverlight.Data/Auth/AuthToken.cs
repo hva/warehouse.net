@@ -13,5 +13,8 @@ namespace Warehouse.Silverlight.Data.Auth
 
         [JsonProperty("userName")]
         public string UserName { get; set; }
+
+        [JsonProperty("role")]
+        public string Role { get; set; }
     }
 }

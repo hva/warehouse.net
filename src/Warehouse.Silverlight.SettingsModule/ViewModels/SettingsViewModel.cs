@@ -16,7 +16,7 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
         {
             this.usersRepository = usersRepository;
 
-            if (authService.IsValid())
+            if (authService.IsAuthenticated())
             {
                 UserName = authService.Token.UserName;
             }

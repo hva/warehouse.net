@@ -26,12 +26,12 @@ namespace Warehouse.Silverlight.Data.Auth
 
         public AuthToken Token { get { return token; } }
 
-        public bool IsValid()
+        public bool IsAuthenticated()
         {
             // checking in-memory token
             if (token != null)
             {
-                return IsValid(token);
+                return IsAuthenticated(token);
             }
 
             TryLoadToken();
@@ -39,7 +39,7 @@ namespace Warehouse.Silverlight.Data.Auth
             // checking saved token
             if (token != null)
             {
-                return IsValid(token);
+                return IsAuthenticated(token);
             }
 
             return false;
@@ -149,7 +149,7 @@ namespace Warehouse.Silverlight.Data.Auth
             }
         }
 
-        private static bool IsValid(AuthToken token)
+        private static bool IsAuthenticated(AuthToken token)
         {
             return token.Expires > DateTime.UtcNow;
         }

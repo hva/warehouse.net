@@ -26,7 +26,7 @@ namespace Warehouse.Silverlight
 
             var authService = Container.Resolve<IAuthService>();
             var navigationService = Container.Resolve<INavigationService>();
-            if (authService.IsValid())
+            if (authService.IsAuthenticated())
             {
                 navigationService.OpenLandingPage();
             }

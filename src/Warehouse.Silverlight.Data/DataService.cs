@@ -63,7 +63,7 @@ namespace Warehouse.Silverlight.Data
 
         private void EnsureValidToken()
         {
-            if (authService == null || !authService.IsValid())
+            if (authService == null || !authService.IsAuthenticated())
             {
                 navigationService.OpenLoginPage();
             }
