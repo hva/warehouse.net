@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Warehouse.Silverlight.Data.Auth;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Http;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
@@ -13,19 +13,21 @@ namespace Warehouse.Silverlight.Data
 {
     public class DataService : IDataService
     {
-        private readonly IAuthService authService;
+        private AuthToken token;
+
+        private readonly IAuthStore authStore;
         private readonly INavigationService navigationService;
 
-        public DataService(IAuthService authService, INavigationService navigationService)
+        public DataService(IAuthStore authStore, INavigationService navigationService)
         {
-            this.authService = authService;
+            this.authStore = authStore;
             this.navigationService = navigationService;
         }
 
         public async Task<AsyncResult<Product[]>> GetProductsAsync()
         {
-            EnsureValidToken();
-            using (var client = new BearerHttpClient(authService.Token.AccessToken))
+            if (!EnsureValidToken()) return new AsyncResult<Product[]>();
+            using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var str = await client.GetStringAsync(new Uri("api/products", UriKind.Relative));
                 var res = JsonConvert.DeserializeObject<Product[]>(str);
@@ -35,8 +37,8 @@ namespace Warehouse.Silverlight.Data
 
         public async Task<AsyncResult<Product>> GetProductAsync(string id)
         {
-            EnsureValidToken();
-            using (var client = new BearerHttpClient(authService.Token.AccessToken))
+            if (!EnsureValidToken()) return new AsyncResult<Product>();
+            using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var uri = new Uri(string.Concat("api/products/", id), UriKind.Relative);
                 var str = await client.GetStringAsync(uri);
@@ -47,8 +49,8 @@ namespace Warehouse.Silverlight.Data
 
         public async Task<AsyncResult> SaveProductAsync(Product product)
         {
-            EnsureValidToken();
-            using (var client = new BearerHttpClient(authService.Token.AccessToken))
+            if (!EnsureValidToken()) return new AsyncResult<Product>();
+            using (var client = new BearerHttpClient(token.AccessToken))
             {
                 client.BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
                 var data = JsonConvert.SerializeObject(product);
@@ -61,12 +63,16 @@ namespace Warehouse.Silverlight.Data
             }
         }
 
-        private void EnsureValidToken()
+        private bool EnsureValidToken()
         {
-            if (authService == null || !authService.IsAuthenticated())
+            token = authStore.Load();
+
+            if (token == null || !token.IsAuthenticated())
             {
                 navigationService.OpenLoginPage();
+                return false;
             }
+            return true;
         }
     }
 }

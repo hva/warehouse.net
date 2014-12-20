@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Warehouse.Silverlight.Data.Auth
+namespace Warehouse.Silverlight.Auth
 {
     public class AuthToken
     {

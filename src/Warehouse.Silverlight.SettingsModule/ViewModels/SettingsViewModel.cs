@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Warehouse.Silverlight.Data.Auth;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Infrastructure;
 
@@ -12,13 +12,14 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
         private string errorMessage;
         private string successMessage;
 
-        public SettingsViewModel(IAuthService authService, IUsersRepository usersRepository)
+        public SettingsViewModel(IAuthStore authStore, IUsersRepository usersRepository)
         {
             this.usersRepository = usersRepository;
 
-            if (authService.IsAuthenticated())
+            var token = authStore.Load();
+            if (token != null && token.IsAuthenticated())
             {
-                UserName = authService.Token.UserName;
+                UserName = token.UserName;
             }
 
             SaveCommand = new DelegateCommand(Save);
@@ -39,7 +40,7 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
                     errorMessage = value;
                     RaisePropertyChanged(() => ErrorMessage);
                     RaisePropertyChanged(() => ErrorMessageOpacity);
-                };
+                }
             }
         }
 

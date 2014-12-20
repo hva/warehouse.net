@@ -6,10 +6,10 @@ using System.Windows.Markup;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
-using Warehouse.Silverlight.Data.Auth;
-using Warehouse.Silverlight.Data.Log;
 using Warehouse.Silverlight.Data.Users;
+using Warehouse.Silverlight.Log;
 using Warehouse.Silverlight.Navigation;
 using Warehouse.Silverlight.SignalR;
 
@@ -24,9 +24,10 @@ namespace Warehouse.Silverlight
             ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
 
-            var authService = Container.Resolve<IAuthService>();
+            var authStore = Container.Resolve<IAuthStore>();
             var navigationService = Container.Resolve<INavigationService>();
-            if (authService.IsAuthenticated())
+            var token = authStore.Load();
+            if (token != null && token.IsAuthenticated())
             {
                 navigationService.OpenLandingPage();
             }
@@ -51,11 +52,17 @@ namespace Warehouse.Silverlight
             base.ConfigureContainer();
 
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+
             Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IAuthStore, AuthStore>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
+            
         }
 
         protected override DependencyObject CreateShell()

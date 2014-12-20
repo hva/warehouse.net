@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Warehouse.Silverlight.Data.Auth;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Http;
 using Warehouse.Silverlight.Infrastructure;
 
@@ -11,17 +11,18 @@ namespace Warehouse.Silverlight.Data.Users
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly IAuthService authService;
+        private readonly IAuthStore authStore;
 
-        public UsersRepository(IAuthService authService)
+        public UsersRepository(IAuthStore authStore)
         {
-            this.authService = authService;
+            this.authStore = authStore;
         }
 
         public async Task<AsyncResult> ChangePasswordAsync(string login, string oldPassword, string newPassword)
         {
             var result = new AsyncResult();
-            using (var client = new BearerHttpClient(authService.Token.AccessToken))
+            var token = authStore.Load();
+            using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var data = new Dictionary<string, string>
                 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Warehouse.Silverlight.Data.Log
+namespace Warehouse.Silverlight.Log
 {
     public interface ILogger
     {

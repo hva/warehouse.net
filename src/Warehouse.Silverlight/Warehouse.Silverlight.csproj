@@ -159,6 +159,10 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Auth\Warehouse.Silverlight.Auth.csproj">
+      <Project>{0BC82E3F-90B2-4873-B4DE-75DBBA42B0D2}</Project>
+      <Name>Warehouse.Silverlight.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
       <Project>{a9e3e722-a7cc-4a04-a9c4-a4c87dd18aa8}</Project>
       <Name>Warehouse.Silverlight.Controls</Name>
@@ -166,6 +170,10 @@
     <ProjectReference Include="..\Warehouse.Silverlight.Data\Warehouse.Silverlight.Data.csproj">
       <Project>{0C80B2FE-F560-41A3-B450-9AA2D5564325}</Project>
       <Name>Warehouse.Silverlight.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.Log\Warehouse.Silverlight.Log.csproj">
+      <Project>{DC5E6D0C-1F7A-4560-8E5B-98F1C043C03D}</Project>
+      <Name>Warehouse.Silverlight.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.MainModule\Warehouse.Silverlight.MainModule.csproj">
       <Project>{F77D538B-1F2E-4F01-951F-DBA2B45CB937}</Project>

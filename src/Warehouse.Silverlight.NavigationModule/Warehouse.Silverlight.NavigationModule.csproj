@@ -129,6 +129,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Silverlight.Auth\Warehouse.Silverlight.Auth.csproj">
+      <Project>{0BC82E3F-90B2-4873-B4DE-75DBBA42B0D2}</Project>
+      <Name>Warehouse.Silverlight.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Controls\Warehouse.Silverlight.Controls.csproj">
       <Project>{A9E3E722-A7CC-4A04-A9C4-A4C87DD18AA8}</Project>
       <Name>Warehouse.Silverlight.Controls</Name>
