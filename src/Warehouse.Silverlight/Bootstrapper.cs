@@ -26,7 +26,7 @@ namespace Warehouse.Silverlight
 
             var authStore = Container.Resolve<IAuthStore>();
             var navigationService = Container.Resolve<INavigationService>();
-            var token = authStore.Load();
+            var token = authStore.LoadToken();
             if (token != null && token.IsAuthenticated())
             {
                 navigationService.OpenLandingPage();

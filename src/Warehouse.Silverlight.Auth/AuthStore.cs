@@ -17,7 +17,7 @@ namespace Warehouse.Silverlight.Auth
             this.logger = logger;
         }
 
-        public void Save(AuthToken token)
+        public void SaveToken(AuthToken token)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Warehouse.Silverlight.Auth
             }
         }
 
-        public AuthToken Load()
+        public AuthToken LoadToken()
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Warehouse.Silverlight.Auth
             return inMemoryToken;
         }
 
-        public void Clear()
+        public void ClearToken()
         {
             inMemoryToken = null;
             TryRemoveToken();

@@ -21,7 +21,7 @@ namespace Warehouse.Silverlight.Data.Users
         public async Task<AsyncResult> ChangePasswordAsync(string login, string oldPassword, string newPassword)
         {
             var result = new AsyncResult();
-            var token = authStore.Load();
+            var token = authStore.LoadToken();
             using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var data = new Dictionary<string, string>

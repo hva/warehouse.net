@@ -34,7 +34,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         private void Logout()
         {
-            authStore.Clear();
+            authStore.ClearToken();
             signalRClient.Stop();
             navigationService.OpenLoginPage();
         }

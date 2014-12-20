@@ -65,7 +65,7 @@ namespace Warehouse.Silverlight.Data
 
         private bool EnsureValidToken()
         {
-            token = authStore.Load();
+            token = authStore.LoadToken();
 
             if (token == null || !token.IsAuthenticated())
             {

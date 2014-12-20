@@ -16,7 +16,7 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
         {
             this.usersRepository = usersRepository;
 
-            var token = authStore.Load();
+            var token = authStore.LoadToken();
             if (token != null && token.IsAuthenticated())
             {
                 UserName = token.UserName;

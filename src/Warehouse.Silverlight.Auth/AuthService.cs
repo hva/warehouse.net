@@ -43,7 +43,7 @@ namespace Warehouse.Silverlight.Auth
                             var token = serializer.Deserialize<AuthToken>(jsonReader);
                             if (token != null)
                             {
-                                store.Save(token);
+                                store.SaveToken(token);
                                 result.Succeed = true;
                             }
                         }

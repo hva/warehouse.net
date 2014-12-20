@@ -2,8 +2,8 @@
 {
     public interface IAuthStore
     {
-        void Save(AuthToken token);
-        AuthToken Load();
-        void Clear();
+        void SaveToken(AuthToken token);
+        AuthToken LoadToken();
+        void ClearToken();
     }
 }
