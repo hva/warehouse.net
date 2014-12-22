@@ -7,5 +7,6 @@ namespace Warehouse.Server.Data
     {
         MongoDatabase Database { get; }
         MongoCollection<Product> Products { get; }
+        MongoCollection<User> Users { get; }
     }
 }

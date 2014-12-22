@@ -1,10 +1,9 @@
-﻿using System;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Data
 {
-    public class MongoContext : IMongoContext, IDisposable
+    public class MongoContext : IMongoContext
     {
         private readonly MongoDatabase database;
 
@@ -22,8 +21,9 @@ namespace Warehouse.Server.Data
             get { return database.GetCollection<Product>("products"); }
         }
 
-        public void Dispose()
+        public MongoCollection<User> Users
         {
+            get { return database.GetCollection<User>("users"); }
         }
     }
 }

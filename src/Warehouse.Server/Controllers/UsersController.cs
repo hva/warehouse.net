@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Warehouse.Server.Data;
 using Warehouse.Server.Identity;
+using Warehouse.Server.Models;
 using Warehouse.Server.ViewModels;
 
 namespace Warehouse.Server.Controllers
@@ -12,10 +15,17 @@ namespace Warehouse.Server.Controllers
     public class UsersController : ApiController
     {
         private readonly ApplicationUserManager userManager;
+        private readonly IMongoContext context;
 
-        public UsersController(ApplicationUserManager userManager)
+        public UsersController(ApplicationUserManager userManager, IMongoContext context)
         {
             this.userManager = userManager;
+            this.context = context;
+        }
+
+        public IEnumerable<User> Get()
+        {
+            return context.Users.FindAll();
         }
 
         [Route("api/users/{login}/changePassword")]

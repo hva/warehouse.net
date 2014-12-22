@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Http;
 using Warehouse.Silverlight.Infrastructure;
+using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.Data.Users
 {
@@ -16,6 +18,17 @@ namespace Warehouse.Silverlight.Data.Users
         public UsersRepository(IAuthStore authStore)
         {
             this.authStore = authStore;
+        }
+
+        public async Task<AsyncResult<User[]>> GetUsers()
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var str = await client.GetStringAsync(new Uri("api/users", UriKind.Relative));
+                var res = JsonConvert.DeserializeObject<User[]>(str);
+                return new AsyncResult<User[]> { Result = res, Succeed = true };
+            }
         }
 
         public async Task<AsyncResult> ChangePasswordAsync(string login, string oldPassword, string newPassword)
