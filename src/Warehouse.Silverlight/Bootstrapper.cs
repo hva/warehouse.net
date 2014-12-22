@@ -41,10 +41,11 @@ namespace Warehouse.Silverlight
         {
             base.ConfigureModuleCatalog();
 
-            ModuleCatalog moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(MainModule.MainModule));
             moduleCatalog.AddModule(typeof(SettingsModule.SettingsModule));
             moduleCatalog.AddModule(typeof(NavigationModule.NavigationModule));
+            moduleCatalog.AddModule(typeof(UsersModule.UsersModule));
         }
 
         protected override void ConfigureContainer()

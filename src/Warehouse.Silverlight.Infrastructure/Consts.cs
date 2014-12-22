@@ -13,6 +13,7 @@
         public const string MainView = "MainView";
         public const string TopMenu = "TopMenu";
         public const string SettingsView = "SettingsView";
+        public const string UsersView = "UsersView";
 
         // settings
         public const string SettingsLoginKey = "Login";

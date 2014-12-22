@@ -20,6 +20,8 @@
             <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
             <controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" />
+            <controls:TopMenuDivider />
         </StackPanel>
 
         <StackPanel Grid.Column="2" Orientation="Horizontal">
