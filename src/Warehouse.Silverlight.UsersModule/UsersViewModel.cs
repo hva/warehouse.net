@@ -12,13 +12,12 @@ namespace Warehouse.Silverlight.UsersModule
     {
         private readonly IUsersRepository usersRepository;
         private User[] users;
-        private readonly ICommand createUserCommand;
         private readonly InteractionRequest<UserEditViewModel> editUserRequest;
 
         public UsersViewModel(IUsersRepository usersRepository)
         {
             this.usersRepository = usersRepository;
-            createUserCommand = new DelegateCommand(CreateUser);
+            CreateUserCommand = new DelegateCommand(CreateUser);
             editUserRequest = new InteractionRequest<UserEditViewModel>();
         }
 
@@ -28,7 +27,7 @@ namespace Warehouse.Silverlight.UsersModule
             set { users = value; RaisePropertyChanged(() => Users); }
         }
 
-        public ICommand CreateUserCommand { get { return createUserCommand; } }
+        public ICommand CreateUserCommand { get; private set; }
         public IInteractionRequest EditUserRequest { get { return editUserRequest; } }
 
         #region INavigationAware
@@ -60,7 +59,7 @@ namespace Warehouse.Silverlight.UsersModule
 
         private void CreateUser()
         {
-            editUserRequest.Raise(new UserEditViewModel());
+            editUserRequest.Raise(new UserEditViewModel(usersRepository));
         }
     }
 }

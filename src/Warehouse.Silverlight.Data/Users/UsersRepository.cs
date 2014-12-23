@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Warehouse.Silverlight.Auth;
@@ -61,26 +62,60 @@ namespace Warehouse.Silverlight.Data.Users
                     else if (resp.StatusCode == HttpStatusCode.BadRequest)
                     {
                         var err = await resp.Content.ReadAsStringAsync();
-                        if (err.IndexOf("Incorrect password", StringComparison.InvariantCultureIgnoreCase) > -1)
-                        {
-                            result.ErrorMessage = "Прежний пароль введён неправильно";
-                        }
-                        else if (err.IndexOf("Passwords must have at least one lowercase", StringComparison.InvariantCultureIgnoreCase) > -1)
-                        {
-                            result.ErrorMessage = "Пароль должен содержать хотя бы одну букву";
-                        }
-                        else if (err.IndexOf("Passwords must have at least one digit", StringComparison.InvariantCultureIgnoreCase) > -1)
-                        {
-                            result.ErrorMessage = "Пароль должен содержать хотя бы одну цифру";
-                        }
-                        else
-                        {
-                            result.ErrorMessage = "Что-то пошло не так... Сообщите специалисту.";
-                        }
+                        result.ErrorMessage = TranslateError(err);
                     }
                     return result;
                 }
             }
+        }
+
+        public async Task<AsyncResult> CreateUser(User user)
+        {
+            var result = new AsyncResult();
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var data = JsonConvert.SerializeObject(user);
+                using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
+                {
+                    var uri = new Uri("api/users", UriKind.Relative);
+                    using (var resp = await client.PostAsync(uri, content))
+                    {
+                        if (resp.StatusCode == HttpStatusCode.Created)
+                        {
+                            result.Succeed = true;
+                            return result;
+                        }
+                        if (resp.StatusCode == HttpStatusCode.InternalServerError)
+                        {
+                            result.ErrorMessage = "Произошла ошибка на сервере";
+                        }
+                        else if (resp.StatusCode == HttpStatusCode.BadRequest)
+                        {
+                            var err = await resp.Content.ReadAsStringAsync();
+                            result.ErrorMessage = TranslateError(err);
+                        }
+                        return result;
+                    }
+                }
+            }
+        }
+
+        public static string TranslateError(string err)
+        {
+            if (err.IndexOf("Incorrect password", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return "Прежний пароль введён неправильно";
+            }
+            if (err.IndexOf("Passwords must have at least one lowercase", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return "Пароль должен содержать хотя бы одну букву";
+            }
+            if (err.IndexOf("Passwords must have at least one digit", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return "Пароль должен содержать хотя бы одну цифру";
+            }
+            return err;
         }
     }
 }

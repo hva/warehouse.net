@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Warehouse.Server.Data;
 using Warehouse.Server.Identity;
 using Warehouse.Server.Models;
@@ -28,6 +29,27 @@ namespace Warehouse.Server.Controllers
             return context.Users.FindAll();
         }
 
+        public async Task<HttpResponseMessage> Post([FromBody] User user)
+        {
+            if (user == null || string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+            var appUser = new ApplicationUser { UserName = user.UserName };
+            var result = userManager.Create(appUser, user.Password);
+            if (result.Succeeded)
+            {
+                var result2 = await userManager.AddUserToRolesAsync(appUser.Id, user.Roles);
+                if (result2.Succeeded)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created);
+                }
+
+                return ErrorResponse(result2.Errors.FirstOrDefault());
+            }
+
+            return ErrorResponse(result.Errors.FirstOrDefault());
+        }
+
         [Route("api/users/{login}/changePassword")]
         [HttpPost]
         public async Task<HttpResponseMessage> ChangePassword(string login, ChangePassword model)
@@ -45,13 +67,18 @@ namespace Warehouse.Server.Controllers
             var res = await userManager.ChangePasswordAsync(user.Id, model.OldPassword, model.NewPassword);
             if (!res.Succeeded)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent(res.Errors.FirstOrDefault())
-                };
+                return ErrorResponse(res.Errors.FirstOrDefault());
             }
 
             return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        private static HttpResponseMessage ErrorResponse(string error)
+        {
+            return new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent(error)
+            };
         }
     }
 }

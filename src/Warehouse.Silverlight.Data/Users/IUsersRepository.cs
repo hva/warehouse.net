@@ -8,5 +8,6 @@ namespace Warehouse.Silverlight.Data.Users
     {
         Task<AsyncResult<User[]>> GetUsers();
         Task<AsyncResult> ChangePasswordAsync(string login, string oldPassword, string newPassword);
+        Task<AsyncResult> CreateUser(User user);
     }
 }
