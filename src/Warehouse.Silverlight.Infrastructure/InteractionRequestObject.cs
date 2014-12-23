@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Warehouse.Silverlight.MainModule.Infrastructure
+namespace Warehouse.Silverlight.Infrastructure
 {
     public abstract class InteractionRequestObject : Confirmation, INotifyPropertyChanged
     {

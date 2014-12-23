@@ -3,7 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Warehouse.Silverlight.MainModule.Infrastructure
+namespace Warehouse.Silverlight.Infrastructure
 {
     public abstract class InteractionRequestValidationObject : InteractionRequestObject, INotifyDataErrorInfo
     {

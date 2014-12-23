@@ -9,7 +9,7 @@
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
     xmlns:interactivity="http://www.codeplex.com/prism"
-    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.MainModule.Behaviors"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title}"

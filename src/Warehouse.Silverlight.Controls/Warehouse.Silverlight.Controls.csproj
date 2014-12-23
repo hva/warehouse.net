@@ -52,6 +52,8 @@
     <Reference Include="System.Core">
       <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Interactivity, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
@@ -60,6 +62,8 @@
   <ItemGroup>
     <Compile Include="AlertBox.cs" />
     <Compile Include="AlertType.cs" />
+    <Compile Include="Behaviors\ChildWindowBehavior.cs" />
+    <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
     <Compile Include="H1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,11 +7,32 @@
     xmlns:usersModule="clr-namespace:Warehouse.Silverlight.UsersModule"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     xmlns:models="clr-namespace:Warehouse.Silverlight.Models;assembly=Warehouse.Silverlight.Models"
+    xmlns:interactionRequest="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance usersModule:UsersViewModel}">
 
+    <i:Interaction.Triggers>
+
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding EditUserRequest}">
+            <interactionRequest:PopupChildWindowAction>
+                <interactionRequest:PopupChildWindowAction.ChildWindow>
+                    <usersModule:UserEditView />
+                </interactionRequest:PopupChildWindowAction.ChildWindow>
+            </interactionRequest:PopupChildWindowAction>
+        </interactionRequest:InteractionRequestTrigger>
+
+    </i:Interaction.Triggers>
+
     <Grid Margin="0,10">
-        <sdk:DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Создать" Command="{Binding CreateUserCommand}" />
+        </StackPanel>
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Имя" Binding="{Binding UserName}" d:DataContext="{d:DesignInstance Type=models:User}" />
                 <sdk:DataGridTextColumn Header="Роль" Binding="{Binding Role}" d:DataContext="{d:DesignInstance Type=models:User}" />

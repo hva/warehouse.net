@@ -8,9 +8,9 @@
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
     xmlns:models="clr-namespace:Warehouse.Silverlight.Models;assembly=Warehouse.Silverlight.Models"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.MainModule.Behaviors"
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:views="clr-namespace:Warehouse.Silverlight.MainModule.Views"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 

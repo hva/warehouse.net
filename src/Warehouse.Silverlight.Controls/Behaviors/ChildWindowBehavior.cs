@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace Warehouse.Silverlight.MainModule.Behaviors
+namespace Warehouse.Silverlight.Controls.Behaviors
 {
     public class ChildWindowBehavior : Behavior<ChildWindow>
     {

@@ -8,7 +8,6 @@ using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
-using Warehouse.Silverlight.MainModule.Infrastructure;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels

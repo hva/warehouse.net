@@ -76,6 +76,8 @@
     <Compile Include="Consts.cs" />
     <Compile Include="Events\ProductUpdatedEvent.cs" />
     <Compile Include="Events\ProductUpdatedEventArgs.cs" />
+    <Compile Include="InteractionRequestObject.cs" />
+    <Compile Include="InteractionRequestValidationObject.cs" />
     <Compile Include="ValidationObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validate.cs" />

@@ -1,4 +1,7 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Models;
@@ -9,6 +12,15 @@ namespace Warehouse.Silverlight.UsersModule
     {
         private readonly IUsersRepository usersRepository;
         private User[] users;
+        private readonly ICommand createUserCommand;
+        private readonly InteractionRequest<UserEditViewModel> editUserRequest;
+
+        public UsersViewModel(IUsersRepository usersRepository)
+        {
+            this.usersRepository = usersRepository;
+            createUserCommand = new DelegateCommand(CreateUser);
+            editUserRequest = new InteractionRequest<UserEditViewModel>();
+        }
 
         public User[] Users
         {
@@ -16,10 +28,8 @@ namespace Warehouse.Silverlight.UsersModule
             set { users = value; RaisePropertyChanged(() => Users); }
         }
 
-        public UsersViewModel(IUsersRepository usersRepository)
-        {
-            this.usersRepository = usersRepository;
-        }
+        public ICommand CreateUserCommand { get { return createUserCommand; } }
+        public IInteractionRequest EditUserRequest { get { return editUserRequest; } }
 
         #region INavigationAware
 
@@ -46,6 +56,11 @@ namespace Warehouse.Silverlight.UsersModule
             {
                 Users = task.Result;
             }
+        }
+
+        private void CreateUser()
+        {
+            editUserRequest.Raise(new UserEditViewModel());
         }
     }
 }
