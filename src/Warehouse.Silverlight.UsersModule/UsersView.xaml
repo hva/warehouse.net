@@ -9,8 +9,16 @@
     xmlns:models="clr-namespace:Warehouse.Silverlight.Models;assembly=Warehouse.Silverlight.Models"
     xmlns:interactionRequest="http://www.codeplex.com/prism"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance usersModule:UsersViewModel}">
+
+    <UserControl.Resources>
+        <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
+        <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
 
     <i:Interaction.Triggers>
 
@@ -34,8 +42,8 @@
         </StackPanel>
         <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top">
             <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Имя" Binding="{Binding UserName}" d:DataContext="{d:DesignInstance Type=models:User}" />
-                <sdk:DataGridTextColumn Header="Роль" Binding="{Binding Role}" d:DataContext="{d:DesignInstance Type=models:User}" />
+                <sdk:DataGridTextColumn Header="Имя" Binding="{Binding UserName}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:User}" />
+                <sdk:DataGridTextColumn Header="Роль" Binding="{Binding Roles, Converter={StaticResource RoleToStringConverter}}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:User}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
     </Grid>

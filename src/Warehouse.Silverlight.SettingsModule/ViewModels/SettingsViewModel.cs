@@ -20,12 +20,14 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
             if (token != null && token.IsAuthenticated())
             {
                 UserName = token.UserName;
+                Role = token.Role;
             }
 
             SaveCommand = new DelegateCommand(Save);
         }
 
         public string UserName { get; private set; }
+        public string Role { get; private set; }
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         public string NewPassword2 { get; set; }

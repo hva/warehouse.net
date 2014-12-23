@@ -65,6 +65,7 @@
     <Compile Include="Behaviors\ChildWindowBehavior.cs" />
     <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
+    <Compile Include="Converters\RoleToStringConverter.cs" />
     <Compile Include="H1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
