@@ -44,7 +44,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <sdk:Label Content="Роль" />
-                <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" IsEnabled="{Binding CanEditRole}" />
+                <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" />
             </StackPanel>
 
         </StackPanel>

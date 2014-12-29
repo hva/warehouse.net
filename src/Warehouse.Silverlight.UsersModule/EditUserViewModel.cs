@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -18,30 +17,21 @@ namespace Warehouse.Silverlight.UsersModule
             this.repository = repository;
 
             Title = user.UserName;
-            
 
             Roles = new Dictionary<string, string>
             {
-                {"admin", "Администратор"},
+                //{"admin", "Администратор"},
                 {"editor", "Менеджер"},
                 {"user", "Кладовщик"},
             };
             Role = user.Roles[0];
 
-            CanEditRole = user.Roles.All(x => x != "admin");
-            if (CanEditRole)
-            {
-                Roles.Remove("admin");
-            }
-
-            SaveCommand = new DelegateCommand<ChildWindow>(Save, x => CanEditRole);
+            SaveCommand = new DelegateCommand<ChildWindow>(Save);
         }
 
         public ICommand SaveCommand { get; private set; }
         public IDictionary<string, string> Roles { get; private set; }
         public string Role { get; set; }
-
-        public bool CanEditRole { get; private set; }
 
         private async void Save(ChildWindow window)
         {

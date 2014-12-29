@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
@@ -70,7 +71,10 @@ namespace Warehouse.Silverlight.UsersModule
 
         private void EditUser(User user)
         {
-            editUserRequest.Raise(new EditUserViewModel(usersRepository, user), Callback);
+            if (user.Roles.All(x => x != "admin"))
+            {
+                editUserRequest.Raise(new EditUserViewModel(usersRepository, user), Callback);
+            }
         }
 
         private void Callback(Confirmation vm)
