@@ -1,33 +1,41 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
 using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.SettingsModule.ViewModels
 {
-    public class SettingsViewModel : ValidationObject
+    public class SettingsViewModel : ValidationObject, INavigationAware
     {
+        private readonly IAuthStore authStore;
         private readonly IUsersRepository usersRepository;
+        private string userName;
+        private string role;
         private string errorMessage;
         private string successMessage;
 
         public SettingsViewModel(IAuthStore authStore, IUsersRepository usersRepository)
         {
+            this.authStore = authStore;
             this.usersRepository = usersRepository;
-
-            var token = authStore.LoadToken();
-            if (token != null && token.IsAuthenticated())
-            {
-                UserName = token.UserName;
-                Role = token.Role;
-            }
 
             SaveCommand = new DelegateCommand(Save);
         }
 
-        public string UserName { get; private set; }
-        public string Role { get; private set; }
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; RaisePropertyChanged(() => UserName); }
+        }
+
+        public string Role
+        {
+            get { return role; }
+            set { role = value; RaisePropertyChanged(() => Role); }
+        }
+
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         public string NewPassword2 { get; set; }
@@ -98,5 +106,30 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
             errorsContainer.ClearErrors(() => NewPassword);
             errorsContainer.SetErrors(() => NewPassword, Validate.Password(NewPassword, NewPassword2));
         }
+
+        #region INavigationAware
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var token = authStore.LoadToken();
+            if (token != null && token.IsAuthenticated())
+            {
+                UserName = token.UserName;
+                Role = token.Role;
+            }
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            UserName = null;
+            Role = null;
+        }
+
+        #endregion
     }
 }
