@@ -101,6 +101,28 @@ namespace Warehouse.Silverlight.Data.Users
             }
         }
 
+        public async Task<AsyncResult> UpdateUser(User user)
+        {
+            var result = new AsyncResult();
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var data = JsonConvert.SerializeObject(user);
+                using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
+                {
+                    var uri = new Uri("api/users", UriKind.Relative);
+                    using (var resp = await client.PutAsync(uri, content))
+                    {
+                        if (resp.StatusCode == HttpStatusCode.OK)
+                        {
+                            result.Succeed = true;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
         public static string TranslateError(string err)
         {
             if (err.IndexOf("Incorrect password", StringComparison.InvariantCultureIgnoreCase) > -1)

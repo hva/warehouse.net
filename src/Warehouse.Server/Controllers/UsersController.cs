@@ -50,6 +50,28 @@ namespace Warehouse.Server.Controllers
             return ErrorResponse(result.Errors.FirstOrDefault());
         }
 
+        public async Task<HttpResponseMessage> Put([FromBody] User user)
+        {
+            if (user == null || string.IsNullOrEmpty(user.UserName))
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+
+            var appUser = await userManager.FindByNameAsync(user.UserName);
+            if (appUser == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            var res1 = await userManager.RemoveUserFromRolesAsync(appUser.Id, appUser.Roles);
+            if (res1.Succeeded)
+            {
+                var res2 = await userManager.AddUserToRolesAsync(appUser.Id, user.Roles);
+                if (res2.Succeeded)
+                {
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+            }
+            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        }
+
         [Route("api/users/{login}/changePassword")]
         [HttpPost]
         public async Task<HttpResponseMessage> ChangePassword(string login, ChangePassword model)

@@ -13,12 +13,16 @@ namespace Warehouse.Silverlight.UsersModule
         private readonly IUsersRepository usersRepository;
         private User[] users;
         private readonly InteractionRequest<CreateUserViewModel> createUserRequest;
+        private readonly InteractionRequest<EditUserViewModel> editUserRequest;
 
         public UsersViewModel(IUsersRepository usersRepository)
         {
             this.usersRepository = usersRepository;
-            CreateUserCommand = new DelegateCommand(CreateUser);
             createUserRequest = new InteractionRequest<CreateUserViewModel>();
+            editUserRequest = new InteractionRequest<EditUserViewModel>();
+
+            CreateUserCommand = new DelegateCommand(CreateUser);
+            EditUserCommand = new DelegateCommand<User>(EditUser);
         }
 
         public User[] Users
@@ -28,7 +32,9 @@ namespace Warehouse.Silverlight.UsersModule
         }
 
         public ICommand CreateUserCommand { get; private set; }
+        public ICommand EditUserCommand { get; private set; }
         public IInteractionRequest CreateUserRequest { get { return createUserRequest; } }
+        public IInteractionRequest EditUserRequest { get { return editUserRequest; } }
 
         #region INavigationAware
 
@@ -59,10 +65,15 @@ namespace Warehouse.Silverlight.UsersModule
 
         private void CreateUser()
         {
-            createUserRequest.Raise(new CreateUserViewModel(usersRepository), CreateUserCallback);
+            createUserRequest.Raise(new CreateUserViewModel(usersRepository), Callback);
         }
 
-        private void CreateUserCallback(CreateUserViewModel vm)
+        private void EditUser(User user)
+        {
+            editUserRequest.Raise(new EditUserViewModel(usersRepository, user), Callback);
+        }
+
+        private void Callback(Confirmation vm)
         {
             if (vm.Confirmed)
             {

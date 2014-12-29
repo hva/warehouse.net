@@ -52,7 +52,6 @@ namespace Warehouse.Silverlight.Data
             if (!EnsureValidToken()) return new AsyncResult<Product>();
             using (var client = new BearerHttpClient(token.AccessToken))
             {
-                client.BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
                 var data = JsonConvert.SerializeObject(product);
                 using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
                 {
