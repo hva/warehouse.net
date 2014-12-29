@@ -112,10 +112,10 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserEditView.xaml.cs">
-      <DependentUpon>UserEditView.xaml</DependentUpon>
+    <Compile Include="CreateUserView.xaml.cs">
+      <DependentUpon>CreateUserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserEditViewModel.cs" />
+    <Compile Include="CreateUserViewModel.cs" />
     <Compile Include="UsersModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersView.xaml.cs">
@@ -127,9 +127,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UserEditView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="CreateUserView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UsersView.xaml">
       <SubType>Designer</SubType>

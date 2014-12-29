@@ -22,10 +22,10 @@
 
     <i:Interaction.Triggers>
 
-        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding EditUserRequest}">
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding CreateUserRequest}">
             <interactionRequest:PopupChildWindowAction>
                 <interactionRequest:PopupChildWindowAction.ChildWindow>
-                    <usersModule:UserEditView />
+                    <usersModule:CreateUserView />
                 </interactionRequest:PopupChildWindowAction.ChildWindow>
             </interactionRequest:PopupChildWindowAction>
         </interactionRequest:InteractionRequestTrigger>
@@ -40,9 +40,9 @@
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Button Content="Создать" Command="{Binding CreateUserCommand}" />
         </StackPanel>
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top">
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Left">
             <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Имя" Binding="{Binding UserName}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:User}" />
+                <sdk:DataGridTextColumn Header="Логин" Binding="{Binding UserName}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:User}" />
                 <sdk:DataGridTextColumn Header="Роль" Binding="{Binding Roles, Converter={StaticResource RoleToStringConverter}}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:User}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>

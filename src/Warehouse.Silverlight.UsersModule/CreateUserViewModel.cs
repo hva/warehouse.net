@@ -9,14 +9,14 @@ using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.UsersModule
 {
-    public class UserEditViewModel : InteractionRequestValidationObject
+    public class CreateUserViewModel : InteractionRequestValidationObject
     {
         private readonly IUsersRepository repository;
         private string name;
         private string password;
         private string error;
 
-        public UserEditViewModel(IUsersRepository repository)
+        public CreateUserViewModel(IUsersRepository repository)
         {
             this.repository = repository;
 

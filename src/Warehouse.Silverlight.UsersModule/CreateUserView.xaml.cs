@@ -1,8 +1,8 @@
 ﻿namespace Warehouse.Silverlight.UsersModule
 {
-    public partial class UserEditView
+    public partial class CreateUserView
     {
-        public UserEditView()
+        public CreateUserView()
         {
             InitializeComponent();
         }
