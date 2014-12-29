@@ -6,9 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls"
     xmlns:viewModels1="clr-namespace:Warehouse.Silverlight.NavigationModule.ViewModels"
+    xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels1:TopMenuViewModel}">
 
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid Height="45">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -20,8 +24,9 @@
             <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
             <controls:TopMenuDivider />
-            <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" />
-            <controls:TopMenuDivider />
+
+            <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
         <StackPanel Grid.Column="2" Orientation="Horizontal">

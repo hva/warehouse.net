@@ -8,5 +8,10 @@ namespace Warehouse.Silverlight.Auth
         {
             return token.Expires > DateTime.UtcNow;
         }
+
+        public static bool IsAdmin(this AuthToken token)
+        {
+            return token.Role == "admin";
+        }
     }
 }
