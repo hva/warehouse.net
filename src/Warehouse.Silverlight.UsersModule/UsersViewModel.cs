@@ -9,7 +9,7 @@ using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.UsersModule
 {
-    public class UsersViewModel : NotificationObject, INavigationAware
+    public class UsersViewModel : NotificationObject, IRegionMemberLifetime
     {
         private readonly IUsersRepository usersRepository;
         private User[] users;
@@ -24,6 +24,8 @@ namespace Warehouse.Silverlight.UsersModule
 
             CreateUserCommand = new DelegateCommand(CreateUser);
             EditUserCommand = new DelegateCommand<User>(EditUser);
+
+            LoadData();
         }
 
         public User[] Users
@@ -37,23 +39,7 @@ namespace Warehouse.Silverlight.UsersModule
         public IInteractionRequest CreateUserRequest { get { return createUserRequest; } }
         public IInteractionRequest EditUserRequest { get { return editUserRequest; } }
 
-        #region INavigationAware
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            LoadData();
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
-
-        #endregion
+        public bool KeepAlive { get { return false; } }
 
         private async void LoadData()
         {
