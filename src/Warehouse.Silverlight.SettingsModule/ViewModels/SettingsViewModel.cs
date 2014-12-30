@@ -7,35 +7,28 @@ using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.SettingsModule.ViewModels
 {
-    public class SettingsViewModel : ValidationObject, INavigationAware
+    public class SettingsViewModel : ValidationObject, IRegionMemberLifetime
     {
-        private readonly IAuthStore authStore;
         private readonly IUsersRepository usersRepository;
-        private string userName;
-        private string role;
         private string errorMessage;
         private string successMessage;
 
         public SettingsViewModel(IAuthStore authStore, IUsersRepository usersRepository)
         {
-            this.authStore = authStore;
             this.usersRepository = usersRepository;
 
             SaveCommand = new DelegateCommand(Save);
+
+            var token = authStore.LoadToken();
+            if (token != null && token.IsAuthenticated())
+            {
+                UserName = token.UserName;
+                Role = token.Role;
+            }
         }
 
-        public string UserName
-        {
-            get { return userName; }
-            set { userName = value; RaisePropertyChanged(() => UserName); }
-        }
-
-        public string Role
-        {
-            get { return role; }
-            set { role = value; RaisePropertyChanged(() => Role); }
-        }
-
+        public string UserName { get; private set; }
+        public string Role { get; private set; }
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         public string NewPassword2 { get; set; }
@@ -73,6 +66,8 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
 
         public ICommand SaveCommand { get; private set; }
 
+        public bool KeepAlive { get { return false; } }
+
         private async void Save()
         {
             ErrorMessage = null;
@@ -107,29 +102,5 @@ namespace Warehouse.Silverlight.SettingsModule.ViewModels
             errorsContainer.SetErrors(() => NewPassword, Validate.Password(NewPassword, NewPassword2));
         }
 
-        #region INavigationAware
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            var token = authStore.LoadToken();
-            if (token != null && token.IsAuthenticated())
-            {
-                UserName = token.UserName;
-                Role = token.Role;
-            }
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            UserName = null;
-            Role = null;
-        }
-
-        #endregion
     }
 }

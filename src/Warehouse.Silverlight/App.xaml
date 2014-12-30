@@ -25,11 +25,13 @@
         <!--TextBox-->
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,3" />
+            <Setter Property="Width" Value="150" />
         </Style>
 
         <!--PasswordBox-->
         <Style TargetType="PasswordBox">
             <Setter Property="Margin" Value="0,3" />
+            <Setter Property="Width" Value="150" />
         </Style>
 
         <!--DataGridCell-->
