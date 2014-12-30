@@ -5,7 +5,6 @@
         public LoggedInView()
         {
             InitializeComponent();
-            VersionTextBlock.Text = "version 0.0.7";
         }
     }
 }

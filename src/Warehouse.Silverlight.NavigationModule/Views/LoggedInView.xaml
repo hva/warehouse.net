@@ -24,7 +24,7 @@
                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
             <TextBlock
                 Grid.Row="2"
-                x:Name="VersionTextBlock"
+                Text="version 0.0.8"
                 Foreground="#bbb" />
         </Grid>
     </Grid>
