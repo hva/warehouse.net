@@ -8,6 +8,6 @@ namespace Warehouse.Silverlight.Data
     {
         Task<AsyncResult<Product[]>> GetProductsAsync();
         Task<AsyncResult<Product>> GetProductAsync(string id);
-        Task<AsyncResult> SaveProductAsync(Product product);
+        Task<AsyncResult<string>> SaveProductAsync(Product product);
     }
 }

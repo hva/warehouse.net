@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,19 +48,37 @@ namespace Warehouse.Silverlight.Data
             }
         }
 
-        public async Task<AsyncResult> SaveProductAsync(Product product)
+        public async Task<AsyncResult<string>> SaveProductAsync(Product product)
         {
-            if (!EnsureValidToken()) return new AsyncResult<Product>();
+            if (!EnsureValidToken()) return new AsyncResult<string>();
+
             using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var data = JsonConvert.SerializeObject(product);
                 using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
                 {
-                    var uri = new Uri(string.Concat("api/products/", product.Id), UriKind.Relative);
-                    await client.PutAsync(uri, content);
-                    return new AsyncResult { Succeed = true };
+                    if (product.Id == null)
+                    {
+                        var uri = new Uri("api/products/", UriKind.Relative);
+                        var resp = await client.PostAsync(uri, content);
+                        if (resp.StatusCode == HttpStatusCode.Created)
+                        {
+                            var id = await resp.Content.ReadAsStringAsync();
+                            return new AsyncResult<string> { Result = id, Succeed = true };
+                        }
+                    }
+                    else
+                    {
+                        var uri = new Uri(string.Concat("api/products/", product.Id), UriKind.Relative);
+                        var resp = await client.PutAsync(uri, content);
+                        if (resp.StatusCode == HttpStatusCode.OK)
+                        {
+                            return new AsyncResult<string> { Result = product.Id, Succeed = true };
+                        }
+                    }
                 }
             }
+            return new AsyncResult<string>();
         }
 
         private bool EnsureValidToken()

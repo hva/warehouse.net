@@ -33,7 +33,13 @@
     </i:Interaction.Triggers>
 
     <Grid Margin="0,10">
-        <sdk:DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button Content="Создать" Command="{Binding CreateProductCommand}" HorizontalAlignment="Left" />
+        <sdk:DataGrid Grid.Row="2" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
             </i:Interaction.Behaviors>

@@ -22,7 +22,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
-        private readonly ICommand openProductCommand;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
 
@@ -34,7 +33,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             this.signalRClient = signalRClient;
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
-            openProductCommand = new DelegateCommand<Product>(OpenProduct);
+            OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
+            CreateProductCommand = new DelegateCommand(CreateProduct);
 
             cvs = new CollectionViewSource();
             items = new ObservableCollection<Product>();
@@ -45,7 +45,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public ICollectionView Items { get { return cvs.View; } }
 
-        public ICommand OpenProductCommand { get { return openProductCommand; } }
+        public ICommand OpenProductCommand { get; private set; }
+        public ICommand CreateProductCommand { get; private set; }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
 
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
@@ -60,6 +61,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                     var index = items.IndexOf(old);
                     items.RemoveAt(index);
                     items.Insert(index, current);
+                }
+                else
+                {
+                    items.Add(current);
                 }
             }
         }
@@ -87,6 +92,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void OpenProduct(Product p)
         {
             editProductRequest.Raise(new ProductEditViewModel(p, service, eventAggregator));
+        }
+
+        private void CreateProduct()
+        {
+            editProductRequest.Raise(new ProductEditViewModel(service, eventAggregator));
         }
 
         #region INavigationAware

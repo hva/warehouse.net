@@ -28,13 +28,27 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string nd;
         private string length;
 
+        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator)
+            :this(null, dataService, eventAggregator)
+        {
+        }
+
         public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
         {
             this.dataService = dataService;
             this.eventAggregator = eventAggregator;
 
-            Title = string.Format("{0} {1}", product.Name, product.Size);
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
+
+            if (product == null)
+            {
+                product = new Product();
+                Title = "Новая позиция";
+            }
+            else
+            {
+                Title = string.Format("{0} {1}", product.Name, product.Size);
+            }
 
             ProductToProps(product);
         }
@@ -334,7 +348,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var task = await dataService.SaveProductAsync(changed);
             if (task.Succeed)
             {
-                eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(new ProductUpdatedEventArgs(id));
+                var args = new ProductUpdatedEventArgs(task.Result);
+                eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                 Confirmed = true;
                 window.Close();
             }

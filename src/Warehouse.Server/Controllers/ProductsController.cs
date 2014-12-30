@@ -54,5 +54,18 @@ namespace Warehouse.Server.Controllers
             var code = res.Ok ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
             return Request.CreateResponse(code);
         }
+
+        public HttpResponseMessage Post([FromBody] Product product)
+        {
+            var res = context.Products.Save(product);
+            if (res.Ok)
+            {
+                return new HttpResponseMessage(HttpStatusCode.Created)
+                {
+                    Content = new StringContent(product.Id.ToString())
+                };
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        }
     }
 }
