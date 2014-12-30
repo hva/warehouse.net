@@ -15,11 +15,6 @@
 
     <UserControl.Resources>
         <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
-        <Style TargetType="sdk:Label">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="10,8" />
-            <Setter Property="Width" Value="100" />
-        </Style>
     </UserControl.Resources>
 
     <StackPanel Width="400" HorizontalAlignment="Left">
@@ -40,10 +35,8 @@
         <controls:H1 Title="Изменить пароль">
             <StackPanel>
 
-                <Grid Margin="0,0,0,10">
-                    <controls:AlertBox Content="{Binding ErrorMessage}" Opacity="{Binding ErrorMessageOpacity}" />
-                    <controls:AlertBox Type="Success" Content="{Binding SuccessMessage}" Opacity="{Binding SuccessMessageOpacity}" />
-                </Grid>
+                <controls:AlertBox Content="{Binding ErrorMessage}" />
+                <controls:AlertBox Type="Success" Content="{Binding SuccessMessage}" />
 
                 <StackPanel Orientation="Horizontal">
                     <sdk:Label Content="Старый пароль" />
@@ -72,7 +65,7 @@
                     </PasswordBox>
                 </StackPanel>
 
-                <Button Content="Изменить" Command="{Binding SaveCommand}" HorizontalAlignment="Left" Margin="120,0,0,0" />
+                <Button Content="Изменить" Command="{Binding SaveCommand}" Style="{StaticResource FormButton}" />
             </StackPanel>
         </controls:H1>
     </StackPanel>

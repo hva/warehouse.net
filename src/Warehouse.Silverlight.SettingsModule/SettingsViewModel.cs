@@ -42,7 +42,6 @@ namespace Warehouse.Silverlight.SettingsModule
                 {
                     errorMessage = value;
                     RaisePropertyChanged(() => ErrorMessage);
-                    RaisePropertyChanged(() => ErrorMessageOpacity);
                 }
             }
         }
@@ -56,13 +55,9 @@ namespace Warehouse.Silverlight.SettingsModule
                 {
                     successMessage = value;
                     RaisePropertyChanged(() => SuccessMessage);
-                    RaisePropertyChanged(() => SuccessMessageOpacity);
                 }
             }
         }
-
-        public double ErrorMessageOpacity { get { return string.IsNullOrEmpty(errorMessage) ? 0 : 1; } }
-        public double SuccessMessageOpacity { get { return string.IsNullOrEmpty(successMessage) ? 0 : 1; } }
 
         public ICommand SaveCommand { get; private set; }
 

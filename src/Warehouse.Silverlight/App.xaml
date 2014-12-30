@@ -7,11 +7,18 @@
     <Application.Resources>
 
         <!--Button-->
-        <Style TargetType="Button">
+        <Style x:Key="Button_Default" TargetType="Button">
             <Setter Property="Height" Value="23" />
             <Setter Property="Width" Value="80" />
             <Setter Property="Padding" Value="10,0" />
             <Setter Property="Margin" Value="0,3" />
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource Button_Default}" />
+
+        <Style x:Key="FormButton" TargetType="Button" BasedOn="{StaticResource Button_Default}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="120,0,0,0" />
         </Style>
 
         <!--TextBlock-->
@@ -34,6 +41,13 @@
             <Setter Property="Width" Value="150" />
         </Style>
 
+        <!--Label-->
+        <Style TargetType="sdk:Label">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="10,8" />
+            <Setter Property="Width" Value="100" />
+        </Style>
+        
         <!--DataGridCell-->
         <Style TargetType="sdk:DataGridCell">
             <Setter Property="Background" Value="Transparent" />

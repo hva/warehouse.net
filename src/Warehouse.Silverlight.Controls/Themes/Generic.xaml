@@ -20,6 +20,7 @@
     </Style>
 
     <Style TargetType="controls:AlertBox">
+        <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="Padding" Value="20,10" />
         <Setter Property="Template">
             <Setter.Value>

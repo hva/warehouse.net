@@ -40,6 +40,13 @@ namespace Warehouse.Silverlight.Controls
 
         #endregion
 
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+            base.OnContentChanged(oldContent, newContent);
+
+            Visibility = newContent == null ? Visibility.Collapsed : Visibility.Visible;
+        }
+
         private void UpdateAlertStates()
         {
             var state = Type == AlertType.Alert ? AlertState : SuccessState;

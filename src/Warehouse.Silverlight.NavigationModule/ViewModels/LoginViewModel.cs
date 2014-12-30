@@ -12,7 +12,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 {
     public class LoginViewModel : NotificationObject, INavigationAware
     {
-        private int messageOpacity;
+        private string message;
 
         private readonly IAuthService authService;
         private readonly INavigationService navigationService;
@@ -44,10 +44,10 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         public ICommand LoginCommand { get; set; }
 
-        public int MessageOpacity
+        public string Message
         {
-            get { return messageOpacity; }
-            set { messageOpacity = value; RaisePropertyChanged(() => MessageOpacity); }
+            get { return message; }
+            set { message = value; RaisePropertyChanged(() => Message); }
         }
 
         #region INavigationAware
@@ -76,7 +76,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         private async void DoLogin()
         {
-            MessageOpacity = 0;
+            Message = null;
             var task = await authService.Login(Login, Password);
 
             if (task.Succeed)
@@ -87,7 +87,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
             else
             {
                 Password = string.Empty;
-                MessageOpacity = 1;
+                Message = "Пароль, который вы ввели, неверный.\nПожалуйста, попробуйте еще раз.";
             }
         }
     }
