@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -95,20 +94,16 @@ namespace Warehouse.Silverlight.UsersModule
                 {
                     error = value;
                     RaisePropertyChanged(() => Error);
-                    RaisePropertyChanged(() => ErrorVisibility);
                 }
             }
-        }
-
-        public Visibility ErrorVisibility
-        {
-            get { return string.IsNullOrEmpty(error) ? Visibility.Collapsed : Visibility.Visible; }
         }
 
         #endregion
 
         private async void Save(ChildWindow window)
         {
+            Error = null;
+
             ValidateName();
             ValidatePassword();
             if (HasErrors) return;

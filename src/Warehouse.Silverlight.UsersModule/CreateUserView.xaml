@@ -29,7 +29,7 @@
 
     <StackPanel Width="220">
 
-        <controls1:AlertBox Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" />
+        <controls1:AlertBox Content="{Binding Error}" />
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Логин" />
