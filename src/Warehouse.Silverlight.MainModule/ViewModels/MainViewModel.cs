@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.Models;
@@ -16,21 +17,24 @@ using Warehouse.Silverlight.SignalR;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
 {
-    public class MainViewModel : NotificationObject, INavigationAware
+    public class MainViewModel : NotificationObject, INavigationAware, IRegionMemberLifetime
     {
         private readonly IDataService service;
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
+        private readonly IAuthStore authStore;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
 
 
-        public MainViewModel(IDataService service, IEventAggregator eventAggregator, ISignalRClient signalRClient)
+        public MainViewModel(IDataService service, IEventAggregator eventAggregator,
+            ISignalRClient signalRClient, IAuthStore authStore)
         {
             this.service = service;
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
+            this.authStore = authStore;
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
@@ -41,6 +45,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             cvs.Source = items;
             cvs.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             cvs.SortDescriptions.Add(new SortDescription("Size", ListSortDirection.Ascending));
+
+            var token = authStore.LoadToken();
+            IsEditor = token != null && token.IsEditor();
         }
 
         public ICollectionView Items { get { return cvs.View; } }
@@ -48,6 +55,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand OpenProductCommand { get; private set; }
         public ICommand CreateProductCommand { get; private set; }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
+        public bool IsEditor { get; private set; }
 
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
@@ -81,7 +89,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void LoadData()
         {
-            items.Clear();
             var task = await service.GetProductsAsync();
             if (task.Succeed)
             {
@@ -91,12 +98,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            editProductRequest.Raise(new ProductEditViewModel(p, service, eventAggregator));
+            editProductRequest.Raise(new ProductEditViewModel(p, service, eventAggregator, authStore));
         }
 
         private void CreateProduct()
         {
-            editProductRequest.Raise(new ProductEditViewModel(service, eventAggregator));
+            editProductRequest.Raise(new ProductEditViewModel(service, eventAggregator, authStore));
         }
 
         #region INavigationAware
@@ -111,13 +118,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            return false;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             Unsubscribe();
         }
+
+        #endregion
+
+        #region IRegionMemberLifetime
+
+        public bool KeepAlive { get { return false; } }
 
         #endregion
     }

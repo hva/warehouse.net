@@ -10,7 +10,7 @@ using Warehouse.Silverlight.SignalR;
 
 namespace Warehouse.Silverlight.NavigationModule.ViewModels
 {
-    public class LoginViewModel : NotificationObject, INavigationAware
+    public class LoginViewModel : NotificationObject, INavigationAware, IRegionMemberLifetime
     {
         private string message;
 
@@ -64,13 +64,19 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            return false;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             IsolatedStorageSettings.ApplicationSettings[Consts.SettingsLoginKey] = Login;
         }
+
+        #endregion
+
+        #region IRegionMemberLifetime
+
+        public bool KeepAlive { get { return false; } }
 
         #endregion
 

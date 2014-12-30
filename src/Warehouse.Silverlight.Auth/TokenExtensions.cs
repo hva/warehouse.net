@@ -13,5 +13,10 @@ namespace Warehouse.Silverlight.Auth
         {
             return token.Role == "admin";
         }
+        
+        public static bool IsEditor(this AuthToken token)
+        {
+            return token.Role == "admin" || token.Role == "editor";
+        }
     }
 }

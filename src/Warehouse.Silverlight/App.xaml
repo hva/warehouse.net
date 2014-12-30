@@ -53,6 +53,13 @@
         </Style>
         <Style TargetType="sdk:Label" BasedOn="{StaticResource Label_Default}" />
 
+        <!--StackPanel-->
+        <Style x:Key="FormButtons" TargetType="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0,40,0,0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
         <!--DataGridCell-->
         <Style TargetType="sdk:DataGridCell">
             <Setter Property="Background" Value="Transparent" />

@@ -29,7 +29,7 @@ namespace Warehouse.Server.Identity
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = provider,
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 AllowInsecureHttp = true
             };
 

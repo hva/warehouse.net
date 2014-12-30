@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
+using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
@@ -28,12 +29,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string nd;
         private string length;
 
-        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator)
-            :this(null, dataService, eventAggregator)
+        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore)
+            :this(null, dataService, eventAggregator, authStore)
         {
         }
 
-        public ProductEditViewModel(Product product, IDataService dataService, IEventAggregator eventAggregator)
+        public ProductEditViewModel(Product product, IDataService dataService,
+            IEventAggregator eventAggregator, IAuthStore authStore)
         {
             this.dataService = dataService;
             this.eventAggregator = eventAggregator;
@@ -51,9 +53,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
 
             ProductToProps(product);
+
+            var token = authStore.LoadToken();
+            IsEditor = token != null && token.IsEditor();
         }
 
         public ICommand SaveCommand { get; private set; }
+        public bool IsEditor { get; private set; }
 
         #region Name
 

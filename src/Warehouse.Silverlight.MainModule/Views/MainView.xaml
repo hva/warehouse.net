@@ -11,6 +11,7 @@
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:views="clr-namespace:Warehouse.Silverlight.MainModule.Views"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
+    xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
@@ -18,6 +19,7 @@
         <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -35,11 +37,14 @@
     <Grid Margin="0,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button Content="Создать" Command="{Binding CreateProductCommand}" HorizontalAlignment="Left" />
-        <sdk:DataGrid Grid.Row="2" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+
+        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <Button Content="Создать" Command="{Binding CreateProductCommand}" />
+        </StackPanel>
+
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
             </i:Interaction.Behaviors>

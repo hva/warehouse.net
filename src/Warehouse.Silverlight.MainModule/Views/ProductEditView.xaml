@@ -10,6 +10,7 @@
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
     xmlns:interactivity="http://www.codeplex.com/prism"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
+    xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title}"
@@ -31,6 +32,7 @@
             <Setter Property="Width" Value="200" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </sdk:ChildWindow.Resources>
 
     <StackPanel>
@@ -143,7 +145,7 @@
             </sdk:TabItem>
         </sdk:TabControl>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
+        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource FormButtons}">
             <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">
