@@ -5,7 +5,7 @@ using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Infrastructure;
 
-namespace Warehouse.Silverlight.SettingsModule.ViewModels
+namespace Warehouse.Silverlight.SettingsModule
 {
     public class SettingsViewModel : ValidationObject, IRegionMemberLifetime
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Warehouse.Silverlight.Infrastructure;
-using Warehouse.Silverlight.SettingsModule.Views;
 
 namespace Warehouse.Silverlight.SettingsModule
 {

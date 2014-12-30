@@ -1,6 +1,4 @@
-﻿using Warehouse.Silverlight.SettingsModule.ViewModels;
-
-namespace Warehouse.Silverlight.SettingsModule.Views
+﻿namespace Warehouse.Silverlight.SettingsModule
 {
     public partial class SettingsView
     {
