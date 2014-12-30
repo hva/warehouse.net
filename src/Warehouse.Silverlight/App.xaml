@@ -27,10 +27,11 @@
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock_Default}" />
 
         <!--TextBox-->
-        <Style TargetType="TextBox">
+        <Style x:Key="TextBox_Default" TargetType="TextBox">
             <Setter Property="Margin" Value="0,3" />
             <Setter Property="Width" Value="150" />
         </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}"/>
 
         <!--PasswordBox-->
         <Style TargetType="PasswordBox">

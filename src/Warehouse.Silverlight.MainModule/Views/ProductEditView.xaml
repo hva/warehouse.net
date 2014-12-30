@@ -21,13 +21,10 @@
     </i:Interaction.Behaviors>
 
     <sdk:ChildWindow.Resources>
-        <Style TargetType="sdk:Label">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="10,8" />
+        <Style TargetType="sdk:Label" BasedOn="{StaticResource Label_Default}">
             <Setter Property="Width" Value="150" />
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0,5" />
+        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}">
             <Setter Property="Width" Value="200" />
         </Style>
         <Style TargetType="TextBlock">
@@ -36,16 +33,10 @@
         </Style>
     </sdk:ChildWindow.Resources>
 
-    <Grid MinWidth="300" MinHeight="300">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="7" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
+    <StackPanel>
         <sdk:TabControl>
             <sdk:TabItem Header="Параметры">
-                <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel>
 
                     <!--Name-->
 
@@ -152,7 +143,7 @@
             </sdk:TabItem>
         </sdk:TabControl>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
             <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">
@@ -163,5 +154,5 @@
                 </i:Interaction.Triggers>
             </Button>
         </StackPanel>
-    </Grid>
+    </StackPanel>
 </sdk:ChildWindow>
