@@ -13,9 +13,7 @@
             <Setter Property="Padding" Value="10,0" />
             <Setter Property="Margin" Value="0,3" />
         </Style>
-
         <Style TargetType="Button" BasedOn="{StaticResource Button_Default}" />
-
         <Style x:Key="FormButton" TargetType="Button" BasedOn="{StaticResource Button_Default}">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Margin" Value="120,0,0,0" />
@@ -26,7 +24,6 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="11" />
         </Style>
-
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock_Default}" />
 
         <!--TextBox-->
@@ -41,13 +38,20 @@
             <Setter Property="Width" Value="150" />
         </Style>
 
+        <!--ComboBox-->
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,5" />
+            <Setter Property="Width" Value="150" />
+        </Style>
+
         <!--Label-->
-        <Style TargetType="sdk:Label">
+        <Style x:Key="Label_Default" TargetType="sdk:Label">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Margin" Value="10,8" />
             <Setter Property="Width" Value="100" />
         </Style>
-        
+        <Style TargetType="sdk:Label" BasedOn="{StaticResource Label_Default}" />
+
         <!--DataGridCell-->
         <Style TargetType="sdk:DataGridCell">
             <Setter Property="Background" Value="Transparent" />

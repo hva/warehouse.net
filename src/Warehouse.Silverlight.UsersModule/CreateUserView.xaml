@@ -22,51 +22,32 @@
     </i:Interaction.Behaviors>
 
     <controls:ChildWindow.Resources>
-        <Style TargetType="sdk:Label">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="10,8" />
+        <Style TargetType="sdk:Label" BasedOn="{StaticResource Label_Default}">
             <Setter Property="Width" Value="50" />
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0,5" />
-            <Setter Property="Width" Value="150" />
-        </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="0,5" />
-            <Setter Property="Width" Value="150" />
         </Style>
     </controls:ChildWindow.Resources>
 
-    <Grid Width="220">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <StackPanel Width="220">
 
         <controls1:AlertBox Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" />
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch">
-
-            <StackPanel Orientation="Horizontal">
-                <sdk:Label Content="Логин" />
-                <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <sdk:Label Content="Пароль" />
-                <TextBox Text="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <sdk:Label Content="Роль" />
-                <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" />
-            </StackPanel>
-
+        <StackPanel Orientation="Horizontal">
+            <sdk:Label Content="Логин" />
+            <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal">
+            <sdk:Label Content="Пароль" />
+            <TextBox Text="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <sdk:Label Content="Роль" />
+            <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" />
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
             <Button Content="Создать" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">
@@ -78,6 +59,6 @@
             </Button>
         </StackPanel>
 
-    </Grid>
+    </StackPanel>
 
 </controls:ChildWindow>
