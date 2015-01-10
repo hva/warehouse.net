@@ -137,7 +137,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void ChangePrice()
         {
-            changePriceRequest.Raise(new ChangePriceViewModel());
+            var products = selectedItems.OfType<Product>().ToArray();
+            changePriceRequest.Raise(new ChangePriceViewModel(products));
         }
 
         #endregion
