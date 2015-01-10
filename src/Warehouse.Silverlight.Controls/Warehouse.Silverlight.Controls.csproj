@@ -64,6 +64,7 @@
     <Compile Include="AlertType.cs" />
     <Compile Include="Behaviors\ChildWindowBehavior.cs" />
     <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
+    <Compile Include="Behaviors\DataGridSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\RoleToStringConverter.cs" />

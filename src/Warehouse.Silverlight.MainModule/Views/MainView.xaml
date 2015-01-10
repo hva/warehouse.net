@@ -31,6 +31,14 @@
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>
+        
+        <prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
+            <prism:PopupChildWindowAction>
+                <prism:PopupChildWindowAction.ChildWindow>
+                    <views:ChangePriceWindow />
+                </prism:PopupChildWindowAction.ChildWindow>
+            </prism:PopupChildWindowAction>
+        </prism:InteractionRequestTrigger>
 
     </i:Interaction.Triggers>
 
@@ -40,13 +48,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" Margin="0,0,0,10">
+        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
             <Button Content="Создать" Command="{Binding CreateProductCommand}" />
+            <Button
+                Content="Пересчитать цену"
+                Command="{Binding ChangePriceCommand}"
+                Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Width="140" Margin="20,3,0,3" />
         </StackPanel>
 
         <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
+                <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
