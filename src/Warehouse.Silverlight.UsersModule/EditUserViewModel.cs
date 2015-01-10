@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Warehouse.Silverlight.Controls.Converters;
 using Warehouse.Silverlight.Data.Users;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
@@ -20,9 +21,8 @@ namespace Warehouse.Silverlight.UsersModule
 
             Roles = new Dictionary<string, string>
             {
-                //{"admin", "Администратор"},
-                {"editor", "Менеджер"},
-                {"user", "Кладовщик"},
+                { UserRole.Editor, RoleToStringConverter.RoleTranslations[UserRole.Editor] },
+                { UserRole.User, RoleToStringConverter.RoleTranslations[UserRole.User] },
             };
             Role = user.Roles[0];
 

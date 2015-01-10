@@ -5,6 +5,7 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Users;
+using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.UsersModule
@@ -57,7 +58,7 @@ namespace Warehouse.Silverlight.UsersModule
 
         private void EditUser(User user)
         {
-            if (user.Roles.All(x => x != "admin"))
+            if (user.Roles.All(x => x != UserRole.Admin))
             {
                 editUserRequest.Raise(new EditUserViewModel(usersRepository, user), Callback);
             }

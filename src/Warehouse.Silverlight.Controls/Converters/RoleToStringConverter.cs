@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
+using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.Controls.Converters
 {
     public class RoleToStringConverter : IValueConverter
     {
-        private static readonly IDictionary<string, string> tr = new Dictionary<string, string>
+        public static readonly IDictionary<string, string> RoleTranslations = new Dictionary<string, string>
         {
-            {"admin", "Администратор"},
-            {"editor", "Менеджер"},
-            {"user", "Кладовщик"},
+            { UserRole.Admin, "Администратор" },
+            { UserRole.Editor, "Зав. складом" },
+            { UserRole.User, "Менеджер" },
         };
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -39,7 +40,7 @@ namespace Warehouse.Silverlight.Controls.Converters
         private static string Convert(string key)
         {
             string val;
-            return tr.TryGetValue(key, out val) ? val : key;
+            return RoleTranslations.TryGetValue(key, out val) ? val : key;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.Auth
 {
@@ -11,12 +12,12 @@ namespace Warehouse.Silverlight.Auth
 
         public static bool IsAdmin(this AuthToken token)
         {
-            return token.Role == "admin";
+            return token.Role == UserRole.Admin;
         }
         
         public static bool IsEditor(this AuthToken token)
         {
-            return token.Role == "admin" || token.Role == "editor";
+            return token.Role == UserRole.Admin || token.Role == UserRole.Editor;
         }
     }
 }
