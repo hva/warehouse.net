@@ -75,7 +75,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена без НДС (опт)" />
-                        <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
                             </i:Interaction.Behaviors>
@@ -129,7 +129,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена приходная" />
-                        <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
                             </i:Interaction.Behaviors>

@@ -55,11 +55,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ProductToProps(product);
 
             var token = authStore.LoadToken();
-            IsEditor = token != null && token.IsEditor();
+            if (token != null)
+            {
+                IsEditor = token.IsEditor();
+                DenyPriceEdit = !token.IsAdmin();
+            }
         }
 
         public ICommand SaveCommand { get; private set; }
         public bool IsEditor { get; private set; }
+        public bool DenyPriceEdit { get; private set; }
 
         #region Name
 
