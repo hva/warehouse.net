@@ -32,6 +32,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly ObservableCollection<Product> items;
         private IList selectedItems;
         private DelegateCommand changePriceCommand;
+        private double totalWeight;
 
         public MainViewModel(IDataService service, IEventAggregator eventAggregator,
             ISignalRClient signalRClient, IAuthStore authStore, IProductsRepository productsRepository)
@@ -82,6 +83,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
+        public double TotalWeight
+        {
+            get { return totalWeight; }
+            set { totalWeight = value; RaisePropertyChanged(() => TotalWeight); }
+        }
+
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
             var task = await service.GetProductAsync(e.ProductId);
@@ -99,6 +106,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 {
                     items.Add(current);
                 }
+                UpdateTotalWeight();
             }
         }
 
@@ -118,6 +126,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             if (task.Succeed)
             {
                 items.AddRange(task.Result);
+                UpdateTotalWeight();
             }
         }
 
@@ -129,6 +138,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void CreateProduct()
         {
             editProductRequest.Raise(new ProductEditViewModel(service, eventAggregator, authStore));
+        }
+
+        private void UpdateTotalWeight()
+        {
+            if (items != null)
+            {
+                TotalWeight = items.Sum(x => x.Weight) / 1000;
+            }
         }
 
         #region ChangePrice

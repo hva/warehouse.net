@@ -68,6 +68,13 @@
                 <Button Content="Изменить" Command="{Binding SaveCommand}" Style="{StaticResource FormButton}" />
             </StackPanel>
         </controls:H1>
+
+        <controls:H1 Title="О программе">
+            <StackPanel Orientation="Horizontal">
+                <sdk:Label Content="Версия" />
+                <TextBlock Text="0.0.9" />
+            </StackPanel>
+        </controls:H1>
     </StackPanel>
 
 </UserControl>

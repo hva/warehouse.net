@@ -48,14 +48,26 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
-            <Button Content="Создать" Command="{Binding CreateProductCommand}" />
-            <Button
-                Content="Пересчитать цену"
-                Command="{Binding ChangePriceCommand}"
-                Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Width="140" Margin="20,3,0,3" />
-        </StackPanel>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Content="Создать"
+                    Command="{Binding CreateProductCommand}"
+                    Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Width="20" />
+                <Button
+                    Content="Пересчитать цену"
+                    Command="{Binding ChangePriceCommand}"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Width="140" />
+            </StackPanel>
+            <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
+        </Grid>
 
         <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <i:Interaction.Behaviors>
