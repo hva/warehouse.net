@@ -65,7 +65,7 @@
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K, StringFormat='{}{0:0.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Цена&#10;без НДС (опт.)" Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.###}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
