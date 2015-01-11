@@ -12,6 +12,7 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
+using Warehouse.Silverlight.Data.Products;
 using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.Models;
 using Warehouse.Silverlight.SignalR;
@@ -24,6 +25,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IAuthStore authStore;
+        private readonly IProductsRepository productsRepository;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly CollectionViewSource cvs;
@@ -32,12 +34,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private DelegateCommand changePriceCommand;
 
         public MainViewModel(IDataService service, IEventAggregator eventAggregator,
-            ISignalRClient signalRClient, IAuthStore authStore)
+            ISignalRClient signalRClient, IAuthStore authStore, IProductsRepository productsRepository)
         {
             this.service = service;
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.authStore = authStore;
+            this.productsRepository = productsRepository;
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
@@ -138,7 +141,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void ChangePrice()
         {
             var products = selectedItems.OfType<Product>().ToArray();
-            changePriceRequest.Raise(new ChangePriceViewModel(products));
+            changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository));
         }
 
         #endregion

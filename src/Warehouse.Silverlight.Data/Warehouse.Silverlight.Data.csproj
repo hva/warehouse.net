@@ -91,6 +91,8 @@
   <ItemGroup>
     <Compile Include="DataService.cs" />
     <Compile Include="IDataService.cs" />
+    <Compile Include="Products\IProductsRepository.cs" />
+    <Compile Include="Products\ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\IUsersRepository.cs" />
     <Compile Include="Users\UsersRepository.cs" />

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Warehouse.Silverlight.Data.Products;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 
@@ -11,10 +13,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ChangePriceViewModel : InteractionRequestObject
     {
+        private readonly IProductsRepository repository;
         private string percentage = "10";
 
-        public ChangePriceViewModel(IEnumerable<Product> products)
+        public ChangePriceViewModel(IEnumerable<Product> products, IProductsRepository repository)
         {
+            this.repository = repository;
+
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
 
             LoadItems(products);
@@ -62,8 +67,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
-        private void Save(ChildWindow window)
+        private async void Save(ChildWindow window)
         {
+            var data = Items.Select(x => new ProductPriceUpdate { Id = x.Id, NewPrice = x.NewPrice }).ToArray();
+            var task = await repository.UpdatePrice(data);
+            // TODO: check for error
+            Confirmed = task.Succeed;
             window.Close();
         }
     }

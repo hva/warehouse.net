@@ -67,5 +67,20 @@ namespace Warehouse.Server.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.InternalServerError);
         }
+
+        [Route("api/products/updatePrice")]
+        [HttpPut]
+        public HttpResponseMessage UpdatePrice(ProductPriceUpdate[] items)
+        {
+            var bulk = context.Products.InitializeUnorderedBulkOperation();
+            foreach (var x in items)
+            {
+                var query = Query<Product>.EQ(p => p.Id, new ObjectId(x.Id));
+                var update = Update<Product>.Set(p => p.PriceOpt, x.NewPrice);
+                bulk.Find(query).UpdateOne(update);
+            }
+            bulk.Execute();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }
