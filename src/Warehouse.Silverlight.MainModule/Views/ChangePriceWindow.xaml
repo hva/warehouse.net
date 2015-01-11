@@ -25,14 +25,14 @@
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Процент" Width="Auto" />
-            <TextBox Text="{Binding Percentage, Mode=TwoWay}" Width="40">
+            <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="40">
                 <i:Interaction.Behaviors>
                     <interactivity:UpdateTextBindingOnPropertyChanged />
                 </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
-        <sdk:DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+        <sdk:DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" MaxHeight="400">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />

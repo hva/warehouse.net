@@ -26,7 +26,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public void Refresh(double percentage)
         {
-            NewPrice = (long) (PriceOpt * (1 + percentage / 100));
+            var a = new decimal(PriceOpt);
+            var x = new decimal(percentage);
+            var b = a * (1 + x / 100);
+
+            NewPrice = (long)(decimal.Ceiling(b / 100) * 100);
         }
     }
 }

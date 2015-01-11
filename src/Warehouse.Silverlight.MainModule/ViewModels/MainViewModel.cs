@@ -141,7 +141,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void ChangePrice()
         {
             var products = selectedItems.OfType<Product>().ToArray();
-            changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository));
+            changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository, eventAggregator));
         }
 
         #endregion

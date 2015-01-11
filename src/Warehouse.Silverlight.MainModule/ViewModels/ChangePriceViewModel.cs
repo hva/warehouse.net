@@ -1,24 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Warehouse.Silverlight.Data.Products;
 using Warehouse.Silverlight.Infrastructure;
+using Warehouse.Silverlight.Infrastructure.Events;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
 {
-    public class ChangePriceViewModel : InteractionRequestObject
+    public class ChangePriceViewModel : InteractionRequestValidationObject
     {
-        private readonly IProductsRepository repository;
         private string percentage = "10";
 
-        public ChangePriceViewModel(IEnumerable<Product> products, IProductsRepository repository)
+        private readonly IProductsRepository repository;
+        private readonly IEventAggregator eventAggregator;
+
+        public ChangePriceViewModel(IEnumerable<Product> products, IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
+            this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
 
@@ -37,9 +41,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 if (percentage != value)
                 {
                     percentage = value;
+                    ValidatePercentage();
                     UpdatePrice();
                 }
             }
+        }
+
+        private void ValidatePercentage()
+        {
+            errorsContainer.ClearErrors(() => Percentage);
+            errorsContainer.SetErrors(() => Percentage, Validate.Double(Percentage));
         }
 
         private void LoadItems(IEnumerable<Product> products)
@@ -69,11 +80,22 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void Save(ChildWindow window)
         {
+            ValidatePercentage();
+            if (HasErrors) return;
+
             var data = Items.Select(x => new ProductPriceUpdate { Id = x.Id, NewPrice = x.NewPrice }).ToArray();
             var task = await repository.UpdatePrice(data);
-            // TODO: check for error
-            Confirmed = task.Succeed;
-            window.Close();
+            if (task.Succeed)
+            {
+                foreach (var x in Items)
+                {
+                    var args = new ProductUpdatedEventArgs(x.Id);
+                    eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
+                }
+
+                Confirmed = task.Succeed;
+                window.Close();
+            }
         }
     }
 }
