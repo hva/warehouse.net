@@ -29,6 +29,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private string nd;
         private string length;
 
+        private bool isSheet;
+        private double[] sheetSizes;
+
         public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore)
             :this(null, dataService, eventAggregator, authStore)
         {
@@ -45,11 +48,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             if (product == null)
             {
                 product = new Product();
-                Title = "Новая позиция";
-            }
-            else
-            {
-                Title = string.Format("{0} {1}", product.Name, product.Size);
+                IsNewProduct = true;
             }
 
             ProductToProps(product);
@@ -65,6 +64,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand SaveCommand { get; private set; }
         public bool IsEditor { get; private set; }
         public bool DenyPriceEdit { get; private set; }
+        public bool IsNewProduct { get; private set; }
+
+        public string Title2
+        {
+            get
+            {
+                if (IsNewProduct)
+                {
+                    return isSheet ? "Новая позиция (лист)" : "Новая позиция";
+                }
+                return string.Format("{0} {1}", Name, Size);
+            }
+        }
 
         #region Name
 
@@ -100,6 +112,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 {
                     size = value;
                     ValidateSize();
+                    if (isSheet)
+                    {
+                        UpdateSheetLength();
+                    }
                 }
             }
         }
@@ -108,6 +124,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             errorsContainer.ClearErrors(() => Size);
             errorsContainer.SetErrors(() => Size, Validate.Required(Size));
+            if (isSheet)
+            {
+                sheetSizes = ParseSheetSize(size);
+                if (sheetSizes == null)
+                {
+                    errorsContainer.SetErrors(() => Size, new[] { "строка в формате\nтолщина*ширина*длина" });
+                }
+            }
         }
 
         #endregion
@@ -187,6 +211,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 var _priceOpt = decimal.Parse(priceOpt);
                 var _k = decimal.Parse(k);
                 var rozn = _priceOpt * _k / 1000m * 1.2m;
+                if (isSheet)
+                {
+                    var _l = decimal.Parse(length);
+                    rozn *= _l;
+                }
                 PriceRozn = (long) (decimal.Ceiling(rozn / 100) * 100);
             }
         }
@@ -285,9 +314,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
+        public string NdLabel
+        {
+            get { return isSheet ? "Н/Д (м²)" : "Н/Д (м)"; }
+        }
+
         #endregion
 
         #region Length
+
+        public string LenghtLabel
+        {
+            get { return isSheet ? "Площадь листа (м²)" : "Длина штанги (м)"; }
+        }
 
         public string Length
         {
@@ -299,6 +338,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                     length = value;
                     ValidateLength();
                     UpdateWeight();
+                    RaisePropertyChanged(() => Length);
                 }
             }
         }
@@ -307,6 +347,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             errorsContainer.ClearErrors(() => Length);
             errorsContainer.SetErrors(() => Length, Validate.Double(Length));
+        }
+
+        private void UpdateSheetLength()
+        {
+            if (errorsContainer.HasErrors || sheetSizes == null)
+            {
+                Length = "0";
+            }
+            else
+            {
+                var val = sheetSizes[1] / 1000 * sheetSizes[2] / 1000;
+                Length = val.ToString("0.000");
+            }
         }
 
         #endregion
@@ -338,6 +391,26 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         #region Internal
 
         public string Internal { get; set; }
+
+        #endregion
+
+        #region IsSheet
+
+        public bool IsSheet
+        {
+            get { return isSheet; }
+            set
+            {
+                isSheet = value;
+                ValidateSize();
+                UpdateSheetLength();
+                UpdatePriceRozn();
+                RaisePropertyChanged(() => IsSheet);
+                RaisePropertyChanged(() => Title2);
+                RaisePropertyChanged(() => LenghtLabel);
+                RaisePropertyChanged(() => NdLabel);
+            }
+        }
 
         #endregion
 
@@ -420,6 +493,25 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 return 0;
             }
             return nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).Sum();
+        }
+
+        private static double[] ParseSheetSize(string size)
+        {
+            if (size == null) return null;
+
+            var parts = size.Split(new[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 0) return null;
+
+            var sizes = parts[0].Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
+            if (sizes.Length != 3) return null;
+
+            double d;
+            if (sizes.All(x => double.TryParse(x, out d)))
+            {
+                return sizes.Select(double.Parse).ToArray();
+            }
+
+            return null;
         }
     }
 }

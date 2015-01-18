@@ -13,7 +13,7 @@
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
-    Title="{Binding Title}"
+    Title="{Binding Title2}"
     d:DataContext="{d:DesignInstance Type=viewModels:ProductEditViewModel}"
     x:Name="confirmationWindow">
 
@@ -39,6 +39,13 @@
         <sdk:TabControl>
             <sdk:TabItem Header="Параметры">
                 <StackPanel>
+
+                    <!--IsSheet-->
+
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsNewProduct, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <sdk:Label Content="Лист" />
+                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
+                    </StackPanel>
 
                     <!--Name-->
 
@@ -74,7 +81,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Цена без НДС (опт)" />
+                        <sdk:Label Content="Цена без НДС (опт.)" />
                         <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
@@ -92,7 +99,7 @@
                     <!--Amount-->
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Кол-во (шт.)" />
+                        <sdk:Label Content="Кол-во (шт)" />
                         <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
@@ -101,8 +108,8 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Длина (м)" />
-                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <sdk:Label Content="{Binding LenghtLabel}" />
+                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsSheet}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
                             </i:Interaction.Behaviors>
@@ -110,7 +117,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Н/Д" />
+                        <sdk:Label Content="{Binding NdLabel}" />
                         <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                             <i:Interaction.Behaviors>
                                 <interactivity:UpdateTextBindingOnPropertyChanged />
@@ -119,8 +126,8 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Кол-во (кг.)" />
-                        <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.###}'}" />
+                        <sdk:Label Content="Кол-во (кг)" />
+                        <TextBlock Text="{Binding Weight, StringFormat='{}{0:0.###}'}" />
                     </StackPanel>
 
                     <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
