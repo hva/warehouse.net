@@ -48,7 +48,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             if (product == null)
             {
                 product = new Product();
-                IsNewProduct = true;
+                IsSheetCheckBoxVisible = true;
+                IsSheetCheckBoxEnabled = true;
+            }
+            else
+            {
+                IsSheetCheckBoxVisible = product.IsSheet;
+                IsSheetCheckBoxEnabled = false;
             }
 
             ProductToProps(product);
@@ -64,13 +70,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand SaveCommand { get; private set; }
         public bool IsEditor { get; private set; }
         public bool DenyPriceEdit { get; private set; }
-        public bool IsNewProduct { get; private set; }
+        public bool IsSheetCheckBoxVisible { get; private set; }
+        public bool IsSheetCheckBoxEnabled { get; private set; }
 
         public string Title2
         {
             get
             {
-                if (IsNewProduct)
+                if (IsSheetCheckBoxEnabled)
                 {
                     return isSheet ? "Новая позиция (лист)" : "Новая позиция";
                 }
@@ -456,6 +463,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             length = product.Length.ToString("0.##");
             priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
             Internal = product.Internal;
+            IsSheet = product.IsSheet;
         }
 
         private Product PropsToProduct()
@@ -474,6 +482,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 Length = Math.Round(double.Parse(length), 2),
                 PriceIcome = long.Parse(priceIcome),
                 Internal = Internal,
+                IsSheet = isSheet,
             };
         }
 

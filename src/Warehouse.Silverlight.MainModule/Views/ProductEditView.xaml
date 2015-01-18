@@ -42,9 +42,9 @@
 
                     <!--IsSheet-->
 
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Лист" IsEnabled="{Binding IsNewProduct}" />
-                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" IsEnabled="{Binding IsNewProduct}" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsSheetCheckBoxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <sdk:Label Content="Лист" />
+                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" IsEnabled="{Binding IsSheetCheckBoxEnabled}" VerticalAlignment="Center" />
                     </StackPanel>
 
                     <!--Name-->

@@ -46,5 +46,9 @@ namespace Warehouse.Server.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("price_income")]
         public long PriceIcome { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [BsonElement("is_sheet")]
+        public bool IsSheet { get; set; }
     }
 }
