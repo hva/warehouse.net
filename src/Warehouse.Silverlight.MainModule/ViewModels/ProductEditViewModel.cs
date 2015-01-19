@@ -408,14 +408,17 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             get { return isSheet; }
             set
             {
-                isSheet = value;
-                ValidateSize();
-                UpdateSheetLength();
-                UpdatePriceRozn();
-                RaisePropertyChanged(() => IsSheet);
-                RaisePropertyChanged(() => Title2);
-                RaisePropertyChanged(() => LenghtLabel);
-                RaisePropertyChanged(() => NdLabel);
+                if (isSheet != value)
+                {
+                    isSheet = value;
+                    ValidateSize();
+                    UpdateSheetLength();
+                    UpdatePriceRozn();
+                    RaisePropertyChanged(() => IsSheet);
+                    RaisePropertyChanged(() => Title2);
+                    RaisePropertyChanged(() => LenghtLabel);
+                    RaisePropertyChanged(() => NdLabel);
+                }
             }
         }
 
