@@ -67,6 +67,8 @@
     <Compile Include="Behaviors\DataGridSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\NdVisibilityConverter.cs" />
+    <Compile Include="Converters\NdValueConverter.cs" />
     <Compile Include="Converters\RoleToStringConverter.cs" />
     <Compile Include="H1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,6 +20,8 @@
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:NdVisibilityConverter x:Key="NdVisibilityConverter" />
+        <converters:NdValueConverter x:Key="NdValueConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -82,7 +84,25 @@
                 <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.###}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Кол-во&#10;(шт.)" Binding="{Binding Count, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <!--<sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />-->
+                <sdk:DataGridTemplateColumn Header="Н/Д">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid d:DataContext="{d:DesignInstance Type=models:Product}">
+                                <Border
+                                    Visibility="{Binding Nd, Converter={StaticResource NdVisibilityConverter}}"
+                                    ToolTipService.ToolTip="{Binding Nd, Converter={StaticResource NdValueConverter}}"
+                                    Background="#C9CACA" Opacity="0.6" />
+                                <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" />
+                            </Grid>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                    <sdk:DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="sdk:DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </sdk:DataGridTemplateColumn.CellStyle>
+                </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn Header="Длина (м)" Binding="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <!--<sdk:DataGridTextColumn Header="1C" Binding="{Binding Internal}" d:DataContext="{d:DesignInstance Type=models:Product}" />-->
