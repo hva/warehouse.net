@@ -12,6 +12,7 @@
     xmlns:views="clr-namespace:Warehouse.Silverlight.MainModule.Views"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
+    xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
@@ -22,6 +23,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:NdVisibilityConverter x:Key="NdVisibilityConverter" />
         <converters:NdValueConverter x:Key="NdValueConverter" />
+        <localConverters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -96,6 +98,7 @@
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+                <behaviors:DataGridRowBackgroundBehavior Converter="{StaticResource ProductFirmaToBrushConverter}" />
             </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
