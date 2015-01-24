@@ -33,11 +33,27 @@
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>
-        
+
         <prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
                     <views:ChangePriceWindow />
+                </prism:PopupChildWindowAction.ChildWindow>
+            </prism:PopupChildWindowAction>
+        </prism:InteractionRequestTrigger>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <prism:PopupChildWindowAction>
+                <prism:PopupChildWindowAction.ChildWindow>
+                    <prism:ConfirmationChildWindow Width="300">
+                        <prism:ConfirmationChildWindow.ConfirmationTemplate>
+                            <DataTemplate>
+                                <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                                    <ContentPresenter Content="{Binding}" />
+                                </ScrollViewer>
+                            </DataTemplate>
+                        </prism:ConfirmationChildWindow.ConfirmationTemplate>
+                    </prism:ConfirmationChildWindow>
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>
@@ -61,7 +77,12 @@
                     Content="Создать"
                     Command="{Binding CreateProductCommand}"
                     Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Rectangle Width="20" />
+                <Rectangle Width="10" />
+                <Button
+                    Content="Удалить"
+                    Command="{Binding DeleteCommand}"
+                    Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Width="30" />
                 <Button
                     Content="Пересчитать цену"
                     Command="{Binding ChangePriceCommand}"

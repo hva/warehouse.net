@@ -39,5 +39,23 @@ namespace Warehouse.Silverlight.Data.Products
             }
             return new AsyncResult { Succeed = succeed };
         }
+
+        public async Task<AsyncResult> Delete(string[] ids)
+        {
+            var succeed = false;
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var q = string.Join(",", ids);
+                var uriString = string.Concat("api/products?ids=", q);
+                var uri = new Uri(uriString, UriKind.Relative);
+                var resp = await client.DeleteAsync(uri);
+                if (resp.StatusCode == HttpStatusCode.OK)
+                {
+                    succeed = true;
+                }
+            }
+            return new AsyncResult { Succeed = succeed };
+        }
     }
 }

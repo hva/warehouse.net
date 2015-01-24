@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -65,6 +67,28 @@ namespace Warehouse.Server.Controllers
                     Content = new StringContent(product.Id.ToString())
                 };
             }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        }
+
+        public HttpResponseMessage Delete(string ids)
+        {
+            if (ids == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var arr = ids.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            if (arr.Length > 0)
+            {
+                var objectIds = arr.Select(x => new ObjectId(x));
+                var query = Query<Product>.In(x => x.Id, objectIds);
+                var res = context.Products.Remove(query);
+                if (res.Ok)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+            }
+
             return Request.CreateResponse(HttpStatusCode.InternalServerError);
         }
 

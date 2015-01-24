@@ -7,5 +7,6 @@ namespace Warehouse.Silverlight.Data.Products
     public interface IProductsRepository
     {
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
+        Task<AsyncResult> Delete(string[] ids);
     }
 }

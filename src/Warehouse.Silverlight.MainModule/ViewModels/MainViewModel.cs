@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Practices.Prism;
@@ -28,10 +30,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IProductsRepository productsRepository;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
+        private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
         private IList selectedItems;
         private DelegateCommand changePriceCommand;
+        private DelegateCommand deleteCommand;
         private double totalWeight;
 
         public MainViewModel(IDataService service, IEventAggregator eventAggregator,
@@ -45,9 +49,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
+            deleteRequest = new InteractionRequest<Confirmation>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
             CreateProductCommand = new DelegateCommand(CreateProduct);
-            changePriceCommand = new DelegateCommand(ChangePrice, CanChangePrice);
+            changePriceCommand = new DelegateCommand(ChangePrice, HasSelectedProducts);
+            deleteCommand = new DelegateCommand(PromtDelete, HasSelectedProducts);
 
             cvs = new CollectionViewSource();
             items = new ObservableCollection<Product>();
@@ -68,8 +74,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand OpenProductCommand { get; private set; }
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
+        public ICommand DeleteCommand { get { return deleteCommand; } }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
         public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
+        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
 
@@ -80,6 +88,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 selectedItems = value;
                 changePriceCommand.RaiseCanExecuteChanged();
+                deleteCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -120,7 +129,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdated);
         }
 
-        private async void LoadData()
+        private async Task LoadData()
         {
             var task = await service.GetProductsAsync();
             if (task.Succeed)
@@ -148,12 +157,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
-        #region ChangePrice
-
-        private bool CanChangePrice()
+        private bool HasSelectedProducts()
         {
             return selectedItems != null && selectedItems.OfType<Product>().Any();
         }
+
+        #region ChangePrice
 
         private void ChangePrice()
         {
@@ -163,11 +172,48 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Delete
+
+        private void PromtDelete()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("Следующие позиции будут удалены:");
+            foreach (var x in selectedItems.OfType<Product>())
+            {
+                sb.AppendFormat("- {0} {1}", x.Name, x.Size);
+                sb.AppendLine();
+            }
+
+            var conf = new Confirmation
+            {
+                Title = "Внимание!",
+                Content = sb.ToString(),
+            };
+
+            deleteRequest.Raise(conf, Delete);
+        }
+
+        private async void Delete(Confirmation conf)
+        {
+            if (conf.Confirmed)
+            {
+                var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToArray();
+                var task = await productsRepository.Delete(ids);
+                if (task.Succeed)
+                {
+                    items.Clear();
+                    await LoadData();
+                }
+            }
+        }
+
+        #endregion
+
         #region INavigationAware
 
         public async void OnNavigatedTo(NavigationContext navigationContext)
         {
-            LoadData();
+            await LoadData();
             Subscribe();
 
             await signalRClient.EnsureConnection();
