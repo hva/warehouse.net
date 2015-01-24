@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -40,7 +41,7 @@ namespace Warehouse.Silverlight.Data.Products
             return new AsyncResult { Succeed = succeed };
         }
 
-        public async Task<AsyncResult> Delete(string[] ids)
+        public async Task<AsyncResult> Delete(List<string> ids)
         {
             var succeed = false;
             var token = authStore.LoadToken();

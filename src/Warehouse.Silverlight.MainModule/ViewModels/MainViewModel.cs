@@ -220,7 +220,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             if (conf.Confirmed)
             {
-                var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToArray();
+                var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
                 var task = await productsRepository.Delete(ids);
                 if (task.Succeed)
                 {

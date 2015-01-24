@@ -1,12 +1,14 @@
-﻿namespace Warehouse.Silverlight.Infrastructure.Events
+﻿using System.Collections.Generic;
+
+namespace Warehouse.Silverlight.Infrastructure.Events
 {
     public class ProductDeletedBatchEventArgs : SignalREventArgs
     {
-        public ProductDeletedBatchEventArgs(string[] productIds, bool fromRemote) : base(fromRemote)
+        public ProductDeletedBatchEventArgs(List<string> productIds, bool fromRemote) : base(fromRemote)
         {
             ProductIds = productIds;
         }
 
-        public string[] ProductIds { get; private set; }
+        public List<string> ProductIds { get; private set; }
     }
 }

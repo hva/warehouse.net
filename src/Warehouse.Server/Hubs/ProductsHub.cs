@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Collections.Generic;
+using Microsoft.AspNet.SignalR;
 
 namespace Warehouse.Server.Hubs
 {
@@ -8,10 +9,16 @@ namespace Warehouse.Server.Hubs
         {
             Clients.Others.OnProductUpdated(id);
         }
+
+        public void RaiseProductDeletedBatch(List<string> ids)
+        {
+            Clients.Others.OnProductDeletedBatch(ids);
+        }
     }
 
     public interface IClient
     {
         void OnProductUpdated(string id);
+        void OnProductDeletedBatch(List<string> ids);
     }
 }
