@@ -98,6 +98,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             set { totalWeight = value; RaisePropertyChanged(() => TotalWeight); }
         }
 
+        #region EventHandlers
+
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
             var task = await service.GetProductAsync(e.ProductId);
@@ -119,15 +121,36 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
+        public void OnProductsDeleted(ProductDeletedBatchEventArgs args)
+        {
+            if (items == null) return;
+            if (args == null || args.ProductIds == null) return;
+
+            foreach (var id in args.ProductIds)
+            {
+                var p = items.FirstOrDefault(x => x.Id == id);
+                if (p != null)
+                {
+                    items.Remove(p);
+                }
+            }
+            UpdateTotalWeight();
+        }
+
         private void Subscribe()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Subscribe(OnProductUpdated);
+            eventAggregator.GetEvent<ProductDeletedBatchEvent>().Subscribe(OnProductsDeleted);
         }
+
 
         private void Unsubscribe()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdated);
+            eventAggregator.GetEvent<ProductDeletedBatchEvent>().Unsubscribe(OnProductsDeleted);
         }
+
+        #endregion
 
         private async Task LoadData()
         {
@@ -201,8 +224,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 var task = await productsRepository.Delete(ids);
                 if (task.Succeed)
                 {
-                    items.Clear();
-                    await LoadData();
+                    var args = new ProductDeletedBatchEventArgs(ids, false);
+                    eventAggregator.GetEvent<ProductDeletedBatchEvent>().Publish(args);
                 }
             }
         }

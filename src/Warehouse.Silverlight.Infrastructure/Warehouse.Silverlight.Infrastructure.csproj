@@ -75,8 +75,11 @@
   <ItemGroup>
     <Compile Include="AsyncResult.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Events\ProductDeletedBatchEvent.cs" />
+    <Compile Include="Events\ProductDeletedBatchEventArgs.cs" />
     <Compile Include="Events\ProductUpdatedEvent.cs" />
     <Compile Include="Events\ProductUpdatedEventArgs.cs" />
+    <Compile Include="Events\SignalREventArgs.cs" />
     <Compile Include="InteractionRequestObject.cs" />
     <Compile Include="InteractionRequestValidationObject.cs" />
     <Compile Include="UserRole.cs" />

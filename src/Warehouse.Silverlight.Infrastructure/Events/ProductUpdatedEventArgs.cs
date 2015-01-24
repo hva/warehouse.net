@@ -1,18 +1,12 @@
 ﻿namespace Warehouse.Silverlight.Infrastructure.Events
 {
-    public class ProductUpdatedEventArgs
+    public class ProductUpdatedEventArgs : SignalREventArgs
     {
-        public ProductUpdatedEventArgs(string productId) : this(productId, false)
-        {
-        }
-
-        public ProductUpdatedEventArgs(string productId, bool fromRemote)
+        public ProductUpdatedEventArgs(string productId, bool fromRemote) : base(fromRemote)
         {
             ProductId = productId;
-            FromRemote = fromRemote;
         }
 
         public string ProductId { get; private set; }
-        public bool FromRemote { get; private set; }
     }
 }

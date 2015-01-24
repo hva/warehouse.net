@@ -89,7 +89,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 foreach (var x in Items)
                 {
-                    var args = new ProductUpdatedEventArgs(x.Id);
+                    var args = new ProductUpdatedEventArgs(x.Id, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                 }
 

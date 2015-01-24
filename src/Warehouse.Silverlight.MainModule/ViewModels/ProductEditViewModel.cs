@@ -442,7 +442,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var task = await dataService.SaveProductAsync(changed);
             if (task.Succeed)
             {
-                var args = new ProductUpdatedEventArgs(task.Result);
+                var args = new ProductUpdatedEventArgs(task.Result, false);
                 eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                 Confirmed = true;
                 window.Close();
