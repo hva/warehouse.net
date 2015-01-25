@@ -51,12 +51,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 product = new Product();
                 IsSheetCheckBoxVisible = true;
-                IsSheetCheckBoxEnabled = true;
             }
             else
             {
-                IsSheetCheckBoxVisible = product.IsSheet;
-                IsSheetCheckBoxEnabled = false;
+                IsSheetCheckBoxVisible = false;
             }
 
             ProductToProps(product);
@@ -73,18 +71,18 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public bool IsEditor { get; private set; }
         public bool DenyPriceEdit { get; private set; }
         public bool IsSheetCheckBoxVisible { get; private set; }
-        public bool IsSheetCheckBoxEnabled { get; private set; }
         public ProductFirmaMapper FirmaMapper { get; private set; }
 
         public string Title2
         {
             get
             {
-                if (IsSheetCheckBoxEnabled)
+                var label = isSheet ? " (лист)" : string.Empty;
+                if (IsSheetCheckBoxVisible) // creating
                 {
-                    return isSheet ? "Новая позиция (лист)" : "Новая позиция";
+                    return string.Format("Новая позиция{0}", label);
                 }
-                return string.Format("{0} {1}", Name, Size);
+                return string.Format("{0} {1}{2}", Name, Size, label);
             }
         }
 

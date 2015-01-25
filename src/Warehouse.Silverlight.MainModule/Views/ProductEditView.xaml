@@ -44,7 +44,7 @@
 
                     <StackPanel Orientation="Horizontal" Visibility="{Binding IsSheetCheckBoxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <sdk:Label Content="Лист" />
-                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" IsEnabled="{Binding IsSheetCheckBoxEnabled}" VerticalAlignment="Center" />
+                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
                     </StackPanel>
 
                     <!--Name-->
