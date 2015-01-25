@@ -9,7 +9,6 @@ using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
-using Warehouse.Silverlight.MainModule.Models;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
@@ -45,7 +44,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
-            FirmaMapper = new ProductFirmaMapper();
 
             if (product == null)
             {
@@ -71,7 +69,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public bool IsEditor { get; private set; }
         public bool DenyPriceEdit { get; private set; }
         public bool IsSheetCheckBoxVisible { get; private set; }
-        public ProductFirmaMapper FirmaMapper { get; private set; }
 
         public string Title2
         {
