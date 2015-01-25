@@ -13,6 +13,7 @@
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
+    xmlns:localModels="clr-namespace:Warehouse.Silverlight.MainModule.Models"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
@@ -72,6 +73,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Margin="0,0,0,10">
@@ -166,6 +168,30 @@
                 <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
+
+        <ItemsControl Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right">
+            <ItemsControl.ItemsSource>
+                <localModels:ProductFirmaMapper />
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Ellipse Width="12" Height="12" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
+                            <Ellipse.Fill>
+                                <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.5" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Value.Translation}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
     </Grid>
 
 </UserControl>
