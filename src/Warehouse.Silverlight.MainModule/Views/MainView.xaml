@@ -111,9 +111,21 @@
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-                <behaviors:DataGridRowBackgroundBehavior Converter="{StaticResource ProductFirmaToBrushConverter}" />
+                <!--<behaviors:DataGridRowBackgroundBehavior Converter="{StaticResource ProductFirmaToBrushConverter}" />-->
             </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn Width="20">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Ellipse Width="10" Height="10" Fill="{Binding Converter={StaticResource ProductFirmaToBrushConverter}}" Opacity="0.8" Stroke="LightGray" StrokeThickness="1" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                    <sdk:DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="sdk:DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </sdk:DataGridTemplateColumn.CellStyle>
+                </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn
                     Header="Наимнование"
                     Binding="{Binding Name}"
@@ -169,16 +181,16 @@
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
 
-        <ItemsControl Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right">
+        <ItemsControl Grid.Row="2" Margin="0,5,0,0">
             <ItemsControl.ItemsSource>
                 <localModels:ProductFirmaMapper />
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                        <Ellipse Width="12" Height="12" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+                        <Ellipse Width="10" Height="10" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
                             <Ellipse.Fill>
-                                <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.5" />
+                                <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.8" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock Text="{Binding Value.Translation}" />
