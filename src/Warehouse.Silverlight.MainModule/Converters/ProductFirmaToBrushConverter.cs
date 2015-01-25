@@ -19,7 +19,7 @@ namespace Warehouse.Silverlight.MainModule.Converters
                 ProductFirma pf;
                 if (mapper.TryGetValue(p.Firma, out pf))
                 {
-                    return new SolidColorBrush(pf.Color);
+                    return new SolidColorBrush(pf.Color) { Opacity = 0.15 };
                 }
             }
             return null;

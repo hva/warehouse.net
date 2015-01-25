@@ -17,8 +17,14 @@
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
     <UserControl.Resources>
-        <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell">
+        <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell" BasedOn="{StaticResource DataGridCell_Default}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="ColumnHeaderRightStyle" TargetType="sdk:DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="ColumnHeaderLeftStyle" TargetType="sdk:DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:NdVisibilityConverter x:Key="NdVisibilityConverter" />
@@ -94,21 +100,50 @@
             <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
         </Grid>
 
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" RowBackground="Transparent" AlternatingRowBackground="Transparent">
+        <sdk:DataGrid
+            Grid.Row="1"
+            ItemsSource="{Binding Items}"
+            ColumnHeaderStyle="{StaticResource ColumnHeaderRightStyle}"
+            AutoGenerateColumns="False" IsReadOnly="True"
+            RowBackground="Transparent" AlternatingRowBackground="Transparent">
             <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
                 <behaviors:DataGridRowBackgroundBehavior Converter="{StaticResource ProductFirmaToBrushConverter}" />
             </i:Interaction.Behaviors>
             <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" CellStyle="{StaticResource TextCellStyle}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Коэф." Binding="{Binding K, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Цена&#10;без НДС (опт.)" Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Цена&#10;с НДС (розн.)" Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Кол-во&#10;(кг.)" Binding="{Binding Weight, StringFormat='{}{0:#.###}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Кол-во&#10;(шт.)" Binding="{Binding Count, StringFormat='{}{0:#.##}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <!--<sdk:DataGridTextColumn Header="Н/Д" Binding="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />-->
+                <sdk:DataGridTextColumn
+                    Header="Наимнование"
+                    Binding="{Binding Name}"
+                    CellStyle="{StaticResource TextCellStyle}"
+                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Размер"
+                    Binding="{Binding Size}"
+                    CellStyle="{StaticResource TextCellStyle}"
+                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Коэф."
+                    Binding="{Binding K, StringFormat='{}{0:0.##;#;#}'}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Цена&#10;без НДС (опт.)"
+                    Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Цена&#10;с НДС (розн.)"
+                    Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Кол-во&#10;(кг.)"
+                    Binding="{Binding Weight, StringFormat='{}{0:#.###}'}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn
+                    Header="Кол-во&#10;(шт.)"
+                    Binding="{Binding Count, StringFormat='{}{0:#.##}'}"
+                    d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTemplateColumn Header="Н/Д">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -129,7 +164,6 @@
                 </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn Header="Длина (м)" Binding="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <!--<sdk:DataGridTextColumn Header="1C" Binding="{Binding Internal}" d:DataContext="{d:DesignInstance Type=models:Product}" />-->
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
     </Grid>

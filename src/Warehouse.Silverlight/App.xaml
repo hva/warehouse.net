@@ -61,7 +61,7 @@
         </Style>
 
         <!--DataGridCell-->
-        <Style TargetType="sdk:DataGridCell">
+        <Style x:Key="DataGridCell_Default" TargetType="sdk:DataGridCell">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="HorizontalContentAlignment" Value="Right" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -114,6 +114,8 @@
             </Setter>
         </Style>
 
+        <Style TargetType="sdk:DataGridCell" BasedOn="{StaticResource DataGridCell_Default}" />
+
         <!--DataGridRow-->
         <Style TargetType="sdk:DataGridRow">
             <Setter Property="IsTabStop" Value="False" />
@@ -140,9 +142,9 @@
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="MouseOverSelected">
-                                        <!--<Storyboard>
+                                        <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
-                                        </Storyboard>-->
+                                        </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="UnfocusedSelected">
                                         <Storyboard>
