@@ -50,5 +50,9 @@ namespace Warehouse.Server.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("is_sheet")]
         public bool IsSheet { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [BsonElement("firma")]
+        public string Firma { get; set; }
     }
 }

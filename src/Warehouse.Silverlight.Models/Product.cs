@@ -17,6 +17,7 @@ namespace Warehouse.Silverlight.Models
         public long PriceIcome { get; set; }
         public string Internal { get; set; }
         public bool IsSheet { get; set; }
+        public string Firma { get; set; }
 
         public double NdTotal { get { return Nd == null ? 0 : Nd.Sum(); } }
     }

@@ -148,6 +148,11 @@
                         <TextBox Text="{Binding Internal, Mode=TwoWay}" />
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <sdk:Label Content="Учет" />
+                        <ComboBox ItemsSource="{Binding FirmaMapper}" SelectedValue="{Binding Firma, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value.Translation" />
+                    </StackPanel>
+
                 </StackPanel>
             </sdk:TabItem>
         </sdk:TabControl>

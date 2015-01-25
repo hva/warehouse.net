@@ -38,7 +38,11 @@ namespace Warehouse.Silverlight.Controls.Behaviors
         {
             if (Converter == null) return;
 
-            e.Row.Background = Converter.Convert(e.Row.DataContext, typeof(Brush), null, CultureInfo.InvariantCulture) as Brush;
+            var brush = Converter.Convert(e.Row.DataContext, typeof(Brush), null, CultureInfo.InvariantCulture) as Brush;
+            if (brush != null)
+            {
+                e.Row.Background = brush;
+            }
         }
     }
 }

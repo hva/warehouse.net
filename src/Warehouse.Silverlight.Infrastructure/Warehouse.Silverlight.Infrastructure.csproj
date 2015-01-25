@@ -82,6 +82,7 @@
     <Compile Include="Events\SignalREventArgs.cs" />
     <Compile Include="InteractionRequestObject.cs" />
     <Compile Include="InteractionRequestValidationObject.cs" />
+    <Compile Include="ProductFirmaNames.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="ValidationObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

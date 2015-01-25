@@ -9,6 +9,7 @@ using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
+using Warehouse.Silverlight.MainModule.Models;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
@@ -44,6 +45,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
+            FirmaMapper = new ProductFirmaMapper();
 
             if (product == null)
             {
@@ -72,6 +74,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public bool DenyPriceEdit { get; private set; }
         public bool IsSheetCheckBoxVisible { get; private set; }
         public bool IsSheetCheckBoxEnabled { get; private set; }
+        public ProductFirmaMapper FirmaMapper { get; private set; }
 
         public string Title2
         {
@@ -424,6 +427,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         #endregion
 
+        #region Firma
+
+        public string Firma { get; set; }
+
+        #endregion
+
         private async void Save(ChildWindow window)
         {
             ValidateName();
@@ -467,6 +476,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
             Internal = product.Internal;
             IsSheet = product.IsSheet;
+            Firma = product.Firma;
         }
 
         private Product PropsToProduct()
@@ -486,6 +496,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 PriceIcome = long.Parse(priceIcome),
                 Internal = Internal,
                 IsSheet = isSheet,
+                Firma = Firma,
             };
         }
 

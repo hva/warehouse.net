@@ -120,6 +120,8 @@
   <ItemGroup>
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="Models\ProductFirma.cs" />
+    <Compile Include="Models\ProductFirmaMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ChangePriceItem.cs" />
     <Compile Include="ViewModels\ChangePriceViewModel.cs" />
