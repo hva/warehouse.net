@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Media;
 using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.MainModule.Models
@@ -7,10 +8,11 @@ namespace Warehouse.Silverlight.MainModule.Models
     {
         public ProductFirmaMapper()
         {
-            Add(ProductFirmaNames.Skill, new ProductFirma { Translation = "Скилл" });
-            Add(ProductFirmaNames.Fina, new ProductFirma { Translation = "Фина" });
-            Add(ProductFirmaNames.Storage, new ProductFirma { Translation = "Хранение" });
-            Add(ProductFirmaNames.Rozn, new ProductFirma { Translation = "Розница" });
+            const byte a = 32;
+            Add(ProductFirmaNames.Skill, new ProductFirma { Translation = "Скилл", Color = Color.FromArgb(a, 0, 255, 0) });
+            Add(ProductFirmaNames.Fina, new ProductFirma { Translation = "Фина", Color = Color.FromArgb(a, 0, 0, 255) });
+            Add(ProductFirmaNames.Storage, new ProductFirma { Translation = "Хранение", Color = Color.FromArgb(a, 148, 0, 211) });
+            Add(ProductFirmaNames.Rozn, new ProductFirma { Translation = "Розница", Color = Color.FromArgb(a, 255, 255, 0) });
         }
     }
 }

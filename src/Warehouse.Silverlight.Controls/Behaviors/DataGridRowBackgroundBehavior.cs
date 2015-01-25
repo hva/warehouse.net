@@ -25,13 +25,11 @@ namespace Warehouse.Silverlight.Controls.Behaviors
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.LoadingRow += LoadingRow;
-            AssociatedObject.Unloaded += Unloaded;
-        }
 
-        private void Unloaded(object sender, RoutedEventArgs e)
-        {
-            AssociatedObject.LoadingRow -= LoadingRow;
+            AssociatedObject.LoadingRow += LoadingRow;
+            AssociatedObject.UnloadingRow += UnloadingRow;
+
+            AssociatedObject.Unloaded += Unloaded;
         }
 
         private void LoadingRow(object sender, DataGridRowEventArgs e)
@@ -43,6 +41,17 @@ namespace Warehouse.Silverlight.Controls.Behaviors
             {
                 e.Row.Background = brush;
             }
+        }
+
+        private void UnloadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Background = null;
+        }
+
+        private void Unloaded(object sender, RoutedEventArgs e)
+        {
+            AssociatedObject.LoadingRow -= LoadingRow;
+            AssociatedObject.UnloadingRow -= UnloadingRow;
         }
     }
 }
