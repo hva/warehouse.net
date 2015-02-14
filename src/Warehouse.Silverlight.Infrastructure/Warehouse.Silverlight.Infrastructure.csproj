@@ -80,6 +80,7 @@
     <Compile Include="Events\ProductUpdatedEvent.cs" />
     <Compile Include="Events\ProductUpdatedEventArgs.cs" />
     <Compile Include="Events\SignalREventArgs.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="InteractionRequestObject.cs" />
     <Compile Include="InteractionRequestValidationObject.cs" />
     <Compile Include="ProductFirmaNames.cs" />

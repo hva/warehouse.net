@@ -1,14 +1,13 @@
 ﻿<sdk:ChildWindow
     x:Class="Warehouse.Silverlight.MainModule.Views.ProductEditView"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
-    xmlns:interactivity="http://www.codeplex.com/prism"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     xmlns:models="clr-namespace:Warehouse.Silverlight.MainModule.Models"
@@ -54,18 +53,18 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Наимнование" />
-                        <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Размер" />
-                        <TextBox Text="{Binding Size, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding Size, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
@@ -85,9 +84,9 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена без НДС (опт.)" />
-                        <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding DenyPriceEdit}">
+                        <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
@@ -103,27 +102,27 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Кол-во (шт)" />
-                        <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="{Binding LenghtLabel}" />
-                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsSheet}">
+                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding IsSheet}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="{Binding NdLabel}" />
-                        <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                        <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
@@ -139,9 +138,9 @@
 
                     <StackPanel Orientation="Horizontal">
                         <sdk:Label Content="Цена приходная" />
-                        <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding DenyPriceEdit}">
+                        <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
-                                <interactivity:UpdateTextBindingOnPropertyChanged />
+                                <behaviors:ThrottledTextBindingBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>

@@ -207,7 +207,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void UpdatePriceRozn()
         {
-            if (errorsContainer.HasErrors)
+            if (errorsContainer.HasErrors(() => PriceOpt, () => K, () => Length))
             {
                 PriceRozn = 0;
             }
@@ -244,7 +244,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void UpdateWeight()
         {
-            if (errorsContainer.HasErrors)
+            if (errorsContainer.HasErrors(() => Count, () => Length, () => K))
             {
                 Weight = 0;
             }
