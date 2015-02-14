@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
+    <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="Models\ProductFirma.cs" />
     <Compile Include="Models\ProductFirmaMapper.cs" />
