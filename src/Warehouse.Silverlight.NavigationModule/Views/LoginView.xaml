@@ -16,7 +16,6 @@
 
         <Grid Height="300">
             <controls:AlertBox Content="{Binding Message}" VerticalAlignment="Bottom" />
-            <controls:ProgressRing IsActive="{Binding IsBusy}" VerticalAlignment="Bottom" />
         </Grid>
 
         <StackPanel Orientation="Horizontal">
@@ -37,7 +36,10 @@
             </PasswordBox>
         </StackPanel>
 
-        <Button Content="Войти" Command="{Binding LoginCommand}" Style="{StaticResource FormButton}" />
+        <Grid>
+            <controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />
+            <Button Content="Войти" Command="{Binding LoginCommand}" Style="{StaticResource FormButton}" />
+        </Grid>
     </StackPanel>
 
 </UserControl>

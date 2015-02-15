@@ -12,6 +12,7 @@ namespace Warehouse.Silverlight.SettingsModule
         private readonly IUsersRepository usersRepository;
         private string errorMessage;
         private string successMessage;
+        private bool isBusy;
 
         public SettingsViewModel(IAuthStore authStore, IUsersRepository usersRepository)
         {
@@ -25,6 +26,12 @@ namespace Warehouse.Silverlight.SettingsModule
                 UserName = token.UserName;
                 Role = token.Role;
             }
+        }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
         }
 
         public string UserName { get; private set; }
@@ -73,7 +80,9 @@ namespace Warehouse.Silverlight.SettingsModule
 
             if (!HasErrors)
             {
+                IsBusy = true;
                 var task = await usersRepository.ChangePasswordAsync(UserName, OldPassword, NewPassword);
+                IsBusy = false;
                 if (task.Succeed)
                 {
                     SuccessMessage = "Пароль обновлен!";

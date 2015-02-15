@@ -65,7 +65,10 @@
                     </PasswordBox>
                 </StackPanel>
 
-                <Button Content="Изменить" Command="{Binding SaveCommand}" Style="{StaticResource FormButton}" />
+                <Grid>
+                    <controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />
+                    <Button Content="Изменить" Command="{Binding SaveCommand}" Style="{StaticResource FormButton}" />
+                </Grid>
             </StackPanel>
         </controls:H1>
 
