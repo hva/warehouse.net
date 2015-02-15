@@ -31,6 +31,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private bool isSheet;
         private double[] sheetSizes;
+        private bool isBusy;
 
         public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore)
             :this(null, dataService, eventAggregator, authStore)
@@ -81,6 +82,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 }
                 return string.Format("{0} {1}{2}", Name, Size, label);
             }
+        }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
         }
 
         #region Name
@@ -443,7 +450,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             var changed = PropsToProduct();
 
+            IsBusy = true;
             var task = await dataService.SaveProductAsync(changed);
+            IsBusy = false;
             if (task.Succeed)
             {
                 var args = new ProductUpdatedEventArgs(task.Result, false);

@@ -12,6 +12,7 @@
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     xmlns:models="clr-namespace:Warehouse.Silverlight.MainModule.Models"
     xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title2}"
@@ -176,6 +177,7 @@
         </sdk:TabControl>
 
         <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource FormButtons}">
+            <controls:ProgressRing IsActive="{Binding IsBusy}" />
             <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">
