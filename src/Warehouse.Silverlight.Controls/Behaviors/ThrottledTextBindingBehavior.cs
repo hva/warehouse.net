@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Interactivity;
@@ -8,21 +9,53 @@ namespace Warehouse.Silverlight.Controls.Behaviors
 {
     public class ThrottledTextBindingBehavior : Behavior<TextBox>
     {
-        private BindingExpression expression;
         private DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(400) };
 
-        protected override void OnAttached()
+        protected BindingExpression expression;
+
+        protected sealed override void OnAttached()
         {
             base.OnAttached();
 
             expression = AssociatedObject.GetBindingExpression(TextBox.TextProperty);
             AssociatedObject.TextChanged += OnTextChanged;
+            AssociatedObject.Loaded += OnLoaded;
         }
 
-        protected override void OnDetaching()
+        protected sealed override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.TextChanged += OnTextChanged;
+            AssociatedObject.TextChanged -= OnTextChanged;
+            AssociatedObject.Loaded -= OnLoaded;
+        }
+
+        protected bool IsTextChangingLocked
+        {
+            set
+            {
+                if (value)
+                {
+                    AssociatedObject.TextChanged -= OnTextChanged;
+                }
+                else
+                {
+                    AssociatedObject.TextChanged += OnTextChanged;
+                }
+            }
+        }
+
+        protected virtual void OnLoaded()
+        {
+        }
+
+        protected virtual void UpdateSource()
+        {
+            expression.UpdateSource();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            OnLoaded();
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -41,10 +74,7 @@ namespace Warehouse.Silverlight.Controls.Behaviors
             timer.Stop();
             timer.Tick -= Tick;
 
-            if (expression != null)
-            {
-                expression.UpdateSource();
-            }
+            UpdateSource();
         }
     }
 }

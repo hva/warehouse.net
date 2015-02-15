@@ -87,7 +87,7 @@
                         <sdk:Label Content="Цена без НДС (опт.)" />
                         <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
+                                <behaviors:CurrencyFormatTextBoxBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>
@@ -141,7 +141,7 @@
                         <sdk:Label Content="Цена приходная" />
                         <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding DenyPriceEdit}">
                             <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
+                                <behaviors:CurrencyFormatTextBoxBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
                     </StackPanel>

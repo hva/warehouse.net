@@ -251,7 +251,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void UpdateWeight()
         {
-            if (errorsContainer.HasErrors(() => Count, () => Length, () => K))
+            if (errorsContainer.HasErrors(() => Count, () => Length, () => K, () => Nd))
             {
                 Weight = 0;
             }
@@ -363,7 +363,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void UpdateSheetLength()
         {
-            if (errorsContainer.HasErrors || sheetSizes == null)
+            if (errorsContainer.HasErrors(() => Size) || sheetSizes == null)
             {
                 Length = "0";
             }
