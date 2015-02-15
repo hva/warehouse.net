@@ -48,6 +48,7 @@
 
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
+            <controls1:ProgressRing IsActive="{Binding IsBusy}" />
             <Button Content="Создать" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">

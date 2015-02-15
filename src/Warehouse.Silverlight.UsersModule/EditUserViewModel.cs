@@ -12,6 +12,7 @@ namespace Warehouse.Silverlight.UsersModule
     public class EditUserViewModel : InteractionRequestValidationObject
     {
         private readonly IUsersRepository repository;
+        private bool isBusy;
 
         public EditUserViewModel(IUsersRepository repository, User user)
         {
@@ -33,6 +34,12 @@ namespace Warehouse.Silverlight.UsersModule
         public IDictionary<string, string> Roles { get; private set; }
         public string Role { get; set; }
 
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+        }
+
         private async void Save(ChildWindow window)
         {
             var user = new User
@@ -41,7 +48,9 @@ namespace Warehouse.Silverlight.UsersModule
                 Roles = new[] { Role },
             };
 
+            IsBusy = true;
             var task = await repository.UpdateUser(user);
+            IsBusy = false;
             if (task.Succeed)
             {
                 Confirmed = true;

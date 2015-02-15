@@ -12,6 +12,7 @@ namespace Warehouse.Silverlight.UsersModule
     public class CreateUserViewModel : InteractionRequestValidationObject
     {
         private readonly IUsersRepository repository;
+        private bool isBusy;
         private string name;
         private string password;
         private string error;
@@ -30,6 +31,12 @@ namespace Warehouse.Silverlight.UsersModule
         }
 
         public ICommand SaveCommand { get; private set; }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+        }
 
         #region Name
 
@@ -116,7 +123,9 @@ namespace Warehouse.Silverlight.UsersModule
                 Password = Password,
             };
 
+            IsBusy = true;
             var task = await repository.CreateUser(user);
+            IsBusy = false;
             if (task.Succeed)
             {
                 Confirmed = true;

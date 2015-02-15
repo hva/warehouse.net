@@ -15,6 +15,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     public class ChangePriceViewModel : InteractionRequestValidationObject
     {
         private string percentage = "10";
+        private bool isBusy;
 
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -45,6 +46,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                     UpdatePrice();
                 }
             }
+        }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
         }
 
         private void ValidatePercentage()
@@ -84,7 +91,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             if (HasErrors) return;
 
             var data = Items.Select(x => new ProductPriceUpdate { Id = x.Id, NewPrice = x.NewPrice }).ToArray();
+            IsBusy = true;
             var task = await repository.UpdatePrice(data);
+            IsBusy = false;
             if (task.Succeed)
             {
                 foreach (var x in Items)

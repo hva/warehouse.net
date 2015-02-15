@@ -10,6 +10,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:controls1="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=usersModule:EditUserViewModel}"
     Width="Auto" Height="Auto"
@@ -34,6 +35,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
+            <controls1:ProgressRing IsActive="{Binding IsBusy}" />
             <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
             <Rectangle Width="10" />
             <Button Content="Отмена">
