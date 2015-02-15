@@ -20,6 +20,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         private string login;
         private string password;
+        private bool isBusy;
 
         public LoginViewModel(IAuthService authService, INavigationService navigationService, ISignalRClient signalRClient)
         {
@@ -48,6 +49,19 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
         {
             get { return message; }
             set { message = value; RaisePropertyChanged(() => Message); }
+        }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                if (isBusy != value)
+                {
+                    isBusy = value;
+                    RaisePropertyChanged(() => IsBusy);
+                }
+            }
         }
 
         #region INavigationAware
@@ -82,6 +96,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
 
         private async void DoLogin()
         {
+            IsBusy = true;
             Message = null;
             var task = await authService.Login(Login, Password);
 
@@ -95,6 +110,7 @@ namespace Warehouse.Silverlight.NavigationModule.ViewModels
                 Password = string.Empty;
                 Message = "Пароль, который вы ввели, неверный.\nПожалуйста, попробуйте еще раз.";
             }
+            IsBusy = false;
         }
     }
 }

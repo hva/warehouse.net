@@ -73,10 +73,15 @@
     <Compile Include="Converters\NdValueConverter.cs" />
     <Compile Include="Converters\RoleToStringConverter.cs" />
     <Compile Include="H1.cs" />
+    <Compile Include="ProgressRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\_ProgressRing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

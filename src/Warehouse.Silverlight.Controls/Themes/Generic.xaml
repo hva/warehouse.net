@@ -3,6 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Warehouse.Silverlight.Controls;component/Themes/_ProgressRing.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="controls:H1">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="0,10,0,0" />
@@ -43,5 +47,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>
