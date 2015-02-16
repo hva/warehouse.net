@@ -29,11 +29,13 @@ namespace Warehouse.Silverlight.Controls.Behaviors
 
                 IsTextChangingLocked = true;
 
+                var selectionStart = AssociatedObject.SelectionStart;
+
                 AssociatedObject.Text = l.ToString(NumberFormatInfo.InvariantInfo);
                 expression.UpdateSource();
 
                 AssociatedObject.Text = l.ToString("#,#");
-                AssociatedObject.SelectionStart = AssociatedObject.Text.Length;
+                AssociatedObject.SelectionStart = selectionStart;
 
                 IsTextChangingLocked = false;
             }
