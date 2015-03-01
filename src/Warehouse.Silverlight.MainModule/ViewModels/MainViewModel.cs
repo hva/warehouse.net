@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IDataService service;
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
-        private readonly IAuthStore authStore;
         private readonly IProductsRepository productsRepository;
+        private readonly Func<ProductEditViewModel> productEditViewModelFactory;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
@@ -38,14 +39,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private DelegateCommand deleteCommand;
         private double totalWeight;
 
-        public MainViewModel(IDataService service, IEventAggregator eventAggregator,
-            ISignalRClient signalRClient, IAuthStore authStore, IProductsRepository productsRepository)
+        public MainViewModel(IDataService service, IEventAggregator eventAggregator, ISignalRClient signalRClient,
+            IAuthStore authStore, IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory)
         {
             this.service = service;
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
-            this.authStore = authStore;
             this.productsRepository = productsRepository;
+            this.productEditViewModelFactory = productEditViewModelFactory;
 
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
@@ -128,7 +129,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
             foreach (var id in args.ProductIds)
             {
-                var p = items.FirstOrDefault(x => x.Id == id);
+                string _id = id;
+                var p = items.FirstOrDefault(x => x.Id == _id);
                 if (p != null)
                 {
                     items.Remove(p);
@@ -164,12 +166,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            editProductRequest.Raise(new ProductEditViewModel(p, service, eventAggregator, authStore));
+            editProductRequest.Raise(productEditViewModelFactory().Init(p));
         }
 
         private void CreateProduct()
         {
-            editProductRequest.Raise(new ProductEditViewModel(service, eventAggregator, authStore));
+            editProductRequest.Raise(productEditViewModelFactory().Init());
         }
 
         private void UpdateTotalWeight()

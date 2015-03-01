@@ -13,6 +13,7 @@
     xmlns:models="clr-namespace:Warehouse.Silverlight.MainModule.Models"
     xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
+    xmlns:productEdit="clr-namespace:Warehouse.Silverlight.MainModule.Views.ProductEdit"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title2}"
@@ -36,16 +37,21 @@
         </Style>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <localConverters:ZeroToStringConverter x:Key="ZeroToStringConverter" />
+        <converters:BooleanInvertConverter x:Key="BooleanInvertConverter" />
     </sdk:ChildWindow.Resources>
 
     <StackPanel>
         <sdk:TabControl>
+            <i:Interaction.Behaviors>
+                <behaviors:TabControlBehavior Command="{Binding TabLoadedCommand}" />
+            </i:Interaction.Behaviors>
+
             <sdk:TabItem Header="Параметры">
                 <StackPanel>
 
                     <!--IsSheet-->
 
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsSheetCheckBoxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsNewProduct, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <sdk:Label Content="Лист" />
                         <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
                     </StackPanel>
@@ -173,6 +179,9 @@
                     </StackPanel>
 
                 </StackPanel>
+            </sdk:TabItem>
+            <sdk:TabItem Header="Сертификаты" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
+                <productEdit:AttachmentsView Width="370" Height="417" />
             </sdk:TabItem>
         </sdk:TabControl>
 

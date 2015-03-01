@@ -17,6 +17,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
     {
         private readonly IDataService dataService;
         private readonly IEventAggregator eventAggregator;
+        private readonly IAuthStore authStore;
 
         private string id;
         private string name;
@@ -34,26 +35,29 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private bool isBusy;
 
         public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore)
-            :this(null, dataService, eventAggregator, authStore)
-        {
-        }
-
-        public ProductEditViewModel(Product product, IDataService dataService,
-            IEventAggregator eventAggregator, IAuthStore authStore)
         {
             this.dataService = dataService;
             this.eventAggregator = eventAggregator;
+            this.authStore = authStore;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
 
+            TabLoadedCommand = new DelegateCommand<object>(x =>
+            {
+                
+            });
+        }
+
+        public ProductEditViewModel Init(Product product = null)
+        {
             if (product == null)
             {
                 product = new Product();
-                IsSheetCheckBoxVisible = true;
+                IsNewProduct = true;
             }
             else
             {
-                IsSheetCheckBoxVisible = false;
+                IsNewProduct = false;
             }
 
             ProductToProps(product);
@@ -64,19 +68,22 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 IsEditor = token.IsEditor();
                 DenyPriceEdit = !token.IsAdmin();
             }
+
+            return this;
         }
 
         public ICommand SaveCommand { get; private set; }
         public bool IsEditor { get; private set; }
         public bool DenyPriceEdit { get; private set; }
-        public bool IsSheetCheckBoxVisible { get; private set; }
+        public bool IsNewProduct { get; private set; }
+        public ICommand TabLoadedCommand { get; private set; }
 
         public string Title2
         {
             get
             {
                 var label = isSheet ? " (лист)" : string.Empty;
-                if (IsSheetCheckBoxVisible) // creating
+                if (IsNewProduct) // creating
                 {
                     return string.Format("Новая позиция{0}", label);
                 }

@@ -68,7 +68,9 @@
     <Compile Include="Behaviors\DataGridRowDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\DataGridSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
+    <Compile Include="Behaviors\TabControlBehavior.cs" />
     <Compile Include="Behaviors\ThrottledTextBindingBehavior.cs" />
+    <Compile Include="Converters\BooleanInvertConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\NdVisibilityConverter.cs" />
     <Compile Include="Converters\NdValueConverter.cs" />
