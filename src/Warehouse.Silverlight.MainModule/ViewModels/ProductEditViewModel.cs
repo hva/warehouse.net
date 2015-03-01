@@ -9,6 +9,7 @@ using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
+using Warehouse.Silverlight.MainModule.ViewModels.ProductEdit;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
@@ -18,6 +19,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IDataService dataService;
         private readonly IEventAggregator eventAggregator;
         private readonly IAuthStore authStore;
+        private readonly AttachmentsViewModel attachmentsViewModel;
 
         private string id;
         private string name;
@@ -33,19 +35,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private bool isSheet;
         private double[] sheetSizes;
         private bool isBusy;
+        private bool isEditor;
+        private bool isAttachmentsTabActive;
 
-        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore)
+
+        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
         {
             this.dataService = dataService;
             this.eventAggregator = eventAggregator;
             this.authStore = authStore;
+            this.attachmentsViewModel = attachmentsViewModel;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
-
-            TabLoadedCommand = new DelegateCommand<object>(x =>
-            {
-                
-            });
+            TabLoadedCommand = new DelegateCommand<object>(OnTabLoaded);
         }
 
         public ProductEditViewModel Init(Product product = null)
@@ -73,10 +75,30 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         }
 
         public ICommand SaveCommand { get; private set; }
-        public bool IsEditor { get; private set; }
+        public ICommand TabLoadedCommand { get; private set; }
+
+        public bool IsEditor
+        {
+            get
+            {
+                if (isAttachmentsTabActive)
+                {
+                    return false;
+                }
+                return isEditor;
+            }
+            private set
+            {
+                if (isEditor != value)
+                {
+                    isEditor = value;
+                    RaisePropertyChanged(() => IsEditor);
+                }
+            }
+        }
         public bool DenyPriceEdit { get; private set; }
         public bool IsNewProduct { get; private set; }
-        public ICommand TabLoadedCommand { get; private set; }
+        public object AttachmentsContext { get { return attachmentsViewModel; } }
 
         public string Title2
         {
@@ -546,6 +568,21 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
 
             return null;
+        }
+
+        private void OnTabLoaded(object vm)
+        {
+            if (vm is AttachmentsViewModel)
+            {
+                attachmentsViewModel.Init(id);
+                isAttachmentsTabActive = true;
+            }
+            else
+            {
+                isAttachmentsTabActive = false;
+            }
+
+            RaisePropertyChanged(() => IsEditor);
         }
     }
 }

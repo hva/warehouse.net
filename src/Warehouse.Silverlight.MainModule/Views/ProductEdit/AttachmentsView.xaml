@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="LightBlue" Height="100">
+    <Grid Background="LightBlue">
 
     </Grid>
 </UserControl>

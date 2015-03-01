@@ -2,15 +2,8 @@
 {
     public class AttachmentsViewModel
     {
-        public AttachmentsViewModel()
+        public void Init(string productId)
         {
-            
         }
-
-        public void Init()
-        {
-            
-        }
-
     }
 }

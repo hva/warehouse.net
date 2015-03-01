@@ -39,7 +39,7 @@ namespace Warehouse.Silverlight.Controls.Behaviors
             var tab = AssociatedObject.SelectedItem as TabItem;
             if (tab != null)
             {
-                var context = tab.DataContext;
+                var context = tab.Content;
                 if (Command.CanExecute(context))
                 {
                     Command.Execute(context);

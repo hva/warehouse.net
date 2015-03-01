@@ -180,8 +180,12 @@
 
                 </StackPanel>
             </sdk:TabItem>
-            <sdk:TabItem Header="Сертификаты" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
-                <productEdit:AttachmentsView Width="370" Height="417" />
+            <sdk:TabItem Header="Сертификаты" Content="{Binding AttachmentsContext}" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <productEdit:AttachmentsView Width="370" Height="417" />
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
             </sdk:TabItem>
         </sdk:TabControl>
 
