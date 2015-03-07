@@ -1,13 +1,18 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Warehouse.Silverlight.Data.Products;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 {
     public class AttachmentsViewModel
     {
-        public AttachmentsViewModel()
+        private readonly IProductsRepository repository;
+
+        public AttachmentsViewModel(IProductsRepository repository)
         {
+            this.repository = repository;
+
             BrowseCommand = new DelegateCommand(Browse);
         }
 
@@ -17,7 +22,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 
         public ICommand BrowseCommand { get; private set; }
 
-        private void Browse()
+        private async void Browse()
         {
             var dlg = new OpenFileDialog
             {
@@ -29,10 +34,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             {
                 //UploadFile(dlg.File.Name, dlg.File.OpenRead());
                 //StatusText.Text = dlg.File.Name;
-            }
-            else
-            {
-                //StatusText.Text = "No file selected...";
+                var task = await repository.AddFile(dlg.File.OpenRead());
+                if (task.Succeed)
+                {
+                    
+                }
             }
         }
     }

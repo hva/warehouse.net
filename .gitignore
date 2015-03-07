@@ -6,3 +6,4 @@ packages
 *.xap
 *.mdf
 *.ldf
+App_Data
