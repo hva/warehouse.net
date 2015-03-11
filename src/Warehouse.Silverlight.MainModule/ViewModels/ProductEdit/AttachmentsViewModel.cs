@@ -7,6 +7,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 {
     public class AttachmentsViewModel
     {
+
+        private string productId;
         private readonly IProductsRepository repository;
 
         public AttachmentsViewModel(IProductsRepository repository)
@@ -16,8 +18,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             BrowseCommand = new DelegateCommand(Browse);
         }
 
-        public void Init(string productId)
+        public void Init(string _productId)
         {
+            productId = _productId;
         }
 
         public ICommand BrowseCommand { get; private set; }
@@ -34,7 +37,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             {
                 //UploadFile(dlg.File.Name, dlg.File.OpenRead());
                 //StatusText.Text = dlg.File.Name;
-                var task = await repository.AddFile(dlg.File.OpenRead());
+                var task = await repository.AddFile(productId, dlg.File.OpenRead());
                 if (task.Succeed)
                 {
                     

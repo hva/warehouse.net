@@ -10,6 +10,6 @@ namespace Warehouse.Silverlight.Data.Products
     {
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
         Task<AsyncResult> Delete(List<string> ids);
-        Task<AsyncResult> AddFile(Stream stream);
+        Task<AsyncResult> AddFile(string id, Stream stream);
     }
 }

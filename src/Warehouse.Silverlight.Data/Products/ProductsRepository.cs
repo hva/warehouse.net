@@ -60,7 +60,7 @@ namespace Warehouse.Silverlight.Data.Products
             return new AsyncResult { Succeed = succeed };
         }
 
-        public async Task<AsyncResult> AddFile(Stream stream)
+        public async Task<AsyncResult> AddFile(string id, Stream stream)
         {
             var succeed = false;
             var token = authStore.LoadToken();
@@ -70,7 +70,8 @@ namespace Warehouse.Silverlight.Data.Products
             {
                 multipart.Add(content, "file", "filename.jpg");
 
-                var uri = new Uri("api/products/file", UriKind.Relative);
+                var uriString = string.Concat("api/files/?productId=", id);
+                var uri = new Uri(uriString, UriKind.Relative);
                 var resp = await client.PostAsync(uri, multipart);
                 if (resp.StatusCode == HttpStatusCode.Created)
                 {

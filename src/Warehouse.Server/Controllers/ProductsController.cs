@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
@@ -110,35 +107,5 @@ namespace Warehouse.Server.Controllers
             bulk.Execute();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-
-        [Route("api/products/file")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddFile()
-        {
-            if (!Request.Content.IsMimeMultipartContent())
-            {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            }
-
-            string root = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
-
-            if (!Directory.Exists(root))
-            {
-                Directory.CreateDirectory(root);
-            }
-
-            var provider = new MultipartFormDataStreamProvider(root);
-
-            await Request.Content.ReadAsMultipartAsync(provider);
-
-            foreach (var fileData in provider.FileData)
-            {
-                var clientName = fileData.Headers.ContentDisposition.FileName;
-                var serverName = fileData.LocalFileName;
-            }
-
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
-        }
-
     }
 }
