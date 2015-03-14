@@ -68,7 +68,7 @@ namespace Warehouse.Silverlight.Data.Products
             using (var multipart = new MultipartFormDataContent())
             using (var content = new StreamContent(stream))
             {
-                multipart.Add(content, "file", "filename.jpg");
+                multipart.Add(content, "image/jpeg", "filename.jpg");
 
                 var uriString = string.Concat("api/files/?productId=", id);
                 var uri = new Uri(uriString, UriKind.Relative);

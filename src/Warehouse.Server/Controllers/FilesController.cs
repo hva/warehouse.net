@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
+using MongoDB.Driver.GridFS;
 using Warehouse.Server.Data;
 using Warehouse.Server.Models;
 
@@ -20,6 +23,27 @@ namespace Warehouse.Server.Controllers
         public FilesController(IMongoContext context)
         {
             this.context = context;
+        }
+
+        public HttpResponseMessage Get(string id)
+        {
+            ObjectId fileId;
+            if (!ObjectId.TryParse(id, out fileId))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var file = context.Database.GridFS.FindOneById(fileId);
+            if (file == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            var stream = file.OpenRead();
+            var resp = Request.CreateResponse();
+            resp.Content = new StreamContent(stream);
+            resp.Content.Headers.ContentType = new MediaTypeHeaderValue(MediaTypeNames.Image.Jpeg);
+            return resp;
         }
 
         public async Task<HttpResponseMessage> Post(string productId)
@@ -43,25 +67,27 @@ namespace Warehouse.Server.Controllers
 
             if (fileData != null)
             {
-                var serverFileName = fileData.LocalFileName;
-                var clientFileName = fileData.Headers.ContentDisposition.FileName;
+                var file = fileData.LocalFileName;
+                var remoteFileName = fileData.Headers.ContentDisposition.FileName;
+                var contentType = fileData.Headers.ContentDisposition.Name;
 
-                var fileId = Upload(serverFileName, clientFileName);
+                var fileId = Upload(file, remoteFileName, contentType);
 
                 if (AddFileToProduct(fileId, productId))
                 {
-                    File.Delete(serverFileName);
+                    File.Delete(file);
                     return Request.CreateResponse(HttpStatusCode.Created);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        private string Upload(string serverFileName, string clientFileName)
+        private string Upload(string file, string remoteFileName, string contentType)
         {
-            using (var fs = new FileStream(serverFileName, FileMode.Open))
+            using (var fs = new FileStream(file, FileMode.Open))
             {
-                var info = context.Database.GridFS.Upload(fs, clientFileName);
+                var options = new MongoGridFSCreateOptions { ContentType = contentType };
+                var info = context.Database.GridFS.Upload(fs, remoteFileName, options);
                 return info.Id.ToString();
             }
         }
