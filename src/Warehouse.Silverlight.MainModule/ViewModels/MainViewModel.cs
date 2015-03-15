@@ -155,7 +155,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async Task LoadData()
         {
-            var task = await service.GetProductsAsync();
+            var task = await productsRepository.GetAsync();
             if (task.Succeed)
             {
                 items.AddRange(task.Result);

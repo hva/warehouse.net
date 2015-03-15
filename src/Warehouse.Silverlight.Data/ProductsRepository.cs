@@ -22,6 +22,17 @@ namespace Warehouse.Silverlight.Data
             this.authStore = authStore;
         }
 
+        public async Task<AsyncResult<Product[]>> GetAsync()
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var str = await client.GetStringAsync(new Uri("api/products", UriKind.Relative));
+                var res = JsonConvert.DeserializeObject<Product[]>(str);
+                return new AsyncResult<Product[]> { Result = res, Succeed = true };
+            }
+        }
+
         public async Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices)
         {
             var succeed = false;

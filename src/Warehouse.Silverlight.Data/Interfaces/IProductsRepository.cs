@@ -7,6 +7,7 @@ namespace Warehouse.Silverlight.Data.Interfaces
 {
     public interface IProductsRepository
     {
+        Task<AsyncResult<Product[]>> GetAsync();
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
         Task<AsyncResult> Delete(List<string> ids);
     }
