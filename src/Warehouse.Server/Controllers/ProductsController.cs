@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -112,7 +111,7 @@ namespace Warehouse.Server.Controllers
 
         [Route("api/products/{id}/files")]
         [HttpPost]
-        public HttpResponseMessage UpdatePrice(string id, FormDataCollection form)
+        public HttpResponseMessage AttachFile(string id, FormDataCollection form)
         {
             var fileId = form.Get("fileId");
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
@@ -120,6 +119,19 @@ namespace Warehouse.Server.Controllers
             var res = context.Products.Update(query, update);
             var code = res.Ok ? HttpStatusCode.Created : HttpStatusCode.InternalServerError;
             return Request.CreateResponse(code);
+        }
+
+        [Route("api/products/{id}/files")]
+        [HttpGet]
+        [AllowAnonymous]
+        public HttpResponseMessage GetFiles(string id)
+        {
+            var productId = new ObjectId(id);
+            var product = context.Products.FindOneById(productId);
+            var q = Query.In("_id", new BsonArray(product.Files));
+            var files = context.Database.GridFS.Find(q);
+            var data = files.Select(x => new FileInfo { Id = x.Id.ToString() });
+            return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }
 }
