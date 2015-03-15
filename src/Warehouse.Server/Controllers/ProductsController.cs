@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
@@ -106,6 +108,18 @@ namespace Warehouse.Server.Controllers
             }
             bulk.Execute();
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [Route("api/products/{id}/files")]
+        [HttpPost]
+        public HttpResponseMessage UpdatePrice(string id, FormDataCollection form)
+        {
+            var fileId = form.Get("fileId");
+            var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
+            var update = Update<Product>.AddToSet(p => p.Files, new ObjectId(fileId));
+            var res = context.Products.Update(query, update);
+            var code = res.Ok ? HttpStatusCode.Created : HttpStatusCode.InternalServerError;
+            return Request.CreateResponse(code);
         }
     }
 }

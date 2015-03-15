@@ -90,12 +90,5 @@ namespace Warehouse.Server.Controllers
                 return info.Id.ToString();
             }
         }
-        //private bool AddFileToProduct(string fileId, string productId)
-        //{
-        //    var query = Query<Product>.EQ(p => p.Id, new ObjectId(productId));
-        //    var update = Update<Product>.AddToSet(p => p.Files, new ObjectId(fileId));
-        //    var res = context.Products.Update(query, update);
-        //    return res.Ok;
-        //}
     }
 }

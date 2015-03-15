@@ -114,5 +114,25 @@ namespace Warehouse.Silverlight.Data
             }
             return new AsyncResult { Succeed = succeed };
         }
+
+        public async Task<AsyncResult> AttachFile(string productId, string fileId)
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var uriString = string.Format("api/products/{0}/files", productId);
+                var uri = new Uri(uriString, UriKind.Relative);
+                var data = new Dictionary<string, string> { {"fileId", fileId} };
+                using (var content = new FormUrlEncodedContent(data))
+                {
+                    var resp = await client.PostAsync(uri, content);
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        return new AsyncResult { Succeed = true };
+                    }
+                }
+            }
+            return new AsyncResult { Succeed = false };
+        }
     }
 }

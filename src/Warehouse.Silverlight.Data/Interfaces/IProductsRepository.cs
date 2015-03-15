@@ -12,5 +12,6 @@ namespace Warehouse.Silverlight.Data.Interfaces
         Task<AsyncResult<string>> SaveAsync(Product product);
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
         Task<AsyncResult> Delete(List<string> ids);
+        Task<AsyncResult> AttachFile(string productId, string fileId);
     }
 }

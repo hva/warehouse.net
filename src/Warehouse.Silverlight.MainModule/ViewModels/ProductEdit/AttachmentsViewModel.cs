@@ -9,10 +9,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
     {
         private string productId;
         private readonly IFilesRepository filesRepository;
+        private readonly IProductsRepository productsRepository;
 
-        public AttachmentsViewModel(IFilesRepository filesRepository)
+        public AttachmentsViewModel(IFilesRepository filesRepository, IProductsRepository productsRepository)
         {
             this.filesRepository = filesRepository;
+            this.productsRepository = productsRepository;
 
             BrowseCommand = new DelegateCommand(Browse);
         }
@@ -38,7 +40,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
                 var task = await filesRepository.Create(file.OpenRead(), file.Name, "image/jpeg");
                 if (task.Succeed)
                 {
-                    
+                    var fileId = task.Result;
+                    var task2 = await productsRepository.AttachFile(productId, fileId);
+                    if (task2.Succeed)
+                    {
+                        
+                    }
                 }
             }
         }
