@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using MongoDB.Bson;
-using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using Warehouse.Server.Data;
-using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Controllers
 {
@@ -46,7 +44,7 @@ namespace Warehouse.Server.Controllers
             return resp;
         }
 
-        public async Task<HttpResponseMessage> Post(string productId)
+        public async Task<HttpResponseMessage> Post()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -73,11 +71,12 @@ namespace Warehouse.Server.Controllers
 
                 var fileId = Upload(file, remoteFileName, contentType);
 
-                if (AddFileToProduct(fileId, productId))
+                File.Delete(file);
+
+                return new HttpResponseMessage(HttpStatusCode.Created)
                 {
-                    File.Delete(file);
-                    return Request.CreateResponse(HttpStatusCode.Created);
-                }
+                    Content = new StringContent(fileId)
+                };
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
@@ -91,13 +90,12 @@ namespace Warehouse.Server.Controllers
                 return info.Id.ToString();
             }
         }
-
-        private bool AddFileToProduct(string fileId, string productId)
-        {
-            var query = Query<Product>.EQ(p => p.Id, new ObjectId(productId));
-            var update = Update<Product>.AddToSet(p => p.Files, new ObjectId(fileId));
-            var res = context.Products.Update(query, update);
-            return res.Ok;
-        }
+        //private bool AddFileToProduct(string fileId, string productId)
+        //{
+        //    var query = Query<Product>.EQ(p => p.Id, new ObjectId(productId));
+        //    var update = Update<Product>.AddToSet(p => p.Files, new ObjectId(fileId));
+        //    var res = context.Products.Update(query, update);
+        //    return res.Ok;
+        //}
     }
 }
