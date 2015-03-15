@@ -26,18 +26,6 @@ namespace Warehouse.Silverlight.Data
             this.navigationService = navigationService;
         }
 
-        public async Task<AsyncResult<Product>> GetProductAsync(string id)
-        {
-            if (!EnsureValidToken()) return new AsyncResult<Product>();
-            using (var client = new BearerHttpClient(token.AccessToken))
-            {
-                var uri = new Uri(string.Concat("api/products/", id), UriKind.Relative);
-                var str = await client.GetStringAsync(uri);
-                var res = JsonConvert.DeserializeObject<Product>(str);
-                return new AsyncResult<Product> { Result = res, Succeed = true };
-            }
-        }
-
         public async Task<AsyncResult<string>> SaveProductAsync(Product product)
         {
             if (!EnsureValidToken()) return new AsyncResult<string>();

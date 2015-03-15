@@ -23,7 +23,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class MainViewModel : NotificationObject, INavigationAware, IRegionMemberLifetime
     {
-        private readonly IDataService service;
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
@@ -34,14 +33,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
         private IList selectedItems;
-        private DelegateCommand changePriceCommand;
-        private DelegateCommand deleteCommand;
+        private readonly DelegateCommand changePriceCommand;
+        private readonly DelegateCommand deleteCommand;
         private double totalWeight;
 
-        public MainViewModel(IDataService service, IEventAggregator eventAggregator, ISignalRClient signalRClient,
+        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient,
             IAuthStore authStore, IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory)
         {
-            this.service = service;
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
@@ -102,7 +100,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
-            var task = await service.GetProductAsync(e.ProductId);
+            var task = await productsRepository.GetAsync(e.ProductId);
             if (task.Succeed)
             {
                 var current = task.Result;
