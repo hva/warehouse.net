@@ -54,7 +54,6 @@ namespace Warehouse.Silverlight
 
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
 
-            Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IProductsRepository, ProductsRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
