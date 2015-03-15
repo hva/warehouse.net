@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
-using Warehouse.Silverlight.Data.Users;
+using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 

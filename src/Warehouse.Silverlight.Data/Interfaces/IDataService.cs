@@ -2,7 +2,7 @@
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 
-namespace Warehouse.Silverlight.Data
+namespace Warehouse.Silverlight.Data.Interfaces
 {
     public interface IDataService
     {

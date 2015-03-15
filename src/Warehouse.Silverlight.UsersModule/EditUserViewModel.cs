@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Warehouse.Silverlight.Controls.Converters;
-using Warehouse.Silverlight.Data.Users;
+using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
 

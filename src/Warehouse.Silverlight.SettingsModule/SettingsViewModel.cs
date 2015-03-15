@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Silverlight.Auth;
-using Warehouse.Silverlight.Data.Users;
+using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
 
 namespace Warehouse.Silverlight.SettingsModule

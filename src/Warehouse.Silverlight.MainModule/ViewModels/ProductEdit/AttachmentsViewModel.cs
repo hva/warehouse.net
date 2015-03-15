@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Warehouse.Silverlight.Data.Products;
+using Warehouse.Silverlight.Data.Interfaces;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 {
