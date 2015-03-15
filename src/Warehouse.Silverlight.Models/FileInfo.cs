@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Server.Models
+﻿namespace Warehouse.Silverlight.Models
 {
     public class FileInfo
     {

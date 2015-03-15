@@ -134,5 +134,18 @@ namespace Warehouse.Silverlight.Data
             }
             return new AsyncResult { Succeed = false };
         }
+
+        public async Task<AsyncResult<FileInfo[]>> GetFiles(string productId)
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var uriString = string.Format("api/products/{0}/files", productId);
+                var uri = new Uri(uriString, UriKind.Relative);
+                var str = await client.GetStringAsync(uri);
+                var res = JsonConvert.DeserializeObject<FileInfo[]>(str);
+                return new AsyncResult<FileInfo[]> { Result = res, Succeed = true };
+            }
+        }
     }
 }

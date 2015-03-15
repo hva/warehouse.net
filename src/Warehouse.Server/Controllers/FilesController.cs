@@ -23,6 +23,7 @@ namespace Warehouse.Server.Controllers
             this.context = context;
         }
 
+        [AllowAnonymous]
         public HttpResponseMessage Get(string id)
         {
             ObjectId fileId;

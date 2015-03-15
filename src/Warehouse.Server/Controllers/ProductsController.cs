@@ -123,14 +123,17 @@ namespace Warehouse.Server.Controllers
 
         [Route("api/products/{id}/files")]
         [HttpGet]
-        [AllowAnonymous]
         public HttpResponseMessage GetFiles(string id)
         {
             var productId = new ObjectId(id);
             var product = context.Products.FindOneById(productId);
             var q = Query.In("_id", new BsonArray(product.Files));
             var files = context.Database.GridFS.Find(q);
-            var data = files.Select(x => new FileInfo { Id = x.Id.ToString() });
+            var data = files.Select(x => new FileInfo
+            {
+                Id = x.Id.ToString(),
+                Name = x.Name,
+            });
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }
