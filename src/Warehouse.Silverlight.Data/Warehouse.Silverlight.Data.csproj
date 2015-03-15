@@ -90,7 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataService.cs" />
+    <Compile Include="FilesRepository.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
+    <Compile Include="Interfaces\IFilesRepository.cs" />
     <Compile Include="Interfaces\IProductsRepository.cs" />
     <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

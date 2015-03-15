@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -54,27 +53,6 @@ namespace Warehouse.Silverlight.Data
                 var uri = new Uri(uriString, UriKind.Relative);
                 var resp = await client.DeleteAsync(uri);
                 if (resp.StatusCode == HttpStatusCode.OK)
-                {
-                    succeed = true;
-                }
-            }
-            return new AsyncResult { Succeed = succeed };
-        }
-
-        public async Task<AsyncResult> AddFile(string id, Stream stream)
-        {
-            var succeed = false;
-            var token = authStore.LoadToken();
-            using (var client = new BearerHttpClient(token.AccessToken))
-            using (var multipart = new MultipartFormDataContent())
-            using (var content = new StreamContent(stream))
-            {
-                multipart.Add(content, "image/jpeg", "filename.jpg");
-
-                var uriString = string.Concat("api/files/?productId=", id);
-                var uri = new Uri(uriString, UriKind.Relative);
-                var resp = await client.PostAsync(uri, multipart);
-                if (resp.StatusCode == HttpStatusCode.Created)
                 {
                     succeed = true;
                 }
