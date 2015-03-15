@@ -16,7 +16,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ProductEditViewModel : InteractionRequestValidationObject
     {
-        private readonly IDataService dataService;
+        private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
         private readonly IAuthStore authStore;
         private readonly AttachmentsViewModel attachmentsViewModel;
@@ -39,9 +39,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private bool isAttachmentsTabActive;
 
 
-        public ProductEditViewModel(IDataService dataService, IEventAggregator eventAggregator, IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
+        public ProductEditViewModel(IProductsRepository repository, IEventAggregator eventAggregator, IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
         {
-            this.dataService = dataService;
+            this.repository = repository;
             this.eventAggregator = eventAggregator;
             this.authStore = authStore;
             this.attachmentsViewModel = attachmentsViewModel;
@@ -480,7 +480,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var changed = PropsToProduct();
 
             IsBusy = true;
-            var task = await dataService.SaveProductAsync(changed);
+            var task = await repository.SaveAsync(changed);
             IsBusy = false;
             if (task.Succeed)
             {

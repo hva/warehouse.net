@@ -6,6 +6,5 @@ namespace Warehouse.Silverlight.Data.Interfaces
 {
     public interface IDataService
     {
-        Task<AsyncResult<string>> SaveProductAsync(Product product);
     }
 }
