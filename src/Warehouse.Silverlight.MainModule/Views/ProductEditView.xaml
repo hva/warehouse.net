@@ -46,7 +46,7 @@
                 <behaviors:TabControlBehavior Command="{Binding TabLoadedCommand}" />
             </i:Interaction.Behaviors>
 
-            <sdk:TabItem Header="Параметры">
+            <sdk:TabItem x:Name="FirstTab" Header="Параметры">
                 <StackPanel>
 
                     <!--IsSheet-->
