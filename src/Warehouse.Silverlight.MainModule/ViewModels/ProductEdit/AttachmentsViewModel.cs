@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Interfaces;
@@ -15,9 +14,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
     public class AttachmentsViewModel : NotificationObject
     {
         private string productId;
-        private FileInfo[] files;
-        private IList selectedItems;
-        private Image image;
+        private object[] selectedItems;
+        private Uri image;
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
 
@@ -27,6 +25,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             this.productsRepository = productsRepository;
 
             BrowseCommand = new DelegateCommand(Browse);
+            Files = new ObservableCollection<FileInfo>();
         }
 
         public async Task Init(string _productId)
@@ -38,13 +37,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 
         public ICommand BrowseCommand { get; private set; }
 
-        public FileInfo[] Files
-        {
-            get { return files; }
-            set { files = value; RaisePropertyChanged(() => Files); }
-        }
+        public ObservableCollection<FileInfo> Files { get; private set; }
 
-        public IList SelectedItems
+        public object[] SelectedItems
         {
             get { return selectedItems; }
             set
@@ -54,7 +49,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             }
         }
 
-        public Image Image
+        public Uri Image
         {
             get { return image; }
             set { image = value; RaisePropertyChanged(() => Image); }
@@ -89,20 +84,19 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             var task = await productsRepository.GetFiles(productId);
             if (task.Succeed)
             {
-                Files = task.Result;
+                Files.AddRange(task.Result);
             }
         }
 
         private void Preview()
         {
-            if (selectedItems != null && selectedItems.Count > 0)
+            if (selectedItems != null && selectedItems.Length > 0)
             {
                 var fileInfo = selectedItems[0] as FileInfo;
                 if (fileInfo != null)
                 {
                     var uriString = string.Concat(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString(), "api/files/", fileInfo.Id);
-                    var uri = new Uri(uriString, UriKind.Absolute);
-                    Image = new Image { Source = new BitmapImage(uri)};
+                    Image = new Uri(uriString, UriKind.Absolute);
                 }
             }
         }

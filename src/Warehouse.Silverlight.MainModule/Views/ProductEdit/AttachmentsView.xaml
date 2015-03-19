@@ -21,9 +21,8 @@
 
         <Button Content="Добавить" HorizontalAlignment="Right" Command="{Binding BrowseCommand}" />
 
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Files}" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Extended">
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Files}" IsReadOnly="True" AutoGenerateColumns="False">
             <i:Interaction.Behaviors>
-                <!--<behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />-->
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
 
@@ -32,6 +31,10 @@
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
 
-        <ContentControl Grid.Row="2" Content="{Binding Image}" />
+        <Image Grid.Row="2">
+            <Image.Source>
+                <BitmapImage UriSource="{Binding Image}" />
+            </Image.Source>
+        </Image>
     </Grid>
 </UserControl>

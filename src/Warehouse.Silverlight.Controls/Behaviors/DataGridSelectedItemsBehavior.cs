@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
@@ -34,7 +35,8 @@ namespace Warehouse.Silverlight.Controls.Behaviors
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedItems = AssociatedObject.SelectedItems;
+            var array = AssociatedObject.SelectedItems.OfType<object>().ToArray();
+            SelectedItems = array;
         }
     }
 }
