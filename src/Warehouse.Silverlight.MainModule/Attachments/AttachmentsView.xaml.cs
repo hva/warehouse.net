@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Windows.Markup;
 
-namespace Warehouse.Silverlight.MainModule.Views.ProductEdit
+namespace Warehouse.Silverlight.MainModule.Attachments
 {
     public partial class AttachmentsView
     {

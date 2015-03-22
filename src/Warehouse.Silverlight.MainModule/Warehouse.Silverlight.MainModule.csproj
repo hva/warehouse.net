@@ -129,7 +129,7 @@
     <Compile Include="ViewModels\ChangePriceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductEditViewModel.cs" />
-    <Compile Include="ViewModels\ProductEdit\AttachmentsViewModel.cs" />
+    <Compile Include="Attachments\AttachmentsViewModel.cs" />
     <Compile Include="Views\ChangePriceWindow.xaml.cs">
       <DependentUpon>ChangePriceWindow.xaml</DependentUpon>
     </Compile>
@@ -139,7 +139,7 @@
     <Compile Include="Views\ProductEditView.xaml.cs">
       <DependentUpon>ProductEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductEdit\AttachmentsView.xaml.cs">
+    <Compile Include="Attachments\AttachmentsView.xaml.cs">
       <DependentUpon>AttachmentsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -159,7 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductEdit\AttachmentsView.xaml">
+    <Page Include="Attachments\AttachmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

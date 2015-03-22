@@ -13,7 +13,7 @@
     xmlns:models="clr-namespace:Warehouse.Silverlight.MainModule.Models"
     xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
-    xmlns:productEdit="clr-namespace:Warehouse.Silverlight.MainModule.Views.ProductEdit"
+    xmlns:attachments="clr-namespace:Warehouse.Silverlight.MainModule.Attachments"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
     Title="{Binding Title2}"
@@ -183,7 +183,7 @@
             <sdk:TabItem Header="Сертификаты" Content="{Binding AttachmentsContext}" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
-                        <productEdit:AttachmentsView Width="370" Height="417" />
+                        <attachments:AttachmentsView Width="370" Height="417" />
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
             </sdk:TabItem>

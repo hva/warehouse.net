@@ -9,7 +9,7 @@ using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
-using Warehouse.Silverlight.MainModule.ViewModels.ProductEdit;
+using Warehouse.Silverlight.MainModule.Attachments;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels

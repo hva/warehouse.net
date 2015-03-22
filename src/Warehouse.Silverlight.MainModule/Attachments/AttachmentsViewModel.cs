@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Models;
 
-namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
+namespace Warehouse.Silverlight.MainModule.Attachments
 {
     public class AttachmentsViewModel : NotificationObject
     {
@@ -23,6 +23,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             this.productsRepository = productsRepository;
 
             BrowseCommand = new DelegateCommand(Browse);
+            OpenFileCommand = new DelegateCommand<FileDescription>(OpenFile);
             Files = new ObservableCollection<FileDescription>();
         }
 
@@ -34,6 +35,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
         }
 
         public ICommand BrowseCommand { get; private set; }
+        public ICommand OpenFileCommand { get; private set; }
 
         public ObservableCollection<FileDescription> Files { get; private set; }
 
@@ -70,6 +72,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
                 var files = task.Result.OrderByDescending(x => x.UploadDate);
                 Files.AddRange(files);
             }
+        }
+
+        private void OpenFile(FileDescription file)
+        {
+            
         }
     }
 }
