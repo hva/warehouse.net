@@ -7,6 +7,8 @@
 
     <Application.Resources>
 
+        <SolidColorBrush x:Key="SecondaryTxt" Color="Gray" />
+
         <!--Button-->
         <Style x:Key="Button_Default" TargetType="Button">
             <Setter Property="Height" Value="23" />
@@ -33,6 +35,10 @@
             <Setter Property="Width" Value="150" />
         </Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}"/>
+        
+        <Style x:Name="ContentBigger" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
 
         <!--PasswordBox-->
         <Style TargetType="PasswordBox">
@@ -201,5 +207,9 @@
             <Setter Property="Margin" Value="85,0,0,0" />
         </Style>
 
+        <!--ListBox-->
+        <Style TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
     </Application.Resources>
 </Application>

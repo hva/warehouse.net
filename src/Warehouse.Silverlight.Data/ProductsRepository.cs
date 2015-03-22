@@ -126,7 +126,7 @@ namespace Warehouse.Silverlight.Data
                 using (var content = new FormUrlEncodedContent(data))
                 {
                     var resp = await client.PostAsync(uri, content);
-                    if (resp.StatusCode == HttpStatusCode.OK)
+                    if (resp.StatusCode == HttpStatusCode.Created)
                     {
                         return new AsyncResult { Succeed = true };
                     }

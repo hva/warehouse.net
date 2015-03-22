@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,8 +14,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
     public class AttachmentsViewModel : NotificationObject
     {
         private string productId;
-        private object[] selectedItems;
-        private Uri image;
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
 
@@ -38,22 +36,6 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
         public ICommand BrowseCommand { get; private set; }
 
         public ObservableCollection<FileInfo> Files { get; private set; }
-
-        public object[] SelectedItems
-        {
-            get { return selectedItems; }
-            set
-            {
-                selectedItems = value;
-                Preview();
-            }
-        }
-
-        public Uri Image
-        {
-            get { return image; }
-            set { image = value; RaisePropertyChanged(() => Image); }
-        }
 
         private async void Browse()
         {
@@ -81,23 +63,12 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 
         private async Task LoadFiles()
         {
+            Files.Clear();
             var task = await productsRepository.GetFiles(productId);
             if (task.Succeed)
             {
-                Files.AddRange(task.Result);
-            }
-        }
-
-        private void Preview()
-        {
-            if (selectedItems != null && selectedItems.Length > 0)
-            {
-                var fileInfo = selectedItems[0] as FileInfo;
-                if (fileInfo != null)
-                {
-                    var uriString = string.Concat(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString(), "api/files/", fileInfo.Id);
-                    Image = new Uri(uriString, UriKind.Absolute);
-                }
+                var files = task.Result.OrderByDescending(x => x.UploadDate);
+                Files.AddRange(files);
             }
         }
     }

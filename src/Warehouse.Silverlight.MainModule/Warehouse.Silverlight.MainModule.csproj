@@ -118,6 +118,7 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\LongToFileSizeConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="MainModule.cs" />

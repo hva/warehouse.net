@@ -5,36 +5,36 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels.ProductEdit"
-    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     xmlns:models="clr-namespace:Warehouse.Silverlight.Models;assembly=Warehouse.Silverlight.Models"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
+    xmlns:converters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:AttachmentsViewModel}">
+
+    <UserControl.Resources>
+        <converters:LongToFileSizeConverter x:Key="LongToFileSizeConverter" />
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="200" />
         </Grid.RowDefinitions>
 
         <Button Content="Добавить" HorizontalAlignment="Right" Command="{Binding BrowseCommand}" />
 
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Files}" IsReadOnly="True" AutoGenerateColumns="False">
-            <i:Interaction.Behaviors>
-                <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Files}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel d:DataContext="{d:DesignInstance Type=models:FileInfo}" Margin="5">
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource ContentBigger}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding UploadDate, StringFormat='g'}" Foreground="{StaticResource SecondaryTxt}" />
+                            <TextBlock Text="{Binding Size, Converter={StaticResource LongToFileSizeConverter}, StringFormat=', {0}'}" Foreground="{StaticResource SecondaryTxt}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-            <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Имя файла" Binding="{Binding Name}" d:DataContext="{d:DesignInstance Type=models:FileInfo}" />
-            </sdk:DataGrid.Columns>
-        </sdk:DataGrid>
-
-        <Image Grid.Row="2">
-            <Image.Source>
-                <BitmapImage UriSource="{Binding Image}" />
-            </Image.Source>
-        </Image>
     </Grid>
 </UserControl>

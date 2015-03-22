@@ -133,6 +133,8 @@ namespace Warehouse.Server.Controllers
             {
                 Id = x.Id.ToString(),
                 Name = x.Name,
+                Size = x.Length,
+                UploadDate = x.UploadDate,
             });
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
