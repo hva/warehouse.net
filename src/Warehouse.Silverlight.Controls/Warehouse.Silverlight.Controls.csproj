@@ -67,7 +67,8 @@
     <Compile Include="Behaviors\DataGridRowBackgroundBehavior.cs" />
     <Compile Include="Behaviors\DoubleClick\DoubleClickBehavior.cs" />
     <Compile Include="Behaviors\DoubleClick\DataGridRowDoubleClickBehavior.cs" />
-    <Compile Include="Behaviors\DataGridSelectedItemsBehavior.cs" />
+    <Compile Include="Behaviors\SelectedItems\ListBoxSelectedItemsBehavior.cs" />
+    <Compile Include="Behaviors\SelectedItems\DataGridSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\DoubleClick\ListBoxDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\EnterPressedBehavior.cs" />
     <Compile Include="Behaviors\TabControlBehavior.cs" />

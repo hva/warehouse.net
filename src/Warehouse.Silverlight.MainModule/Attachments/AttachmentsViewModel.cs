@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -18,6 +19,8 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
         private readonly InteractionRequest<AttachmentDetailViewModel> openDetailRequest;
+        private readonly DelegateCommand deleteCommand;
+        private IList selectedItems;
 
         public AttachmentsViewModel(IFilesRepository filesRepository, IProductsRepository productsRepository)
         {
@@ -28,6 +31,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             OpenFileCommand = new DelegateCommand<FileDescription>(OpenFile);
             Files = new ObservableCollection<FileDescription>();
             openDetailRequest = new InteractionRequest<AttachmentDetailViewModel>();
+            deleteCommand = new DelegateCommand(Delete, CanDelete);
         }
 
         public async Task Init(string _productId)
@@ -39,7 +43,19 @@ namespace Warehouse.Silverlight.MainModule.Attachments
 
         public ICommand BrowseCommand { get; private set; }
         public ICommand OpenFileCommand { get; private set; }
+        public ICommand SelectionChangedCommand { get; private set; }
+        public ICommand DeleteCommand { get { return deleteCommand; } }
         public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
+
+        public IList SelectedItems
+        {
+            get { return selectedItems; }
+            set
+            {
+                selectedItems = value;
+                deleteCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public ObservableCollection<FileDescription> Files { get; private set; }
 
@@ -82,5 +98,16 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         {
             openDetailRequest.Raise(new AttachmentDetailViewModel(file));
         }
+
+        private bool CanDelete()
+        {
+            return selectedItems != null && selectedItems.Count > 0;
+        }
+
+        private void Delete()
+        {
+            
+        }
+
     }
 }

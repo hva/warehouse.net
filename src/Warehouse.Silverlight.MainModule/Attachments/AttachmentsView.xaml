@@ -36,9 +36,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Content="Добавить" HorizontalAlignment="Left" Command="{Binding BrowseCommand}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="Добавить" Command="{Binding BrowseCommand}" />
+            <Rectangle Width="10" />
+            <Button Content="Удалить" Command="{Binding DeleteCommand}" />
+        </StackPanel>
 
-        <ListBox Grid.Row="2" ItemsSource="{Binding Files}">
+        <ListBox Grid.Row="2" ItemsSource="{Binding Files}" SelectionMode="Extended">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Background="Transparent" d:DataContext="{d:DesignInstance Type=models:FileDescription}">
@@ -59,6 +63,7 @@
 
             <i:Interaction.Behaviors>
                 <behaviors:ListBoxDoubleClickBehavior Command="{Binding OpenFileCommand}" />
+                <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
         </ListBox>
 
