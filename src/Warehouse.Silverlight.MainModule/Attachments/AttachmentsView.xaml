@@ -32,12 +32,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Content="Добавить" HorizontalAlignment="Right" Command="{Binding BrowseCommand}" />
+        <Button Content="Добавить" HorizontalAlignment="Left" Command="{Binding BrowseCommand}" />
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Files}">
+        <ListBox Grid.Row="2" ItemsSource="{Binding Files}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Background="Transparent" d:DataContext="{d:DesignInstance Type=models:FileDescription}">

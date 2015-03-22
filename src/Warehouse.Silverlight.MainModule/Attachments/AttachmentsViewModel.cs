@@ -80,7 +80,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
 
         private void OpenFile(FileDescription file)
         {
-            openDetailRequest.Raise(new AttachmentDetailViewModel());
+            openDetailRequest.Raise(new AttachmentDetailViewModel(file));
         }
     }
 }

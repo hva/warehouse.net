@@ -6,10 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule.Attachments"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     Width="Auto" Height="Auto"
-    Title="{Binding Title2}"
-    d:DataContext="{d:DesignInstance Type=local:AttachmentDetailViewModel}">
-    <StackPanel>
+    Title="{Binding Title}"
+    d:DataContext="{d:DesignInstance Type=local:AttachmentDetailViewModel}"
+    x:Name="Window">
+
+    <i:Interaction.Behaviors>
+        <behaviors:ChildWindowBehavior />
+    </i:Interaction.Behaviors>
+
+    <StackPanel MaxWidth="400" MaxHeight="600">
+        <Button Content="Печать" HorizontalAlignment="Left" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=Window}" />
+
+        <Rectangle Height="5" />
+
+        <Image Source="{Binding Uri}" />
     </StackPanel>
 </controls:ChildWindow>
