@@ -25,7 +25,7 @@
         <ListBox Grid.Row="1" ItemsSource="{Binding Files}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel d:DataContext="{d:DesignInstance Type=models:FileInfo}" Margin="5">
+                    <StackPanel d:DataContext="{d:DesignInstance Type=models:FileDescription}" Margin="5">
                         <TextBlock Text="{Binding Name}" Style="{StaticResource ContentBigger}" />
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding UploadDate, StringFormat='g'}" Foreground="{StaticResource SecondaryTxt}" />

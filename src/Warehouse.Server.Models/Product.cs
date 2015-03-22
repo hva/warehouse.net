@@ -54,9 +54,5 @@ namespace Warehouse.Server.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         [BsonElement("firma")]
         public string Firma { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [BsonElement("files")]
-        public ObjectId[] Files { get; set; }
     }
 }

@@ -114,11 +114,24 @@ namespace Warehouse.Server.Controllers
         public HttpResponseMessage AttachFile(string id, FormDataCollection form)
         {
             var fileId = form.Get("fileId");
-            var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
-            var update = Update<Product>.AddToSet(p => p.Files, new ObjectId(fileId));
-            var res = context.Products.Update(query, update);
-            var code = res.Ok ? HttpStatusCode.Created : HttpStatusCode.InternalServerError;
-            return Request.CreateResponse(code);
+
+            var file = context.Database.GridFS.FindOneById(new ObjectId(fileId));
+            if (file == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            var meta = new FileMetadata
+            {
+                ProductIds = new HashSet<ObjectId>
+                {
+                    new ObjectId(id)
+                }
+            };
+
+            context.Database.GridFS.SetMetadata(file, meta.ToBsonDocument());
+
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [Route("api/products/{id}/files")]
@@ -126,16 +139,18 @@ namespace Warehouse.Server.Controllers
         public HttpResponseMessage GetFiles(string id)
         {
             var productId = new ObjectId(id);
-            var product = context.Products.FindOneById(productId);
-            var q = Query.In("_id", new BsonArray(product.Files));
-            var files = context.Database.GridFS.Find(q);
-            var data = files.Select(x => new FileInfo
+            var ids = new[] {productId};
+            var query = Query.In("metadata.products", new BsonArray(ids));
+            var files = context.Database.GridFS.Find(query);
+
+            var data = files.Select(x => new FileDescription
             {
                 Id = x.Id.ToString(),
                 Name = x.Name,
                 Size = x.Length,
                 UploadDate = x.UploadDate,
             });
+
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }

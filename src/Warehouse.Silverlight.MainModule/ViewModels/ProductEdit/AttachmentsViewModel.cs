@@ -23,7 +23,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
             this.productsRepository = productsRepository;
 
             BrowseCommand = new DelegateCommand(Browse);
-            Files = new ObservableCollection<FileInfo>();
+            Files = new ObservableCollection<FileDescription>();
         }
 
         public async Task Init(string _productId)
@@ -35,7 +35,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels.ProductEdit
 
         public ICommand BrowseCommand { get; private set; }
 
-        public ObservableCollection<FileInfo> Files { get; private set; }
+        public ObservableCollection<FileDescription> Files { get; private set; }
 
         private async void Browse()
         {

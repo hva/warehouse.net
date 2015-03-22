@@ -50,7 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileInfo.cs" />
+    <Compile Include="FileDescription.cs" />
+    <Compile Include="FileMetadata.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductPriceUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

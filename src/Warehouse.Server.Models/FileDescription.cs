@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Warehouse.Silverlight.Models
+namespace Warehouse.Server.Models
 {
-    public class FileInfo
+    public class FileDescription
     {
         public string Id { get; set; }
         public string Name { get; set; }

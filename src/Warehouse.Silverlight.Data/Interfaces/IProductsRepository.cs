@@ -13,6 +13,6 @@ namespace Warehouse.Silverlight.Data.Interfaces
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
         Task<AsyncResult> Delete(List<string> ids);
         Task<AsyncResult> AttachFile(string productId, string fileId);
-        Task<AsyncResult<FileInfo[]>> GetFiles(string productId);
+        Task<AsyncResult<FileDescription[]>> GetFiles(string productId);
     }
 }
