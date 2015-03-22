@@ -9,12 +9,25 @@
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule.Attachments"
+    xmlns:prism="http://www.codeplex.com/prism"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:AttachmentsViewModel}">
 
     <UserControl.Resources>
         <converters:LongToFileSizeConverter x:Key="LongToFileSizeConverter" />
     </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding OpenDetailRequest}">
+            <prism:PopupChildWindowAction>
+                <prism:PopupChildWindowAction.ChildWindow>
+                    <local:AttachmentDetailView />
+                </prism:PopupChildWindowAction.ChildWindow>
+            </prism:PopupChildWindowAction>
+        </prism:InteractionRequestTrigger>
+
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>

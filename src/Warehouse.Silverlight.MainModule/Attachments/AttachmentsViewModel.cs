@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Models;
@@ -16,6 +17,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         private string productId;
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
+        private readonly InteractionRequest<AttachmentDetailViewModel> openDetailRequest;
 
         public AttachmentsViewModel(IFilesRepository filesRepository, IProductsRepository productsRepository)
         {
@@ -25,6 +27,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             BrowseCommand = new DelegateCommand(Browse);
             OpenFileCommand = new DelegateCommand<FileDescription>(OpenFile);
             Files = new ObservableCollection<FileDescription>();
+            openDetailRequest = new InteractionRequest<AttachmentDetailViewModel>();
         }
 
         public async Task Init(string _productId)
@@ -36,6 +39,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
 
         public ICommand BrowseCommand { get; private set; }
         public ICommand OpenFileCommand { get; private set; }
+        public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
 
         public ObservableCollection<FileDescription> Files { get; private set; }
 
@@ -76,7 +80,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
 
         private void OpenFile(FileDescription file)
         {
-            
+            openDetailRequest.Raise(new AttachmentDetailViewModel());
         }
     }
 }

@@ -118,6 +118,10 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attachments\AttachmentDetailViewModel.cs" />
+    <Compile Include="Attachments\AttachmentDetailView.xaml.cs">
+      <DependentUpon>AttachmentDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
@@ -147,6 +151,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Attachments\AttachmentDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ChangePriceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
