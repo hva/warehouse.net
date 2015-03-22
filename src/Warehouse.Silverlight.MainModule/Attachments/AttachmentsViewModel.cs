@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +20,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
         private readonly InteractionRequest<AttachmentDetailViewModel> openDetailRequest;
+        private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly DelegateCommand deleteCommand;
         private IList selectedItems;
 
@@ -31,7 +33,8 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             OpenFileCommand = new DelegateCommand<FileDescription>(OpenFile);
             Files = new ObservableCollection<FileDescription>();
             openDetailRequest = new InteractionRequest<AttachmentDetailViewModel>();
-            deleteCommand = new DelegateCommand(Delete, CanDelete);
+            deleteCommand = new DelegateCommand(PromtDelete, CanDelete);
+            deleteRequest = new InteractionRequest<Confirmation>();
         }
 
         public async Task Init(string _productId)
@@ -43,9 +46,9 @@ namespace Warehouse.Silverlight.MainModule.Attachments
 
         public ICommand BrowseCommand { get; private set; }
         public ICommand OpenFileCommand { get; private set; }
-        public ICommand SelectionChangedCommand { get; private set; }
         public ICommand DeleteCommand { get { return deleteCommand; } }
         public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
+        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
 
         public IList SelectedItems
         {
@@ -104,10 +107,40 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             return selectedItems != null && selectedItems.Count > 0;
         }
 
-        private void Delete()
+        private void PromtDelete()
         {
-            
+            var sb = new StringBuilder();
+            sb.AppendLine("Следующие файлы будут удалены:");
+            foreach (var x in selectedItems.OfType<FileDescription>())
+            {
+                sb.AppendFormat("- {0}", x.Name);
+                sb.AppendLine();
+            }
+
+            var conf = new Confirmation
+            {
+                Title = "Внимание!",
+                Content = sb.ToString(),
+            };
+
+            deleteRequest.Raise(conf, Delete);
         }
 
+        private async void Delete(Confirmation conf)
+        {
+            if (conf.Confirmed)
+            {
+                var ids = selectedItems
+                    .OfType<FileDescription>()
+                    .OrderByDescending(x => x.UploadDate)
+                    .Select(x => x.Id)
+                    .ToArray();
+                var task = await productsRepository.DetachFiles(productId, ids);
+                if (task.Succeed)
+                {
+                    await LoadFiles();
+                }
+            }
+        }
     }
 }

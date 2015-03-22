@@ -14,5 +14,6 @@ namespace Warehouse.Silverlight.Data.Interfaces
         Task<AsyncResult> Delete(List<string> ids);
         Task<AsyncResult> AttachFile(string productId, string fileId);
         Task<AsyncResult<FileDescription[]>> GetFiles(string productId);
+        Task<AsyncResult> DetachFiles(string productId, string[] fileIds);
     }
 }

@@ -147,5 +147,18 @@ namespace Warehouse.Silverlight.Data
                 return new AsyncResult<FileDescription[]> { Result = res, Succeed = true };
             }
         }
+
+        public async Task<AsyncResult> DetachFiles(string productId, string[] fileIds)
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var q = string.Join(",", fileIds);
+                var uriString = string.Format("api/products/{0}/files?ids={1}", productId, q);
+                var uri = new Uri(uriString, UriKind.Relative);
+                var resp = await client.DeleteAsync(uri);
+                return new AsyncResult { Succeed = resp.StatusCode == HttpStatusCode.OK };
+            }
+        }
     }
 }

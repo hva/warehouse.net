@@ -27,6 +27,22 @@
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>
 
+        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <prism:PopupChildWindowAction>
+                <prism:PopupChildWindowAction.ChildWindow>
+                    <prism:ConfirmationChildWindow Width="300">
+                        <prism:ConfirmationChildWindow.ConfirmationTemplate>
+                            <DataTemplate>
+                                <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                                    <ContentPresenter Content="{Binding}" />
+                                </ScrollViewer>
+                            </DataTemplate>
+                        </prism:ConfirmationChildWindow.ConfirmationTemplate>
+                    </prism:ConfirmationChildWindow>
+                </prism:PopupChildWindowAction.ChildWindow>
+            </prism:PopupChildWindowAction>
+        </prism:InteractionRequestTrigger>
+
     </i:Interaction.Triggers>
 
     <Grid>

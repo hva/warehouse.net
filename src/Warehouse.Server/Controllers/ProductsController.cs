@@ -153,5 +153,25 @@ namespace Warehouse.Server.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
+
+        [Route("api/products/{id}/files")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteFiles(string ids)
+        {
+            if (ids == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var arr = ids.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            if (arr.Length > 0)
+            {
+                var objectIds = arr.Select(x => new ObjectId(x));
+                var query = Query.In("_id", new BsonArray(objectIds));
+                context.Database.GridFS.Delete(query);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
