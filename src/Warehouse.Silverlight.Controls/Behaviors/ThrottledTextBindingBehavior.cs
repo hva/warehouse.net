@@ -9,7 +9,7 @@ namespace Warehouse.Silverlight.Controls.Behaviors
 {
     public class ThrottledTextBindingBehavior : Behavior<TextBox>
     {
-        private DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(400) };
+        private readonly DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(400) };
 
         protected BindingExpression expression;
 
