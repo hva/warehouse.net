@@ -572,7 +572,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private async void OnTabLoaded(object vm)
         {
-            if (vm is AttachmentsViewModel)
+            if (vm is AttachmentsView)
             {
                 await attachmentsViewModel.Init(id);
                 isAttachmentsTabActive = true;

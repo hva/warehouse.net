@@ -180,26 +180,24 @@
 
                 </StackPanel>
             </sdk:TabItem>
-            <sdk:TabItem Header="Сертификаты" Content="{Binding AttachmentsContext}" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <attachments:AttachmentsView Width="370" Height="417" />
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
+            <sdk:TabItem Header="Сертификаты" IsEnabled="{Binding IsNewProduct, Converter={StaticResource BooleanInvertConverter}}">
+                <attachments:AttachmentsView DataContext="{Binding AttachmentsContext}" Width="370" Height="417" />
             </sdk:TabItem>
         </sdk:TabControl>
 
-        <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource FormButtons}">
-            <controls:ProgressRing IsActive="{Binding IsBusy}" />
-            <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
-            <Rectangle Width="10" />
-            <Button Content="Отмена">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-        </StackPanel>
+        <Border MinHeight="70">
+            <StackPanel Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource FormButtons}">
+                <controls:ProgressRing IsActive="{Binding IsBusy}" />
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </Border>
     </StackPanel>
 </sdk:ChildWindow>
