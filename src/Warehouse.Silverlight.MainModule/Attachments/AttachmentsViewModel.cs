@@ -73,7 +73,12 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             if (dlg.ShowDialog() == true)
             {
                 var file = dlg.File;
+
+                var progress = new ProgressWindow { Content = "Закачиваем файл..." };
+                progress.Show();
+
                 var task = await filesRepository.Create(file.OpenRead(), file.Name, "image/jpeg");
+
                 if (task.Succeed)
                 {
                     var fileId = task.Result;
@@ -83,6 +88,8 @@ namespace Warehouse.Silverlight.MainModule.Attachments
                         await LoadFiles();
                     }
                 }
+
+                progress.Close();
             }
         }
 

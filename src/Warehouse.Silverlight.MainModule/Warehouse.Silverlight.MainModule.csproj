@@ -122,6 +122,9 @@
     <Compile Include="Attachments\AttachmentDetailView.xaml.cs">
       <DependentUpon>AttachmentDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attachments\ProgressWindow.xaml.cs">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
@@ -152,6 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Attachments\AttachmentDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attachments\ProgressWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
