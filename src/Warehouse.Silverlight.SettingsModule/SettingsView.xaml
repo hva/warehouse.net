@@ -75,7 +75,7 @@
         <controls:H1 Title="О программе">
             <StackPanel Orientation="Horizontal">
                 <sdk:Label Content="Версия" />
-                <TextBlock Text="0.3.1" />
+                <TextBlock Text="0.3.2" />
             </StackPanel>
         </controls:H1>
     </StackPanel>
