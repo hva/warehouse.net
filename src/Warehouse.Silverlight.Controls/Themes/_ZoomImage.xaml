@@ -17,11 +17,18 @@
                 <ControlTemplate TargetType="controls:ZoomImage">
                     <Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Image x:Name="Image" Stretch="Uniform" />
+                            <Canvas x:Name="Canvas" Background="#330000ff">
+                                <Image x:Name="Image" Stretch="Uniform">
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="Transform" />
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Canvas>
                         </ScrollViewer>
                         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30">
                             <Button x:Name="ZoomInButton" Content="+" Style="{StaticResource ZoomButton}" />
                             <Button x:Name="ZoomOutButton" Content="-" Style="{StaticResource ZoomButton}" />
+                            <Button x:Name="RotateButton" Content="" Style="{StaticResource ZoomButton}" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
