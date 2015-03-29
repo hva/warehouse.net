@@ -10,6 +10,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule.Attachments"
     xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:AttachmentsViewModel}">
 
@@ -56,6 +57,8 @@
             <Button Content="Добавить" Command="{Binding BrowseCommand}" />
             <Rectangle Width="10" />
             <Button Content="Удалить" Command="{Binding DeleteCommand}" />
+            <Rectangle Width="10" />
+            <controls:ProgressRing IsActive="{Binding IsBusy}" />
         </StackPanel>
 
         <ListBox Grid.Row="2" ItemsSource="{Binding Files}" SelectionMode="Extended">

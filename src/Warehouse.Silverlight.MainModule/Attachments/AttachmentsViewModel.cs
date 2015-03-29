@@ -23,6 +23,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly DelegateCommand deleteCommand;
         private IList selectedItems;
+        private bool isBusy;
 
         public AttachmentsViewModel(IFilesRepository filesRepository, IProductsRepository productsRepository)
         {
@@ -49,6 +50,7 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         public ICommand DeleteCommand { get { return deleteCommand; } }
         public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
+        public ObservableCollection<FileDescription> Files { get; private set; }
 
         public IList SelectedItems
         {
@@ -60,7 +62,11 @@ namespace Warehouse.Silverlight.MainModule.Attachments
             }
         }
 
-        public ObservableCollection<FileDescription> Files { get; private set; }
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+        }
 
         private async void Browse()
         {
@@ -96,7 +102,11 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         private async Task LoadFiles()
         {
             Files.Clear();
+
+            IsBusy = true;
             var task = await productsRepository.GetFiles(productId);
+            IsBusy = false;
+
             if (task.Succeed)
             {
                 var files = task.Result.OrderByDescending(x => x.UploadDate);
@@ -142,7 +152,11 @@ namespace Warehouse.Silverlight.MainModule.Attachments
                     .OrderByDescending(x => x.UploadDate)
                     .Select(x => x.Id)
                     .ToArray();
+
+                IsBusy = true;
                 var task = await productsRepository.DetachFiles(productId, ids);
+                IsBusy = false;
+
                 if (task.Succeed)
                 {
                     await LoadFiles();
