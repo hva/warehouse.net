@@ -20,7 +20,7 @@ namespace Warehouse.Silverlight.Controls
         private Button zoomOutButton;
         private Button rotateButton;
         private Canvas canvas;
-        private RotateTransform transform;
+        private CompositeTransform transform;
 
         private readonly double[] zoomValues = { 0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2 };
         private int zoomIndex;
@@ -61,7 +61,7 @@ namespace Warehouse.Silverlight.Controls
             zoomOutButton = GetTemplateChild(ZoomOutButton) as Button;
             rotateButton = GetTemplateChild(RotateButton) as Button;
             canvas = GetTemplateChild(Canvas) as Canvas;
-            transform = GetTemplateChild(Transform) as RotateTransform;
+            transform = GetTemplateChild(Transform) as CompositeTransform;
 
             Subscribe();
 
@@ -122,9 +122,10 @@ namespace Warehouse.Silverlight.Controls
         private void OnImageOpened(object sender, RoutedEventArgs e)
         {
             zoomIndex = 1;
-            transform.Angle = 0;
-            image.SetValue(System.Windows.Controls.Canvas.TopProperty, 0d);
-            image.SetValue(System.Windows.Controls.Canvas.LeftProperty, 0d);
+
+            transform.Rotation = 0;
+            transform.TranslateX = 0;
+            transform.TranslateY = 0;
 
             var source = (BitmapImage)image.Source;
             w = source.PixelWidth;
@@ -151,50 +152,62 @@ namespace Warehouse.Silverlight.Controls
             zoomOutButton.IsEnabled = 0 < zoomIndex;
 
             var k = zoomValues[zoomIndex];
-
-            canvas.Width = k * w;
-            canvas.Height = k * h;
-
             image.Width = k * w;
             image.Height = k * h;
+
+            RefreshCanvas();
         }
 
         private void Rotate(object sender, RoutedEventArgs e)
         {
-            transform.Angle += 90;
+            var angle = Convert.ToInt32(transform.Rotation);
 
-            var angle = Convert.ToInt32(transform.Angle);
+            angle += 90;
+
             if (angle == 360)
             {
                 angle = 0;
-                transform.Angle = 0;
             }
 
+            transform.Rotation = angle;
+
+            RefreshCanvas();
+        }
+
+        private void RefreshCanvas()
+        {
             var k = zoomValues[zoomIndex];
+
+            canvas.Width = k * w;
+            canvas.Height = k * h;
+
+            var angle = Convert.ToInt32(transform.Rotation);
+
             var original = angle % 180 == 0;
             canvas.Width = k * (original ? w : h);
             canvas.Height = k * (original ? h : w);
 
             if (angle == 0)
             {
-                image.SetValue(System.Windows.Controls.Canvas.TopProperty, 0d);
-                image.SetValue(System.Windows.Controls.Canvas.LeftProperty, 0d);
+                transform.TranslateX = 0;
+                transform.TranslateY = 0;
             }
             else if (angle == 90)
             {
-                image.SetValue(System.Windows.Controls.Canvas.TopProperty, 0d);
-                image.SetValue(System.Windows.Controls.Canvas.LeftProperty, h * k);
+                transform.TranslateX = h * k;
+                transform.TranslateY = 0;
             }
             else if (angle == 180)
             {
-                image.SetValue(System.Windows.Controls.Canvas.TopProperty, h * k);
-                image.SetValue(System.Windows.Controls.Canvas.LeftProperty, w * k);
+                transform.TranslateX = w * k;
+                transform.TranslateY = h * k;
             }
             else if (angle == 270)
             {
-                image.SetValue(System.Windows.Controls.Canvas.TopProperty, w * k);
-                image.SetValue(System.Windows.Controls.Canvas.LeftProperty, 0d);
+                transform.TranslateX = 0;
+                transform.TranslateY = w * k;
             }
+
         }
     }
 }

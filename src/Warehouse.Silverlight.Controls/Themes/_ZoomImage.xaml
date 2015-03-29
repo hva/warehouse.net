@@ -20,7 +20,7 @@
                             <Canvas x:Name="Canvas" Background="#330000ff">
                                 <Image x:Name="Image" Stretch="Uniform">
                                     <Image.RenderTransform>
-                                        <RotateTransform x:Name="Transform" />
+                                        <CompositeTransform x:Name="Transform" />
                                     </Image.RenderTransform>
                                 </Image>
                             </Canvas>
