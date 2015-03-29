@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Warehouse.Silverlight.Controls;component/Themes/_ProgressRing.xaml" />
+        <ResourceDictionary Source="/Warehouse.Silverlight.Controls;component/Themes/_ZoomImage.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="controls:H1">

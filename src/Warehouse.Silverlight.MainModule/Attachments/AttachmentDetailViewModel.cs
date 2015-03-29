@@ -14,22 +14,22 @@ namespace Warehouse.Silverlight.MainModule.Attachments
         public AttachmentDetailViewModel(FileDescription file)
         {
             Title = file.Name;
-            Uri = string.Concat(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString(), "api/files/", file.Id);
             PrintCommand = new DelegateCommand<ChildWindow>(Print);
+
+            var uriString = string.Concat(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString(), "api/files/", file.Id);
+            Uri = new Uri(uriString, UriKind.Absolute);
         }
 
-        public string Uri { get; private set; }
+        public Uri Uri { get; private set; }
         public ICommand PrintCommand { get; private set; }
 
         private void Print(ChildWindow window)
         {
             var doc = new PrintDocument();
 
-            var uri = new Uri(Uri, UriKind.Absolute);
-
             doc.PrintPage += (s, ea) =>
             {
-                ea.PageVisual = new Image { Source = new BitmapImage(uri) };
+                ea.PageVisual = new Image { Source = new BitmapImage(Uri) };
                 ea.HasMorePages = false;
             };
 

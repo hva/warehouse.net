@@ -9,7 +9,7 @@
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
-    Width="400" Height="600"
+    Width="800" Height="600"
     Title="{Binding Title}"
     d:DataContext="{d:DesignInstance Type=local:AttachmentDetailViewModel}"
     x:Name="Window">
@@ -25,6 +25,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Button Content="Печать" HorizontalAlignment="Left" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=Window}" />
-        <Image Grid.Row="2" Source="{Binding Uri}" Stretch="Uniform" />
+        <controls:ZoomImage Grid.Row="2" Uri="{Binding Uri}" />
     </Grid>
 </controls:ChildWindow2>
