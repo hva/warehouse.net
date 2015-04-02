@@ -7,3 +7,4 @@ packages
 *.mdf
 *.ldf
 App_Data
+src/_ReSharper.Warehouse
