@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using NLog;
 
 namespace Warehouse.Utils.Backup
@@ -9,6 +8,14 @@ namespace Warehouse.Utils.Backup
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
+        {
+            if (TryDump())
+            {
+                
+            }
+        }
+
+        private static bool TryDump()
         {
             var info = new ProcessStartInfo
             {
@@ -24,13 +31,13 @@ namespace Warehouse.Utils.Backup
 
             var error = process.StandardError.ReadToEnd();
 
-            if (!string.IsNullOrEmpty(error))
+            if (string.IsNullOrEmpty(error))
             {
-                logger.Error(error);
-                return;
+                logger.Trace("dump ok");
+                return true;
             }
-
-
+            logger.Error(error);
+            return false;
         }
     }
 }
