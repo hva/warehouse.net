@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO.Compression;
 using NLog;
 
 namespace Warehouse.Utils.Backup
@@ -11,7 +13,7 @@ namespace Warehouse.Utils.Backup
         {
             if (TryDump())
             {
-                
+                TryZip();
             }
         }
 
@@ -37,6 +39,22 @@ namespace Warehouse.Utils.Backup
                 return true;
             }
             logger.Error(error);
+            return false;
+        }
+
+        private static bool TryZip()
+        {
+            try
+            {
+                var fileName = string.Format("skill_{0:yyyyMMdd_HHmm}.zip", DateTime.Now);
+                ZipFile.CreateFromDirectory("dump", fileName);
+                logger.Trace("zip ok");
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
+            }
             return false;
         }
     }
