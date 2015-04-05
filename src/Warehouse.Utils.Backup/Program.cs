@@ -17,10 +17,10 @@ namespace Warehouse.Utils.Backup
 
         static void Main(string[] args)
         {
-            if (!TryDump()) return;
+            if (!Dump()) return;
 
             var fileName = string.Format("skill_{0:yyyyMMdd_HHmm}.zip", DateTime.Now);
-            if (!TryZip(fileName)) return;
+            if (!Zip(fileName)) return;
 
             var token = LoadToken();
             if (token == null) return;
@@ -33,9 +33,12 @@ namespace Warehouse.Utils.Backup
 
             var task2 = UploadFile(fileName, link);
             task2.Wait();
+            if (!task2.Result) return;
+
+            Cleanup(fileName);
         }
 
-        private static bool TryDump()
+        private static bool Dump()
         {
             var info = new ProcessStartInfo
             {
@@ -59,7 +62,7 @@ namespace Warehouse.Utils.Backup
             return false;
         }
 
-        private static bool TryZip(string fileName)
+        private static bool Zip(string fileName)
         {
             try
             {
@@ -75,18 +78,23 @@ namespace Warehouse.Utils.Backup
 
         private static string LoadToken()
         {
-            try
+            const string fileName = "token.txt";
+            if (!File.Exists(fileName))
             {
-                using (var reader = new StreamReader("token.txt"))
-                {
-                    return reader.ReadLine();
-                }
+                logger.Error("{0} not found", fileName);
+                return null;
             }
-            catch(Exception e)
+            string token;
+            using (var reader = new StreamReader(fileName))
             {
-                logger.Error(e.Message);
+                token = reader.ReadLine();
             }
-            return null;
+            if (string.IsNullOrEmpty(token))
+            {
+                logger.Error("token is empty");
+                return null;
+            }
+            return token;
         }
 
         private async static Task<string> GetUploadLink(string fileName, string token)
@@ -111,7 +119,7 @@ namespace Warehouse.Utils.Backup
             }
         }
 
-        private static async Task UploadFile(string fileName, string link)
+        private static async Task<bool> UploadFile(string fileName, string link)
         {
             using (var client = new HttpClient())
             using (var stream = File.OpenRead(fileName))
@@ -121,12 +129,19 @@ namespace Warehouse.Utils.Backup
                 if (resp.StatusCode == HttpStatusCode.Created)
                 {
                     logger.Trace("upload succeed");
+                    return true;
                 }
-                else
-                {
-                    var errorContent = await resp.Content.ReadAsStringAsync();
-                    logger.Error(errorContent);
-                }
+                var errorContent = await resp.Content.ReadAsStringAsync();
+                logger.Error(errorContent);
+                return false;
+            }
+        }
+
+        private static void Cleanup(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
             }
         }
     }
