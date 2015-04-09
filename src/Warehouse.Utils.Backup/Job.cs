@@ -41,10 +41,14 @@ namespace Warehouse.Utils.Backup
 
         private static bool Dump()
         {
+            var codebase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            var uri = new Uri(codebase, UriKind.Absolute);
+            var path = Path.GetDirectoryName(uri.LocalPath);
+
             var info = new ProcessStartInfo
             {
                 FileName = "mongodump",
-                Arguments = "--db skill",
+                Arguments = "--db skill --out " + path,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardError = true,
