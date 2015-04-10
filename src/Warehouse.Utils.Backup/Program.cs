@@ -22,7 +22,7 @@ namespace Warehouse.Utils.Backup
 
         private static void ServiceSetup(ISchedulingService service)
         {
-            service.At("*/3 * * * *").Run<Job>();
+            service.At("0 22 * * *").Run<Job>();
         }
     }
 }
