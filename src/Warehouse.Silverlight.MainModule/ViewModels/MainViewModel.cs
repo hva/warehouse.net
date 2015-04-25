@@ -27,6 +27,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
         private readonly Func<ProductEditViewModel> productEditViewModelFactory;
+        private readonly Func<ProductEditViewModel2> productEditViewModelFactory2;
+        private readonly InteractionRequest<ProductEditViewModel2> createProductRequest;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
@@ -37,14 +39,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly DelegateCommand deleteCommand;
         private double totalWeight;
 
-        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient,
-            IAuthStore authStore, IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory)
+        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
+            IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory, Func<ProductEditViewModel2> productEditViewModelFactory2)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
             this.productEditViewModelFactory = productEditViewModelFactory;
+            this.productEditViewModelFactory2 = productEditViewModelFactory2;
 
+            createProductRequest = new InteractionRequest<ProductEditViewModel2>();
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
@@ -73,6 +77,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
         public ICommand DeleteCommand { get { return deleteCommand; } }
+        public IInteractionRequest CreateProductRequest { get { return createProductRequest; } }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
         public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
@@ -168,7 +173,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void CreateProduct()
         {
-            editProductRequest.Raise(productEditViewModelFactory().Init());
+            createProductRequest.Raise(productEditViewModelFactory2().Init());
         }
 
         private void UpdateTotalWeight()

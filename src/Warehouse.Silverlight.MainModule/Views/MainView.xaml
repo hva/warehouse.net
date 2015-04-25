@@ -14,6 +14,7 @@
     xmlns:converters="clr-namespace:Warehouse.Silverlight.Controls.Converters;assembly=Warehouse.Silverlight.Controls"
     xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     xmlns:localModels="clr-namespace:Warehouse.Silverlight.MainModule.Models"
+    xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
 
@@ -34,6 +35,19 @@
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
+            <prism:PopupChildWindowAction>
+                <prism:PopupChildWindowAction.ChildWindow>
+                    <sdk:ChildWindow Title="Новая позиция" d:DataContext="{d:DesignInstance Type=local:ProductEditViewModel2}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+                        </i:Interaction.Behaviors>
+                        <local:ProductEditView2 />
+                    </sdk:ChildWindow>
+                </prism:PopupChildWindowAction.ChildWindow>
+            </prism:PopupChildWindowAction>
+        </prism:InteractionRequestTrigger>
 
         <prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
             <prism:PopupChildWindowAction>

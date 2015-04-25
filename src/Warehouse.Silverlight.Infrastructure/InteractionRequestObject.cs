@@ -8,11 +8,13 @@ namespace Warehouse.Silverlight.Infrastructure
 {
     public abstract class InteractionRequestObject : Confirmation, INotifyPropertyChanged
     {
+        private bool isWindowOpen = true;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -21,5 +23,19 @@ namespace Warehouse.Silverlight.Infrastructure
             var name = PropertySupport.ExtractPropertyName(lambda);
             OnPropertyChanged(name);
         }
+
+        public bool IsWindowOpen
+        {
+            get { return isWindowOpen; }
+            set
+            {
+                if (isWindowOpen != value)
+                {
+                    isWindowOpen = value;
+                    RaisePropertyChanged(() => IsWindowOpen);
+                }
+            }
+        }
+
     }
 }
