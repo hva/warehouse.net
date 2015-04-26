@@ -37,23 +37,21 @@ namespace Warehouse.Server.Controllers
             return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        public HttpResponseMessage GetMany(string ids)
+        [Route("api/products/getMany")]
+        [HttpPost]
+        public HttpResponseMessage GetMany(string[] ids)
         {
             if (ids == null)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            var arr = ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            if (arr.Length > 0)
+            var objectIds = ids.Select(x => new ObjectId(x));
+            var query = Query<Product>.In(x => x.Id, objectIds);
+            var data = context.Products.Find(query);
+            if (data != null)
             {
-                var objectIds = arr.Select(x => new ObjectId(x));
-                var query = Query<Product>.In(x => x.Id, objectIds);
-                var data = context.Products.Find(query);
-                if (data != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, data);
-                }
+                return Request.CreateResponse(HttpStatusCode.OK, data);
             }
 
             return Request.CreateResponse(HttpStatusCode.InternalServerError);
