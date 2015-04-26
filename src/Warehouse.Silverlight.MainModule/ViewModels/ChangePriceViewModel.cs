@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -25,7 +24,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             this.repository = repository;
             this.eventAggregator = eventAggregator;
 
-            SaveCommand = new DelegateCommand<ChildWindow>(Save);
+            SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
 
             LoadItems(products);
@@ -81,12 +80,18 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
-        private async void Save(ChildWindow window)
+        private async void Save()
         {
             ValidatePercentage();
             if (HasErrors) return;
 
-            var data = Items.Select(x => new ProductPriceUpdate { Id = x.Product.Id, NewPrice = x.NewPriceOpt }).ToArray();
+            var data = Items.Select(x => new ProductPriceUpdate
+            {
+                Id = x.Product.Id,
+                NewPriceOpt = x.NewPriceOpt,
+                NewPriceRozn = x.NewPriceRozn
+            }).ToArray();
+
             IsBusy = true;
             var task = await repository.UpdatePrice(data);
             IsBusy = false;
@@ -99,7 +104,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
                 }
 
                 Confirmed = task.Succeed;
-                window.Close();
+                IsWindowOpen = false;
             }
         }
     }

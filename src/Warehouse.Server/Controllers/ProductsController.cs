@@ -102,7 +102,9 @@ namespace Warehouse.Server.Controllers
             foreach (var x in items)
             {
                 var query = Query<Product>.EQ(p => p.Id, new ObjectId(x.Id));
-                var update = Update<Product>.Set(p => p.PriceOpt, x.NewPrice);
+                var update = Update<Product>
+                    .Set(p => p.PriceOpt, x.NewPriceOpt)
+                    .Set(p => p.PriceRozn, x.NewPriceRozn);
                 bulk.Find(query).UpdateOne(update);
             }
             bulk.Execute();
