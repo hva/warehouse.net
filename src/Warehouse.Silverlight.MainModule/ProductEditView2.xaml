@@ -64,7 +64,9 @@
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Цена без НДС (опт.)" />
-            <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
+            <TextBox
+                Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                IsReadOnly="{Binding IsPriceReadonly}">
                 <i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />
                 </i:Interaction.Behaviors>
@@ -90,7 +92,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-            <sdk:Label Content="Длина штанги (м)" />
+            <sdk:Label Content="{Binding LenghtLabel}" />
             <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
                 <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
@@ -99,7 +101,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-            <sdk:Label Content="Н/Д (м)" />
+            <sdk:Label Content="{Binding NdLabel}" />
             <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
                 <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
@@ -118,7 +120,9 @@
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Цена приходная" />
-            <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
+            <TextBox
+                Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                IsReadOnly="{Binding IsPriceReadonly}">
                 <i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />
                 </i:Interaction.Behaviors>

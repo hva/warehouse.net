@@ -28,9 +28,7 @@ namespace Warehouse.Silverlight.MainModule
 
         public ProductCreateWindowViewModel Init()
         {
-            var product = new Product();
-            Context = new ProductEditViewModel2(product);
-
+            UpdateContext();
             IsWindowOpen = true;
             return this;
         }
@@ -67,7 +65,8 @@ namespace Warehouse.Silverlight.MainModule
                 if (isSheet != value)
                 {
                     isSheet = value;
-                    // TODO: change context
+                    UpdateContext();
+                    RaisePropertyChanged(() => Title2);
                 }
             }
         }
@@ -89,6 +88,14 @@ namespace Warehouse.Silverlight.MainModule
                     IsWindowOpen = false;
                 }
             }
+        }
+
+        private void UpdateContext()
+        {
+            var product = new Product();
+            Context = (isSheet)
+                ? new SheetEditViewModel2(product, true)
+                : new ProductEditViewModel2(product, true);
         }
     }
 }

@@ -25,10 +25,6 @@
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}">
             <Setter Property="Width" Value="200" />
         </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Width" Value="200" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
     </sdk:ChildWindow.Resources>
 
     <StackPanel>

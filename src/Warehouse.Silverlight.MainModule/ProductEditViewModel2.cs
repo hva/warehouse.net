@@ -19,8 +19,9 @@ namespace Warehouse.Silverlight.MainModule
         private string nd;
         private string length;
 
-        public ProductEditViewModel2(Product product)
+        public ProductEditViewModel2(Product product, bool canEditPrice)
         {
+            IsPriceReadonly = !canEditPrice;
             ProductToProps(product);
         }
 
@@ -59,6 +60,7 @@ namespace Warehouse.Silverlight.MainModule
             };
         }
 
+        public bool IsPriceReadonly { get; private set; }
 
         #region Name
 
@@ -279,6 +281,8 @@ namespace Warehouse.Silverlight.MainModule
             }
         }
 
+        public virtual string NdLabel { get { return "Н/Д (м)"; } }
+
         #endregion
 
         #region Length
@@ -303,6 +307,8 @@ namespace Warehouse.Silverlight.MainModule
             errorsContainer.ClearErrors(() => Length);
             errorsContainer.SetErrors(() => Length, Validate.Double(Length));
         }
+
+        public virtual string LenghtLabel { get { return "Длина штанги (м)"; } }
 
         #endregion
 
