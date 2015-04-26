@@ -37,6 +37,28 @@ namespace Warehouse.Server.Controllers
             return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
+        public HttpResponseMessage GetMany(string ids)
+        {
+            if (ids == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var arr = ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (arr.Length > 0)
+            {
+                var objectIds = arr.Select(x => new ObjectId(x));
+                var query = Query<Product>.In(x => x.Id, objectIds);
+                var data = context.Products.Find(query);
+                if (data != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, data);
+                }
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        }
+
         public HttpResponseMessage Put(string id, [FromBody] Product product)
         {
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));

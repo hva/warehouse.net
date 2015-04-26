@@ -9,6 +9,7 @@ namespace Warehouse.Silverlight.Data.Interfaces
     {
         Task<AsyncResult<Product[]>> GetAsync();
         Task<AsyncResult<Product>> GetAsync(string id);
+        Task<AsyncResult<Product[]>> GetManyAsync(List<string> ids);
         Task<AsyncResult<string>> SaveAsync(Product product);
         Task<AsyncResult> UpdatePrice(ProductPriceUpdate[] prices);
         Task<AsyncResult> Delete(List<string> ids);

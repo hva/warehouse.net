@@ -107,25 +107,41 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var task = await productsRepository.GetAsync(e.ProductId);
             if (task.Succeed)
             {
-                var current = task.Result;
-                var old = items.FirstOrDefault(x => x.Id == current.Id);
-                if (old != null)
-                {
-                    var index = items.IndexOf(old);
-                    items.RemoveAt(index);
-                    items.Insert(index, current);
-                }
-                else
-                {
-                    items.Add(current);
-                }
+                UpdateProductItem(task.Result);
                 UpdateTotalWeight();
             }
         }
 
-        public async void OnProductsUpdated(ProductUpdatedBatchEventArgs e)
+        private void UpdateProductItem(Product current)
         {
-            
+            if (items == null) return;
+
+            var old = items.FirstOrDefault(x => x.Id == current.Id);
+            if (old != null)
+            {
+                var index = items.IndexOf(old);
+                items.RemoveAt(index);
+                items.Insert(index, current);
+            }
+            else
+            {
+                items.Add(current);
+            }
+        }
+
+        public async void OnProductsUpdated(ProductUpdatedBatchEventArgs args)
+        {
+            if (args == null || args.ProductIds == null) return;
+
+            var task = await productsRepository.GetManyAsync(args.ProductIds);
+            if (task.Succeed)
+            {
+                foreach (var product in task.Result)
+                {
+                    UpdateProductItem(product);
+                }
+                UpdateTotalWeight();
+            }
         }
 
         public void OnProductsDeleted(ProductDeletedBatchEventArgs args)

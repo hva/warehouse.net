@@ -45,6 +45,20 @@ namespace Warehouse.Silverlight.Data
             }
         }
 
+        public async Task<AsyncResult<Product[]>> GetManyAsync(List<string> ids)
+        {
+            var token = authStore.LoadToken();
+            using (var client = new BearerHttpClient(token.AccessToken))
+            {
+                var q = string.Join(",", ids);
+                var uriString = string.Concat("api/products?ids=", q);
+                var uri = new Uri(uriString, UriKind.Relative);
+                var str = await client.GetStringAsync(uri);
+                var res = JsonConvert.DeserializeObject<Product[]>(str);
+                return new AsyncResult<Product[]> { Result = res, Succeed = true };
+            }
+        }
+
         public async Task<AsyncResult<string>> SaveAsync(Product product)
         {
             var token = authStore.LoadToken();
