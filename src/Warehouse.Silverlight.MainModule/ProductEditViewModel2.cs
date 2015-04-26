@@ -1,26 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Events;
-using Warehouse.Silverlight.Auth;
-using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
-using Warehouse.Silverlight.Infrastructure.Events;
-using Warehouse.Silverlight.MainModule.Attachments;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule
 {
     public class ProductEditViewModel2 : InteractionRequestValidationObject
     {
-        private readonly IProductsRepository repository;
-        private readonly IEventAggregator eventAggregator;
-        private readonly IAuthStore authStore;
-        private readonly AttachmentsViewModel attachmentsViewModel;
-
         private string id;
         private string name;
         private string size;
@@ -32,92 +19,46 @@ namespace Warehouse.Silverlight.MainModule
         private string nd;
         private string length;
 
-        private bool isSheet;
-        private double[] sheetSizes;
-        private bool isBusy;
-        private bool isEditor;
-        private bool isAttachmentsTabActive;
-
-
-        public ProductEditViewModel2(IProductsRepository repository, IEventAggregator eventAggregator, IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
+        public ProductEditViewModel2(Product product)
         {
-            this.repository = repository;
-            this.eventAggregator = eventAggregator;
-            this.authStore = authStore;
-            this.attachmentsViewModel = attachmentsViewModel;
-
-            SaveCommand = new DelegateCommand<ChildWindow>(Save);
-            TabLoadedCommand = new DelegateCommand<object>(OnTabLoaded);
-        }
-
-        public ProductEditViewModel2 Init(Product product = null)
-        {
-            if (product == null)
-            {
-                product = new Product();
-                IsNewProduct = true;
-            }
-            else
-            {
-                IsNewProduct = false;
-            }
-
             ProductToProps(product);
-
-            var token = authStore.LoadToken();
-            if (token != null)
-            {
-                IsEditor = token.IsEditor();
-                DenyPriceEdit = !token.IsAdmin();
-            }
-
-            return this;
         }
 
-        public ICommand SaveCommand { get; private set; }
-        public ICommand TabLoadedCommand { get; private set; }
-
-        public bool IsEditor
+        public bool IsValid()
         {
-            get
-            {
-                if (isAttachmentsTabActive)
-                {
-                    return false;
-                }
-                return isEditor;
-            }
-            private set
-            {
-                if (isEditor != value)
-                {
-                    isEditor = value;
-                    RaisePropertyChanged(() => IsEditor);
-                }
-            }
-        }
-        public bool DenyPriceEdit { get; private set; }
-        public bool IsNewProduct { get; private set; }
-        public object AttachmentsContext { get { return attachmentsViewModel; } }
+            ValidateName();
+            ValidateSize();
+            ValidateK();
+            ValidatePriceOpt();
+            ValidateCount();
+            ValidateNd();
+            ValidateLength();
+            ValidatePriceIcome();
 
-        public string Title2
-        {
-            get
-            {
-                var label = isSheet ? " (лист)" : string.Empty;
-                if (IsNewProduct) // creating
-                {
-                    return string.Format("Новая позиция{0}", label);
-                }
-                return string.Format("{0} {1}{2}", Name, Size, label);
-            }
+            return HasErrors;
         }
 
-        public bool IsBusy
+        public Product GetUpdatedProduct()
         {
-            get { return isBusy; }
-            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+            return new Product
+            {
+                Id = id,
+                Name = name,
+                Size = size,
+                K = Math.Round(double.Parse(k), 2),
+                PriceOpt = long.Parse(priceOpt),
+                PriceRozn = priceRozn,
+                Weight = weight,
+                Count = int.Parse(count),
+                Nd = ParseNd(nd),
+                Length = Math.Round(double.Parse(length), 2),
+                PriceIcome = long.Parse(priceIcome),
+                Internal = Internal,
+                IsSheet = false,
+                Firma = Firma,
+            };
         }
+
 
         #region Name
 
@@ -153,10 +94,6 @@ namespace Warehouse.Silverlight.MainModule
                 {
                     size = value;
                     ValidateSize();
-                    if (isSheet)
-                    {
-                        UpdateSheetLength();
-                    }
                 }
             }
         }
@@ -165,14 +102,6 @@ namespace Warehouse.Silverlight.MainModule
         {
             errorsContainer.ClearErrors(() => Size);
             errorsContainer.SetErrors(() => Size, Validate.Required(Size));
-            if (isSheet)
-            {
-                sheetSizes = ParseSheetSize(size);
-                if (sheetSizes == null)
-                {
-                    errorsContainer.SetErrors(() => Size, new[] { "строка в формате\nтолщина*ширина*длина" });
-                }
-            }
         }
 
         #endregion
@@ -252,11 +181,6 @@ namespace Warehouse.Silverlight.MainModule
                 var _priceOpt = decimal.Parse(priceOpt);
                 var _k = decimal.Parse(k);
                 var rozn = _priceOpt * _k / 1000m * 1.2m;
-                if (isSheet)
-                {
-                    var _l = decimal.Parse(length);
-                    rozn *= _l;
-                }
                 PriceRozn = (long) (decimal.Ceiling(rozn / 100) * 100);
             }
         }
@@ -355,19 +279,9 @@ namespace Warehouse.Silverlight.MainModule
             }
         }
 
-        public string NdLabel
-        {
-            get { return isSheet ? "Н/Д (м²)" : "Н/Д (м)"; }
-        }
-
         #endregion
 
         #region Length
-
-        public string LenghtLabel
-        {
-            get { return isSheet ? "Площадь листа (м²)" : "Длина штанги (м)"; }
-        }
 
         public string Length
         {
@@ -388,19 +302,6 @@ namespace Warehouse.Silverlight.MainModule
         {
             errorsContainer.ClearErrors(() => Length);
             errorsContainer.SetErrors(() => Length, Validate.Double(Length));
-        }
-
-        private void UpdateSheetLength()
-        {
-            if (errorsContainer.HasErrors(() => Size) || sheetSizes == null)
-            {
-                Length = "0";
-            }
-            else
-            {
-                var val = sheetSizes[1] / 1000 * sheetSizes[2] / 1000;
-                Length = val.ToString("0.000");
-            }
         }
 
         #endregion
@@ -435,61 +336,11 @@ namespace Warehouse.Silverlight.MainModule
 
         #endregion
 
-        #region IsSheet
-
-        public bool IsSheet
-        {
-            get { return isSheet; }
-            set
-            {
-                if (isSheet != value)
-                {
-                    isSheet = value;
-                    ValidateSize();
-                    UpdateSheetLength();
-                    UpdatePriceRozn();
-                    RaisePropertyChanged(() => IsSheet);
-                    RaisePropertyChanged(() => Title2);
-                    RaisePropertyChanged(() => LenghtLabel);
-                    RaisePropertyChanged(() => NdLabel);
-                }
-            }
-        }
-
-        #endregion
-
         #region Firma
 
         public string Firma { get; set; }
 
         #endregion
-
-        private async void Save(ChildWindow window)
-        {
-            ValidateName();
-            ValidateSize();
-            ValidateK();
-            ValidatePriceOpt();
-            ValidateCount();
-            ValidateNd();
-            ValidateLength();
-            ValidatePriceIcome();
-
-            if (HasErrors) return;
-
-            var changed = PropsToProduct();
-
-            IsBusy = true;
-            var task = await repository.SaveAsync(changed);
-            IsBusy = false;
-            if (task.Succeed)
-            {
-                var args = new ProductUpdatedEventArgs(task.Result, false);
-                eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                Confirmed = true;
-                window.Close();
-            }
-        }
 
         private void ProductToProps(Product product)
         {
@@ -508,29 +359,7 @@ namespace Warehouse.Silverlight.MainModule
             length = product.Length.ToString("0.##");
             priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
             Internal = product.Internal;
-            IsSheet = product.IsSheet;
             Firma = product.Firma;
-        }
-
-        private Product PropsToProduct()
-        {
-            return new Product
-            {
-                Id = id,
-                Name = name,
-                Size = size,
-                K = Math.Round(double.Parse(k), 2),
-                PriceOpt = long.Parse(priceOpt),
-                PriceRozn = priceRozn,
-                Weight = weight,
-                Count = int.Parse(count),
-                Nd = ParseNd(nd),
-                Length = Math.Round(double.Parse(length), 2),
-                PriceIcome = long.Parse(priceIcome),
-                Internal = Internal,
-                IsSheet = isSheet,
-                Firma = Firma,
-            };
         }
 
         private static double[] ParseNd(string nd)
@@ -549,40 +378,6 @@ namespace Warehouse.Silverlight.MainModule
                 return 0;
             }
             return nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).Sum();
-        }
-
-        private static double[] ParseSheetSize(string size)
-        {
-            if (size == null) return null;
-
-            var parts = size.Split(new[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length == 0) return null;
-
-            var sizes = parts[0].Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
-            if (sizes.Length != 3) return null;
-
-            double d;
-            if (sizes.All(x => double.TryParse(x, out d)))
-            {
-                return sizes.Select(double.Parse).ToArray();
-            }
-
-            return null;
-        }
-
-        private async void OnTabLoaded(object vm)
-        {
-            if (vm is AttachmentsView)
-            {
-                await attachmentsViewModel.Init(id);
-                isAttachmentsTabActive = true;
-            }
-            else
-            {
-                isAttachmentsTabActive = false;
-            }
-
-            RaisePropertyChanged(() => IsEditor);
         }
     }
 }
