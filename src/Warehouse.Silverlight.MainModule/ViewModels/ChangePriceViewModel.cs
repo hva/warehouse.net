@@ -26,12 +26,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand<ChildWindow>(Save);
+            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
 
             LoadItems(products);
             UpdatePrice();
         }
 
         public ICommand SaveCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
         public ObservableCollection<ChangePriceItem> Items { get; private set; }
 
         public string Percentage
@@ -64,13 +66,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             var items =
                 from p in products
-                select new ChangePriceItem
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Size = p.Size,
-                    PriceOpt = p.PriceOpt,
-                };
+                select new ChangePriceItem(p);
 
             Items = new ObservableCollection<ChangePriceItem>(items);
         }
@@ -90,7 +86,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             ValidatePercentage();
             if (HasErrors) return;
 
-            var data = Items.Select(x => new ProductPriceUpdate { Id = x.Id, NewPrice = x.NewPrice }).ToArray();
+            var data = Items.Select(x => new ProductPriceUpdate { Id = x.Product.Id, NewPrice = x.NewPriceOpt }).ToArray();
             IsBusy = true;
             var task = await repository.UpdatePrice(data);
             IsBusy = false;
@@ -98,7 +94,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             {
                 foreach (var x in Items)
                 {
-                    var args = new ProductUpdatedEventArgs(x.Id, false);
+                    var args = new ProductUpdatedEventArgs(x.Product.Id, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                 }
 

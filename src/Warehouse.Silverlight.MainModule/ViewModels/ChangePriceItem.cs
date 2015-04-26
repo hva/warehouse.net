@@ -1,36 +1,62 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using System;
+using Microsoft.Practices.Prism.ViewModel;
+using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ChangePriceItem : NotificationObject
     {
-        private long newPrice;
+        private long newPriceOpt;
+        private long newPriceRozn;
+        private readonly string k;
+        private readonly string length;
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Size { get; set; }
-        public long PriceOpt { get; set; }
-
-        public long NewPrice
+        public ChangePriceItem(Product p)
         {
-            get { return newPrice; }
+            Product = p;
+
+            k = Convert.ToString(p.K);
+            length = Convert.ToString(p.Length);
+        }
+
+        public Product Product { get; private set; }
+
+        public long NewPriceOpt
+        {
+            get { return newPriceOpt; }
             set
             {
-                if (newPrice != value)
+                if (newPriceOpt != value)
                 {
-                    newPrice = value;
-                    RaisePropertyChanged(() => NewPrice);
+                    newPriceOpt = value;
+                    RaisePropertyChanged(() => NewPriceOpt);
+                }
+            }
+        }
+
+        public long NewPriceRozn
+        {
+            get { return newPriceRozn; }
+            set
+            {
+                if (newPriceRozn != value)
+                {
+                    newPriceRozn = value;
+                    RaisePropertyChanged(() => NewPriceRozn);
                 }
             }
         }
 
         public void Refresh(double percentage)
         {
-            var a = new decimal(PriceOpt);
+            var a = new decimal(Product.PriceOpt);
             var x = new decimal(percentage);
             var b = a * (1 + x / 100);
 
-            NewPrice = (long)(decimal.Ceiling(b / 100) * 100);
+            NewPriceOpt = (long)(decimal.Ceiling(b / 100) * 100);
+
+            var priceOptStr = Convert.ToString(newPriceOpt);
+            NewPriceRozn = ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
         }
     }
 }

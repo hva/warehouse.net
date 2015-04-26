@@ -5,7 +5,6 @@
     xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
-    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Warehouse.Silverlight.MainModule.ViewModels"
@@ -14,15 +13,30 @@
     xmlns:controls1="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceViewModel}"
-    Width="Auto" Height="Auto"
-    Title="Пересчет цены"
-    x:Name="confirmationWindow">
+    Width="660" Height="600"
+    Title="Пересчет цены">
+
+    <controls:ChildWindow.Resources>
+        <Style x:Key="Default" TargetType="sdk:DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+        <Style TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}" />
+        <Style x:Key="Inactive" TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}">
+            <Setter Property="Opacity" Value="0.6" />
+        </Style>
+    </controls:ChildWindow.Resources>
 
     <i:Interaction.Behaviors>
-        <behaviors:ChildWindowBehavior />
+        <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
     </i:Interaction.Behaviors>
 
-    <StackPanel>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Процент" Width="Auto" />
@@ -33,27 +47,45 @@
             </TextBox>
         </StackPanel>
 
-        <sdk:DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" MaxHeight="400">
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn Header="Наимнование" Binding="{Binding Name}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
-                <sdk:DataGridTextColumn Header="Размер" Binding="{Binding Size}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
-                <sdk:DataGridTextColumn Header="Старая цена" Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
-                <sdk:DataGridTextColumn Header="Новая цена" Binding="{Binding NewPrice, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Наимнование"
+                    Binding="{Binding Product.Name}"
+                    Width="150"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Размер"
+                    Binding="{Binding Product.Size}"
+                    Width="100"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Старая цена&#10;(опт.)"
+                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,#}'}"
+                    CellStyle="{StaticResource Inactive}"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Старая цена&#10;(розн.)"
+                    Binding="{Binding Product.PriceRozn, StringFormat='{}{0:##,#}'}"
+                    CellStyle="{StaticResource Inactive}"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Новая цена&#10;(опт.)"
+                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,#}'}"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
+                <sdk:DataGridTextColumn
+                    Header="Новая цена&#10;(розн.)"
+                    Binding="{Binding NewPriceRozn, StringFormat='{}{0:##,#}'}"
+                    d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
             <controls1:ProgressRing IsActive="{Binding IsBusy}" />
-            <Button Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=confirmationWindow}" />
+            <Button Content="Сохранить" Command="{Binding SaveCommand}" />
             <Rectangle Width="10" />
-            <Button Content="Отмена">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            <Button Content="Отмена" Command="{Binding CancelCommand}" />
         </StackPanel>
-    </StackPanel>
+    </Grid>
 
 </controls:ChildWindow>
