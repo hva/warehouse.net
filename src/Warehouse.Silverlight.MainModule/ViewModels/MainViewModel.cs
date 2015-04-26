@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -124,6 +123,11 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
+        public async void OnProductsUpdated(ProductUpdatedBatchEventArgs e)
+        {
+            
+        }
+
         public void OnProductsDeleted(ProductDeletedBatchEventArgs args)
         {
             if (items == null) return;
@@ -144,6 +148,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void Subscribe()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Subscribe(OnProductUpdated);
+            eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Subscribe(OnProductsUpdated);
             eventAggregator.GetEvent<ProductDeletedBatchEvent>().Subscribe(OnProductsDeleted);
         }
 
@@ -151,6 +156,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private void Unsubscribe()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdated);
+            eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Unsubscribe(OnProductsUpdated);
             eventAggregator.GetEvent<ProductDeletedBatchEvent>().Unsubscribe(OnProductsDeleted);
         }
 

@@ -10,6 +10,11 @@ namespace Warehouse.Server.Hubs
             Clients.Others.OnProductUpdated(id);
         }
 
+        public void RaiseProductUpdatedBatch(List<string> ids)
+        {
+            Clients.Others.OnProductUpdatedBatch(ids);
+        }
+
         public void RaiseProductDeletedBatch(List<string> ids)
         {
             Clients.Others.OnProductDeletedBatch(ids);
@@ -19,6 +24,7 @@ namespace Warehouse.Server.Hubs
     public interface IClient
     {
         void OnProductUpdated(string id);
+        void OnProductUpdatedBatch(List<string> ids);
         void OnProductDeletedBatch(List<string> ids);
     }
 }

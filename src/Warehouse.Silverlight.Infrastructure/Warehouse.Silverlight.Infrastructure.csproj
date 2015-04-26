@@ -77,6 +77,8 @@
     <Compile Include="Consts.cs" />
     <Compile Include="Events\ProductDeletedBatchEvent.cs" />
     <Compile Include="Events\ProductDeletedBatchEventArgs.cs" />
+    <Compile Include="Events\ProductUpdatedBatchEvent.cs" />
+    <Compile Include="Events\ProductUpdatedBatchEventArgs.cs" />
     <Compile Include="Events\ProductUpdatedEvent.cs" />
     <Compile Include="Events\ProductUpdatedEventArgs.cs" />
     <Compile Include="Events\SignalREventArgs.cs" />

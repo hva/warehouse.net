@@ -24,6 +24,7 @@ namespace Warehouse.Silverlight.SignalR
             hubProxy = connection.CreateHubProxy(HubName);
 
             hubProxy.On<string>(ProductUpdatedEvent.HubEventName, OnProductUpdatedRemote);
+            hubProxy.On<List<string>>(ProductUpdatedBatchEvent.HubEventName, OnProductUpdatedBatchRemote);
             hubProxy.On<List<string>>(ProductDeletedBatchEvent.HubEventName, OnProductDeletedBatchRemote);
         }
 
@@ -54,12 +55,14 @@ namespace Warehouse.Silverlight.SignalR
         private void SubscribeLocal()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Subscribe(OnProductUpdatedLocal);
+            eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Subscribe(OnProductUpdatedBatchLocal);
             eventAggregator.GetEvent<ProductDeletedBatchEvent>().Subscribe(OnProductDeletedBatchLocal);
         }
 
         private void UnsubscribeLocal()
         {
             eventAggregator.GetEvent<ProductUpdatedEvent>().Unsubscribe(OnProductUpdatedLocal);
+            eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Unsubscribe(OnProductUpdatedBatchLocal);
             eventAggregator.GetEvent<ProductDeletedBatchEvent>().Unsubscribe(OnProductDeletedBatchLocal);
         }
 
@@ -82,6 +85,30 @@ namespace Warehouse.Silverlight.SignalR
                 // we need to notify local modules
                 var e = new ProductUpdatedEventArgs(productId, true);
                 eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(e);
+            });
+        }
+
+        #endregion
+
+        #region ProductUpdatedBatch
+
+        public void OnProductUpdatedBatchLocal(ProductUpdatedBatchEventArgs e)
+        {
+            if (e.FromRemote) return;
+
+            // products updated locally
+            // we need to notify other clients
+            hubProxy.Invoke(ProductUpdatedBatchEvent.HubMethodName, e.ProductIds).Wait();
+        }
+
+        private void OnProductUpdatedBatchRemote(List<string> ids)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(delegate
+            {
+                // products updated remotely
+                // we need to notify local modules
+                var e = new ProductUpdatedBatchEventArgs(ids, true);
+                eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Publish(e);
             });
         }
 

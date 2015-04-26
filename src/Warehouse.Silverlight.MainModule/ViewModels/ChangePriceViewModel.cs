@@ -97,11 +97,9 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             IsBusy = false;
             if (task.Succeed)
             {
-                foreach (var x in Items)
-                {
-                    var args = new ProductUpdatedEventArgs(x.Product.Id, false);
-                    eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                }
+                var ids = Items.Select(x => x.Product.Id).ToList();
+                var args = new ProductUpdatedBatchEventArgs(ids, false);
+                eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Publish(args);
 
                 Confirmed = task.Succeed;
                 IsWindowOpen = false;
