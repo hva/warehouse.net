@@ -7,8 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
-    xmlns:models="clr-namespace:Warehouse.Silverlight.MainModule.Models"
-    xmlns:localConverters="clr-namespace:Warehouse.Silverlight.MainModule.Converters"
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule"
     mc:Ignorable="d"
@@ -31,142 +29,17 @@
             <Setter Property="Width" Value="200" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <localConverters:ZeroToStringConverter x:Key="ZeroToStringConverter" />
     </sdk:ChildWindow.Resources>
 
     <StackPanel>
-                <StackPanel>
 
-                    <!--IsSheet-->
+        <!--IsSheet-->
+        <StackPanel Orientation="Horizontal">
+            <sdk:Label Content="Лист" />
+            <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
+        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Лист" />
-                        <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
-                    </StackPanel>
-
-                    <!--Name-->
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Наимнование" />
-                        <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Размер" />
-                        <TextBox Text="{Binding Size, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
-
-                    <!--Price-->
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="K" />
-                        <TextBox Text="{Binding K, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Цена без НДС (опт.)" />
-                        <TextBox Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:CurrencyFormatTextBoxBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Цена с НДС (розн.)" />
-                        <TextBlock Text="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" />
-                    </StackPanel>
-
-                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
-
-                    <!--Amount-->
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Кол-во (шт)" />
-                        <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="{Binding LenghtLabel}" />
-                        <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}" IsReadOnly="{Binding IsSheet}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="{Binding NdLabel}" />
-                        <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ThrottledTextBindingBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Кол-во (кг)" />
-                        <TextBlock Text="{Binding Weight, StringFormat='{}{0:0.###}'}" />
-                    </StackPanel>
-
-                    <Rectangle Height="1" Fill="#ddd" Margin="3,5" />
-
-                    <!--Other-->
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Цена приходная" />
-                        <TextBox Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:CurrencyFormatTextBoxBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="1C" />
-                        <TextBox Text="{Binding Internal, Mode=TwoWay}" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <sdk:Label Content="Учет" />
-                        <ComboBox SelectedValue="{Binding Firma, Mode=TwoWay}" SelectedValuePath="Key">
-                            <ComboBox.ItemsSource>
-                                <models:ProductFirmaMapper />
-                            </ComboBox.ItemsSource>
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Ellipse Width="10" Height="10" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
-                                            <Ellipse.Fill>
-                                                <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.8" />
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                        <TextBlock Text="{Binding Value.Translation}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
-
-                </StackPanel>
+        <local:ProductEditView2 DataContext="{Binding Context}" />
 
         <Border MinHeight="70">
             <StackPanel Style="{StaticResource FormButtons}">

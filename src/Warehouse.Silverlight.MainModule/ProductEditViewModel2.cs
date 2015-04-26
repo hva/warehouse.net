@@ -35,7 +35,7 @@ namespace Warehouse.Silverlight.MainModule
             ValidateLength();
             ValidatePriceIcome();
 
-            return HasErrors;
+            return !HasErrors;
         }
 
         public Product GetUpdatedProduct()
