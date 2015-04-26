@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-using Warehouse.Silverlight.Auth;
 using Warehouse.Silverlight.Data.Interfaces;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Infrastructure.Events;
-using Warehouse.Silverlight.MainModule.Attachments;
 using Warehouse.Silverlight.Models;
 
 namespace Warehouse.Silverlight.MainModule
 {
-    public class ProductEditViewModel2 : InteractionRequestValidationObject
+    public class ProductCreateWindowViewModel : InteractionRequestValidationObject
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
-        private readonly IAuthStore authStore;
-        private readonly AttachmentsViewModel attachmentsViewModel;
 
         private string id;
         private string name;
@@ -35,81 +30,33 @@ namespace Warehouse.Silverlight.MainModule
         private bool isSheet;
         private double[] sheetSizes;
         private bool isBusy;
-        private bool isEditor;
-        private bool isAttachmentsTabActive;
 
-
-        public ProductEditViewModel2(IProductsRepository repository, IEventAggregator eventAggregator, IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
+        public ProductCreateWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
-            this.authStore = authStore;
-            this.attachmentsViewModel = attachmentsViewModel;
 
-            SaveCommand = new DelegateCommand<ChildWindow>(Save);
-            TabLoadedCommand = new DelegateCommand<object>(OnTabLoaded);
+            SaveCommand = new DelegateCommand(Save);
+            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
-        public ProductEditViewModel2 Init(Product product = null)
+        public ProductCreateWindowViewModel Init()
         {
-            if (product == null)
-            {
-                product = new Product();
-                IsNewProduct = true;
-            }
-            else
-            {
-                IsNewProduct = false;
-            }
-
+            var product = new Product();
             ProductToProps(product);
-
-            var token = authStore.LoadToken();
-            if (token != null)
-            {
-                IsEditor = token.IsEditor();
-                DenyPriceEdit = !token.IsAdmin();
-            }
-
+            IsWindowOpen = true;
             return this;
         }
 
         public ICommand SaveCommand { get; private set; }
-        public ICommand TabLoadedCommand { get; private set; }
-
-        public bool IsEditor
-        {
-            get
-            {
-                if (isAttachmentsTabActive)
-                {
-                    return false;
-                }
-                return isEditor;
-            }
-            private set
-            {
-                if (isEditor != value)
-                {
-                    isEditor = value;
-                    RaisePropertyChanged(() => IsEditor);
-                }
-            }
-        }
-        public bool DenyPriceEdit { get; private set; }
-        public bool IsNewProduct { get; private set; }
-        public object AttachmentsContext { get { return attachmentsViewModel; } }
+        public ICommand CancelCommand { get; private set; }
 
         public string Title2
         {
             get
             {
                 var label = isSheet ? " (лист)" : string.Empty;
-                if (IsNewProduct) // creating
-                {
-                    return string.Format("Новая позиция{0}", label);
-                }
-                return string.Format("{0} {1}{2}", Name, Size, label);
+                return string.Format("Новая позиция{0}", label);
             }
         }
 
@@ -464,7 +411,7 @@ namespace Warehouse.Silverlight.MainModule
 
         #endregion
 
-        private async void Save(ChildWindow window)
+        private async void Save()
         {
             ValidateName();
             ValidateSize();
@@ -487,7 +434,7 @@ namespace Warehouse.Silverlight.MainModule
                 var args = new ProductUpdatedEventArgs(task.Result, false);
                 eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                 Confirmed = true;
-                window.Close();
+                IsWindowOpen = false;
             }
         }
 
@@ -568,21 +515,6 @@ namespace Warehouse.Silverlight.MainModule
             }
 
             return null;
-        }
-
-        private async void OnTabLoaded(object vm)
-        {
-            if (vm is AttachmentsView)
-            {
-                await attachmentsViewModel.Init(id);
-                isAttachmentsTabActive = true;
-            }
-            else
-            {
-                isAttachmentsTabActive = false;
-            }
-
-            RaisePropertyChanged(() => IsEditor);
         }
     }
 }

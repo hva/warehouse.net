@@ -39,12 +39,7 @@
         <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
-                    <sdk:ChildWindow Title="Новая позиция" d:DataContext="{d:DesignInstance Type=local:ProductEditViewModel2}">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
-                        </i:Interaction.Behaviors>
-                        <local:ProductEditView2 />
-                    </sdk:ChildWindow>
+                    <local:ProductCreateWindow />
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>

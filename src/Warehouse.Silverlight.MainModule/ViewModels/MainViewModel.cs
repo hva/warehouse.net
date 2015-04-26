@@ -27,8 +27,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
         private readonly Func<ProductEditViewModel> productEditViewModelFactory;
-        private readonly Func<ProductEditViewModel2> productEditViewModelFactory2;
-        private readonly InteractionRequest<ProductEditViewModel2> createProductRequest;
+        private readonly ProductCreateWindowViewModel productCreateViewModel;
+        private readonly InteractionRequest<ProductCreateWindowViewModel> createProductRequest;
         private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
@@ -40,15 +40,16 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private double totalWeight;
 
         public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
-            IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory, Func<ProductEditViewModel2> productEditViewModelFactory2)
+            IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory,
+            ProductCreateWindowViewModel productCreateViewModel)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
             this.productEditViewModelFactory = productEditViewModelFactory;
-            this.productEditViewModelFactory2 = productEditViewModelFactory2;
+            this.productCreateViewModel = productCreateViewModel;
 
-            createProductRequest = new InteractionRequest<ProductEditViewModel2>();
+            createProductRequest = new InteractionRequest<ProductCreateWindowViewModel>();
             editProductRequest = new InteractionRequest<ProductEditViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
@@ -173,7 +174,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void CreateProduct()
         {
-            createProductRequest.Raise(productEditViewModelFactory2().Init());
+            createProductRequest.Raise(productCreateViewModel.Init());
         }
 
         private void UpdateTotalWeight()
