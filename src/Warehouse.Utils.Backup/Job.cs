@@ -56,7 +56,7 @@ namespace Warehouse.Utils.Backup
                 throw new NullReferenceException("appPath");
             }
             var customerNow = DateTime.UtcNow.AddHours(3);
-            zipFile = $"skill_{customerNow:yyyyMMdd_HHmm}.zip";
+            zipFile = string.Format("skill_{0:yyyyMMdd_HHmm}.zip", customerNow);
         }
 
         private void Dump()
@@ -113,7 +113,7 @@ namespace Warehouse.Utils.Backup
                 client.BaseAddress = new Uri("https://cloud-api.yandex.net:443");
 
                 var path = string.Concat("skill-backup/", zipFile);
-                var linkUriString = $"/v1/disk/resources/upload?path={WebUtility.UrlEncode(path)}";
+                var linkUriString = string.Format("/v1/disk/resources/upload?path={0}", WebUtility.UrlEncode(path));
 
                 var resp = await client.GetAsync(linkUriString);
                 var content = await resp.Content.ReadAsStringAsync();
