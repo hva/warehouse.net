@@ -10,7 +10,7 @@
     xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
     xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule"
     mc:Ignorable="d"
-    Width="Auto" Height="Auto"
+    Width="390" Height="570"
     Title="{Binding Title2}"
     d:DataContext="{d:DesignInstance Type=local:ProductCreateWindowViewModel}">
 
@@ -18,26 +18,22 @@
         <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
     </i:Interaction.Behaviors>
 
-    <sdk:ChildWindow.Resources>
-        <Style TargetType="sdk:Label" BasedOn="{StaticResource Label_Default}">
-            <Setter Property="Width" Value="150" />
-        </Style>
-        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}">
-            <Setter Property="Width" Value="200" />
-        </Style>
-    </sdk:ChildWindow.Resources>
+    <Grid>
 
-    <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <!--IsSheet-->
         <StackPanel Orientation="Horizontal">
-            <sdk:Label Content="Лист" />
+            <sdk:Label Content="Лист" Width="150" />
             <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
 
-        <local:ProductEditView2 DataContext="{Binding Context}" />
+        <local:ProductEditView2 Grid.Row="1" DataContext="{Binding Context}" />
 
-        <Border MinHeight="70">
+        <Border Grid.Row="2" MinHeight="70">
             <StackPanel Style="{StaticResource FormButtons}">
                 <controls:ProgressRing IsActive="{Binding IsBusy}" />
                 <Button Content="Сохранить" Command="{Binding SaveCommand}" />
@@ -45,5 +41,5 @@
                 <Button Content="Отмена" Command="{Binding CancelCommand}" />
             </StackPanel>
         </Border>
-    </StackPanel>
+    </Grid>
 </sdk:ChildWindow>

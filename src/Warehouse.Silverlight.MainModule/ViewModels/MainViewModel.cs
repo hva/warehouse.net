@@ -26,10 +26,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
-        private readonly Func<ProductEditViewModel> productEditViewModelFactory;
+        private readonly ProductEditWindowViewModel productEditViewModel;
         private readonly ProductCreateWindowViewModel productCreateViewModel;
         private readonly InteractionRequest<ProductCreateWindowViewModel> createProductRequest;
-        private readonly InteractionRequest<ProductEditViewModel> editProductRequest;
+        private readonly InteractionRequest<ProductEditWindowViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
@@ -39,18 +39,17 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         private readonly DelegateCommand deleteCommand;
         private double totalWeight;
 
-        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
-            IProductsRepository productsRepository, Func<ProductEditViewModel> productEditViewModelFactory,
-            ProductCreateWindowViewModel productCreateViewModel)
+        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore, IProductsRepository productsRepository,
+            ProductEditWindowViewModel productEditViewModel, ProductCreateWindowViewModel productCreateViewModel)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
-            this.productEditViewModelFactory = productEditViewModelFactory;
+            this.productEditViewModel = productEditViewModel;
             this.productCreateViewModel = productCreateViewModel;
 
             createProductRequest = new InteractionRequest<ProductCreateWindowViewModel>();
-            editProductRequest = new InteractionRequest<ProductEditViewModel>();
+            editProductRequest = new InteractionRequest<ProductEditWindowViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
@@ -169,7 +168,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         private void OpenProduct(Product p)
         {
-            editProductRequest.Raise(productEditViewModelFactory().Init(p));
+            editProductRequest.Raise(productEditViewModel.Init(p));
         }
 
         private void CreateProduct()

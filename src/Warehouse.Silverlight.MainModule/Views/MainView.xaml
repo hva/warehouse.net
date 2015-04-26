@@ -47,7 +47,7 @@
         <prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
-                    <views:ProductEditView />
+                    <local:ProductEditWindow />
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>

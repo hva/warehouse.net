@@ -131,6 +131,7 @@
     <Compile Include="MainModule.cs" />
     <Compile Include="Models\ProductFirma.cs" />
     <Compile Include="Models\ProductFirmaMapper.cs" />
+    <Compile Include="ProductEditWindowViewModel.cs" />
     <Compile Include="ProductCreateWindowViewModel.cs" />
     <Compile Include="ProductCreateWindow.xaml.cs">
       <DependentUpon>ProductCreateWindow.xaml</DependentUpon>
@@ -139,6 +140,9 @@
       <DependentUpon>ProductEditView2.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductEditViewModel2.cs" />
+    <Compile Include="ProductEditWindow.xaml.cs">
+      <DependentUpon>ProductEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SheetEditViewModel2.cs" />
     <Compile Include="ViewModels\ChangePriceItem.cs" />
@@ -178,6 +182,10 @@
     <Page Include="ProductEditView2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProductEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChangePriceWindow.xaml">
       <SubType>Designer</SubType>

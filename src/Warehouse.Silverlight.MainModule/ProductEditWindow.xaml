@@ -1,0 +1,46 @@
+﻿<sdk:ChildWindow
+    x:Class="Warehouse.Silverlight.MainModule.ProductEditWindow"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Silverlight.Controls.Behaviors;assembly=Warehouse.Silverlight.Controls"
+    xmlns:attachments="clr-namespace:Warehouse.Silverlight.MainModule.Attachments"
+    xmlns:local="clr-namespace:Warehouse.Silverlight.MainModule"
+    xmlns:controls="clr-namespace:Warehouse.Silverlight.Controls;assembly=Warehouse.Silverlight.Controls"
+    mc:Ignorable="d"
+    Width="400" Height="560"
+    Title="{Binding Title}"
+    d:DataContext="{d:DesignInstance Type=local:ProductEditWindowViewModel}"
+    x:Name="confirmationWindow">
+
+    <i:Interaction.Behaviors>
+        <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
+
+    <sdk:TabControl x:Name="TabControl">
+        <sdk:TabItem Header="Параметры">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <local:ProductEditView2 DataContext="{Binding Context}" />
+
+                <StackPanel Grid.Row="1" Style="{StaticResource FormButtons}">
+                    <controls:ProgressRing IsActive="{Binding IsBusy}" />
+                    <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                    <Rectangle Width="10" />
+                    <Button Content="Отмена" Command="{Binding CancelCommand}" />
+                </StackPanel>
+            </Grid>
+        </sdk:TabItem>
+        <sdk:TabItem Header="Сертификаты">
+            <attachments:AttachmentsView DataContext="{Binding AttachmentsContext}" />
+        </sdk:TabItem>
+    </sdk:TabControl>
+
+</sdk:ChildWindow>
