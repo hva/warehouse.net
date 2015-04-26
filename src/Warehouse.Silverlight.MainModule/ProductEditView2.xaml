@@ -93,7 +93,9 @@
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="{Binding LenghtLabel}" />
-            <TextBox Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
+            <TextBox
+                Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                IsReadOnly="{Binding IsLengthReadonly}">
                 <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>

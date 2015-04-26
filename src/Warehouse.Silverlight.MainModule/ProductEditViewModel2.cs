@@ -10,7 +10,7 @@ namespace Warehouse.Silverlight.MainModule
     {
         private string id;
         private string name;
-        private string size;
+        protected string size;
         private string k;
         private string priceOpt;
         private long priceRozn;
@@ -55,7 +55,7 @@ namespace Warehouse.Silverlight.MainModule
                 Length = Math.Round(double.Parse(length), 2),
                 PriceIcome = long.Parse(priceIcome),
                 Internal = Internal,
-                IsSheet = false,
+                IsSheet = GetIsSheet(),
                 Firma = Firma,
             };
         }
@@ -87,7 +87,7 @@ namespace Warehouse.Silverlight.MainModule
 
         #region Size
 
-        public string Size
+        public virtual string Size
         {
             get { return size; }
             set
@@ -100,7 +100,7 @@ namespace Warehouse.Silverlight.MainModule
             }
         }
 
-        private void ValidateSize()
+        protected virtual void ValidateSize()
         {
             errorsContainer.ClearErrors(() => Size);
             errorsContainer.SetErrors(() => Size, Validate.Required(Size));
@@ -172,7 +172,7 @@ namespace Warehouse.Silverlight.MainModule
             }
         }
 
-        private void UpdatePriceRozn()
+        protected void UpdatePriceRozn()
         {
             if (errorsContainer.HasErrors(() => PriceOpt, () => K, () => Length))
             {
@@ -180,10 +180,7 @@ namespace Warehouse.Silverlight.MainModule
             }
             else
             {
-                var _priceOpt = decimal.Parse(priceOpt);
-                var _k = decimal.Parse(k);
-                var rozn = _priceOpt * _k / 1000m * 1.2m;
-                PriceRozn = (long) (decimal.Ceiling(rozn / 100) * 100);
+                PriceRozn = ProductExtensions.CalculatePriceRozn(priceOpt, k, length, GetIsSheet());
             }
         }
 
@@ -310,6 +307,8 @@ namespace Warehouse.Silverlight.MainModule
 
         public virtual string LenghtLabel { get { return "Длина штанги (м)"; } }
 
+        public virtual bool IsLengthReadonly { get { return false;} }
+
         #endregion
 
         #region PriceIcome
@@ -347,6 +346,11 @@ namespace Warehouse.Silverlight.MainModule
         public string Firma { get; set; }
 
         #endregion
+
+        protected virtual bool GetIsSheet()
+        {
+            return false;
+        }
 
         private void ProductToProps(Product product)
         {
