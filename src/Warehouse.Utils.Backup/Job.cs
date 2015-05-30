@@ -19,6 +19,8 @@ namespace Warehouse.Utils.Backup
         private string zipFile;
         private string token;
         private string uploadLink;
+        private string uploadPath;
+        private readonly DateTime customerTime = DateTime.UtcNow.AddHours(3);
 
         public override void Execute()
         {
@@ -39,6 +41,7 @@ namespace Warehouse.Utils.Backup
             Dump();
             Zip();
             LoadToken();
+            await CreateUploadPath();
             await GetUploadLink();
             await UploadFile();
             Cleanup();
@@ -55,8 +58,7 @@ namespace Warehouse.Utils.Backup
             {
                 throw new NullReferenceException("appPath");
             }
-            var customerNow = DateTime.UtcNow.AddHours(3);
-            zipFile = string.Format("skill_{0:yyyyMMdd_HHmm}.zip", customerNow);
+            zipFile = string.Format("skill_{0:yyyyMMdd_HHmm}.zip", customerTime);
         }
 
         private void Dump()
@@ -105,6 +107,29 @@ namespace Warehouse.Utils.Backup
             }
         }
 
+        private async Task CreateUploadPath()
+        {
+            uploadPath = string.Format("skill-backup/{0:yyyy_MMM}", customerTime);
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", token);
+                client.BaseAddress = new Uri("https://cloud-api.yandex.net:443");
+
+                var uriString = string.Format("/v1/disk/resources/?path={0}", WebUtility.UrlEncode(uploadPath));
+
+                var resp = await client.GetAsync(uriString);
+                if (resp.StatusCode == HttpStatusCode.NotFound)
+                {
+                    var message = new HttpRequestMessage(HttpMethod.Put, uriString);
+                    var resp2 = await client.SendAsync(message);
+                    if (resp2.StatusCode != HttpStatusCode.Created)
+                    {
+                        throw new Exception("can't create upload path");
+                    }
+                }
+            }
+        }
+
         private async Task GetUploadLink()
         {
             using (var client = new HttpClient())
@@ -112,13 +137,13 @@ namespace Warehouse.Utils.Backup
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", token);
                 client.BaseAddress = new Uri("https://cloud-api.yandex.net:443");
 
-                var path = string.Concat("skill-backup/", zipFile);
+                var path = string.Concat(uploadPath, "/", zipFile);
                 var linkUriString = string.Format("/v1/disk/resources/upload?path={0}", WebUtility.UrlEncode(path));
 
                 var resp = await client.GetAsync(linkUriString);
-                var content = await resp.Content.ReadAsStringAsync();
                 if (resp.StatusCode == HttpStatusCode.OK)
                 {
+                    var content = await resp.Content.ReadAsStringAsync();
                     var json = JObject.Parse(content);
                     uploadLink = json["href"].ToString();
                 }
