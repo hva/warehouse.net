@@ -140,6 +140,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Wpf.Navigation\Warehouse.Wpf.Navigation.csproj">
+      <Project>{FEB9B2FB-24F3-41FA-BDB1-E648BC95A085}</Project>
+      <Name>Warehouse.Wpf.Navigation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

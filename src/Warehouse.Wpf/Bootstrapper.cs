@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Prism.UnityExtensions;
+using Microsoft.Practices.Unity;
+using Warehouse.Wpf.Navigation;
 
 namespace Warehouse.Wpf
 {
@@ -7,7 +9,7 @@ namespace Warehouse.Wpf
     {
         protected override DependencyObject CreateShell()
         {
-            return new Shell();
+            return Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
@@ -16,6 +18,14 @@ namespace Warehouse.Wpf
 
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            Container.RegisterInstance(Logger);
+            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
         }
     }
 }
