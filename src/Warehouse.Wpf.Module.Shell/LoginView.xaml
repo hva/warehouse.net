@@ -8,38 +8,46 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=shell:LoginViewModel}">
 
-    <StackPanel Width="300">
+    <Grid ShowGridLines="True" Width="300">
 
-        <Grid Height="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+
+        <Grid>
             <!--<controls:AlertBox Content="{Binding Message}" VerticalAlignment="Bottom" />-->
         </Grid>
 
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Логин" />
-            <TextBox x:Name="login" Text="{Binding Login, Mode=TwoWay}">
-                <!--<i:Interaction.Behaviors>
-                    <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
-                </i:Interaction.Behaviors>-->
-            </TextBox>
-        </StackPanel>
+        <Label Grid.Row="1" Content="Логин"  />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="login" Text="{Binding Login, Mode=TwoWay}">
+            <!--<i:Interaction.Behaviors>
+                <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
+            </i:Interaction.Behaviors>-->
+        </TextBox>
 
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Пароль" />
-            <PasswordBox>
+        <Label Grid.Row="2" Content="Пароль" />
+        <PasswordBox Grid.Row="2" Grid.Column="1">
 
-                <!--Password="{Binding Password, Mode=TwoWay}"-->
+            <!--Password="{Binding Password, Mode=TwoWay}"-->
 
-                <!--<i:Interaction.Behaviors>
-                    <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
-                </i:Interaction.Behaviors>-->
-            </PasswordBox>
-        </StackPanel>
+            <!--<i:Interaction.Behaviors>
+                <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
+            </i:Interaction.Behaviors>-->
+        </PasswordBox>
 
         <Grid>
             <!--<controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />-->
             <Button Content="Войти" Command="{Binding LoginCommand}" IsDefault="True" />
             <!--Style="{StaticResource FormButton}"-->
         </Grid>
-    </StackPanel>
+    </Grid>
 
 </UserControl>
