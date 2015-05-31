@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="Warehouse.Wpf.Module.Shell.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:shell="clr-namespace:Warehouse.Wpf.Module.Shell"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=shell:LoginViewModel}">
+
+    <StackPanel Width="300">
+
+        <Grid Height="300">
+            <!--<controls:AlertBox Content="{Binding Message}" VerticalAlignment="Bottom" />-->
+        </Grid>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Логин" />
+            <TextBox x:Name="login" Text="{Binding Login, Mode=TwoWay}">
+                <!--<i:Interaction.Behaviors>
+                    <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
+                </i:Interaction.Behaviors>-->
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Пароль" />
+            <PasswordBox>
+
+                <!--Password="{Binding Password, Mode=TwoWay}"-->
+
+                <!--<i:Interaction.Behaviors>
+                    <behaviors:EnterPressedBehavior Command="{Binding LoginCommand}" />
+                </i:Interaction.Behaviors>-->
+            </PasswordBox>
+        </StackPanel>
+
+        <Grid>
+            <!--<controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />-->
+            <Button Content="Войти" Command="{Binding LoginCommand}" IsDefault="True" />
+            <!--Style="{StaticResource FormButton}"-->
+        </Grid>
+    </StackPanel>
+
+</UserControl>
