@@ -73,6 +73,10 @@
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
       <Name>Warehouse.Wpf.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Settings\Warehouse.Wpf.Settings.csproj">
+      <Project>{CA2DAE22-C84F-42BC-ACE1-C5D055C6CA34}</Project>
+      <Name>Warehouse.Wpf.Settings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

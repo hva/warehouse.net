@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
@@ -17,7 +18,6 @@ namespace Warehouse.Wpf.Module.Shell
         private readonly ISignalRClient signalRClient;
 
         private string login;
-        private string password;
         private bool isBusy;
 
         public LoginViewModel(IAuthService authService, INavigationService navigationService, ISignalRClient signalRClient)
@@ -26,22 +26,16 @@ namespace Warehouse.Wpf.Module.Shell
             this.navigationService = navigationService;
             this.signalRClient = signalRClient;
 
-            LoginCommand = new DelegateCommand(DoLogin);
+            LoginCommand = new DelegateCommand<PasswordBox>(DoLogin);
         }
+
+        public ICommand LoginCommand { get; private set; }
 
         public string Login
         {
             get { return login; }
             set { SetProperty(ref login, value); }
         }
-
-        public string Password
-        {
-            get { return password; }
-            set { SetProperty(ref password, value); }
-        }
-
-        public ICommand LoginCommand { get; private set; }
 
         public string Message
         {
@@ -64,7 +58,7 @@ namespace Warehouse.Wpf.Module.Shell
             //{
             //    Login = l;
             //}
-            Password = string.Empty;
+            //Password = string.Empty;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -85,11 +79,11 @@ namespace Warehouse.Wpf.Module.Shell
 
         #endregion
 
-        private async void DoLogin()
+        private async void DoLogin(PasswordBox password)
         {
             IsBusy = true;
             Message = null;
-            var task = await authService.Login(Login, Password);
+            var task = await authService.Login(Login, password.Password);
 
             if (task.Succeed)
             {
@@ -98,7 +92,7 @@ namespace Warehouse.Wpf.Module.Shell
             }
             else
             {
-                Password = string.Empty;
+                password.Password = string.Empty;
                 Message = "Пароль, который вы ввели, неверный.\nПожалуйста, попробуйте еще раз.";
             }
             IsBusy = false;
