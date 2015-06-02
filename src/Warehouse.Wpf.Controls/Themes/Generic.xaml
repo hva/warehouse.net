@@ -1,0 +1,31 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Controls">
+
+    <Style TargetType="{x:Type local:AlertBox}">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="Padding" Value="20,10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:AlertBox}">
+                    <Border x:Name="Container" Padding="{TemplateBinding Padding}" Background="#F04124" BorderThickness="1" BorderBrush="#DE2D0F" CornerRadius="3">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="AlertStates">
+                                <VisualState x:Name="Alert" />
+                                <VisualState x:Name="Success">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="Container" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#43AC6A" Duration="0" />
+                                        <ColorAnimation Storyboard.TargetName="Container" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#3A945B" Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <TextBlock Text="{TemplateBinding Content}" TextWrapping="Wrap" Foreground="White" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

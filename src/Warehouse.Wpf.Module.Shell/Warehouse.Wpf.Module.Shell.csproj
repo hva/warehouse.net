@@ -57,6 +57,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ObjectModel" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -83,6 +85,10 @@
     <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">
       <Project>{23D2C7E0-9521-452C-B3EE-F01CBA79E300}</Project>
       <Name>Warehouse.Wpf.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Controls\Warehouse.Wpf.Controls.csproj">
+      <Project>{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}</Project>
+      <Name>Warehouse.Wpf.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
