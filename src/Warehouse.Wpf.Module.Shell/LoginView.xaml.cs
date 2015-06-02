@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warehouse.Wpf.Module.Shell
 {
-    public partial class LoginView : UserControl
+    public partial class LoginView : UserControl, IView
     {
         public LoginView()
         {

@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:shell="clr-namespace:Warehouse.Wpf.Module.Shell"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=shell:LoginViewModel}">
+    d:DataContext="{d:DesignInstance Type=shell:LoginViewModel}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
 
     <StackPanel Width="300">
 

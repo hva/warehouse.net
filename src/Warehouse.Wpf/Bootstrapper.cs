@@ -42,6 +42,7 @@ namespace Warehouse.Wpf
 
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthStore, AuthStore>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IApplicationSettings, ApplicationSettings>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Infrastructure;
 
@@ -14,6 +15,8 @@ namespace Warehouse.Wpf.Module.Shell
             Container.RegisterType<object, LoginView>(Consts.LoginView);
             //Container.RegisterType<object, LoggedInView>(Consts.LoggedInView);
             //Container.RegisterType<object, TopMenu>(Consts.TopMenu);
+
+            ViewModelLocationProvider.Register(typeof(LoginView).FullName, () => Container.Resolve<LoginViewModel>() );
         }
     }
 }
