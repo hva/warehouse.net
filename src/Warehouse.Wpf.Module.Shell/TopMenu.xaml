@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="Warehouse.Wpf.Module.Shell.TopMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shell="clr-namespace:Warehouse.Wpf.Module.Shell"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=shell:TopMenuViewModel}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <!--<UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>-->
+    <Grid Height="45">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <!--<controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
+            <controls:TopMenuDivider />
+
+            <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <!--<controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
+            <controls:TopMenuDivider />
+            <controls:TopMenuItem Content="Выйти" Command="{Binding LogoutCommand}" />
+            <controls:TopMenuDivider />-->
+        </StackPanel>
+    </Grid>
+</UserControl>
