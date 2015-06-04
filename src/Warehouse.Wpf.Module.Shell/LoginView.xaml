@@ -11,9 +11,9 @@
     d:DataContext="{d:DesignInstance Type=shell:LoginViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
-    <StackPanel Width="300">
+    <StackPanel Width="300" VerticalAlignment="Center">
 
-        <Grid Height="300">
+        <Grid Height="100" Margin="0,-110,0,10">
             <controls:AlertBox Content="{Binding Message}" VerticalAlignment="Bottom" />
         </Grid>
 
@@ -28,9 +28,8 @@
         </StackPanel>
 
         <Grid>
-            <!--<controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />-->
-            <Button Content="Войти" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=password}" IsDefault="True" />
-            <!--Style="{StaticResource FormButton}"-->
+            <controls:ProgressRing IsActive="{Binding IsBusy}" Style="{StaticResource FormProgressRing}" />
+            <Button Content="Войти" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=password}" IsDefault="True" Style="{StaticResource FormButton}" />
         </Grid>
     </StackPanel>
 
