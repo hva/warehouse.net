@@ -81,6 +81,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Settings", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Controls", "Warehouse.Wpf.Controls\Warehouse.Wpf.Controls.csproj", "{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Module.Main", "Warehouse.Wpf.Module.Main\Warehouse.Wpf.Module.Main.csproj", "{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Models", "Warehouse.Wpf.Models\Warehouse.Wpf.Models.csproj", "{B1784D93-0EB5-4B35-A40E-9FBC125D829C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Data", "Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj", "{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +209,18 @@ Global
 		{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1784D93-0EB5-4B35-A40E-9FBC125D829C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1784D93-0EB5-4B35-A40E-9FBC125D829C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1784D93-0EB5-4B35-A40E-9FBC125D829C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1784D93-0EB5-4B35-A40E-9FBC125D829C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,6 +257,9 @@ Global
 		{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 		{CA2DAE22-C84F-42BC-ACE1-C5D055C6CA34} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 		{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
+		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C} = {14964CC4-3254-4AA6-AA33-9F48C980A263}
+		{B1784D93-0EB5-4B35-A40E-9FBC125D829C} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
+		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

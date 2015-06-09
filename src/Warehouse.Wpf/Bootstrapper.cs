@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Navigation;
 using Warehouse.Wpf.Settings;
@@ -34,6 +35,7 @@ namespace Warehouse.Wpf
             base.ConfigureModuleCatalog();
 
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ShellModule));
+            ((ModuleCatalog)ModuleCatalog).AddModule(typeof(MainModule));
         }
 
         protected override void ConfigureContainer()
