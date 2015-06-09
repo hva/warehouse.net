@@ -21,7 +21,7 @@ namespace Warehouse.Wpf.Auth
         {
             try
             {
-                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var store = GetStore())
                 using (var file = store.OpenFile(TokenFileName, FileMode.Create))
                 using (var writer = new StreamWriter(file))
                 {
@@ -40,7 +40,7 @@ namespace Warehouse.Wpf.Auth
         {
             try
             {
-                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var store = GetStore())
                 {
                     if (store.FileExists(TokenFileName))
                     {
@@ -83,6 +83,12 @@ namespace Warehouse.Wpf.Auth
             {
                 logger.Log(e.Message, Category.Exception, Priority.None);
             }
+        }
+
+        private static IsolatedStorageFile GetStore()
+        {
+            const IsolatedStorageScope scope = IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain;
+            return IsolatedStorageFile.GetStore(scope, typeof(System.Security.Policy.Url), typeof(System.Security.Policy.Url));
         }
     }
 }

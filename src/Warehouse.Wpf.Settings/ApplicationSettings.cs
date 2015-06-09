@@ -2,6 +2,6 @@
 {
     public class ApplicationSettings : IApplicationSettings
     {
-        public string Endpoint { get { return "http://localhost:63270/"; } }
+        public string Endpoint { get { return "http://localhost.fiddler:63270/"; } }
     }
 }
