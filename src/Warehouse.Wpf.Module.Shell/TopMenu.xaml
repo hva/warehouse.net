@@ -6,13 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shell="clr-namespace:Warehouse.Wpf.Module.Shell"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Module.Shell.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=shell:TopMenuViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
-    <!--<UserControl.Resources>
-        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </UserControl.Resources>-->
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
     <Grid Height="45">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -21,20 +23,20 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal">
-            <!--<controls:TopMenuDivider />
+            <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
             <controls:TopMenuDivider />
 
             <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+            <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
         <StackPanel Grid.Column="2" Orientation="Horizontal">
-            <!--<controls:TopMenuDivider />
+            <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
             <controls:TopMenuDivider />
             <controls:TopMenuItem Content="Выйти" Command="{Binding LogoutCommand}" />
-            <controls:TopMenuDivider />-->
+            <controls:TopMenuDivider />
         </StackPanel>
     </Grid>
 </UserControl>
