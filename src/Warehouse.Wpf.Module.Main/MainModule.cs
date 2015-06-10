@@ -10,7 +10,6 @@ namespace Warehouse.Wpf.Module.Main
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-
         public void Initialize()
         {
             Container.RegisterType<object, MainView>(Consts.MainView);

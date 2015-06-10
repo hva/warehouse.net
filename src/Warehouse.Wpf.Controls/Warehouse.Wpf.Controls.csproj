@@ -55,6 +55,7 @@
     <Compile Include="AlertType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="ProgressRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

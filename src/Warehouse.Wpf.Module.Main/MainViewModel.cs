@@ -17,6 +17,9 @@ using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.Module.Main.ChangePrice;
+using Warehouse.Wpf.Module.Main.ProductCreate;
+using Warehouse.Wpf.Module.Main.ProductEdit;
 
 namespace Warehouse.Wpf.Module.Main
 {
