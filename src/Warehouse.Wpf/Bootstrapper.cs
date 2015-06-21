@@ -3,6 +3,8 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Data;
+using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Navigation;
@@ -47,6 +49,8 @@ namespace Warehouse.Wpf
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IApplicationSettings, ApplicationSettings>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IProductsRepository, ProductsRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
         }
 
         protected override DependencyObject CreateShell()

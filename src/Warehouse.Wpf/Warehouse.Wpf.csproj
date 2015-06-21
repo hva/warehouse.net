@@ -154,6 +154,10 @@
       <Project>{c5dcdf6a-bb55-4258-a57f-b1dc6fd4cb37}</Project>
       <Name>Warehouse.Wpf.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj">
+      <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
+      <Name>Warehouse.Wpf.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Module.Main\Warehouse.Wpf.Module.Main.csproj">
       <Project>{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}</Project>
       <Name>Warehouse.Wpf.Module.Main</Name>

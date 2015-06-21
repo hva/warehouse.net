@@ -1,5 +1,8 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Settings;
 
 namespace Warehouse.Wpf.Data.Http
 {
@@ -7,9 +10,12 @@ namespace Warehouse.Wpf.Data.Http
     {
         private const string Bearer = "Bearer";
 
-        public BearerHttpClient(string token)
+        public BearerHttpClient(IAuthStore authStore, IApplicationSettings settings)
         {
-            DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Bearer, token);
+            BaseAddress = new Uri(settings.Endpoint, UriKind.Absolute);
+
+            var token = authStore.LoadToken();
+            DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Bearer, token.AccessToken);
         }
     }
 }

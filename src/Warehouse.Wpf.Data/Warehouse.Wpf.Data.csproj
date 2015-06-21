@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,11 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilesRepository.cs" />
     <Compile Include="Interfaces\IFilesRepository.cs" />
     <Compile Include="Interfaces\IProductsRepository.cs" />
+    <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Wpf.Data.Http\Warehouse.Wpf.Data.Http.csproj">
+      <Project>{f79b8463-a3a7-4f54-a73e-d3ab4804428c}</Project>
+      <Name>Warehouse.Wpf.Data.Http</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
       <Name>Warehouse.Wpf.Infrastructure</Name>
@@ -52,6 +63,9 @@
       <Project>{b1784d93-0eb5-4b35-a40e-9fbc125d829c}</Project>
       <Name>Warehouse.Wpf.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

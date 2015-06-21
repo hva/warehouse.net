@@ -96,11 +96,16 @@
     <Compile Include="ChangePrice\ChangePriceWindow.xaml.cs">
       <DependentUpon>ChangePriceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NdValueConverter.cs" />
+    <Compile Include="Converters\NdVisibilityConverter.cs" />
+    <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Models\ProductFirma.cs" />
+    <Compile Include="Models\ProductFirmaMapper.cs" />
     <Compile Include="ProductCreate\ProductCreateWindow.xaml.cs">
       <DependentUpon>ProductCreateWindow.xaml</DependentUpon>
     </Compile>
