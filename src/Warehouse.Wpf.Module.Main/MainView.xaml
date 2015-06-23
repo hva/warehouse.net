@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Main"
-    xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Main.Converters"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     mc:Ignorable="d"
@@ -106,16 +105,27 @@
             <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
         </Grid>
 
-        <DataGrid
+        <ListView
+            Grid.Row="1"
+            ItemsSource="{Binding Items}"
+            BorderThickness="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Наимнование" DisplayMemberBinding="{Binding Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <!--<DataGrid
             Grid.Row="1"
             ItemsSource="{Binding Items}"
             ColumnHeaderStyle="{StaticResource ColumnHeaderRightStyle}"
             AutoGenerateColumns="False" IsReadOnly="True"
             RowBackground="Transparent" AlternatingRowBackground="Transparent">
-            <!--<i:Interaction.Behaviors>
+            <i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>-->
+            </i:Interaction.Behaviors>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="20">
                     <DataGridTemplateColumn.CellTemplate>
@@ -183,7 +193,7 @@
                 <DataGridTextColumn Header="Длина (м)" Binding="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
 
         <!--<ItemsControl Grid.Row="2" Margin="0,5,0,0">
             <ItemsControl.ItemsSource>
