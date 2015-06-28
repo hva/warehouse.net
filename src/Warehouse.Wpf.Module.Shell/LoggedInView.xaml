@@ -12,13 +12,14 @@
         <Grid MaxWidth="1000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
+                <RowDefinition Height="10" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <ContentControl
                 regions:RegionManager.RegionName="TopMenuRegion"
                 HorizontalContentAlignment="Stretch" />
             <ContentControl
-                Grid.Row="1"
+                Grid.Row="2"
                 regions:RegionManager.RegionName="MainRegion"
                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
         </Grid>

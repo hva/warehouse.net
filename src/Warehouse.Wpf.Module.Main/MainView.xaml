@@ -7,21 +7,13 @@
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Main"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Main.Converters"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
-    mvvm:ViewModelLocator.AutoWireViewModel="True">
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    Language="ru-RU">
 
     <UserControl.Resources>
-        <Style x:Key="TextCellStyle" TargetType="DataGridCell">
-            <!--BasedOn="{StaticResource DataGridCell_Default}"-->
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-        </Style>
-        <Style x:Key="ColumnHeaderRightStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="HorizontalContentAlignment" Value="Right"/>
-        </Style>
-        <Style x:Key="ColumnHeaderLeftStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:NdVisibilityConverter x:Key="NdVisibilityConverter" />
         <converters:NdValueConverter x:Key="NdValueConverter" />
@@ -72,14 +64,15 @@
 
     </i:Interaction.Triggers>-->
 
-    <Grid Margin="0,10">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="0,0,0,10">
+        <Grid Margin="10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
@@ -105,95 +98,99 @@
             <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
         </Grid>
 
-        <ListView
-            Grid.Row="1"
-            ItemsSource="{Binding Items}"
-            BorderThickness="0">
+        <ListView Grid.Row="2" ItemsSource="{Binding Items}" BorderThickness="0">
+            <!--<i:Interaction.Behaviors>
+                <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
+                <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+            </i:Interaction.Behaviors>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Наимнование" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle Width="10" Height="10" Fill="{Binding Converter={StaticResource ProductFirmaToBrushConverter}}" Opacity="0.8" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Наимнование" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Размер" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Size}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Коэф.">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding K, StringFormat='{}{0:0.##;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Цена&#10;без НДС (опт.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Цена&#10;с НДС (розн.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Кол-во&#10;(кг.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.###}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Кол-во&#10;(шт.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Count, StringFormat='{}{0:#.##}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Н/Д">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,-2" d:DataContext="{d:DesignInstance Type=models:Product}">
+                                    <Border
+                                        Visibility="{Binding Nd, Converter={StaticResource NdVisibilityConverter}}"
+                                        ToolTipService.ToolTip="{Binding Nd, Converter={StaticResource NdValueConverter}}"
+                                        Background="#C9CACA" Opacity="0.6" />
+                                    <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Длина (м)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Приходная">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        
-        <!--<DataGrid
-            Grid.Row="1"
-            ItemsSource="{Binding Items}"
-            ColumnHeaderStyle="{StaticResource ColumnHeaderRightStyle}"
-            AutoGenerateColumns="False" IsReadOnly="True"
-            RowBackground="Transparent" AlternatingRowBackground="Transparent">
-            <i:Interaction.Behaviors>
-                <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
-                <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Width="20">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Ellipse Width="10" Height="10" Fill="{Binding Converter={StaticResource ProductFirmaToBrushConverter}}" Opacity="0.8" Stroke="LightGray" StrokeThickness="1" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                        </Style>
-                    </DataGridTemplateColumn.CellStyle>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn
-                    
-                    Header="Наимнование"
-                    Binding="{Binding Name}"
-                    CellStyle="{StaticResource TextCellStyle}"
-                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Размер"
-                    Binding="{Binding Size}"
-                    CellStyle="{StaticResource TextCellStyle}"
-                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Коэф."
-                    Binding="{Binding K, StringFormat='{}{0:0.##;#;#}'}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Цена&#10;без НДС (опт.)"
-                    Binding="{Binding PriceOpt, StringFormat='{}{0:##,#}'}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Цена&#10;с НДС (розн.)"
-                    Binding="{Binding PriceRozn, StringFormat='{}{0:##,#}'}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Кол-во&#10;(кг.)"
-                    Binding="{Binding Weight, StringFormat='{}{0:#.###}'}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn
-                    Header="Кол-во&#10;(шт.)"
-                    Binding="{Binding Count, StringFormat='{}{0:#.##}'}"
-                    d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTemplateColumn Header="Н/Д">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Grid d:DataContext="{d:DesignInstance Type=models:Product}">
-                                <Border
-                                    Visibility="{Binding Nd, Converter={StaticResource NdVisibilityConverter}}"
-                                    ToolTipService.ToolTip="{Binding Nd, Converter={StaticResource NdValueConverter}}"
-                                    Background="#C9CACA" Opacity="0.6" />
-                                <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" />
-                            </Grid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </DataGridTemplateColumn.CellStyle>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Длина (м)" Binding="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-            </DataGrid.Columns>
-        </DataGrid>-->
 
         <!--<ItemsControl Grid.Row="2" Margin="0,5,0,0">
             <ItemsControl.ItemsSource>
