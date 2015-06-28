@@ -29,7 +29,8 @@
         <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
             <prism:PopupWindowAction IsModal="True" prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}">
                 <prism:PopupWindowAction.WindowContent>
-                    <local:RegionAwareControl
+                    <ContentControl
+                        prism:RegionManager.RegionManager="{x:Static local:UIServiceLocator.RegionManager}"
                         prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}"
                         VerticalContentAlignment="Stretch"
                         HorizontalContentAlignment="Stretch" />
