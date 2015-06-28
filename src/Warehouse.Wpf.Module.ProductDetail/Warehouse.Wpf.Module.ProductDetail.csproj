@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8DC55023-47A1-4243-9CE9-C3838AC16FAF}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{E4E36694-80E5-47B2-A11C-C48346489AB5}</ProjectGuid>
+    <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Warehouse.Wpf</RootNamespace>
-    <AssemblyName>Warehouse.Wpf</AssemblyName>
+    <RootNamespace>Warehouse.Wpf.Module.ProductDetail</RootNamespace>
+    <AssemblyName>Warehouse.Wpf.Module.ProductDetail</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,10 +36,6 @@
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Interactivity.5.0.0\lib\NET45\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
       <Private>True</Private>
@@ -50,20 +44,12 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.PubSubEvents, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.PubSubEvents.1.1.2\lib\portable-sl5+windowsphone8+windows8+net40+wpa81\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.UnityExtensions, Version=5.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.UnityExtensions.5.0.1\lib\NET45\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -80,7 +66,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -94,20 +79,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Shell.xaml.cs">
-      <DependentUpon>Shell.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ProductDetailModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,6 +93,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\CreateProductViewModel.cs" />
+    <Compile Include="Views\CreateProductView.xaml.cs">
+      <DependentUpon>CreateProductView.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -132,59 +108,17 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Shell.xaml">
+    <Page Include="Views\CreateProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\ListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">
-      <Project>{23d2c7e0-9521-452c-b3ee-f01cba79e300}</Project>
-      <Name>Warehouse.Wpf.Auth</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Controls\Warehouse.Wpf.Controls.csproj">
-      <Project>{c5dcdf6a-bb55-4258-a57f-b1dc6fd4cb37}</Project>
-      <Name>Warehouse.Wpf.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj">
-      <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
-      <Name>Warehouse.Wpf.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Module.Main\Warehouse.Wpf.Module.Main.csproj">
-      <Project>{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}</Project>
-      <Name>Warehouse.Wpf.Module.Main</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Module.ProductDetail\Warehouse.Wpf.Module.ProductDetail.csproj">
-      <Project>{E4E36694-80E5-47B2-A11C-C48346489AB5}</Project>
-      <Name>Warehouse.Wpf.Module.ProductDetail</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Module.Shell\Warehouse.Wpf.Module.Shell.csproj">
-      <Project>{458c0dc6-d383-42fe-8bbf-83544fe22619}</Project>
-      <Name>Warehouse.Wpf.Module.Shell</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Navigation\Warehouse.Wpf.Navigation.csproj">
-      <Project>{FEB9B2FB-24F3-41FA-BDB1-E648BC95A085}</Project>
-      <Name>Warehouse.Wpf.Navigation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Settings\Warehouse.Wpf.Settings.csproj">
-      <Project>{ca2dae22-c84f-42bc-ace1-c5d055c6ca34}</Project>
-      <Name>Warehouse.Wpf.Settings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
-      <Project>{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA}</Project>
-      <Name>Warehouse.Wpf.SignalR</Name>
+    <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
+      <Project>{75A26DFE-9711-4E5C-BC3D-50D2F8292391}</Project>
+      <Name>Warehouse.Wpf.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

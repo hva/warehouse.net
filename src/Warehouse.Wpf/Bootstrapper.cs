@@ -6,6 +6,7 @@ using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Module.Main;
+using Warehouse.Wpf.Module.ProductDetail;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Navigation;
 using Warehouse.Wpf.Settings;
@@ -38,6 +39,7 @@ namespace Warehouse.Wpf
 
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ShellModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(MainModule));
+            ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ProductDetailModule));
         }
 
         protected override void ConfigureContainer()

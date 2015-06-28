@@ -14,11 +14,11 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data.Interfaces;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Module.Main.ChangePrice;
-using Warehouse.Wpf.Module.Main.ProductCreate;
 using Warehouse.Wpf.Module.Main.ProductEdit;
 
 namespace Warehouse.Wpf.Module.Main
@@ -28,9 +28,9 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
+        private readonly IRegionManager regionManager;
         private readonly ProductEditWindowViewModel productEditViewModel;
-        private readonly ProductCreateWindowViewModel productCreateViewModel;
-        private readonly InteractionRequest<ProductCreateWindowViewModel> createProductRequest;
+        private readonly InteractionRequest<INotification> createProductRequest;
         private readonly InteractionRequest<ProductEditWindowViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
@@ -41,16 +41,17 @@ namespace Warehouse.Wpf.Module.Main
         private readonly DelegateCommand deleteCommand;
         private double totalWeight;
 
-        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore, IProductsRepository productsRepository,
-            ProductEditWindowViewModel productEditViewModel, ProductCreateWindowViewModel productCreateViewModel)
+        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
+            IProductsRepository productsRepository, IRegionManager regionManager,
+            ProductEditWindowViewModel productEditViewModel)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
+            this.regionManager = regionManager;
             this.productEditViewModel = productEditViewModel;
-            this.productCreateViewModel = productCreateViewModel;
 
-            createProductRequest = new InteractionRequest<ProductCreateWindowViewModel>();
+            createProductRequest = new InteractionRequest<INotification>();
             editProductRequest = new InteractionRequest<ProductEditWindowViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
@@ -198,7 +199,8 @@ namespace Warehouse.Wpf.Module.Main
 
         private void CreateProduct()
         {
-            createProductRequest.Raise(productCreateViewModel.Init());
+            regionManager.RequestNavigate(Consts.ProductWindowRegion, Consts.CreateProductView);
+            createProductRequest.Raise(new Notification { Title = "New Product" });
         }
 
         private void UpdateTotalWeight()

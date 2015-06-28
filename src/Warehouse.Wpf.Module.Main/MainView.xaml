@@ -9,6 +9,9 @@
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:localModels="clr-namespace:Warehouse.Wpf.Module.Main.Models"
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -21,33 +24,38 @@
         <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
     </UserControl.Resources>
 
-    <!--<i:Interaction.Triggers>
+    <i:Interaction.Triggers>
 
         <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
-            <prism:PopupChildWindowAction>
-                <prism:PopupChildWindowAction.ChildWindow>
-                    <local:ProductCreateWindow />
-                </prism:PopupChildWindowAction.ChildWindow>
-            </prism:PopupChildWindowAction>
+            <prism:PopupWindowAction IsModal="True" prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}">
+                <prism:PopupWindowAction.WindowContent>
+                    <local:RegionAwareControl
+                        prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}"
+                        VerticalContentAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch" />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
+        <!--<local:ProductCreateWindow />-->
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
+
+        <!--<prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
                     <local:ProductEditWindow />
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>
+        </prism:InteractionRequestTrigger>-->
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
+        <!--<prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
                     <views:ChangePriceWindow />
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>
+        </prism:InteractionRequestTrigger>-->
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+        <!--<prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
                     <prism:ConfirmationChildWindow Width="300">
@@ -61,9 +69,9 @@
                     </prism:ConfirmationChildWindow>
                 </prism:PopupChildWindowAction.ChildWindow>
             </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>
+        </prism:InteractionRequestTrigger>-->
 
-    </i:Interaction.Triggers>-->
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>

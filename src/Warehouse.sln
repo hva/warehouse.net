@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Models", "War
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Data", "Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj", "{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Module.ProductDetail", "Warehouse.Wpf.Module.ProductDetail\Warehouse.Wpf.Module.ProductDetail.csproj", "{E4E36694-80E5-47B2-A11C-C48346489AB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -221,6 +223,10 @@ Global
 		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E36694-80E5-47B2-A11C-C48346489AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E36694-80E5-47B2-A11C-C48346489AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E36694-80E5-47B2-A11C-C48346489AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E36694-80E5-47B2-A11C-C48346489AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -260,6 +266,7 @@ Global
 		{F575F4B8-5B11-4D82-8367-ED16D7F0B46C} = {14964CC4-3254-4AA6-AA33-9F48C980A263}
 		{B1784D93-0EB5-4B35-A40E-9FBC125D829C} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 		{84FAA228-9C42-48B7-923C-BCC6EC9F10F7} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
+		{E4E36694-80E5-47B2-A11C-C48346489AB5} = {14964CC4-3254-4AA6-AA33-9F48C980A263}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
