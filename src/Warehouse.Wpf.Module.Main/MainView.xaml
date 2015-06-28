@@ -8,6 +8,7 @@
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Main.Converters"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
+    xmlns:localModels="clr-namespace:Warehouse.Wpf.Module.Main.Models"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -69,6 +70,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
             <RowDefinition />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -98,14 +100,18 @@
             <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
         </Grid>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Items}" BorderThickness="0">
+        <ListView
+            Grid.Row="2"
+            ItemsSource="{Binding Items}"
+            BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <!--<i:Interaction.Behaviors>
                 <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
+                    <GridViewColumn Width="30">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Rectangle Width="10" Height="10" Fill="{Binding Converter={StaticResource ProductFirmaToBrushConverter}}" Opacity="0.8" />
@@ -126,35 +132,35 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Коэф.">
+                    <GridViewColumn Header="K">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding K, StringFormat='{}{0:0.##;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Цена&#10;без НДС (опт.)">
+                    <GridViewColumn Header="Цена оптовая">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Цена&#10;с НДС (розн.)">
+                    <GridViewColumn Header="Цена розничная">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Кол-во&#10;(кг.)">
+                    <GridViewColumn Header="Кол-во (кг)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.###}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Кол-во&#10;(шт.)">
+                    <GridViewColumn Header="Кол-во (шт)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Count, StringFormat='{}{0:#.##}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
@@ -192,18 +198,18 @@
             </ListView.View>
         </ListView>
 
-        <!--<ItemsControl Grid.Row="2" Margin="0,5,0,0">
+        <ItemsControl Grid.Row="4" Margin="20,0">
             <ItemsControl.ItemsSource>
                 <localModels:ProductFirmaMapper />
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
-                        <Ellipse Width="10" Height="10" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
-                            <Ellipse.Fill>
-                                <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.8" />
-                            </Ellipse.Fill>
-                        </Ellipse>
+                        <Rectangle Width="10" Height="10" Margin="0,0,5,0" Opacity="0.8">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding Value.Color}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <TextBlock Text="{Binding Value.Translation}" />
                     </StackPanel>
                 </DataTemplate>
@@ -213,7 +219,7 @@
                     <StackPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-        </ItemsControl>-->
+        </ItemsControl>
 
     </Grid>
 
