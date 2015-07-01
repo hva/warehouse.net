@@ -1,13 +1,13 @@
 ﻿<UserControl
-    x:Class="Warehouse.Wpf.Module.Main.ProductEdit.ProductEditView2"
+    x:Class="Warehouse.Wpf.Module.ProductDetail.Form.ProductFormView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:productEdit="clr-namespace:Warehouse.Wpf.Module.Main.ProductEdit"
+    xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=productEdit:ProductEditViewModel2}">
+    d:DataContext="{d:DesignInstance Type=form:ProductFormViewModel}">
 
     <UserControl.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource Label_Default}">

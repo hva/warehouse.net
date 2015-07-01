@@ -2,8 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Module.ProductDetail.ViewModels;
-using Warehouse.Wpf.Module.ProductDetail.Views;
+using Warehouse.Wpf.Module.ProductDetail.Create;
 
 namespace Warehouse.Wpf.Module.ProductDetail
 {
@@ -14,8 +13,8 @@ namespace Warehouse.Wpf.Module.ProductDetail
 
         public void Initialize()
         {
-            Container.RegisterType<object, CreateProductView>(Consts.CreateProductView);
-            ViewModelLocationProvider.Register(typeof(CreateProductView).FullName, () => Container.Resolve<CreateProductViewModel>());
+            Container.RegisterType<object, ProductCreateView>(Consts.CreateProductView);
+            ViewModelLocationProvider.Register(typeof(ProductCreateView).FullName, () => Container.Resolve<ProductCreateViewModel>());
         }
     }
 }

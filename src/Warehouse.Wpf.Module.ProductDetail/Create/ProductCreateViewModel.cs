@@ -5,20 +5,20 @@ using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Main.ProductEdit;
+using Warehouse.Wpf.Module.ProductDetail.Form;
 
-namespace Warehouse.Wpf.Module.Main.ProductCreate
+namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public class ProductCreateWindowViewModel : InteractionRequestValidationObject
+    public class ProductCreateViewModel : InteractionRequestValidationObject
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
 
         private bool isSheet;
         private bool isBusy;
-        private ProductEditViewModel2 context;
+        private ProductFormViewModel context;
 
-        public ProductCreateWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
+        public ProductCreateViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
@@ -27,7 +27,7 @@ namespace Warehouse.Wpf.Module.Main.ProductCreate
             CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
-        public ProductCreateWindowViewModel Init()
+        public ProductCreateViewModel Init()
         {
             UpdateContext();
             IsWindowOpen = true;
@@ -37,7 +37,7 @@ namespace Warehouse.Wpf.Module.Main.ProductCreate
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
 
-        public ProductEditViewModel2 Context
+        public ProductFormViewModel Context
         {
             get { return context; }
             set { context = value; RaisePropertyChanged(() => Context); }
@@ -95,8 +95,8 @@ namespace Warehouse.Wpf.Module.Main.ProductCreate
         {
             var product = new Product();
             Context = (isSheet)
-                ? new SheetEditViewModel2(product, true)
-                : new ProductEditViewModel2(product, true);
+                ? new SheetFormViewModel(product, true)
+                : new ProductFormViewModel(product, true);
         }
     }
 }

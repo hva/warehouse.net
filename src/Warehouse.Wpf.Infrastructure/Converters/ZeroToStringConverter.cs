@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Warehouse.Wpf.Controls.Converters
+namespace Warehouse.Wpf.Infrastructure.Converters
 {
     public class ZeroToStringConverter : IValueConverter
     {
