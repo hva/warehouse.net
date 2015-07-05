@@ -21,8 +21,8 @@ namespace Warehouse.Wpf.Models
         public static long CalculatePriceRozn(this Product p)
         {
             var priceOpt = Convert.ToString(p.PriceOpt);
-            var k = Convert.ToString(p.K, CultureInfo.InvariantCulture);
-            var length = Convert.ToString(p.Length, CultureInfo.InvariantCulture);
+            var k = Convert.ToString(p.K, CultureInfo.CurrentCulture);
+            var length = Convert.ToString(p.Length, CultureInfo.CurrentCulture);
             return CalculatePriceRozn(priceOpt, k, length, p.IsSheet);
         }
     }

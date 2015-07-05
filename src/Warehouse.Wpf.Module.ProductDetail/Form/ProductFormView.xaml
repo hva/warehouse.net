@@ -7,6 +7,8 @@
     xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=form:ProductFormViewModel}"
     Language="ru-RU">
@@ -34,11 +36,11 @@
             <TextBox
                 Text="{Binding Name, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged}"
+                               UpdateSourceTrigger=Explicit}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -47,11 +49,11 @@
             <TextBox
                 Text="{Binding Size, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged}"
+                               UpdateSourceTrigger=Explicit}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -64,12 +66,12 @@
             <TextBox
                 Text="{Binding K, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged,
+                               UpdateSourceTrigger=Explicit,
                                Converter={StaticResource ZeroToStringConverter}}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -78,13 +80,13 @@
             <TextBox
                 Text="{Binding PriceOpt, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged,
+                               UpdateSourceTrigger=Explicit,
                                Converter={StaticResource ZeroToStringConverter}}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsPriceReadonly}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -102,12 +104,12 @@
             <TextBox
                 Text="{Binding Count, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged,
+                               UpdateSourceTrigger=Explicit,
                                Converter={StaticResource ZeroToStringConverter}}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -120,9 +122,9 @@
                                Converter={StaticResource ZeroToStringConverter}}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsLengthReadonly}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -130,11 +132,11 @@
             <Label Content="{Binding NdLabel}" />
             <TextBox Text="{Binding Nd, Mode=TwoWay,
                                     ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                                    UpdateSourceTrigger=PropertyChanged}"
+                                    UpdateSourceTrigger=Explicit}"
                      Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
@@ -152,13 +154,13 @@
             <TextBox
                 Text="{Binding PriceIcome, Mode=TwoWay,
                                ValidatesOnDataErrors=True, NotifyOnValidationError=True,
-                               UpdateSourceTrigger=PropertyChanged,
+                               UpdateSourceTrigger=Explicit,
                                Converter={StaticResource ZeroToStringConverter}}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsPriceReadonly}">
-                <!--<i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />
-                </i:Interaction.Behaviors>-->
+                </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
