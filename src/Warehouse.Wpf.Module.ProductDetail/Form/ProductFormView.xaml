@@ -8,10 +8,11 @@
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=form:ProductFormViewModel}">
+    d:DataContext="{d:DesignInstance Type=form:ProductFormViewModel}"
+    Language="ru-RU">
 
     <UserControl.Resources>
-        <Style TargetType="Label" BasedOn="{StaticResource Label_Default}">
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource Label_Default}">
             <Setter Property="Width" Value="150" />
         </Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}">
@@ -31,7 +32,9 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Наимнование" />
             <TextBox
-                Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}"
+                Text="{Binding Name, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
@@ -41,7 +44,11 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Размер" />
-            <TextBox Text="{Binding Size, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
+            <TextBox
+                Text="{Binding Size, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>-->
@@ -54,7 +61,12 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="K" />
-            <TextBox Text="{Binding K, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
+            <TextBox
+                Text="{Binding K, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged,
+                               Converter={StaticResource ZeroToStringConverter}}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>-->
@@ -64,7 +76,11 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Цена без НДС (опт.)" />
             <TextBox
-                Text="{Binding PriceOpt, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                Text="{Binding PriceOpt, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged,
+                               Converter={StaticResource ZeroToStringConverter}}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsPriceReadonly}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />
@@ -83,7 +99,12 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Кол-во (шт)" />
-            <TextBox Text="{Binding Count, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}">
+            <TextBox
+                Text="{Binding Count, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged,
+                               Converter={StaticResource ZeroToStringConverter}}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>-->
@@ -93,7 +114,11 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="{Binding LenghtLabel}" />
             <TextBox
-                Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                Text="{Binding Length, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=Explicit,
+                               Converter={StaticResource ZeroToStringConverter}}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsLengthReadonly}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
@@ -103,7 +128,10 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="{Binding NdLabel}" />
-            <TextBox Text="{Binding Nd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
+            <TextBox Text="{Binding Nd, Mode=TwoWay,
+                                    ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>-->
@@ -122,7 +150,11 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Цена приходная" />
             <TextBox
-                Text="{Binding PriceIcome, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit, Converter={StaticResource ZeroToStringConverter}}"
+                Text="{Binding PriceIcome, Mode=TwoWay,
+                               ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged,
+                               Converter={StaticResource ZeroToStringConverter}}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}"
                 IsReadOnly="{Binding IsPriceReadonly}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:CurrencyFormatTextBoxBehavior />

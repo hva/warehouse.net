@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Warehouse.Wpf.Infrastructure
 {
     public static class Validate
     {
+        private static readonly CultureInfo culture = new CultureInfo("ru-Ru");
+
         public static IEnumerable<string> Required(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -33,7 +36,7 @@ namespace Warehouse.Wpf.Infrastructure
         public static IEnumerable<string> Double(string value)
         {
             double d;
-            if (!double.TryParse(value, out d))
+            if (!double.TryParse(value, NumberStyles.Float, culture, out d))
             {
                 yield return "дробное число";
             }
