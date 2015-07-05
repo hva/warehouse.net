@@ -32,10 +32,10 @@
             <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
 
-        <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" />
+        <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" Margin="0,0,0,10" />
 
-        <Border Grid.Row="2" MinHeight="70">
-            <StackPanel Style="{StaticResource FormButtons}">
+        <Border Grid.Row="2" Style="{StaticResource FormButtons}">
+            <StackPanel>
                 <controls:ProgressRing IsActive="{Binding IsBusy}" />
                 <Button Content="Сохранить" Command="{Binding SaveCommand}" />
                 <Rectangle Width="10" />

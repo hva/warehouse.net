@@ -46,10 +46,16 @@
     </Style>
 
     <!--StackPanel-->
-    <Style x:Key="FormButtons" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="Margin" Value="0,40,0,0" />
-        <Setter Property="Orientation" Value="Horizontal" />
+    <Style x:Key="FormButtons" TargetType="{x:Type Border}">
+        <Style.Resources>
+            <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0,0,10,0" />
+        <Setter Property="Background" Value="#F0F0F0" />
     </Style>
 
     <ControlTemplate x:Key="ErrorTemplateSilverlightStyle">
