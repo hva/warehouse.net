@@ -32,10 +32,29 @@ namespace Warehouse.Wpf.Controls.Behaviors
 
         #endregion
 
+        #region IsWindowOpen
+
+        public bool IsWindowOpen
+        {
+            get { return (bool)GetValue(IsWindowOpenProperty); }
+            set { SetValue(IsWindowOpenProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsWindowOpenProperty =
+            DependencyProperty.Register("IsWindowOpen", typeof(bool), typeof(ParentWindowBehavior), new PropertyMetadata(false, OnIsWindowOpenChanged));
+
+        private static void OnIsWindowOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((ParentWindowBehavior)d).UpdateIsWindowOpen();
+        }
+
+        #endregion
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             window = Window.GetWindow(AssociatedObject);
             UpdateTitle();
+            UpdateIsWindowOpen();
         }
 
         private void UpdateTitle()
@@ -43,6 +62,15 @@ namespace Warehouse.Wpf.Controls.Behaviors
             if (window != null)
             {
                 window.Title = Title;
+            }
+        }
+
+        private void UpdateIsWindowOpen()
+        {
+            // is used only for closing
+            if (window != null && !IsWindowOpen)
+            {
+                window.Close();
             }
         }
     }

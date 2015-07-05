@@ -28,13 +28,6 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
-        //public ProductCreateViewModel Init()
-        //{
-        //    UpdateContext();
-        //    IsWindowOpen = true;
-        //    return this;
-        //}
-
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
 
@@ -105,6 +98,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             UpdateContext();
+            IsWindowOpen = true;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

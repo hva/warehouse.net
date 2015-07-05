@@ -16,7 +16,7 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
     <i:Interaction.Behaviors>
-        <behaviors:ParentWindowBehavior Title="{Binding Title2}" />
+        <behaviors:ParentWindowBehavior Title="{Binding Title2}" IsWindowOpen="{Binding IsWindowOpen}" />
     </i:Interaction.Behaviors>
 
     <Grid>
