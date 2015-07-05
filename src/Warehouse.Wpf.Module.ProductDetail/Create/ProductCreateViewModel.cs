@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Events;
@@ -9,7 +10,7 @@ using Warehouse.Wpf.Module.ProductDetail.Form;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public class ProductCreateViewModel : InteractionRequestValidationObject
+    public class ProductCreateViewModel : InteractionRequestValidationObject, INavigationAware
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -27,12 +28,12 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
-        public ProductCreateViewModel Init()
-        {
-            UpdateContext();
-            IsWindowOpen = true;
-            return this;
-        }
+        //public ProductCreateViewModel Init()
+        //{
+        //    UpdateContext();
+        //    IsWindowOpen = true;
+        //    return this;
+        //}
 
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
@@ -98,5 +99,21 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                 ? new SheetFormViewModel(product, true)
                 : new ProductFormViewModel(product, true);
         }
+
+        #region INavigationAware
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            UpdateContext();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return false;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
+
+        #endregion
     }
 }

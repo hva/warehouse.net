@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\ParentWindowBehavior.cs" />
+    <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="ProgressRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -30,7 +30,9 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Наимнование" />
-            <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}">
+            <TextBox
+                Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=Explicit}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
                 <!--<i:Interaction.Behaviors>
                     <behaviors:ThrottledTextBindingBehavior />
                 </i:Interaction.Behaviors>-->
