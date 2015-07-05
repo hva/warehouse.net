@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Main.Models;
 
 namespace Warehouse.Wpf.Module.Main.Converters
 {
@@ -19,7 +19,8 @@ namespace Warehouse.Wpf.Module.Main.Converters
                 ProductFirma pf;
                 if (mapper.TryGetValue(p.Firma, out pf))
                 {
-                    return new SolidColorBrush(pf.Color) { Opacity = 0.8 };
+                    var color = (Color)ColorConverter.ConvertFromString(pf.Color);
+                    return new SolidColorBrush(color) { Opacity = 0.8 };
                 }
             }
             return null;

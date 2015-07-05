@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
+    xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=form:ProductFormViewModel}">
 
@@ -135,17 +136,17 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Учет" />
             <ComboBox SelectedValue="{Binding Firma, Mode=TwoWay}" SelectedValuePath="Key">
-                <!--<ComboBox.ItemsSource>
-                    <models:ProductFirmaMapper />
-                </ComboBox.ItemsSource>-->
+                <ComboBox.ItemsSource>
+                    <infrastructure:ProductFirmaMapper />
+                </ComboBox.ItemsSource>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Ellipse Width="10" Height="10" Margin="0,0,5,0" Stroke="LightGray" StrokeThickness="1">
-                                <Ellipse.Fill>
+                            <Rectangle Width="10" Height="10" Margin="0,0,5,0">
+                                <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding Value.Color}" Opacity="0.8" />
-                                </Ellipse.Fill>
-                            </Ellipse>
+                                </Rectangle.Fill>
+                            </Rectangle>
                             <TextBlock Text="{Binding Value.Translation}" />
                         </StackPanel>
                     </DataTemplate>

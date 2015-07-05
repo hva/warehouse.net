@@ -42,8 +42,12 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Margin" Value="85,0,0,0" />
     </Style>
-    
-    
-    
+
+    <!--StackPanel-->
+    <Style x:Key="FormButtons" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,40,0,0" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
 
 </ResourceDictionary>

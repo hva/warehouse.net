@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
@@ -76,6 +77,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -134,6 +136,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Wpf.Controls\Warehouse.Wpf.Controls.csproj">
+      <Project>{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}</Project>
+      <Name>Warehouse.Wpf.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj">
       <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
       <Name>Warehouse.Wpf.Data</Name>

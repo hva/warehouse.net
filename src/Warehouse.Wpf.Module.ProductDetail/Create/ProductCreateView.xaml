@@ -6,9 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Create"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
-    d:DataContext="{d:DesignInstance Type=local:ProductCreateViewModel}">
+    d:DataContext="{d:DesignInstance Type=local:ProductCreateViewModel}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <i:Interaction.Behaviors>
+        <behaviors:ParentWindowBehavior Title="{Binding Title2}" />
+    </i:Interaction.Behaviors>
 
     <Grid>
 
@@ -26,12 +35,12 @@
         <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" />
 
         <Border Grid.Row="2" MinHeight="70">
-            <!--<StackPanel Style="{StaticResource FormButtons}">
+            <StackPanel Style="{StaticResource FormButtons}">
                 <controls:ProgressRing IsActive="{Binding IsBusy}" />
                 <Button Content="Сохранить" Command="{Binding SaveCommand}" />
                 <Rectangle Width="10" />
                 <Button Content="Отмена" Command="{Binding CancelCommand}" />
-            </StackPanel>-->
+            </StackPanel>
         </Border>
 
     </Grid>

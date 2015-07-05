@@ -8,7 +8,6 @@
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Main.Converters"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
-    xmlns:localModels="clr-namespace:Warehouse.Wpf.Module.Main.Models"
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
@@ -207,7 +206,7 @@
 
         <ItemsControl Grid.Row="4" Margin="20,0">
             <ItemsControl.ItemsSource>
-                <localModels:ProductFirmaMapper />
+                <infrastructure:ProductFirmaMapper />
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

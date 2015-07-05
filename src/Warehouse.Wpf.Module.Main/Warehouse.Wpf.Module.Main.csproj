@@ -106,8 +106,6 @@
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Models\ProductFirma.cs" />
-    <Compile Include="Models\ProductFirmaMapper.cs" />
     <Compile Include="ProductEdit\ProductEditView2.xaml.cs">
       <DependentUpon>ProductEditView2.xaml</DependentUpon>
     </Compile>
