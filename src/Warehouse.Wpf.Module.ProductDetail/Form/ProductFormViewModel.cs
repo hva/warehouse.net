@@ -52,7 +52,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
                 Weight = weight,
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
-                Length = Math.Round(double.Parse(length), 2),
+                Length = Math.Round(double.Parse(length), 3),
                 PriceIcome = long.Parse(priceIcome),
                 Internal = Internal,
                 IsSheet = GetIsSheet(),
@@ -366,7 +366,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
             {
                 nd = string.Join(" ", product.Nd);
             }
-            length = product.Length.ToString("0.##");
+            length = product.Length.ToString("0.###");
             priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
             Internal = product.Internal;
             Firma = product.Firma;

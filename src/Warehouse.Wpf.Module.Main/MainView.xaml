@@ -162,7 +162,7 @@
                     <GridViewColumn Header="Кол-во (кг)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.###}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                                <TextBlock Text="{Binding Weight, StringFormat='{}{0:#.000,#;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -189,7 +189,7 @@
                     <GridViewColumn Header="Длина (м)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                                <TextBlock Text="{Binding Length, StringFormat='{}{0:0.###;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:Product}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
