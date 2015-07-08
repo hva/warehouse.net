@@ -26,7 +26,7 @@
     <i:Interaction.Triggers>
 
         <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
-            <prism:PopupWindowAction prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}" IsModal="True" CenterOverAssociatedObject="True">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
                 <prism:PopupWindowAction.WindowContent>
                     <ContentControl
                         prism:RegionManager.RegionManager="{x:Static local:UIServiceLocator.RegionManager}"
