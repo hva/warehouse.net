@@ -8,16 +8,19 @@
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
-    Title="{Binding Title2}" Height="300" Width="300"
+    Height="300" Width="300"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner"
+    Title="{Binding Title2}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:ProductCreateWindowViewModel}">
 
-    <!--<i:Interaction.Behaviors>
-        <behaviors:ParentWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
-    </i:Interaction.Behaviors>-->
+    <i:Interaction.Behaviors>
+        <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
 
     <Grid>
 

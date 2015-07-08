@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\CurrencyFormatTextBoxBehavior.cs" />
-    <Compile Include="Behaviors\ParentWindowBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="Behaviors\ThrottledTextBindingBehavior.cs" />
+    <Compile Include="Behaviors\WindowBehavior.cs" />
     <Compile Include="ProgressRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
