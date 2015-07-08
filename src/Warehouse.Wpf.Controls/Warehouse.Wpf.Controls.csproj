@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\CurrencyFormatTextBoxBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
+    <Compile Include="Behaviors\SelectedItems\ListViewSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\ThrottledTextBindingBehavior.cs" />
     <Compile Include="Behaviors\WindowBehavior.cs" />
     <Compile Include="ProgressRing.cs" />

@@ -14,7 +14,6 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data.Interfaces;
-using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
@@ -28,7 +27,6 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
-        private readonly IRegionManager regionManager;
         private readonly ProductEditWindowViewModel productEditViewModel;
         private readonly InteractionRequest<ProductEditWindowViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
@@ -41,13 +39,11 @@ namespace Warehouse.Wpf.Module.Main
         private double totalWeight;
 
         public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
-            IProductsRepository productsRepository, IRegionManager regionManager,
-            ProductEditWindowViewModel productEditViewModel)
+            IProductsRepository productsRepository, ProductEditWindowViewModel productEditViewModel)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
-            this.regionManager = regionManager;
             this.productEditViewModel = productEditViewModel;
 
             editProductRequest = new InteractionRequest<ProductEditWindowViewModel>();
@@ -215,8 +211,8 @@ namespace Warehouse.Wpf.Module.Main
 
         private void ChangePrice()
         {
-            var products = selectedItems.OfType<Product>().ToArray();
-            changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository, eventAggregator));
+            //var products = selectedItems.OfType<Product>().ToArray();
+            //changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository, eventAggregator));
         }
 
         #endregion

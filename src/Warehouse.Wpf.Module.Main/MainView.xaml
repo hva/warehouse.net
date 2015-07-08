@@ -11,6 +11,7 @@
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -41,21 +42,15 @@
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>-->
 
-        <!--<prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
-            <prism:PopupChildWindowAction>
-                <prism:PopupChildWindowAction.ChildWindow>
-                    <prism:ConfirmationChildWindow Width="300">
-                        <prism:ConfirmationChildWindow.ConfirmationTemplate>
-                            <DataTemplate>
-                                <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" BorderThickness="0">
-                                    <ContentPresenter Content="{Binding}" />
-                                </ScrollViewer>
-                            </DataTemplate>
-                        </prism:ConfirmationChildWindow.ConfirmationTemplate>
-                    </prism:ConfirmationChildWindow>
-                </prism:PopupChildWindowAction.ChildWindow>
-            </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>-->
+        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <!--<prism:PopupWindowAction.WindowContent>
+                    <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                        <TextBlock Text="{Binding Content}" />
+                    </ScrollViewer>
+                </prism:PopupWindowAction.WindowContent>-->
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
 
     </i:Interaction.Triggers>
 
@@ -99,10 +94,10 @@
             ItemsSource="{Binding Items}"
             BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-            <!--<i:Interaction.Behaviors>
-                <behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />
-                <behaviors:DataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>-->
+            <i:Interaction.Behaviors>
+                <!--<behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />-->
+                <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+            </i:Interaction.Behaviors>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="30">
