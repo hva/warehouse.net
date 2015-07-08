@@ -1,11 +1,11 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public partial class ProductCreateView : UserControl, IView
+    public partial class ProductCreateWindow : Window, IView
     {
-        public ProductCreateView()
+        public ProductCreateWindow()
         {
             InitializeComponent();
         }

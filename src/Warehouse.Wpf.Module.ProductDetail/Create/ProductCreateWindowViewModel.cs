@@ -10,7 +10,7 @@ using Warehouse.Wpf.Module.ProductDetail.Form;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public class ProductCreateViewModel : InteractionRequestValidationObject, INavigationAware
+    public class ProductCreateWindowViewModel : InteractionRequestValidationObject, INavigationAware
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -19,7 +19,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         private bool isBusy;
         private ProductFormViewModel context;
 
-        public ProductCreateViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
+        public ProductCreateWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;

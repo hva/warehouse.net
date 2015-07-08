@@ -25,18 +25,6 @@
 
     <i:Interaction.Triggers>
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding CreateProductRequest}">
-            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <prism:PopupWindowAction.WindowContent>
-                    <ContentControl
-                        prism:RegionManager.RegionManager="{x:Static local:UIServiceLocator.RegionManager}"
-                        prism:RegionManager.RegionName="{x:Static infrastructure:Consts.ProductWindowRegion}"
-                        VerticalContentAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch" />
-                </prism:PopupWindowAction.WindowContent>
-            </prism:PopupWindowAction>
-        </prism:InteractionRequestTrigger>
-
         <!--<prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>

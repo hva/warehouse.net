@@ -30,7 +30,6 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IProductsRepository productsRepository;
         private readonly IRegionManager regionManager;
         private readonly ProductEditWindowViewModel productEditViewModel;
-        private readonly InteractionRequest<INotification> createProductRequest;
         private readonly InteractionRequest<ProductEditWindowViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
@@ -51,7 +50,6 @@ namespace Warehouse.Wpf.Module.Main
             this.regionManager = regionManager;
             this.productEditViewModel = productEditViewModel;
 
-            createProductRequest = new InteractionRequest<INotification>();
             editProductRequest = new InteractionRequest<ProductEditWindowViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
@@ -75,12 +73,10 @@ namespace Warehouse.Wpf.Module.Main
         }
 
         public ICollectionView Items { get { return cvs.View; } }
-
         public ICommand OpenProductCommand { get; private set; }
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
         public ICommand DeleteCommand { get { return deleteCommand; } }
-        public IInteractionRequest CreateProductRequest { get { return createProductRequest; } }
         public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
         public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
@@ -199,8 +195,7 @@ namespace Warehouse.Wpf.Module.Main
 
         private void CreateProduct()
         {
-            regionManager.RequestNavigate(Consts.ProductWindowRegion, Consts.CreateProductView);
-            createProductRequest.Raise(new Notification { Title = "New Product" });
+            eventAggregator.GetEvent<ProductCreateRequestEvent>().Publish(null);
         }
 
         private void UpdateTotalWeight()
