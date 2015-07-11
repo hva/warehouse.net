@@ -6,28 +6,29 @@ using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Main.Attachments;
+using Warehouse.Wpf.Module.ProductDetail.Form;
+//using Warehouse.Wpf.Module.Main.Attachments;
 
-namespace Warehouse.Wpf.Module.Main.ProductEdit
+namespace Warehouse.Wpf.Module.ProductDetail.Edit
 {
     public class ProductEditWindowViewModel : InteractionRequestValidationObject
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
-        private readonly AttachmentsViewModel attachmentsViewModel;
+        //private readonly AttachmentsViewModel attachmentsViewModel;
 
         private readonly bool canSave;
         private readonly bool canEditPrice;
 
         private bool isBusy;
-        private ProductEditViewModel2 context;
+        private ProductFormViewModel context;
 
         public ProductEditWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator,
-            IAuthStore authStore, AttachmentsViewModel attachmentsViewModel)
+            IAuthStore authStore/*, AttachmentsViewModel attachmentsViewModel*/)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
-            this.attachmentsViewModel = attachmentsViewModel;
+            //this.attachmentsViewModel = attachmentsViewModel;
 
             var token = authStore.LoadToken();
             if (token != null)
@@ -45,10 +46,10 @@ namespace Warehouse.Wpf.Module.Main.ProductEdit
             Title = string.Format("{0} {1}", p.Name, p.Size);
 
             Context = (p.IsSheet)
-                ? new SheetEditViewModel2(p, canEditPrice)
-                : new ProductEditViewModel2(p, canEditPrice);
+                ? new SheetFormViewModel(p, canEditPrice)
+                : new ProductFormViewModel(p, canEditPrice);
 
-            InitAttachments(p.Id);
+            //InitAttachments(p.Id);
 
             IsWindowOpen = true;
             return this;
@@ -56,9 +57,9 @@ namespace Warehouse.Wpf.Module.Main.ProductEdit
 
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
-        public AttachmentsViewModel AttachmentsContext { get { return attachmentsViewModel; } }
+        //public AttachmentsViewModel AttachmentsContext { get { return attachmentsViewModel; } }
 
-        public ProductEditViewModel2 Context
+        public ProductFormViewModel Context
         {
             get { return context; }
             set { context = value; RaisePropertyChanged(() => Context); }
@@ -89,9 +90,9 @@ namespace Warehouse.Wpf.Module.Main.ProductEdit
             }
         }
 
-        private async void InitAttachments(string id)
-        {
-            await attachmentsViewModel.Init(id);
-        }
+        //private async void InitAttachments(string id)
+        //{
+        //    await attachmentsViewModel.Init(id);
+        //}
     }
 }

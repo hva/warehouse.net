@@ -63,6 +63,7 @@
     <Compile Include="AsyncResult.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
+    <Compile Include="Events\ProductEditRequestEvent.cs" />
     <Compile Include="Events\ProductCreateRequestEvent.cs" />
     <Compile Include="Events\ProductDeletedBatchEvent.cs" />
     <Compile Include="Events\ProductDeletedBatchEventArgs.cs" />

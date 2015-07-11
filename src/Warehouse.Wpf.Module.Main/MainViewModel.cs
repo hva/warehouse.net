@@ -18,7 +18,6 @@ using Warehouse.Wpf.Infrastructure.Events;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Module.Main.ChangePrice;
-using Warehouse.Wpf.Module.Main.ProductEdit;
 
 namespace Warehouse.Wpf.Module.Main
 {
@@ -27,8 +26,6 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
-        private readonly ProductEditWindowViewModel productEditViewModel;
-        private readonly InteractionRequest<ProductEditWindowViewModel> editProductRequest;
         private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
@@ -39,14 +36,12 @@ namespace Warehouse.Wpf.Module.Main
         private double totalWeight;
 
         public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
-            IProductsRepository productsRepository, ProductEditWindowViewModel productEditViewModel)
+            IProductsRepository productsRepository)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
-            this.productEditViewModel = productEditViewModel;
 
-            editProductRequest = new InteractionRequest<ProductEditWindowViewModel>();
             changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
@@ -73,7 +68,6 @@ namespace Warehouse.Wpf.Module.Main
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
         public ICommand DeleteCommand { get { return deleteCommand; } }
-        public IInteractionRequest EditProductRequest { get { return editProductRequest; } }
         public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public bool IsEditor { get; private set; }
@@ -186,7 +180,7 @@ namespace Warehouse.Wpf.Module.Main
 
         private void OpenProduct(Product p)
         {
-            editProductRequest.Raise(productEditViewModel.Init(p));
+            eventAggregator.GetEvent<ProductEditRequestEvent>().Publish(p);
         }
 
         private void CreateProduct()

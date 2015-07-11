@@ -106,15 +106,6 @@
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="ProductEdit\ProductEditView2.xaml.cs">
-      <DependentUpon>ProductEditView2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEdit\ProductEditViewModel2.cs" />
-    <Compile Include="ProductEdit\ProductEditWindow.xaml.cs">
-      <DependentUpon>ProductEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEdit\ProductEditWindowViewModel.cs" />
-    <Compile Include="ProductEdit\SheetEditViewModel2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,14 +125,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ProductEdit\ProductEditView2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ProductEdit\ProductEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

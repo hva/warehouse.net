@@ -26,14 +26,6 @@
 
     <i:Interaction.Triggers>
 
-        <!--<prism:InteractionRequestTrigger SourceObject="{Binding EditProductRequest}">
-            <prism:PopupChildWindowAction>
-                <prism:PopupChildWindowAction.ChildWindow>
-                    <local:ProductEditWindow />
-                </prism:PopupChildWindowAction.ChildWindow>
-            </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>-->
-
         <!--<prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
             <prism:PopupChildWindowAction>
                 <prism:PopupChildWindowAction.ChildWindow>
