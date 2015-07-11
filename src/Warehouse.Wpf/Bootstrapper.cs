@@ -9,7 +9,6 @@ using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail;
 using Warehouse.Wpf.Module.Shell;
-using Warehouse.Wpf.Navigation;
 using Warehouse.Wpf.Settings;
 using Warehouse.Wpf.SignalR;
 
@@ -21,17 +20,17 @@ namespace Warehouse.Wpf
         {
             base.Run(runWithDefaultConfiguration);
 
-            var authStore = Container.Resolve<IAuthStore>();
-            var navigationService = Container.Resolve<INavigationService>();
-            var token = authStore.LoadToken();
-            if (token != null && token.IsAuthenticated())
-            {
-                navigationService.OpenLandingPage();
-            }
-            else
-            {
-                navigationService.OpenLoginPage();
-            }
+            //var authStore = Container.Resolve<IAuthStore>();
+            //var navigationService = Container.Resolve<INavigationService>();
+            //var token = authStore.LoadToken();
+            //if (token != null && token.IsAuthenticated())
+            //{
+            //    navigationService.OpenLandingPage();
+            //}
+            //else
+            //{
+            //    navigationService.OpenLoginPage();
+            //}
         }
 
         protected override void ConfigureModuleCatalog()
@@ -48,7 +47,7 @@ namespace Warehouse.Wpf
             base.ConfigureContainer();
 
             Container.RegisterType<Window, Shell>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+            //Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthStore, AuthStore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IApplicationSettings, ApplicationSettings>(new ContainerControlledLifetimeManager());

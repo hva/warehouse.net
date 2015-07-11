@@ -3,15 +3,16 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data.Interfaces;
-using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Module.ProductDetail.Form;
+using Warehouse.Wpf.Mvvm;
+
 //using Warehouse.Wpf.Module.Main.Attachments;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Edit
 {
-    public class ProductEditWindowViewModel : InteractionRequestValidationObject
+    public class ProductEditWindowViewModel : ValidationObject
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -38,12 +39,12 @@ namespace Warehouse.Wpf.Module.ProductDetail.Edit
             }
 
             SaveCommand = new DelegateCommand(Save, () => canSave);
-            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
+            CancelCommand = new DelegateCommand(() => /* IsWindowOpen = false */ {});
         }
 
         public ProductEditWindowViewModel Init(Product p)
         {
-            Title = string.Format("{0} {1}", p.Name, p.Size);
+            //Title = string.Format("{0} {1}", p.Name, p.Size);
 
             Context = (p.IsSheet)
                 ? new SheetFormViewModel(p, canEditPrice)
@@ -51,7 +52,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Edit
 
             //InitAttachments(p.Id);
 
-            IsWindowOpen = true;
+            //IsWindowOpen = true;
             return this;
         }
 
@@ -62,13 +63,13 @@ namespace Warehouse.Wpf.Module.ProductDetail.Edit
         public ProductFormViewModel Context
         {
             get { return context; }
-            set { context = value; RaisePropertyChanged(() => Context); }
+            set { SetProperty(ref context, value); }
         }
 
         public bool IsBusy
         {
             get { return isBusy; }
-            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+            set { SetProperty(ref isBusy, value); }
         }
 
         private async void Save()
@@ -84,8 +85,8 @@ namespace Warehouse.Wpf.Module.ProductDetail.Edit
                 {
                     var args = new ProductUpdatedEventArgs(task.Result, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                    Confirmed = true;
-                    IsWindowOpen = false;
+                    //Confirmed = true;
+                    //IsWindowOpen = false;
                 }
             }
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Infrastructure;
 
-namespace Warehouse.Wpf.Navigation
+namespace Warehouse.Wpf.Mvvm
 {
     public class NavigationService : INavigationService
     {

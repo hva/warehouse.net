@@ -6,12 +6,13 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.Main.ChangePrice
 {
-    public class ChangePriceViewModel : InteractionRequestValidationObject
+    public class ChangePriceViewModel : ValidationObject
     {
         private string percentage = "10";
         private bool isBusy;
@@ -25,7 +26,7 @@ namespace Warehouse.Wpf.Module.Main.ChangePrice
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
+            CancelCommand = new DelegateCommand(() => /* IsWindowOpen = false*/ { });
 
             LoadItems(products);
             UpdatePrice();
@@ -52,7 +53,7 @@ namespace Warehouse.Wpf.Module.Main.ChangePrice
         public bool IsBusy
         {
             get { return isBusy; }
-            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+            set { SetProperty(ref isBusy, value); }
         }
 
         private void ValidatePercentage()
@@ -101,8 +102,8 @@ namespace Warehouse.Wpf.Module.Main.ChangePrice
                 var args = new ProductUpdatedBatchEventArgs(ids, false);
                 eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Publish(args);
 
-                Confirmed = task.Succeed;
-                IsWindowOpen = false;
+                //Confirmed = task.Succeed;
+                //IsWindowOpen = false;
             }
         }
     }

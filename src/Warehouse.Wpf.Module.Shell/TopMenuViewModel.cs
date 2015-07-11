@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Navigation;
+using Warehouse.Wpf.Mvvm;
 using Warehouse.Wpf.SignalR;
 
 namespace Warehouse.Wpf.Module.Shell

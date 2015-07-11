@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Prism.PubSubEvents;
 
-namespace Warehouse.Wpf.Infrastructure.Events
+namespace Warehouse.Wpf.Events
 {
     public class ProductUpdatedEvent : PubSubEvent<ProductUpdatedEventArgs>
     {

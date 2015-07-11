@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Infrastructure.Events
+﻿namespace Warehouse.Wpf.Events
 {
     public abstract class SignalREventArgs
     {

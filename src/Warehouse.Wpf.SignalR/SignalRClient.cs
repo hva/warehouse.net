@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Settings;
 
 namespace Warehouse.Wpf.SignalR

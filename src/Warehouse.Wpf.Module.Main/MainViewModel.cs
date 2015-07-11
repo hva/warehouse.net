@@ -14,10 +14,9 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data.Interfaces;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Main.ChangePrice;
 
 namespace Warehouse.Wpf.Module.Main
 {
@@ -26,7 +25,7 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
-        private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
+        //private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
@@ -42,7 +41,7 @@ namespace Warehouse.Wpf.Module.Main
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
 
-            changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
+            //changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
             CreateProductCommand = new DelegateCommand(CreateProduct);
@@ -68,7 +67,7 @@ namespace Warehouse.Wpf.Module.Main
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
         public ICommand DeleteCommand { get { return deleteCommand; } }
-        public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
+        //public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }

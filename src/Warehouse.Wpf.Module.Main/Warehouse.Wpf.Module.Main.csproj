@@ -39,9 +39,8 @@
       <HintPath>..\packages\Prism.Interactivity.5.0.0\lib\NET45\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.Mvvm">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
@@ -51,9 +50,8 @@
       <HintPath>..\packages\Prism.PubSubEvents.1.1.2\lib\portable-sl5+windowsphone8+windows8+net40+wpa81\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -142,6 +140,10 @@
       <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
       <Name>Warehouse.Wpf.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Events\Warehouse.Wpf.Events.csproj">
+      <Project>{bfad256a-278f-4289-a267-131911df50c0}</Project>
+      <Name>Warehouse.Wpf.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75A26DFE-9711-4E5C-BC3D-50D2F8292391}</Project>
       <Name>Warehouse.Wpf.Infrastructure</Name>
@@ -149,6 +151,10 @@
     <ProjectReference Include="..\Warehouse.Wpf.Models\Warehouse.Wpf.Models.csproj">
       <Project>{b1784d93-0eb5-4b35-a40e-9fbc125d829c}</Project>
       <Name>Warehouse.Wpf.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Mvvm\Warehouse.Wpf.Mvvm.csproj">
+      <Project>{6046a759-4162-47f0-9b37-7df9c75546bf}</Project>
+      <Name>Warehouse.Wpf.Mvvm</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
       <Project>{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA}</Project>

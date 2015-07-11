@@ -116,9 +116,9 @@
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
       <Name>Warehouse.Wpf.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Navigation\Warehouse.Wpf.Navigation.csproj">
-      <Project>{FEB9B2FB-24F3-41FA-BDB1-E648BC95A085}</Project>
-      <Name>Warehouse.Wpf.Navigation</Name>
+    <ProjectReference Include="..\Warehouse.Wpf.Mvvm\Warehouse.Wpf.Mvvm.csproj">
+      <Project>{6046a759-4162-47f0-9b37-7df9c75546bf}</Project>
+      <Name>Warehouse.Wpf.Mvvm</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
       <Project>{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA}</Project>

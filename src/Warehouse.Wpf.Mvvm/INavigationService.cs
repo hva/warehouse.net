@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Navigation
+﻿namespace Warehouse.Wpf.Mvvm
 {
     public interface INavigationService
     {

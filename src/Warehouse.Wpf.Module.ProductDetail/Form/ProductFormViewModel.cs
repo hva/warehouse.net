@@ -3,10 +3,11 @@ using System.Globalization;
 using System.Linq;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Form
 {
-    public class ProductFormViewModel : InteractionRequestValidationObject
+    public class ProductFormViewModel : ValidationObject
     {
         private string id;
         private string name;
@@ -162,14 +163,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
         public long PriceRozn
         {
             get { return priceRozn; }
-            set
-            {
-                if (priceRozn != value)
-                {
-                    priceRozn = value;
-                    RaisePropertyChanged(() => PriceRozn);
-                }
-            }
+            set { SetProperty(ref priceRozn, value); }
         }
 
         protected void UpdatePriceRozn()
@@ -196,7 +190,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
                 if (Math.Abs(weight - value) > double.Epsilon)
                 {
                     weight = value;
-                    RaisePropertyChanged(() => Weight);
+                    OnPropertyChanged(() => Weight);
                 }
             }
         }
@@ -294,7 +288,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
                     length = value;
                     ValidateLength();
                     UpdateWeight();
-                    RaisePropertyChanged(() => Length);
+                    OnPropertyChanged(() => Length);
                 }
             }
         }

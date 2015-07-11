@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.ViewModel;
+using PropertySupport = Microsoft.Practices.Prism.Mvvm.PropertySupport;
 
-namespace Warehouse.Wpf.Infrastructure
+namespace Warehouse.Wpf.Mvvm
 {
     public static class Extensions
     {

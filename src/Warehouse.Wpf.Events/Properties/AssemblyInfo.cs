@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Warehouse.Wpf.Navigation")]
+[assembly: AssemblyTitle("Warehouse.Wpf.Events")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Warehouse.Wpf.Navigation")]
+[assembly: AssemblyProduct("Warehouse.Wpf.Events")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("688b28c3-32be-4d47-bb9e-07790a539b15")]
+[assembly: Guid("b1ae8a69-d960-47a6-a501-938042cad6a1")]
 
 // Version information for an assembly consists of the following four values:
 //

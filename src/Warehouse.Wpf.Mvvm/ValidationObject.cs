@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Warehouse.Wpf.Infrastructure
+namespace Warehouse.Wpf.Mvvm
 {
-    public abstract class InteractionRequestValidationObject : InteractionRequestObject, INotifyDataErrorInfo
+    public abstract class ValidationObject : BindableBase, INotifyDataErrorInfo
     {
         protected ErrorsContainer<string> errorsContainer;
 
-        protected InteractionRequestValidationObject()
+        protected ValidationObject()
         {
             errorsContainer = new ErrorsContainer<string>(RaiseErrorsChanged);
         }

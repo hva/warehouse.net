@@ -3,14 +3,14 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Data.Interfaces;
-using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Module.ProductDetail.Form;
+using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public class ProductCreateWindowViewModel : InteractionRequestValidationObject, INavigationAware
+    public class ProductCreateWindowViewModel : ValidationObject, INavigationAware
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -25,7 +25,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
+            CancelCommand = new DelegateCommand(() => /* IsWindowOpen = false */ { });
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -34,7 +34,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         public ProductFormViewModel Context
         {
             get { return context; }
-            set { context = value; RaisePropertyChanged(() => Context); }
+            set { context = value; OnPropertyChanged(() => Context); }
         }
 
         public string Title2
@@ -49,7 +49,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         public bool IsBusy
         {
             get { return isBusy; }
-            set { isBusy = value; RaisePropertyChanged(() => IsBusy); }
+            set { SetProperty(ref isBusy, value); }
         }
 
         public bool IsSheet
@@ -57,11 +57,9 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             get { return isSheet; }
             set
             {
-                if (isSheet != value)
+                if (SetProperty(ref isSheet, value))
                 {
-                    isSheet = value;
                     UpdateContext();
-                    RaisePropertyChanged(() => Title2);
                 }
             }
         }
@@ -79,8 +77,8 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                 {
                     var args = new ProductUpdatedEventArgs(task.Result, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                    Confirmed = true;
-                    IsWindowOpen = false;
+                    //Confirmed = true;
+                    //IsWindowOpen = false;
                 }
             }
         }
@@ -98,7 +96,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             UpdateContext();
-            IsWindowOpen = true;
+            //IsWindowOpen = true;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

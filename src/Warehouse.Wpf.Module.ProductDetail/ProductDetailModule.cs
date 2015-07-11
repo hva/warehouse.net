@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warehouse.Wpf.Infrastructure.Events;
+using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 
 namespace Warehouse.Wpf.Module.ProductDetail

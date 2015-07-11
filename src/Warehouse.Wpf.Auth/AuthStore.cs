@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
-using Microsoft.Practices.Prism.Logging;
 using Newtonsoft.Json;
 
 namespace Warehouse.Wpf.Auth
@@ -10,11 +9,11 @@ namespace Warehouse.Wpf.Auth
     {
         private const string TokenFileName = "auth_token";
         private AuthToken inMemoryToken;
-        private readonly ILoggerFacade logger;
+        //private readonly ILoggerFacade logger;
 
-        public AuthStore(ILoggerFacade logger)
+        public AuthStore(/*ILoggerFacade logger*/)
         {
-            this.logger = logger;
+            //this.logger = logger;
         }
 
         public void SaveToken(AuthToken token)
@@ -31,7 +30,7 @@ namespace Warehouse.Wpf.Auth
             }
             catch (Exception e)
             {
-                logger.Log(e.Message, Category.Exception, Priority.None);
+                //logger.Log(e.Message, Category.Exception, Priority.None);
                 inMemoryToken = token;
             }
         }
@@ -56,7 +55,7 @@ namespace Warehouse.Wpf.Auth
             }
             catch (Exception e)
             {
-                logger.Log(e.Message, Category.Exception, Priority.None);
+                //logger.Log(e.Message, Category.Exception, Priority.None);
             }
             return inMemoryToken;
         }
@@ -81,7 +80,7 @@ namespace Warehouse.Wpf.Auth
             }
             catch (Exception e)
             {
-                logger.Log(e.Message, Category.Exception, Priority.None);
+                //logger.Log(e.Message, Category.Exception, Priority.None);
             }
         }
 

@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
-      <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
-      <Name>Warehouse.Wpf.Infrastructure</Name>
+    <ProjectReference Include="..\Warehouse.Wpf.Events\Warehouse.Wpf.Events.csproj">
+      <Project>{bfad256a-278f-4289-a267-131911df50c0}</Project>
+      <Name>Warehouse.Wpf.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Settings\Warehouse.Wpf.Settings.csproj">
       <Project>{ca2dae22-c84f-42bc-ace1-c5d055c6ca34}</Project>

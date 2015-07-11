@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Warehouse.Wpf.Infrastructure.Events
+namespace Warehouse.Wpf.Events
 {
     public class ProductUpdatedBatchEventArgs : SignalREventArgs
     {

@@ -2,6 +2,7 @@
 using System.Linq;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Form
 {
