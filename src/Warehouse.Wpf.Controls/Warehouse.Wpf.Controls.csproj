@@ -57,7 +57,9 @@
     <Compile Include="AlertType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\CurrencyFormatTextBoxBehavior.cs" />
+    <Compile Include="Behaviors\ListViewDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="Behaviors\SelectedItems\ListViewSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\ThrottledTextBindingBehavior.cs" />

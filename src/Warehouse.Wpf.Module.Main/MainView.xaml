@@ -95,7 +95,7 @@
             BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <i:Interaction.Behaviors>
-                <!--<behaviors:DataGridRowDoubleClickBehavior Command="{Binding OpenProductCommand}" />-->
+                <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
             <ListView.View>
