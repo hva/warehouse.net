@@ -156,7 +156,7 @@
                                         Visibility="{Binding Nd, Converter={StaticResource NdVisibilityConverter}}"
                                         ToolTipService.ToolTip="{Binding Nd, Converter={StaticResource NdValueConverter}}"
                                         Background="#C9CACA" Opacity="0.6" />
-                                    <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" />
+                                    <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
