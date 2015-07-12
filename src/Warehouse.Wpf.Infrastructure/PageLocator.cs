@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.Infrastructure
 {
     public static class PageLocator
     {
         private static readonly Dictionary<string, Type> pages = new Dictionary<string, Type>();
+        private static Action<object> openWindowCallback;
+
+        public static void SetOpenWindowCallback(Action<object> callback)
+        {
+            openWindowCallback = callback;
+        }
 
         public static void Register<T>(string pageName)
         {
@@ -23,6 +29,16 @@ namespace Warehouse.Wpf.Module.Shell
                 return Activator.CreateInstance(type);
             }
             return null;
+        }
+
+        public static void OpenWindow(string pageName)
+        {
+            Type type;
+            if (pages.TryGetValue(pageName, out type) && openWindowCallback != null)
+            {
+                var window = Activator.CreateInstance(type);
+                openWindowCallback(window);
+            }
         }
     }
 }

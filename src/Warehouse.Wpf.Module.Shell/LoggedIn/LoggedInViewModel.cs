@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 
 namespace Warehouse.Wpf.Module.Shell.LoggedIn

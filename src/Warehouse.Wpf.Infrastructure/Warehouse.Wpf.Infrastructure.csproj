@@ -44,6 +44,8 @@
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="Interfaces\INavigationAware.cs" />
+    <Compile Include="PageLocator.cs" />
+    <Compile Include="PageName.cs" />
     <Compile Include="ProductFirma.cs" />
     <Compile Include="ProductFirmaMapper.cs" />
     <Compile Include="ProductFirmaNames.cs" />

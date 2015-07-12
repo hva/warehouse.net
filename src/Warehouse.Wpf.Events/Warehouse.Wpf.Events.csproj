@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Navigation\NavigateProductCreateEvent.cs" />
     <Compile Include="ProductDeletedBatchEvent.cs" />
     <Compile Include="ProductDeletedBatchEventArgs.cs" />
-    <Compile Include="Navigation\NavigateProductEditEvent.cs" />
     <Compile Include="ProductUpdatedBatchEvent.cs" />
     <Compile Include="ProductUpdatedBatchEventArgs.cs" />
     <Compile Include="ProductUpdatedEvent.cs" />
