@@ -9,8 +9,10 @@ using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
+using Warehouse.Wpf.Module.ProductDetail.Edit;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Settings;
 using Warehouse.Wpf.SignalR;
@@ -35,7 +37,8 @@ namespace Warehouse.Wpf
 
             PageLocator.SetOpenWindowCallback(OpenWindow);
             PageLocator.Register<MainView>(PageName.ProductsList);
-            PageLocator.Register<ProductCreateWindow>(PageName.CreateProductWindow);
+            PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
+            PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
         }
 
         protected override DependencyObject CreateShell()
@@ -62,13 +65,18 @@ namespace Warehouse.Wpf
             return Type.GetType(viewModelName);
         }
 
-        private void OpenWindow(object page)
+        private void OpenWindow(object page, object param)
         {
             var window = page as Window;
             if (window != null)
             {
                 window.Owner = (Window) Shell;
                 window.ShowDialog();
+                var vm = window.DataContext as INavigationAware;
+                if (vm != null)
+                {
+                    vm.OnNavigatedTo(param);
+                }
             }
         }
     }

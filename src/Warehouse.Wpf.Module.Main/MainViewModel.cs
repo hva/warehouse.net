@@ -43,8 +43,8 @@ namespace Warehouse.Wpf.Module.Main
 
             //changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
-            OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
-            CreateProductCommand = new DelegateCommand(CreateProduct);
+            OpenProductCommand = new DelegateCommand<Product>(p => PageLocator.OpenWindow(PageName.ProductEditWindow, p));
+            CreateProductCommand = new DelegateCommand(() => PageLocator.OpenWindow(PageName.ProductCreateWindow, null));
             changePriceCommand = new DelegateCommand(ChangePrice, HasSelectedProducts);
             deleteCommand = new DelegateCommand(PromtDelete, HasSelectedProducts);
 
@@ -175,17 +175,6 @@ namespace Warehouse.Wpf.Module.Main
                 items.AddRange(task.Result);
                 UpdateTotalWeight();
             }
-        }
-
-        private void OpenProduct(Product p)
-        {
-            //eventAggregator.GetEvent<NavigateProductEditEvent>().Publish(p);
-        }
-
-        private void CreateProduct()
-        {
-            PageLocator.OpenWindow(PageName.CreateProductWindow);
-            //eventAggregator.GetEvent<NavigateProductCreateEvent>().Publish(null);
         }
 
         private void UpdateTotalWeight()
