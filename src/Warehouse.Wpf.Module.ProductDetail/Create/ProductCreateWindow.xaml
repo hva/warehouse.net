@@ -27,6 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -35,9 +36,9 @@
             <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
 
-        <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" Margin="0,0,0,10" />
+        <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" />
 
-        <Border Grid.Row="2" Style="{StaticResource FormButtons}">
+        <Border Grid.Row="3" Style="{StaticResource FormButtons}">
             <StackPanel>
                 <controls:ProgressRing IsActive="{Binding IsBusy}" />
                 <Button Content="Сохранить" Command="{Binding SaveCommand}" />
