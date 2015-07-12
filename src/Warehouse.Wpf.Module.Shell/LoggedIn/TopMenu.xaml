@@ -1,14 +1,14 @@
 ﻿<UserControl
-    x:Class="Warehouse.Wpf.Module.Shell.TopMenu"
+    x:Class="Warehouse.Wpf.Module.Shell.LoggedIn.TopMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:shell="clr-namespace:Warehouse.Wpf.Module.Shell"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
-    xmlns:controls="clr-namespace:Warehouse.Wpf.Module.Shell.Controls"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn.Controls"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=shell:TopMenuViewModel}"
+    d:DataContext="{d:DesignInstance Type=local:TopMenuViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>

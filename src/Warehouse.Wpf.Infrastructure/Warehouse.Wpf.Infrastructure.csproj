@@ -43,6 +43,7 @@
     <Compile Include="AsyncResult.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
+    <Compile Include="Interfaces\INavigationAware.cs" />
     <Compile Include="ProductFirma.cs" />
     <Compile Include="ProductFirmaMapper.cs" />
     <Compile Include="ProductFirmaNames.cs" />

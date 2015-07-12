@@ -1,28 +1,23 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
-using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Mvvm;
 using Warehouse.Wpf.SignalR;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.Module.Shell.LoggedIn
 {
-    public class TopMenuViewModel : BindableBase, INavigationAware
+    public class TopMenuViewModel : BindableBase
     {
         private readonly IAuthStore authStore;
         private readonly INavigationService navigationService;
-        private readonly IRegionManager regionManager;
         private readonly ISignalRClient signalRClient;
         private bool isAdmin;
 
-        public TopMenuViewModel(IAuthStore authStore, INavigationService navigationService,
-            IRegionManager regionManager, ISignalRClient signalRClient)
+        public TopMenuViewModel(IAuthStore authStore, INavigationService navigationService, ISignalRClient signalRClient)
         {
             this.authStore = authStore;
             this.navigationService = navigationService;
-            this.regionManager = regionManager;
             this.signalRClient = signalRClient;
 
             LogoutCommand = new DelegateCommand(Logout);
@@ -43,7 +38,7 @@ namespace Warehouse.Wpf.Module.Shell
 
         private void NavigateToPage(string page)
         {
-            regionManager.RequestNavigate(Consts.MainRegion, page);
+            //regionManager.RequestNavigate(Consts.MainRegion, page);
         }
 
         public bool IsAdmin
@@ -54,20 +49,20 @@ namespace Warehouse.Wpf.Module.Shell
 
         #region INavigationAware
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            var token = authStore.LoadToken();
-            IsAdmin = token != null && token.IsAdmin();
-        }
+        //public void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    var token = authStore.LoadToken();
+        //    IsAdmin = token != null && token.IsAdmin();
+        //}
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
+        //public bool IsNavigationTarget(NavigationContext navigationContext)
+        //{
+        //    return true;
+        //}
 
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
+        //public void OnNavigatedFrom(NavigationContext navigationContext)
+        //{
+        //}
 
         #endregion
     }

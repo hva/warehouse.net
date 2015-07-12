@@ -1,0 +1,25 @@
+﻿<Window
+    x:Class="Warehouse.Wpf.Module.Shell.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell"
+    Title="Склад" Width="800" Height="600"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    d:DataContext="{d:DesignInstance Type=local:ShellViewModel}">
+
+    <ContentControl
+        Content="{Binding Context}"
+        VerticalContentAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+        <ContentControl.ContentTemplateSelector>
+            <local:ShellTemplateSelector>
+                
+            </local:ShellTemplateSelector>
+        </ContentControl.ContentTemplateSelector>
+    </ContentControl>
+
+</Window>

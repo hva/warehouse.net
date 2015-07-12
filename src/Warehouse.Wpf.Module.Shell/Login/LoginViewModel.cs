@@ -2,14 +2,14 @@
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Mvvm;
 using Warehouse.Wpf.SignalR;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.Module.Shell.Login
 {
-    public class LoginViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
+    public class LoginViewModel : BindableBase, INavigationAware
     {
         private string message;
 
@@ -51,7 +51,7 @@ namespace Warehouse.Wpf.Module.Shell
 
         #region INavigationAware
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public void OnNavigatedTo(object param)
         {
             //string l;
             //if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(Consts.SettingsLoginKey, out l))
@@ -61,21 +61,10 @@ namespace Warehouse.Wpf.Module.Shell
             //Password = string.Empty;
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
+        public void OnNavigatedFrom()
         {
             //IsolatedStorageSettings.ApplicationSettings[Consts.SettingsLoginKey] = Login;
         }
-
-        #endregion
-
-        #region IRegionMemberLifetime
-
-        public bool KeepAlive { get { return false; } }
 
         #endregion
 

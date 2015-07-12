@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Module.Shell.Controls
+﻿namespace Warehouse.Wpf.Module.Shell.LoggedIn.Controls
 {
     public partial class TopMenuDivider
     {
