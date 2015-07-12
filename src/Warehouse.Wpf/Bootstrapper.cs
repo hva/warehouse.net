@@ -63,6 +63,7 @@ namespace Warehouse.Wpf
 
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
+            ViewModelLocator.SetAutoWireViewModel(Shell, true);
         }
     }
 }

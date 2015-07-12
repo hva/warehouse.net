@@ -28,13 +28,14 @@ namespace Warehouse.Wpf.Module.ProductDetail
         public void OnNavigateProductCreate(object obj)
         {
             var window = new ProductCreateWindow { Owner = mainWindow };
-            ((INavigationAware)window.DataContext).OnNavigatedTo();
+            ((INavigationAware)window.DataContext).OnNavigatedTo(null);
             window.ShowDialog();
         }
 
-        private void OnNavigateProductEdit(object obj)
+        private void OnNavigateProductEdit(object product)
         {
             var window = new ProductEditWindow { Owner = mainWindow };
+            ((INavigationAware)window.DataContext).OnNavigatedTo(product);
             window.ShowDialog();
         }
     }

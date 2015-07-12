@@ -250,7 +250,7 @@ namespace Warehouse.Wpf.Module.Main
 
         #region INavigationAware
 
-        public async void OnNavigatedTo()
+        public async void OnNavigatedTo(object param)
         {
             await LoadData();
             Subscribe();

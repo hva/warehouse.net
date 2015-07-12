@@ -2,7 +2,7 @@
 {
     public interface INavigationAware
     {
-        void OnNavigatedTo();
+        void OnNavigatedTo(object param);
         void OnNavigatedFrom();
     }
 }

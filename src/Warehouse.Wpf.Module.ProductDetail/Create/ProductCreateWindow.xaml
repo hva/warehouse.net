@@ -14,7 +14,7 @@
     Height="300" Width="300"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner"
-    Title="{Binding Title2}"
+    Title="{Binding Title}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:ProductCreateWindowViewModel}">
 

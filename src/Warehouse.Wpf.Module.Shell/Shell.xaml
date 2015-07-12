@@ -10,7 +10,6 @@
     xmlns:login="clr-namespace:Warehouse.Wpf.Module.Shell.Login"
     xmlns:loggedIn="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn"
     Title="Склад" Width="800" Height="600"
-    mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:ShellViewModel}">
 
     <ContentControl

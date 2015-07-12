@@ -44,7 +44,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             set { SetProperty(ref isWindowOpen, value); }
         }
 
-        public string Title2
+        public string Title
         {
             get
             {
@@ -84,7 +84,6 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                 {
                     var args = new ProductUpdatedEventArgs(task.Result, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                    //Confirmed = true;
                     IsWindowOpen = false;
                 }
             }
@@ -98,7 +97,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                 : new ProductFormViewModel(product, true);
         }
 
-        public void OnNavigatedTo()
+        public void OnNavigatedTo(object param)
         {
             UpdateContext();
         }

@@ -6,15 +6,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Edit"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:form="clr-namespace:Warehouse.Wpf.Module.ProductDetail.Form"
     mc:Ignorable="d"
-    Width="400" Height="560"
+    Height="300" Width="300"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner"
     Title="{Binding Title}"
-    d:DataContext="{d:DesignInstance Type=local:ProductEditWindowViewModel}"
-    mvvm:ViewModelLocator.AutoWireViewModel="True">
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    d:DataContext="{d:DesignInstance Type=local:ProductEditWindowViewModel}">
 
-    <!--<i:Interaction.Behaviors>
-        <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
-    </i:Interaction.Behaviors>-->
+    <i:Interaction.Behaviors>
+        <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <form:ProductFormView DataContext="{Binding Context}" />
+
+        <Border Grid.Row="1" Style="{StaticResource FormButtons}">
+            <StackPanel>
+                <controls:ProgressRing IsActive="{Binding IsBusy}" />
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+    </Grid>
 
     <!--<sdk:TabControl x:Name="TabControl">
         <sdk:TabItem Header="Параметры">
