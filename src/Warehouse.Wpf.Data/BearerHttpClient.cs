@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Warehouse.Wpf.Auth;
-using Warehouse.Wpf.Settings;
+using Warehouse.Wpf.Auth.Interfaces;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 
-namespace Warehouse.Wpf.Data.Http
+namespace Warehouse.Wpf.Data
 {
     public class BearerHttpClient : HttpClient
     {

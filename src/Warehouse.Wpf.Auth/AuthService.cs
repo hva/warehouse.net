@@ -5,8 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Infrastructure;
-using Warehouse.Wpf.Settings;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 
 namespace Warehouse.Wpf.Auth
 {

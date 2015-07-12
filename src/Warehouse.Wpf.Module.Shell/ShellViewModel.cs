@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Module.Shell.LoggedIn;
 using Warehouse.Wpf.Module.Shell.Login;
-using Warehouse.Wpf.SignalR;
+using Warehouse.Wpf.SignalR.Interfaces;
 
 namespace Warehouse.Wpf.Module.Shell
 {

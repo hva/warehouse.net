@@ -5,7 +5,8 @@ using System.Windows;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Events;
-using Warehouse.Wpf.Settings;
+using Warehouse.Wpf.Infrastructure.Interfaces;
+using Warehouse.Wpf.SignalR.Interfaces;
 
 namespace Warehouse.Wpf.SignalR
 {

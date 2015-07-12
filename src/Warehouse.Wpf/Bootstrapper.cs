@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
@@ -14,8 +15,8 @@ using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
 using Warehouse.Wpf.Module.Shell;
-using Warehouse.Wpf.Settings;
 using Warehouse.Wpf.SignalR;
+using Warehouse.Wpf.SignalR.Interfaces;
 
 namespace Warehouse.Wpf
 {
@@ -71,12 +72,14 @@ namespace Warehouse.Wpf
             if (window != null)
             {
                 window.Owner = (Window) Shell;
-                window.ShowDialog();
+
                 var vm = window.DataContext as INavigationAware;
                 if (vm != null)
                 {
                     vm.OnNavigatedTo(param);
                 }
+
+                window.ShowDialog();
             }
         }
     }

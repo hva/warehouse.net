@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.IsolatedStorage;
 using Newtonsoft.Json;
+using Warehouse.Wpf.Auth.Interfaces;
 
 namespace Warehouse.Wpf.Auth
 {

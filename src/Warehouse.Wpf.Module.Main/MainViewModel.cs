@@ -11,12 +11,13 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
-using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.SignalR.Interfaces;
 
 namespace Warehouse.Wpf.Module.Main
 {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Warehouse.Wpf.Infrastructure;
 
-namespace Warehouse.Wpf.Auth
+namespace Warehouse.Wpf.Auth.Interfaces
 {
     public interface IAuthService
     {

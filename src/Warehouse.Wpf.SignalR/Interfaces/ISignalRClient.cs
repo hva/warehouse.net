@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Warehouse.Wpf.SignalR
+namespace Warehouse.Wpf.SignalR.Interfaces
 {
     public interface ISignalRClient
     {

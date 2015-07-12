@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Auth
+﻿namespace Warehouse.Wpf.Auth.Interfaces
 {
     public interface IAuthStore
     {

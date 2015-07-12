@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Infrastructure.Interfaces;

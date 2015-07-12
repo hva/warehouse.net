@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Settings
+﻿namespace Warehouse.Wpf.Infrastructure.Interfaces
 {
     public interface IApplicationSettings
     {

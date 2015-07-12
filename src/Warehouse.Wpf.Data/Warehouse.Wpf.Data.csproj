@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BearerHttpClient.cs" />
     <Compile Include="FilesRepository.cs" />
     <Compile Include="Interfaces\IFilesRepository.cs" />
     <Compile Include="Interfaces\IProductsRepository.cs" />
@@ -51,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.Wpf.Data.Http\Warehouse.Wpf.Data.Http.csproj">
-      <Project>{f79b8463-a3a7-4f54-a73e-d3ab4804428c}</Project>
-      <Name>Warehouse.Wpf.Data.Http</Name>
+    <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">
+      <Project>{23d2c7e0-9521-452c-b3ee-f01cba79e300}</Project>
+      <Name>Warehouse.Wpf.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
