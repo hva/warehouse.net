@@ -13,6 +13,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
+using Warehouse.Wpf.Events.Navigation;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.SignalR;
@@ -179,12 +180,12 @@ namespace Warehouse.Wpf.Module.Main
 
         private void OpenProduct(Product p)
         {
-            eventAggregator.GetEvent<ProductEditRequestEvent>().Publish(p);
+            eventAggregator.GetEvent<NavigateProductEditEvent>().Publish(p);
         }
 
         private void CreateProduct()
         {
-            eventAggregator.GetEvent<ProductCreateRequestEvent>().Publish(null);
+            eventAggregator.GetEvent<NavigateProductCreateEvent>().Publish(null);
         }
 
         private void UpdateTotalWeight()

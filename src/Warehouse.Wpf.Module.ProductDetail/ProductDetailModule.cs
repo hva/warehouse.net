@@ -1,8 +1,10 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warehouse.Wpf.Events;
+using Warehouse.Wpf.Events.Navigation;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Module.ProductDetail.Create;
+using Warehouse.Wpf.Module.ProductDetail.Edit;
 
 namespace Warehouse.Wpf.Module.ProductDetail
 {
@@ -19,12 +21,20 @@ namespace Warehouse.Wpf.Module.ProductDetail
 
         public void Initialize()
         {
-            eventAggregator.GetEvent<ProductCreateRequestEvent>().Subscribe(OnProductCreateRequest, true);
+            eventAggregator.GetEvent<NavigateProductCreateEvent>().Subscribe(OnNavigateProductCreate, true);
+            eventAggregator.GetEvent<NavigateProductEditEvent>().Subscribe(OnNavigateProductEdit, true);
         }
 
-        public void OnProductCreateRequest(object obj)
+        public void OnNavigateProductCreate(object obj)
         {
             var window = new ProductCreateWindow { Owner = mainWindow };
+            ((INavigationAware)window.DataContext).OnNavigatedTo();
+            window.ShowDialog();
+        }
+
+        private void OnNavigateProductEdit(object obj)
+        {
+            var window = new ProductEditWindow { Owner = mainWindow };
             window.ShowDialog();
         }
     }

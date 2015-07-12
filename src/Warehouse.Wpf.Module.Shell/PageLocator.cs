@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Warehouse.Wpf.Infrastructure
+namespace Warehouse.Wpf.Module.Shell
 {
     public static class PageLocator
     {

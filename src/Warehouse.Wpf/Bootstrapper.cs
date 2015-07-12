@@ -9,7 +9,6 @@ using Microsoft.Practices.Unity;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Data;
 using Warehouse.Wpf.Data.Interfaces;
-using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail;
 using Warehouse.Wpf.Module.Shell;

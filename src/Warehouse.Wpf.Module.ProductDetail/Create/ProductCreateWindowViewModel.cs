@@ -1,16 +1,16 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Prism.Regions;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Module.ProductDetail.Form;
-using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.ProductDetail.Create
 {
-    public class ProductCreateWindowViewModel : ValidationObject, INavigationAware
+    public class ProductCreateWindowViewModel : BindableBase, INavigationAware
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -18,6 +18,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         private bool isSheet;
         private bool isBusy;
         private ProductFormViewModel context;
+        private bool isWindowOpen = true;
 
         public ProductCreateWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
@@ -25,7 +26,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => /* IsWindowOpen = false */ { });
+            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -34,7 +35,13 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
         public ProductFormViewModel Context
         {
             get { return context; }
-            set { context = value; OnPropertyChanged(() => Context); }
+            set { SetProperty(ref context, value); }
+        }
+
+        public bool IsWindowOpen
+        {
+            get { return isWindowOpen; }
+            set { SetProperty(ref isWindowOpen, value); }
         }
 
         public string Title2
@@ -78,7 +85,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                     var args = new ProductUpdatedEventArgs(task.Result, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
                     //Confirmed = true;
-                    //IsWindowOpen = false;
+                    IsWindowOpen = false;
                 }
             }
         }
@@ -91,21 +98,13 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
                 : new ProductFormViewModel(product, true);
         }
 
-        #region INavigationAware
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public void OnNavigatedTo()
         {
             UpdateContext();
-            //IsWindowOpen = true;
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
+        public void OnNavigatedFrom()
         {
-            return false;
         }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext) { }
-
-        #endregion
     }
 }

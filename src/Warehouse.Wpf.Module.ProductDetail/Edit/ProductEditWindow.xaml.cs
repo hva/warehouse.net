@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Controls;
-
-namespace Warehouse.Wpf.Module.Main.ProductEdit
+﻿namespace Warehouse.Wpf.Module.ProductDetail.Edit
 {
     public partial class ProductEditWindow
     {
