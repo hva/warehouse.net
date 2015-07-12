@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Module.Shell
+﻿namespace Warehouse.Wpf.Infrastructure
 {
     public static class PageName
     {

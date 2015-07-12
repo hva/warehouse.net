@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 
 namespace Warehouse.Wpf.Module.Shell.LoggedIn
@@ -10,7 +12,7 @@ namespace Warehouse.Wpf.Module.Shell.LoggedIn
     public class LoggedInViewModel : BindableBase
     {
         private Action logoutCallback;
-        private IView view;
+        private object view;
 
         public LoggedInViewModel()
         {
@@ -30,7 +32,7 @@ namespace Warehouse.Wpf.Module.Shell.LoggedIn
         public ICommand LogoutCommand { get; private set; }
         public ICommand NavigateToPageCommand { get; private set; }
 
-        public IView View
+        public object View
         {
             get { return view; }
             set { SetProperty(ref view, value); }
@@ -69,9 +71,10 @@ namespace Warehouse.Wpf.Module.Shell.LoggedIn
 
         private INavigationAware GetViewModel()
         {
-            if (view != null)
+            var v = view as FrameworkElement;
+            if (v != null)
             {
-                return view.DataContext as INavigationAware;
+                return v.DataContext as INavigationAware;
             }
             return null;
         }

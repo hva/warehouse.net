@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Auth;
@@ -25,7 +26,7 @@ namespace Warehouse.Wpf.Module.Main
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
         //private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
-        //private readonly InteractionRequest<Confirmation> deleteRequest;
+        private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
         private IList selectedItems;
@@ -41,7 +42,7 @@ namespace Warehouse.Wpf.Module.Main
             this.productsRepository = productsRepository;
 
             //changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
-            //deleteRequest = new InteractionRequest<Confirmation>();
+            deleteRequest = new InteractionRequest<Confirmation>();
             OpenProductCommand = new DelegateCommand<Product>(OpenProduct);
             CreateProductCommand = new DelegateCommand(CreateProduct);
             changePriceCommand = new DelegateCommand(ChangePrice, HasSelectedProducts);
@@ -67,7 +68,7 @@ namespace Warehouse.Wpf.Module.Main
         public ICommand ChangePriceCommand { get { return changePriceCommand; } }
         public ICommand DeleteCommand { get { return deleteCommand; } }
         //public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
-        //public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
+        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
 
@@ -221,28 +222,28 @@ namespace Warehouse.Wpf.Module.Main
                 sb.AppendLine();
             }
 
-            //var conf = new Confirmation
-            //{
-            //    Title = "Внимание!",
-            //    Content = sb.ToString(),
-            //};
+            var conf = new Confirmation
+            {
+                Title = "Внимание!",
+                Content = sb.ToString(),
+            };
 
-            //deleteRequest.Raise(conf, Delete);
+            deleteRequest.Raise(conf, Delete);
         }
 
-        //private async void Delete(Confirmation conf)
-        //{
-        //    if (conf.Confirmed)
-        //    {
-        //        var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
-        //        var task = await productsRepository.Delete(ids);
-        //        if (task.Succeed)
-        //        {
-        //            var args = new ProductDeletedBatchEventArgs(ids, false);
-        //            eventAggregator.GetEvent<ProductDeletedBatchEvent>().Publish(args);
-        //        }
-        //    }
-        //}
+        private async void Delete(Confirmation conf)
+        {
+            if (conf.Confirmed)
+            {
+                var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
+                var task = await productsRepository.Delete(ids);
+                if (task.Succeed)
+                {
+                    var args = new ProductDeletedBatchEventArgs(ids, false);
+                    eventAggregator.GetEvent<ProductDeletedBatchEvent>().Publish(args);
+                }
+            }
+        }
 
         #endregion
 

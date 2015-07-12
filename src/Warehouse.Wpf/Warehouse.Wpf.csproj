@@ -192,6 +192,10 @@
       <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
       <Name>Warehouse.Wpf.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
+      <Project>{75A26DFE-9711-4E5C-BC3D-50D2F8292391}</Project>
+      <Name>Warehouse.Wpf.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Module.Main\Warehouse.Wpf.Module.Main.csproj">
       <Project>{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}</Project>
       <Name>Warehouse.Wpf.Module.Main</Name>

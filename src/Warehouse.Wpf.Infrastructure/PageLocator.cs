@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.Prism.Mvvm;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.Infrastructure
 {
     public static class PageLocator
     {
         private static readonly Dictionary<string, Type> pages = new Dictionary<string, Type>();
 
-        public static void Register<T>(string pageName) where T : IView
+        public static void Register<T>(string pageName)
         {
             if (!string.IsNullOrEmpty(pageName))
             {
@@ -16,12 +15,12 @@ namespace Warehouse.Wpf.Module.Shell
             }
         }
 
-        public static IView Resolve(string pageName)
+        public static object Resolve(string pageName)
         {
             Type type;
             if (pages.TryGetValue(pageName, out type))
             {
-                return (IView)Activator.CreateInstance(type);
+                return Activator.CreateInstance(type);
             }
             return null;
         }
