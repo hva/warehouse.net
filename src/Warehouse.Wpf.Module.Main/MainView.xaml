@@ -8,7 +8,6 @@
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Main.Converters"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
-    xmlns:prism="http://www.codeplex.com/prism"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
@@ -24,7 +23,7 @@
         <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
     </UserControl.Resources>
 
-    <i:Interaction.Triggers>
+    <!--<i:Interaction.Triggers>-->
 
         <!--<prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
             <prism:PopupChildWindowAction>
@@ -34,17 +33,17 @@
             </prism:PopupChildWindowAction>
         </prism:InteractionRequestTrigger>-->
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
-            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <!--<prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">-->
                 <!--<prism:PopupWindowAction.WindowContent>
                     <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" BorderThickness="0">
                         <TextBlock Text="{Binding Content}" />
                     </ScrollViewer>
                 </prism:PopupWindowAction.WindowContent>-->
-            </prism:PopupWindowAction>
+            <!--</prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
 
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
 
     <Grid>
         <Grid.RowDefinitions>

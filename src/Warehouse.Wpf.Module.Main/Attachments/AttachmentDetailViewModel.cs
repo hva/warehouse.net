@@ -1,13 +1,12 @@
-﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Warehouse.Wpf.Models;
+﻿using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Module.Main.Attachments
 {
-    public class AttachmentDetailViewModel : Notification
+    public class AttachmentDetailViewModel // : Notification
     {
         public AttachmentDetailViewModel(FileDescription file)
         {
-            Title = file.Name;
+            //Title = file.Name;
             //PrintCommand = new DelegateCommand<ChildWindow>(Print);
 
             //var uriString = string.Concat(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString(), "api/files/", file.Id);

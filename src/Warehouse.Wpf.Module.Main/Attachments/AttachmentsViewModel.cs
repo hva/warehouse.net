@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Win32;
 using Warehouse.Wpf.Data.Interfaces;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Module.Main.Attachments
@@ -19,8 +18,8 @@ namespace Warehouse.Wpf.Module.Main.Attachments
         private string productId;
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
-        private readonly InteractionRequest<AttachmentDetailViewModel> openDetailRequest;
-        private readonly InteractionRequest<Confirmation> deleteRequest;
+        //private readonly InteractionRequest<AttachmentDetailViewModel> openDetailRequest;
+        //private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly DelegateCommand deleteCommand;
         private IList selectedItems;
         private bool isBusy;
@@ -33,9 +32,9 @@ namespace Warehouse.Wpf.Module.Main.Attachments
             BrowseCommand = new DelegateCommand(Browse);
             OpenFileCommand = new DelegateCommand<FileDescription>(OpenFile);
             Files = new ObservableCollection<FileDescription>();
-            openDetailRequest = new InteractionRequest<AttachmentDetailViewModel>();
+            //openDetailRequest = new InteractionRequest<AttachmentDetailViewModel>();
             deleteCommand = new DelegateCommand(PromtDelete, CanDelete);
-            deleteRequest = new InteractionRequest<Confirmation>();
+            //deleteRequest = new InteractionRequest<Confirmation>();
         }
 
         public async Task Init(string _productId)
@@ -48,8 +47,8 @@ namespace Warehouse.Wpf.Module.Main.Attachments
         public ICommand BrowseCommand { get; private set; }
         public ICommand OpenFileCommand { get; private set; }
         public ICommand DeleteCommand { get { return deleteCommand; } }
-        public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
-        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
+        //public IInteractionRequest OpenDetailRequest { get { return openDetailRequest; } }
+        //public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public ObservableCollection<FileDescription> Files { get; private set; }
 
         public IList SelectedItems
@@ -116,7 +115,7 @@ namespace Warehouse.Wpf.Module.Main.Attachments
 
         private void OpenFile(FileDescription file)
         {
-            openDetailRequest.Raise(new AttachmentDetailViewModel(file));
+            //openDetailRequest.Raise(new AttachmentDetailViewModel(file));
         }
 
         private bool CanDelete()
@@ -134,34 +133,34 @@ namespace Warehouse.Wpf.Module.Main.Attachments
                 sb.AppendLine();
             }
 
-            var conf = new Confirmation
-            {
-                Title = "Внимание!",
-                Content = sb.ToString(),
-            };
+            //var conf = new Confirmation
+            //{
+            //    Title = "Внимание!",
+            //    Content = sb.ToString(),
+            //};
 
-            deleteRequest.Raise(conf, Delete);
+            //deleteRequest.Raise(conf, Delete);
         }
 
-        private async void Delete(Confirmation conf)
-        {
-            if (conf.Confirmed)
-            {
-                var ids = selectedItems
-                    .OfType<FileDescription>()
-                    .OrderByDescending(x => x.UploadDate)
-                    .Select(x => x.Id)
-                    .ToArray();
+        //private async void Delete(Confirmation conf)
+        //{
+        //    if (conf.Confirmed)
+        //    {
+        //        var ids = selectedItems
+        //            .OfType<FileDescription>()
+        //            .OrderByDescending(x => x.UploadDate)
+        //            .Select(x => x.Id)
+        //            .ToArray();
 
-                IsBusy = true;
-                var task = await productsRepository.DetachFiles(productId, ids);
-                IsBusy = false;
+        //        IsBusy = true;
+        //        var task = await productsRepository.DetachFiles(productId, ids);
+        //        IsBusy = false;
 
-                if (task.Succeed)
-                {
-                    await LoadFiles();
-                }
-            }
-        }
+        //        if (task.Succeed)
+        //        {
+        //            await LoadFiles();
+        //        }
+        //    }
+        //}
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncResult.cs" />
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="Interfaces\INavigationAware.cs" />
     <Compile Include="ProductFirma.cs" />

@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Globalization;
+using System.Reflection;
+using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -20,7 +23,6 @@ namespace Warehouse.Wpf
         {
             base.ConfigureModuleCatalog();
 
-            ((ModuleCatalog)ModuleCatalog).AddModule(typeof(MainModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ProductDetailModule));
         }
 
@@ -37,13 +39,22 @@ namespace Warehouse.Wpf
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(viewType =>
+            {
+                var viewName = viewType.FullName;
+                viewName = viewName.Replace(".Views.", ".ViewModels.");
+                var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+                var viewModelName = String.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
+                viewModelName = viewModelName.Replace("ViewViewModel", "ViewModel");
+                return Type.GetType(viewModelName);
+            });
 
             PageLocator.Register<MainView>(PageName.ProductsList);
         }
 
         protected override DependencyObject CreateShell()
         {
-            return new Shell();
+            return Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
