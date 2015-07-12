@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn.Controls"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn"
+    xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:LoggedInViewModel}">
 
@@ -32,7 +33,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <controls:TopMenuDivider />
-                    <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
+                    <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.ProductsList}" />
                     <controls:TopMenuDivider />
 
                     <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
