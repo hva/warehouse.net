@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn.Controls"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:LoggedInViewModel}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -18,9 +21,32 @@
                 <RowDefinition Height="10" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <ContentControl HorizontalContentAlignment="Stretch" />
 
+            <!--TopMenu-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
+                <StackPanel Orientation="Horizontal">
+                    <controls:TopMenuDivider />
+                    <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="MainView" />
+                    <controls:TopMenuDivider />
+
+                    <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <controls:TopMenuDivider />
+                    <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
+                    <controls:TopMenuDivider />
+                    <controls:TopMenuItem Content="Выйти" Command="{Binding LogoutCommand}" />
+                    <controls:TopMenuDivider />
+                </StackPanel>
+            </Grid>
 
             <ContentControl Grid.Row="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
         </Grid>

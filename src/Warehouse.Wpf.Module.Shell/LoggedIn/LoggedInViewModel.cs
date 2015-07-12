@@ -1,21 +1,39 @@
-﻿using Warehouse.Wpf.Infrastructure.Interfaces;
+﻿using System;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Warehouse.Wpf.Auth;
 
 namespace Warehouse.Wpf.Module.Shell.LoggedIn
 {
-    public class LoggedInViewModel : INavigationAware
+    public class LoggedInViewModel
     {
-        #region INavigationAware
+        private Action logoutCallback;
 
-        public void OnNavigatedTo(object param)
+        public LoggedInViewModel()
         {
-            
+            NavigateToPageCommand = new DelegateCommand<string>(NavigateToPage);
+            LogoutCommand = new DelegateCommand(Logout);
         }
 
-        public void OnNavigatedFrom()
+        public LoggedInViewModel Init(AuthToken token, Action logout)
         {
-            
+            logoutCallback = logout;
+            IsAdmin = token.IsAdmin();
+            return this;
         }
 
-        #endregion
+        public bool IsAdmin { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
+        public ICommand NavigateToPageCommand { get; private set; }
+
+        private void NavigateToPage(string page)
+        {
+            //regionManager.RequestNavigate(Consts.MainRegion, page);
+        }
+
+        private void Logout()
+        {
+            logoutCallback();
+        }
     }
 }

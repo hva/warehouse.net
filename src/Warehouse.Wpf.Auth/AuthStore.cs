@@ -70,7 +70,7 @@ namespace Warehouse.Wpf.Auth
         {
             try
             {
-                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var store = GetStore())
                 {
                     if (store.FileExists(TokenFileName))
                     {

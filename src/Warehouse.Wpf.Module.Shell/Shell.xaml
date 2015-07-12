@@ -7,6 +7,8 @@
     mc:Ignorable="d"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell"
+    xmlns:login="clr-namespace:Warehouse.Wpf.Module.Shell.Login"
+    xmlns:loggedIn="clr-namespace:Warehouse.Wpf.Module.Shell.LoggedIn"
     Title="Склад" Width="800" Height="600"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:ShellViewModel}">
@@ -17,7 +19,16 @@
         HorizontalContentAlignment="Stretch">
         <ContentControl.ContentTemplateSelector>
             <local:ShellTemplateSelector>
-                
+                <local:ShellTemplateSelector.LoginTemplate>
+                    <DataTemplate>
+                        <login:LoginView />
+                    </DataTemplate>
+                </local:ShellTemplateSelector.LoginTemplate>
+                <local:ShellTemplateSelector.LoggedInTemplate>
+                    <DataTemplate>
+                        <loggedIn:LoggedInView />
+                    </DataTemplate>
+                </local:ShellTemplateSelector.LoggedInTemplate>
             </local:ShellTemplateSelector>
         </ContentControl.ContentTemplateSelector>
     </ContentControl>

@@ -1,32 +1,37 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Warehouse.Wpf.Auth;
-using Warehouse.Wpf.Infrastructure.Interfaces;
-using Warehouse.Wpf.Mvvm;
-using Warehouse.Wpf.SignalR;
 
 namespace Warehouse.Wpf.Module.Shell.Login
 {
-    public class LoginViewModel : BindableBase, INavigationAware
+    public class LoginViewModel : BindableBase
     {
         private string message;
-
-        private readonly IAuthService authService;
-        private readonly INavigationService navigationService;
-        private readonly ISignalRClient signalRClient;
-
         private string login;
         private bool isBusy;
 
-        public LoginViewModel(IAuthService authService, INavigationService navigationService, ISignalRClient signalRClient)
-        {
-            this.authService = authService;
-            this.navigationService = navigationService;
-            this.signalRClient = signalRClient;
+        private Func<string, string, Task<bool>> loginCallback;
 
+        public LoginViewModel()
+        {
             LoginCommand = new DelegateCommand<PasswordBox>(DoLogin);
+        }
+
+        public LoginViewModel Init(Func<string, string, Task<bool>> callback)
+        {
+            loginCallback = callback;
+
+            //string l;
+            //if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(Consts.SettingsLoginKey, out l))
+            //{
+            //    Login = l;
+            //}
+            //Password = string.Empty;
+
+            return this;
         }
 
         public ICommand LoginCommand { get; private set; }
@@ -49,42 +54,25 @@ namespace Warehouse.Wpf.Module.Shell.Login
             set { SetProperty(ref isBusy, value); }
         }
 
-        #region INavigationAware
-
-        public void OnNavigatedTo(object param)
-        {
-            //string l;
-            //if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(Consts.SettingsLoginKey, out l))
-            //{
-            //    Login = l;
-            //}
-            //Password = string.Empty;
-        }
-
-        public void OnNavigatedFrom()
-        {
-            //IsolatedStorageSettings.ApplicationSettings[Consts.SettingsLoginKey] = Login;
-        }
-
-        #endregion
-
         private async void DoLogin(PasswordBox password)
         {
-            IsBusy = true;
             Message = null;
-            var task = await authService.Login(Login, password.Password);
 
-            if (task.Succeed)
+            var task = loginCallback.Invoke(Login, password.Password);
+
+            IsBusy = true;
+            var succeed = await task;
+            IsBusy = false;
+
+            if (succeed)
             {
-                await signalRClient.StartAsync();
-                navigationService.OpenLandingPage();
+                //IsolatedStorageSettings.ApplicationSettings[Consts.SettingsLoginKey] = Login;
             }
             else
             {
                 password.Password = string.Empty;
                 Message = "Пароль, который вы ввели, неверный.\nПожалуйста, попробуйте еще раз.";
             }
-            IsBusy = false;
         }
     }
 }

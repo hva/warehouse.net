@@ -5,11 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
-    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Shell.Login"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=local:LoginViewModel}"
-    mvvm:ViewModelLocator.AutoWireViewModel="True">
+    d:DataContext="{d:DesignInstance Type=local:LoginViewModel}">
 
     <StackPanel Width="300" VerticalAlignment="Center">
 

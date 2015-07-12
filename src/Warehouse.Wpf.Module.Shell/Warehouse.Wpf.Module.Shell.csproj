@@ -74,15 +74,8 @@
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShellModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ShellTemplateSelector.cs" />
     <Compile Include="ShellViewModel.cs" />
-    <Compile Include="LoggedIn\TopMenu.xaml.cs">
-      <DependentUpon>TopMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LoggedIn\TopMenuViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">
@@ -124,10 +117,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="LoggedIn\TopMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -16,28 +16,11 @@ namespace Warehouse.Wpf
 {
     public class Bootstrapper : UnityBootstrapper
     {
-        public override void Run(bool runWithDefaultConfiguration)
-        {
-            base.Run(runWithDefaultConfiguration);
-
-            //var authStore = Container.Resolve<IAuthStore>();
-            //var navigationService = Container.Resolve<INavigationService>();
-            //var token = authStore.LoadToken();
-            //if (token != null && token.IsAuthenticated())
-            //{
-            //    navigationService.OpenLandingPage();
-            //}
-            //else
-            //{
-            //    navigationService.OpenLoginPage();
-            //}
-        }
-
         protected override void ConfigureModuleCatalog()
         {
             base.ConfigureModuleCatalog();
 
-            ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ShellModule));
+            //((ModuleCatalog)ModuleCatalog).AddModule(typeof(ShellModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(MainModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ProductDetailModule));
         }
@@ -47,7 +30,6 @@ namespace Warehouse.Wpf
             base.ConfigureContainer();
 
             Container.RegisterType<Window, Shell>(new ContainerControlledLifetimeManager());
-            //Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthStore, AuthStore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthService, AuthService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IApplicationSettings, ApplicationSettings>(new ContainerControlledLifetimeManager());
