@@ -48,7 +48,7 @@
                 </StackPanel>
             </Grid>
 
-            <ContentControl Grid.Row="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+            <ContentControl Grid.Row="2" Content="{Binding View}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
         </Grid>
     </Grid>
 

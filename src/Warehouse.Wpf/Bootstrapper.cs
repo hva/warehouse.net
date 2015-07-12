@@ -20,7 +20,6 @@ namespace Warehouse.Wpf
         {
             base.ConfigureModuleCatalog();
 
-            //((ModuleCatalog)ModuleCatalog).AddModule(typeof(ShellModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(MainModule));
             ((ModuleCatalog)ModuleCatalog).AddModule(typeof(ProductDetailModule));
         }
@@ -38,11 +37,13 @@ namespace Warehouse.Wpf
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
+
+            PageLocator.Register<MainView>(PageName.ProductsList);
         }
 
         protected override DependencyObject CreateShell()
         {
-            return Container.Resolve<Shell>();
+            return new Shell();
         }
 
         protected override void InitializeShell()

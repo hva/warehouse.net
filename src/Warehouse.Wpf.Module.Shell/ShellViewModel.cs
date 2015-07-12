@@ -45,10 +45,6 @@ namespace Warehouse.Wpf.Module.Shell
             }
             else
             {
-                if (context != null)
-                {
-                    // TODO: notify current view about navigating from
-                }
                 Context = loginFactory().Init(DoLogin);
             }
         }

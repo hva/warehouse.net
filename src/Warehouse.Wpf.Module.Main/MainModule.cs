@@ -1,7 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Unity;
-using Warehouse.Wpf.Infrastructure;
 
 namespace Warehouse.Wpf.Module.Main
 {
@@ -12,8 +11,6 @@ namespace Warehouse.Wpf.Module.Main
 
         public void Initialize()
         {
-            Container.RegisterType<object, MainView>(Consts.MainView);
-
             ViewModelLocationProvider.Register(typeof(MainView).FullName, () => Container.Resolve<MainViewModel>());
         }
     }

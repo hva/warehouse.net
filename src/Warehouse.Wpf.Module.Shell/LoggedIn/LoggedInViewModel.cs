@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 
 namespace Warehouse.Wpf.Module.Shell.LoggedIn
 {
-    public class LoggedInViewModel
+    public class LoggedInViewModel : BindableBase
     {
         private Action logoutCallback;
+        private IView view;
 
         public LoggedInViewModel()
         {
@@ -19,6 +22,7 @@ namespace Warehouse.Wpf.Module.Shell.LoggedIn
         {
             logoutCallback = logout;
             IsAdmin = token.IsAdmin();
+            NavigateToPage(PageName.ProductsList);
             return this;
         }
 
@@ -26,14 +30,50 @@ namespace Warehouse.Wpf.Module.Shell.LoggedIn
         public ICommand LogoutCommand { get; private set; }
         public ICommand NavigateToPageCommand { get; private set; }
 
+        public IView View
+        {
+            get { return view; }
+            set { SetProperty(ref view, value); }
+        }
+
         private void NavigateToPage(string page)
         {
-            //regionManager.RequestNavigate(Consts.MainRegion, page);
+            NavigateFromCurrentView();
+            View = PageLocator.Resolve(page);
+            NavigateToCurrentView();
         }
 
         private void Logout()
         {
+            NavigateFromCurrentView();
             logoutCallback();
+        }
+
+        private void NavigateFromCurrentView()
+        {
+            var vm = GetViewModel();
+            if (vm != null)
+            {
+                vm.OnNavigatedFrom();
+            }
+        }
+
+        private void NavigateToCurrentView()
+        {
+            var vm = GetViewModel();
+            if (vm != null)
+            {
+                vm.OnNavigatedTo();
+            }
+        }
+
+        private INavigationAware GetViewModel()
+        {
+            if (view != null)
+            {
+                return view.DataContext as INavigationAware;
+            }
+            return null;
         }
     }
 }
