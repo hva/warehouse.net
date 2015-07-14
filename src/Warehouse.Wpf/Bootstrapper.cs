@@ -34,9 +34,8 @@ namespace Warehouse.Wpf
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
-            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(ResolvViewTypeFromViewModelType);
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(ResolveViewTypeFromViewModelType);
 
-            PageLocator.SetOpenWindowCallback(OpenWindow);
             PageLocator.Register<MainView>(PageName.ProductsList);
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
@@ -44,7 +43,7 @@ namespace Warehouse.Wpf
 
         protected override DependencyObject CreateShell()
         {
-            return new Shell();
+            return Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
@@ -56,31 +55,14 @@ namespace Warehouse.Wpf
             ViewModelLocator.SetAutoWireViewModel(Shell, true);
         }
 
-        private Type ResolvViewTypeFromViewModelType(Type viewType)
+        private Type ResolveViewTypeFromViewModelType(Type viewType)
         {
             var viewName = viewType.FullName;
             viewName = viewName.Replace(".Views.", ".ViewModels.");
             var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-            var viewModelName = String.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
+            var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
             viewModelName = viewModelName.Replace("ViewViewModel", "ViewModel");
             return Type.GetType(viewModelName);
-        }
-
-        private void OpenWindow(object page, object param)
-        {
-            var window = page as Window;
-            if (window != null)
-            {
-                window.Owner = (Window) Shell;
-
-                var vm = window.DataContext as INavigationAware;
-                if (vm != null)
-                {
-                    vm.OnNavigatedTo(param);
-                }
-
-                window.ShowDialog();
-            }
         }
     }
 }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenWindowEvent.cs" />
     <Compile Include="ProductDeletedBatchEvent.cs" />
     <Compile Include="ProductDeletedBatchEventArgs.cs" />
     <Compile Include="ProductUpdatedBatchEvent.cs" />

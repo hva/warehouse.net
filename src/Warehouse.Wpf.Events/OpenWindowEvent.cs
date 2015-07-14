@@ -1,0 +1,19 @@
+﻿using Microsoft.Practices.Prism.PubSubEvents;
+
+namespace Warehouse.Wpf.Events
+{
+    public class OpenWindowEvent: PubSubEvent<OpenWindowEventArgs>
+    {
+    }
+
+    public class OpenWindowEventArgs
+    {
+        public OpenWindowEventArgs(string pageName, object param)
+        {
+            PageName = pageName;
+            Param = param;
+        }
+        public string PageName { get; }
+        public object Param { get; }
+    }
+}

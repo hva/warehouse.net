@@ -44,8 +44,8 @@ namespace Warehouse.Wpf.Module.Main
 
             //changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
-            OpenProductCommand = new DelegateCommand<Product>(p => PageLocator.OpenWindow(PageName.ProductEditWindow, p));
-            CreateProductCommand = new DelegateCommand(() => PageLocator.OpenWindow(PageName.ProductCreateWindow, null));
+            CreateProductCommand = new DelegateCommand(CreateProduct);
+            OpenProductCommand = new DelegateCommand<Product>(EditProduct);
             changePriceCommand = new DelegateCommand(ChangePrice, HasSelectedProducts);
             deleteCommand = new DelegateCommand(PromtDelete, HasSelectedProducts);
 
@@ -189,6 +189,18 @@ namespace Warehouse.Wpf.Module.Main
         private bool HasSelectedProducts()
         {
             return selectedItems != null && selectedItems.OfType<Product>().Any();
+        }
+
+        private void CreateProduct()
+        {
+            var args = new OpenWindowEventArgs(PageName.ProductCreateWindow, null);
+            eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
+        }
+
+        private void EditProduct(Product p)
+        {
+            var args = new OpenWindowEventArgs(PageName.ProductEditWindow, p);
+            eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
         }
 
         #region ChangePrice

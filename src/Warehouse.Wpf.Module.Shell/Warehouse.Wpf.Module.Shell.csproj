@@ -38,6 +38,10 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.PubSubEvents.1.1.2\lib\portable-sl5+windowsphone8+windows8+net40+wpa81\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +89,10 @@
     <ProjectReference Include="..\Warehouse.Wpf.Controls\Warehouse.Wpf.Controls.csproj">
       <Project>{C5DCDF6A-BB55-4258-A57F-B1DC6FD4CB37}</Project>
       <Name>Warehouse.Wpf.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Events\Warehouse.Wpf.Events.csproj">
+      <Project>{BFAD256A-278F-4289-A267-131911DF50C0}</Project>
+      <Name>Warehouse.Wpf.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
