@@ -44,38 +44,49 @@
             <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Width="40" />
         </StackPanel>
 
-        <!--<sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
-            <sdk:DataGrid.Columns>
-                <sdk:DataGridTextColumn
-                    Header="Наимнование"
-                    Binding="{Binding Product.Name}"
-                    Width="150"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-                <sdk:DataGridTextColumn
-                    Header="Размер"
-                    Binding="{Binding Product.Size}"
-                    Width="100"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-                <sdk:DataGridTextColumn
-                    Header="Старая цена&#10;(опт.)"
-                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,#}'}"
-                    CellStyle="{StaticResource Inactive}"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-                <sdk:DataGridTextColumn
-                    Header="Старая цена&#10;(розн.)"
-                    Binding="{Binding Product.PriceRozn, StringFormat='{}{0:##,#}'}"
-                    CellStyle="{StaticResource Inactive}"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-                <sdk:DataGridTextColumn
-                    Header="Новая цена&#10;(опт.)"
-                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,#}'}"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-                <sdk:DataGridTextColumn
-                    Header="Новая цена&#10;(розн.)"
-                    Binding="{Binding NewPriceRozn, StringFormat='{}{0:##,#}'}"
-                    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceItem}" />
-            </sdk:DataGrid.Columns>
-        </sdk:DataGrid>-->
+        <ListView Grid.Row="1" ItemsSource="{Binding Items}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Наимнование" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.Name}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Размер" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.Size}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Старая цена&#10;(опт.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--CellStyle="{StaticResource Inactive}"-->
+                                <TextBlock Text="{Binding Product.PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Старая цена&#10;(розн.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--CellStyle="{StaticResource Inactive}"-->
+                                <TextBlock Text="{Binding Product.PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Новая цена&#10;(опт.)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NewPriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <Border Grid.Row="2" Style="{StaticResource FormButtons}">
             <StackPanel Orientation="Horizontal">
