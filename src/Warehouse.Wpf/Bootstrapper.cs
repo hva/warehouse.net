@@ -11,6 +11,7 @@ using Warehouse.Wpf.Data;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
+using Warehouse.Wpf.Module.ChangePrice;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
@@ -39,6 +40,7 @@ namespace Warehouse.Wpf
             PageLocator.Register<MainView>(PageName.ProductsList);
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
+            PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
         }
 
         protected override DependencyObject CreateShell()

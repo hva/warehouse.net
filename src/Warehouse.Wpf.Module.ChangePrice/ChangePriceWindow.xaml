@@ -1,14 +1,21 @@
 ﻿<Window
-    x:Class="Warehouse.Wpf.Module.Main.ChangePrice.ChangePriceWindow"
+    x:Class="Warehouse.Wpf.Module.ChangePrice.ChangePriceWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:changePrice="clr-namespace:Warehouse.Wpf.Module.Main.ChangePrice"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Module.ChangePrice"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=changePrice:ChangePriceViewModel}"
-    Width="660" Height="600"
-    Title="Пересчет цены">
+    d:DataContext="{d:DesignInstance Type=local:ChangePriceWindowViewModel}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner"
+    Title="Пересчет цены"
+    Language="ru-RU">
 
     <!--<controls:ChildWindow.Resources>
         <Style x:Key="Default" TargetType="sdk:DataGridCell">
@@ -20,11 +27,11 @@
         </Style>
     </controls:ChildWindow.Resources>-->
 
-    <!--<i:Interaction.Behaviors>
-        <behaviors:ChildWindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
-    </i:Interaction.Behaviors>-->
+    <i:Interaction.Behaviors>
+        <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
 
-    <!--<Grid>
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,15 +40,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
-            <sdk:Label Content="Процент" Width="Auto" />
-            <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="40">
-                <i:Interaction.Behaviors>
-                    <interactivity:UpdateTextBindingOnPropertyChanged />
-                </i:Interaction.Behaviors>
-            </TextBox>
+            <Label Content="Процент" Width="Auto" />
+            <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Width="40" />
         </StackPanel>
 
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+        <!--<sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn
                     Header="Наимнование"
@@ -74,12 +77,14 @@
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>-->
 
-        <!--<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,40,0,0">
-            <controls1:ProgressRing IsActive="{Binding IsBusy}" />
-            <Button Content="Сохранить" Command="{Binding SaveCommand}" />
-            <Rectangle Width="10" />
-            <Button Content="Отмена" Command="{Binding CancelCommand}" />
-        </StackPanel>-->
-    <!--</Grid>-->
+        <Border Grid.Row="2" Style="{StaticResource FormButtons}">
+            <StackPanel Orientation="Horizontal">
+                <controls:ProgressRing IsActive="{Binding IsBusy}" />
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+    </Grid>
 
 </Window>

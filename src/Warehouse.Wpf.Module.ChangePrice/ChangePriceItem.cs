@@ -3,7 +3,7 @@ using System.Globalization;
 using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Main.ChangePrice
+namespace Warehouse.Wpf.Module.ChangePrice
 {
     public class ChangePriceItem : BindableBase
     {

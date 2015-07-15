@@ -26,14 +26,6 @@
 
     <i:Interaction.Triggers>
 
-        <!--<prism:InteractionRequestTrigger SourceObject="{Binding ChangePriceRequest}">
-            <prism:PopupChildWindowAction>
-                <prism:PopupChildWindowAction.ChildWindow>
-                    <views:ChangePriceWindow />
-                </prism:PopupChildWindowAction.ChildWindow>
-            </prism:PopupChildWindowAction>
-        </prism:InteractionRequestTrigger>-->
-
         <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
                 <!--<prism:PopupWindowAction.WindowContent>

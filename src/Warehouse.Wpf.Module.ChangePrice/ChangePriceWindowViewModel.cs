@@ -7,29 +7,28 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Events;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.Mvvm;
 
-namespace Warehouse.Wpf.Module.Main.ChangePrice
+namespace Warehouse.Wpf.Module.ChangePrice
 {
-    public class ChangePriceViewModel : ValidationObject
+    public class ChangePriceWindowViewModel : ValidationObject, INavigationAware
     {
         private string percentage = "10";
         private bool isBusy;
+        private bool isWindowOpen = true;
 
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
 
-        public ChangePriceViewModel(IEnumerable<Product> products, IProductsRepository repository, IEventAggregator eventAggregator)
+        public ChangePriceWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => /* IsWindowOpen = false*/ { });
-
-            LoadItems(products);
-            UpdatePrice();
+            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -54,6 +53,12 @@ namespace Warehouse.Wpf.Module.Main.ChangePrice
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
+        }
+
+        public bool IsWindowOpen
+        {
+            get { return isWindowOpen; }
+            set { SetProperty(ref isWindowOpen, value); }
         }
 
         private void ValidatePercentage()
@@ -105,6 +110,21 @@ namespace Warehouse.Wpf.Module.Main.ChangePrice
                 //Confirmed = task.Succeed;
                 //IsWindowOpen = false;
             }
+        }
+
+        public void OnNavigatedTo(object param)
+        {
+            var products = param as IEnumerable<Product>;
+            if (products != null)
+            {
+                LoadItems(products);
+                UpdatePrice();
+            }
+        }
+
+        public void OnNavigatedFrom()
+        {
+            
         }
     }
 }

@@ -26,7 +26,6 @@ namespace Warehouse.Wpf.Module.Main
         private readonly IEventAggregator eventAggregator;
         private readonly ISignalRClient signalRClient;
         private readonly IProductsRepository productsRepository;
-        //private readonly InteractionRequest<ChangePriceViewModel> changePriceRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
@@ -42,7 +41,6 @@ namespace Warehouse.Wpf.Module.Main
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
 
-            //changePriceRequest = new InteractionRequest<ChangePriceViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
             CreateProductCommand = new DelegateCommand(CreateProduct);
             OpenProductCommand = new DelegateCommand<Product>(EditProduct);
@@ -208,7 +206,8 @@ namespace Warehouse.Wpf.Module.Main
         private void ChangePrice()
         {
             //var products = selectedItems.OfType<Product>().ToArray();
-            //changePriceRequest.Raise(new ChangePriceViewModel(products, productsRepository, eventAggregator));
+            var args = new OpenWindowEventArgs(PageName.ChangePriceWindow, null);
+            eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
         }
 
         #endregion
