@@ -28,7 +28,10 @@ namespace Warehouse.Wpf.Module.Shell
             {
                 window.Owner = this;
                 var vm = window.DataContext as INavigationAware;
-                vm?.OnNavigatedTo(args.Param);
+                if (vm != null)
+                {
+                    vm.OnNavigatedTo(args.Param);
+                }
                 window.ShowDialog();
             }
         }

@@ -13,7 +13,7 @@ namespace Warehouse.Wpf.Events
             PageName = pageName;
             Param = param;
         }
-        public string PageName { get; }
-        public object Param { get; }
+        public string PageName { get; private set; }
+        public object Param { get; private set; }
     }
 }
