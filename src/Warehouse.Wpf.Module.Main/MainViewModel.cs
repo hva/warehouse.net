@@ -201,16 +201,12 @@ namespace Warehouse.Wpf.Module.Main
             eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
         }
 
-        #region ChangePrice
-
         private void ChangePrice()
         {
-            //var products = selectedItems.OfType<Product>().ToArray();
-            var args = new OpenWindowEventArgs(PageName.ChangePriceWindow, null);
+            var products = selectedItems.OfType<Product>().ToArray();
+            var args = new OpenWindowEventArgs(PageName.ChangePriceWindow, products);
             eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
         }
-
-        #endregion
 
         #region Delete
 

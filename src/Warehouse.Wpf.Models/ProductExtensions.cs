@@ -1,18 +1,15 @@
-﻿using System;
-using System.Globalization;
-
-namespace Warehouse.Wpf.Models
+﻿namespace Warehouse.Wpf.Models
 {
     public static class ProductExtensions
     {
-        public static long CalculatePriceRozn(string priceOpt, string k, string length, bool isSheet)
+        public static long CalculatePriceRozn(long priceOpt, double k, double length, bool isSheet)
         {
-            var _priceOpt = decimal.Parse(priceOpt);
-            var _k = decimal.Parse(k);
+            var _priceOpt = new decimal(priceOpt);
+            var _k = new decimal(k);
             var rozn = _priceOpt * _k / 1000m * 1.2m;
             if (isSheet)
             {
-                var _l = decimal.Parse(length);
+                var _l = new decimal(length);
                 rozn *= _l;
             }
             return (long)(decimal.Ceiling(rozn / 100) * 100);
@@ -20,10 +17,7 @@ namespace Warehouse.Wpf.Models
 
         public static long CalculatePriceRozn(this Product p)
         {
-            var priceOpt = Convert.ToString(p.PriceOpt);
-            var k = Convert.ToString(p.K, CultureInfo.CurrentCulture);
-            var length = Convert.ToString(p.Length, CultureInfo.CurrentCulture);
-            return CalculatePriceRozn(priceOpt, k, length, p.IsSheet);
+            return CalculatePriceRozn(p.PriceOpt, p.K, p.Length, p.IsSheet);
         }
     }
 }

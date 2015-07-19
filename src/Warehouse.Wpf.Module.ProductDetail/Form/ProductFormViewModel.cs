@@ -174,7 +174,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
             }
             else
             {
-                PriceRozn = ProductExtensions.CalculatePriceRozn(priceOpt, k, length, GetIsSheet());
+                PriceRozn = ProductExtensions.CalculatePriceRozn(long.Parse(priceOpt), double.Parse(k), double.Parse(length), GetIsSheet());
             }
         }
 

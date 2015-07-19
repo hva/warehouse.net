@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Microsoft.Practices.Prism.Mvvm;
+﻿using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Module.ChangePrice
@@ -9,15 +7,10 @@ namespace Warehouse.Wpf.Module.ChangePrice
     {
         private long newPriceOpt;
         private long newPriceRozn;
-        private readonly string k;
-        private readonly string length;
 
         public ChangePriceItem(Product p)
         {
             Product = p;
-
-            k = Convert.ToString(p.K, CultureInfo.InvariantCulture);
-            length = Convert.ToString(p.Length, CultureInfo.InvariantCulture);
         }
 
         public Product Product { get; private set; }
@@ -42,8 +35,7 @@ namespace Warehouse.Wpf.Module.ChangePrice
 
             NewPriceOpt = (long)(decimal.Ceiling(b / 100) * 100);
 
-            var priceOptStr = Convert.ToString(newPriceOpt);
-            NewPriceRozn = ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
+            NewPriceRozn = ProductExtensions.CalculatePriceRozn(newPriceOpt, Product.K, Product.Length, Product.IsSheet);
         }
     }
 }
