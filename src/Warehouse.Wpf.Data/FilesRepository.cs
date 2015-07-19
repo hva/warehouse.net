@@ -3,8 +3,10 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
+using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Data
 {
@@ -15,6 +17,17 @@ namespace Warehouse.Wpf.Data
         public FilesRepository(Func<BearerHttpClient> httpClientFactory)
         {
             this.httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<AsyncResult<FileDescription[]>> GetAll()
+        {
+            using (var client = httpClientFactory())
+            {
+                var uri = new Uri("api/files", UriKind.Relative);
+                var str = await client.GetStringAsync(uri);
+                var res = JsonConvert.DeserializeObject<FileDescription[]>(str);
+                return new AsyncResult<FileDescription[]> { Result = res, Succeed = true };
+            }
         }
 
         public async Task<AsyncResult<string>> Create(Stream stream, string fileName, string contentType)

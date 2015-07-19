@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Events", "War
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Module.ChangePrice", "Warehouse.Wpf.Module.ChangePrice\Warehouse.Wpf.Module.ChangePrice.csproj", "{F8FBAE74-CC03-4E38-8762-3DE33F2A83CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.Module.Files", "Warehouse.Wpf.Module.Files\Warehouse.Wpf.Module.Files.csproj", "{4296A241-5EF5-42A4-89DE-EAADA5B71B7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,10 @@ Global
 		{F8FBAE74-CC03-4E38-8762-3DE33F2A83CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8FBAE74-CC03-4E38-8762-3DE33F2A83CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8FBAE74-CC03-4E38-8762-3DE33F2A83CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4296A241-5EF5-42A4-89DE-EAADA5B71B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4296A241-5EF5-42A4-89DE-EAADA5B71B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4296A241-5EF5-42A4-89DE-EAADA5B71B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4296A241-5EF5-42A4-89DE-EAADA5B71B7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,6 +273,7 @@ Global
 		{6046A759-4162-47F0-9B37-7DF9C75546BF} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 		{BFAD256A-278F-4289-A267-131911DF50C0} = {7B9EF921-9ECA-4BE3-80D2-0E71FC6912FA}
 		{F8FBAE74-CC03-4E38-8762-3DE33F2A83CD} = {14964CC4-3254-4AA6-AA33-9F48C980A263}
+		{4296A241-5EF5-42A4-89DE-EAADA5B71B7F} = {14964CC4-3254-4AA6-AA33-9F48C980A263}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

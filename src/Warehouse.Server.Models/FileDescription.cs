@@ -8,5 +8,6 @@ namespace Warehouse.Server.Models
         public string Name { get; set; }
         public long Size { get; set; }
         public DateTime UploadDate { get; set; }
+        public FileMetadata Metadata { get; set; }
     }
 }
