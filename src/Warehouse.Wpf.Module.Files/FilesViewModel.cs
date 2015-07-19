@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
@@ -13,6 +18,10 @@ namespace Warehouse.Wpf.Module.Files
     {
         private FileDescription[] items;
         private bool isBusy;
+        private IList selectedItems;
+        private readonly DelegateCommand deleteCommand;
+        private readonly InteractionRequest<Confirmation> deleteRequest;
+
         private readonly IFilesRepository filesRepository;
         private readonly IProductsRepository productsRepository;
 
@@ -27,10 +36,15 @@ namespace Warehouse.Wpf.Module.Files
                 IsEditor = token.IsEditor();
                 IsAdmin = token.IsAdmin();
             }
+
+            deleteCommand = new DelegateCommand(PromtDelete, HasSelectedItems);
+            deleteRequest = new InteractionRequest<Confirmation>();
         }
 
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
+        public ICommand DeleteCommand { get { return deleteCommand; } }
+        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
 
         public FileDescription[] Items
         {
@@ -42,6 +56,16 @@ namespace Warehouse.Wpf.Module.Files
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
+        }
+
+        public IList SelectedItems
+        {
+            get { return selectedItems; }
+            set
+            {
+                selectedItems = value;
+                deleteCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public async void OnNavigatedTo(object param)
@@ -72,5 +96,47 @@ namespace Warehouse.Wpf.Module.Files
         public void OnNavigatedFrom()
         {
         }
+
+        private bool HasSelectedItems()
+        {
+            return selectedItems != null && selectedItems.OfType<FileDescription>().Any();
+        }
+
+        #region Delete
+
+        private void PromtDelete()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("Следующие файлы будут удалены:");
+            foreach (var x in selectedItems.OfType<FileDescription>())
+            {
+                sb.AppendFormat("- {0}", x.Name);
+                sb.AppendLine();
+            }
+
+            var conf = new Confirmation
+            {
+                Title = "Внимание!",
+                Content = sb.ToString(),
+            };
+
+            deleteRequest.Raise(conf, Delete);
+        }
+
+        private void Delete(Confirmation conf)
+        {
+            if (conf.Confirmed)
+            {
+                //var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
+                //var task = await productsRepository.Delete(ids);
+                //if (task.Succeed)
+                //{
+                //    var args = new ProductDeletedBatchEventArgs(ids, false);
+                //    eventAggregator.GetEvent<ProductDeletedBatchEvent>().Publish(args);
+                //}
+            }
+        }
+
+        #endregion
     }
 }

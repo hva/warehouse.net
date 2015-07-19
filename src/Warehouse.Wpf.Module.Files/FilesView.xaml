@@ -9,6 +9,9 @@
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Files.Converters"
+    xmlns:interactionRequest="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance Type=local:FilesViewModel}"
@@ -20,6 +23,12 @@
         <converters:LongToFileSizeConverter x:Key="LongToFileSizeConverter" />
         <converters:ProductIdToNameConverter x:Key="ProductIdToNameConverter" />
     </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
+        </interactionRequest:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,11 +45,12 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Button
-                    Content="Создать"
+                    Content="Добавить"
                     Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Rectangle Width="10" />
                 <Button
                     Content="Удалить"
+                    Command="{Binding DeleteCommand}"
                     Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </StackPanel>
         </Grid>
@@ -50,10 +60,10 @@
             ItemsSource="{Binding Items}"
             BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-            <!--<i:Interaction.Behaviors>
-                <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenProductCommand}" />
+            <i:Interaction.Behaviors>
+                <!--<behaviors:ListViewDoubleClickBehavior Command="{Binding OpenProductCommand}" />-->
                 <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>-->
+            </i:Interaction.Behaviors>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Файл">
