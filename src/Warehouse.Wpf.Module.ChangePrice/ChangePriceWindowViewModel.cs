@@ -18,6 +18,7 @@ namespace Warehouse.Wpf.Module.ChangePrice
         private string percentage = "10";
         private bool isBusy;
         private bool isWindowOpen = true;
+        private ChangePriceItem[] items;
 
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
@@ -33,7 +34,12 @@ namespace Warehouse.Wpf.Module.ChangePrice
 
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
-        public ObservableCollection<ChangePriceItem> Items { get; private set; }
+
+        public ChangePriceItem[] Items
+        {
+            get { return items; }
+            set { SetProperty(ref items, value); }
+        }
 
         public string Percentage
         {
@@ -69,11 +75,11 @@ namespace Warehouse.Wpf.Module.ChangePrice
 
         private void LoadItems(IEnumerable<Product> products)
         {
-            var items =
+            var q =
                 from p in products
                 select new ChangePriceItem(p);
 
-            Items = new ObservableCollection<ChangePriceItem>(items);
+            Items = q.ToArray();
         }
 
         private void UpdatePrice()
@@ -106,9 +112,7 @@ namespace Warehouse.Wpf.Module.ChangePrice
                 var ids = Items.Select(x => x.Product.Id).ToList();
                 var args = new ProductUpdatedBatchEventArgs(ids, false);
                 eventAggregator.GetEvent<ProductUpdatedBatchEvent>().Publish(args);
-
-                //Confirmed = task.Succeed;
-                //IsWindowOpen = false;
+                IsWindowOpen = false;
             }
         }
 

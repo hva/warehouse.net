@@ -13,19 +13,10 @@
     d:DataContext="{d:DesignInstance Type=local:ChangePriceWindowViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     SizeToContent="WidthAndHeight"
+    MaxHeight="600"
     WindowStartupLocation="CenterOwner"
     Title="Пересчет цены"
     Language="ru-RU">
-
-    <!--<controls:ChildWindow.Resources>
-        <Style x:Key="Default" TargetType="sdk:DataGridCell">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-        </Style>
-        <Style TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}" />
-        <Style x:Key="Inactive" TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}">
-            <Setter Property="Opacity" Value="0.6" />
-        </Style>
-    </controls:ChildWindow.Resources>-->
 
     <i:Interaction.Behaviors>
         <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
@@ -64,16 +55,14 @@
                     <GridViewColumn Header="Старая цена&#10;(опт.)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <!--CellStyle="{StaticResource Inactive}"-->
-                                <TextBlock Text="{Binding Product.PriceOpt, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                                <TextBlock Text="{Binding Product.PriceOpt, StringFormat='{}{0:##,#}'}" Opacity="0.6" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Старая цена&#10;(розн.)">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <!--CellStyle="{StaticResource Inactive}"-->
-                                <TextBlock Text="{Binding Product.PriceRozn, StringFormat='{}{0:##,#}'}" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
+                                <TextBlock Text="{Binding Product.PriceRozn, StringFormat='{}{0:##,#}'}" Opacity="0.6" d:DataContext="{d:DesignInstance Type=local:ChangePriceItem}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
