@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
+    <Compile Include="Converters\ProductIdToNameConverter.cs" />
     <Compile Include="FilesView.xaml.cs">
       <DependentUpon>FilesView.xaml</DependentUpon>
     </Compile>

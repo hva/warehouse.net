@@ -1,9 +1,11 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using System.Linq;
+using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
+using Warehouse.Wpf.Module.Files.Converters;
 
 namespace Warehouse.Wpf.Module.Files
 {
@@ -12,10 +14,12 @@ namespace Warehouse.Wpf.Module.Files
         private FileDescription[] items;
         private bool isBusy;
         private readonly IFilesRepository filesRepository;
+        private readonly IProductsRepository productsRepository;
 
-        public FilesViewModel(IFilesRepository filesRepository, IAuthStore authStore)
+        public FilesViewModel(IFilesRepository filesRepository, IAuthStore authStore, IProductsRepository productsRepository)
         {
             this.filesRepository = filesRepository;
+            this.productsRepository = productsRepository;
 
             var token = authStore.LoadToken();
             if (token != null)
@@ -43,13 +47,26 @@ namespace Warehouse.Wpf.Module.Files
         public async void OnNavigatedTo(object param)
         {
             IsBusy = true;
+
             var task = await filesRepository.GetAll();
-            IsBusy = false;
 
             if (task.Succeed)
             {
+                var ids = task.Result.SelectMany(x => x.Metadata.ProductIds).Distinct().ToList();
+
+                if (ids.Count > 0)
+                {
+                    var task2 = await productsRepository.GetManyAsync(ids);
+                    if (task2.Succeed)
+                    {
+                        ProductIdToNameConverter.SetNames(task2.Result.ToDictionary(x => x.Id, x => string.Concat(x.Name, " ", x.Size)));
+                    }
+                }
+
                 Items = task.Result;
             }
+
+            IsBusy = false;
         }
 
         public void OnNavigatedFrom()
