@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -10,13 +11,13 @@ using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Files.Converters;
 
 namespace Warehouse.Wpf.Module.Files
 {
     public class FilesViewModel : BindableBase, INavigationAware
     {
         private FileDescription[] items;
+        private Dictionary<string, string> names;
         private bool isBusy;
         private IList selectedItems;
         private readonly DelegateCommand deleteCommand;
@@ -80,12 +81,14 @@ namespace Warehouse.Wpf.Module.Files
 
                 if (ids.Count > 0)
                 {
-                    var task2 = await productsRepository.GetManyAsync(ids);
+                    var task2 = await productsRepository.GetNamesAsync(ids);
                     if (task2.Succeed)
                     {
-                        ProductIdToNameConverter.SetNames(task2.Result.ToDictionary(x => x.Id, x => string.Concat(x.Name, " ", x.Size)));
+                        names = task2.Result.ToDictionary(x => x.Id, x => x.Name);
                     }
                 }
+
+                PopulateNames(task.Result);
 
                 Items = task.Result;
             }
@@ -138,5 +141,25 @@ namespace Warehouse.Wpf.Module.Files
         }
 
         #endregion
+
+        private void PopulateNames(IEnumerable<FileDescription> files)
+        {
+            if (names != null && files != null)
+            {
+                foreach (var x in files)
+                {
+                    var sb = new StringBuilder();
+                    foreach (var id in x.Metadata.ProductIds)
+                    {
+                        string name;
+                        if (names.TryGetValue(id, out name))
+                        {
+                            sb.AppendLine(name);
+                        }
+                    }
+                    x.Metadata.ProductNames = sb.ToString().TrimEnd();
+                }
+            }
+        }
     }
 }

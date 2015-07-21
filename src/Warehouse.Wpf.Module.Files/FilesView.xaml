@@ -21,7 +21,6 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:LongToFileSizeConverter x:Key="LongToFileSizeConverter" />
-        <converters:ProductIdToNameConverter x:Key="ProductIdToNameConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -76,7 +75,7 @@
                     <GridViewColumn Header="Позиция">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Metadata.ProductIds, Converter={StaticResource ProductIdToNameConverter}}" d:DataContext="{d:DesignInstance Type=models:FileDescription}" />
+                                <TextBlock Text="{Binding Metadata.ProductNames}" d:DataContext="{d:DesignInstance Type=models:FileDescription}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
