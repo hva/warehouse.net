@@ -57,6 +57,29 @@ namespace Warehouse.Server.Controllers
             return Request.CreateResponse(HttpStatusCode.InternalServerError);
         }
 
+        [Route("api/products/getNames")]
+        [HttpPost]
+        public HttpResponseMessage GetNames(string[] ids)
+        {
+            if (ids == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var objectIds = ids.Select(x => new ObjectId(x));
+            var query = Query<Product>.In(x => x.Id, objectIds);
+            var data = context.Products
+                .Find(query)
+                .SetFields(Fields<Product>.Include(x => x.Name, x => x.Size));
+            if (data != null)
+            {
+                var names = data.Select(x => new ProductName { Id = x.Id, Name = string.Concat(x.Name, " ", x.Size) });
+                return Request.CreateResponse(HttpStatusCode.OK, names);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        }
+
         public HttpResponseMessage Put(string id, [FromBody] Product product)
         {
             var query = Query<Product>.EQ(p => p.Id, new ObjectId(id));
