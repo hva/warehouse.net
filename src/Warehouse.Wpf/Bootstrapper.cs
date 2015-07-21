@@ -43,6 +43,7 @@ namespace Warehouse.Wpf
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
             PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
+            PageLocator.Register<CreateFileWindow>(PageName.CreateFileWindow);
         }
 
         protected override DependencyObject CreateShell()

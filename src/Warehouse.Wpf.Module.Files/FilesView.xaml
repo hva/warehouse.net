@@ -44,7 +44,8 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Button
-                    Content="Добавить"
+                    Content="Загрузить"
+                    Command="{Binding BrowseCommand}"
                     Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Rectangle Width="10" />
                 <Button

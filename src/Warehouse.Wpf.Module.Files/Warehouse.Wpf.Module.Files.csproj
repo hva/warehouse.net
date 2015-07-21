@@ -70,6 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
+    <Compile Include="CreateFileWindow.xaml.cs">
+      <DependentUpon>CreateFileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateFileWindowViewModel.cs" />
     <Compile Include="FilesView.xaml.cs">
       <DependentUpon>FilesView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CreateFileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +124,10 @@
     <ProjectReference Include="..\Warehouse.Wpf.Data\Warehouse.Wpf.Data.csproj">
       <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
       <Name>Warehouse.Wpf.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Events\Warehouse.Wpf.Events.csproj">
+      <Project>{bfad256a-278f-4289-a267-131911df50c0}</Project>
+      <Name>Warehouse.Wpf.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
