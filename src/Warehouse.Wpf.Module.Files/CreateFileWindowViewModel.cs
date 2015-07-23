@@ -11,11 +11,18 @@ namespace Warehouse.Wpf.Module.Files
         private BitmapImage imageSource;
         private string shortName;
         private string fullName;
+        private string title;
 
         public BitmapImage ImageSource
         {
             get { return imageSource; }
             set { SetProperty(ref imageSource, value); }
+        }
+
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
 
         public void OnNavigatedTo(object param)
@@ -26,6 +33,7 @@ namespace Warehouse.Wpf.Module.Files
                 shortName = dialog.SafeFileName;
                 fullName = dialog.FileName;
                 ImageSource = new BitmapImage(new Uri(fullName));
+                Title = shortName + "*";
             }
         }
 

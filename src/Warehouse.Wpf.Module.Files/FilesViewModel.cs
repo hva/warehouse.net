@@ -21,7 +21,7 @@ namespace Warehouse.Wpf.Module.Files
     public class FilesViewModel : BindableBase, INavigationAware
     {
         private FileDescription[] items;
-        private Dictionary<string, string> names;
+        private IDictionary<string, string> names;
         private bool isBusy;
         private IList selectedItems;
         private readonly DelegateCommand deleteCommand;
@@ -86,15 +86,10 @@ namespace Warehouse.Wpf.Module.Files
 
             if (task.Succeed)
             {
-                var ids = task.Result.SelectMany(x => x.Metadata.ProductIds).Distinct().ToList();
-
-                if (ids.Count > 0)
+                var task2 = await productsRepository.GetNamesAsync();
+                if (task2.Succeed)
                 {
-                    var task2 = await productsRepository.GetNamesAsync(ids);
-                    if (task2.Succeed)
-                    {
-                        names = task2.Result.ToDictionary(x => x.Id, x => x.Name);
-                    }
+                    names = task2.Result.ToDictionary(x => x.Id, x => x.Name);
                 }
 
                 PopulateNames(task.Result);

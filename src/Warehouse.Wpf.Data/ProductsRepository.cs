@@ -59,23 +59,33 @@ namespace Warehouse.Wpf.Data
             }
         }
 
-        public async Task<AsyncResult<Product[]>> GetNamesAsync(List<string> ids)
+        public async Task<AsyncResult<Product[]>> GetNamesAsync()
         {
             using (var client = httpClientFactory())
             {
-                var data = JsonConvert.SerializeObject(ids);
-                using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
-                {
-                    var uri = new Uri("api/products/getNames", UriKind.Relative);
-                    using (var resp = await client.PostAsync(uri, content))
-                    {
-                        var str = await resp.Content.ReadAsStringAsync();
-                        var res = JsonConvert.DeserializeObject<Product[]>(str);
-                        return new AsyncResult<Product[]> { Result = res, Succeed = true };
-                    }
-                }
+                var str = await client.GetStringAsync(new Uri("api/products/getNames", UriKind.Relative));
+                var res = JsonConvert.DeserializeObject<Product[]>(str);
+                return new AsyncResult<Product[]> { Result = res, Succeed = true };
             }
         }
+
+        //public async Task<AsyncResult<Product[]>> GetNamesAsync(List<string> ids)
+        //{
+        //    using (var client = httpClientFactory())
+        //    {
+        //        var data = JsonConvert.SerializeObject(ids);
+        //        using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
+        //        {
+        //            var uri = new Uri("api/products/getNames", UriKind.Relative);
+        //            using (var resp = await client.PostAsync(uri, content))
+        //            {
+        //                var str = await resp.Content.ReadAsStringAsync();
+        //                var res = JsonConvert.DeserializeObject<Product[]>(str);
+        //                return new AsyncResult<Product[]> { Result = res, Succeed = true };
+        //            }
+        //        }
+        //    }
+        //}
 
         public async Task<AsyncResult<string>> SaveAsync(Product product)
         {
