@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Win32;
 using Warehouse.Wpf.Infrastructure.Interfaces;
+using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Module.Files
 {
@@ -12,6 +16,19 @@ namespace Warehouse.Wpf.Module.Files
         private string shortName;
         private string fullName;
         private string title;
+        private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
+        private readonly Func<ProductPickerViewModel> pickerFactory;
+
+        public CreateFileWindowViewModel(Func<ProductPickerViewModel> pickerFactory)
+        {
+            this.pickerFactory = pickerFactory;
+
+            addProductRequest = new InteractionRequest<ProductPickerViewModel>();
+            AddProductCommand = new DelegateCommand(AddProduct);
+        }
+
+        public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
+        public ICommand AddProductCommand { get; private set; }
 
         public BitmapImage ImageSource
         {
@@ -23,6 +40,15 @@ namespace Warehouse.Wpf.Module.Files
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        private Product[] products;
+
+
+        public Product[] Products
+        {
+            get { return products; }
+            set { SetProperty(ref products, value); }
         }
 
         public void OnNavigatedTo(object param)
@@ -40,6 +66,20 @@ namespace Warehouse.Wpf.Module.Files
         public void OnNavigatedFrom()
         {
             
+        }
+
+        private async void AddProduct()
+        {
+            var context = pickerFactory();
+            context.Title = "Товарные позиции";
+            await context.InitAsync();
+            addProductRequest.Raise(context, x =>
+            {
+                if (x.Confirmed)
+                {
+                    Products = x.SelectedProducts;
+                }
+            });
         }
     }
 }

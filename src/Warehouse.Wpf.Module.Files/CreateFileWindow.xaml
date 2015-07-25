@@ -8,42 +8,55 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Warehouse.Wpf.Module.Files"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ir="http://www.codeplex.com/prism"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:CreateFileWindowViewModel}">
 
+    <i:Interaction.Triggers>
+        <ir:InteractionRequestTrigger SourceObject="{Binding AddProductRequest}">
+            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <ir:PopupWindowAction.WindowContent>
+                    <local:ProductPickerView />
+                </ir:PopupWindowAction.WindowContent>
+            </ir:PopupWindowAction>
+        </ir:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Добавить позицию" />
-                <Rectangle Width="10" />
-                <Button Content="Удалить" />
-            </StackPanel>
-            <ListBox Margin="0,10" BorderBrush="{x:Null}">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="10,5" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-
-                <ListBoxItem>item 1</ListBoxItem>
-                <ListBoxItem>item 2</ListBoxItem>
-                <ListBoxItem>item 3</ListBoxItem>
-                <ListBoxItem>item 4</ListBoxItem>
-            </ListBox>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Добавить" Command="{Binding AddProductCommand}" />
+            <Rectangle Width="10" />
+            <Button Content="Удалить" />
         </StackPanel>
+        <ListBox
+            x:Name="productsList"
+            Grid.Row="1"
+            ItemsSource="{Binding Products}"
+            DisplayMemberPath="Name"
+            Margin="0,10"
+            BorderBrush="{x:Null}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="10,5" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
-        <Image Grid.Row="1" Source="{Binding ImageSource}" />
+        <Image Grid.Row="2" Source="{Binding ImageSource}" />
     </Grid>
 
 </Window>
