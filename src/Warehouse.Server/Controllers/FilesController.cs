@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -9,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using Warehouse.Server.Data;
 using Warehouse.Server.Models;
@@ -34,7 +37,7 @@ namespace Warehouse.Server.Controllers
                 Name = x.Name,
                 Size = x.Length,
                 UploadDate = x.UploadDate,
-                Metadata = BsonSerializer.Deserialize<FileMetadata>(x.Metadata)
+                Metadata = (x.Metadata != null) ? BsonSerializer.Deserialize<FileMetadata>(x.Metadata) : null
             });
 
             return Request.CreateResponse(HttpStatusCode.OK, data);
@@ -97,6 +100,47 @@ namespace Warehouse.Server.Controllers
                 };
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
+
+        [HttpDelete]
+        public HttpResponseMessage Delete(string ids)
+        {
+            if (ids == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var arr = ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (arr.Length > 0)
+            {
+                var objectIds = arr.Select(x => new ObjectId(x));
+                var query = Query.In("_id", new BsonArray(objectIds));
+                context.Database.GridFS.Delete(query);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [Route("api/files/{id}/products")]
+        [HttpPost]
+        public HttpResponseMessage AttachProducts(string id, string[] productIds)
+        {
+            var file = context.Database.GridFS.FindOneById(new ObjectId(id));
+            if (file == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            var meta = new FileMetadata
+            {
+                ProductIds = new HashSet<ObjectId>
+                {
+                    new ObjectId(id)
+                }
+            };
+
+            context.Database.GridFS.SetMetadata(file, meta.ToBsonDocument());
+
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         private string Upload(string file, string remoteFileName, string contentType)

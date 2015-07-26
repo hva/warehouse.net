@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -48,6 +49,8 @@ namespace Warehouse.Wpf.Module.Files
             deleteCommand = new DelegateCommand(PromtDelete, HasSelectedItems);
             deleteRequest = new InteractionRequest<Confirmation>();
             BrowseCommand = new DelegateCommand(Browse);
+
+            eventAggregator.GetEvent<FileUpdatedEvent>().Subscribe(OnFileUpdated);
         }
 
         public bool IsEditor { get; private set; }
@@ -80,6 +83,20 @@ namespace Warehouse.Wpf.Module.Files
 
         public async void OnNavigatedTo(object param)
         {
+            await RefreshAsync();
+        }
+
+        public void OnNavigatedFrom()
+        {
+        }
+
+        private bool HasSelectedItems()
+        {
+            return selectedItems != null && selectedItems.OfType<FileDescription>().Any();
+        }
+
+        private async Task RefreshAsync()
+        {
             IsBusy = true;
 
             var task = await filesRepository.GetAll();
@@ -100,13 +117,9 @@ namespace Warehouse.Wpf.Module.Files
             IsBusy = false;
         }
 
-        public void OnNavigatedFrom()
+        private async void OnFileUpdated(object obj)
         {
-        }
-
-        private bool HasSelectedItems()
-        {
-            return selectedItems != null && selectedItems.OfType<FileDescription>().Any();
+            await RefreshAsync();
         }
 
         #region Delete
@@ -130,17 +143,20 @@ namespace Warehouse.Wpf.Module.Files
             deleteRequest.Raise(conf, Delete);
         }
 
-        private void Delete(Confirmation conf)
+        private async void Delete(Confirmation conf)
         {
             if (conf.Confirmed)
             {
-                //var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
-                //var task = await productsRepository.Delete(ids);
-                //if (task.Succeed)
-                //{
-                //    var args = new ProductDeletedBatchEventArgs(ids, false);
-                //    eventAggregator.GetEvent<ProductDeletedBatchEvent>().Publish(args);
-                //}
+                IsBusy = true;
+
+                var ids = selectedItems.OfType<FileDescription>().Select(x => x.Id).ToArray();
+                var task = await filesRepository.DeleteAsync(ids);
+                if (task.Succeed)
+                {
+                    await RefreshAsync();
+                }
+
+                IsBusy = false;
             }
         }
 
@@ -152,16 +168,19 @@ namespace Warehouse.Wpf.Module.Files
             {
                 foreach (var x in files)
                 {
-                    var sb = new StringBuilder();
-                    foreach (var id in x.Metadata.ProductIds)
+                    if (x.Metadata != null)
                     {
-                        string name;
-                        if (names.TryGetValue(id, out name))
+                        var sb = new StringBuilder();
+                        foreach (var id in x.Metadata.ProductIds)
                         {
-                            sb.AppendLine(name);
+                            string name;
+                            if (names.TryGetValue(id, out name))
+                            {
+                                sb.AppendLine(name);
+                            }
                         }
+                        x.Metadata.ProductNames = sb.ToString().TrimEnd();
                     }
-                    x.Metadata.ProductNames = sb.ToString().TrimEnd();
                 }
             }
         }
@@ -177,24 +196,6 @@ namespace Warehouse.Wpf.Module.Files
             if (dialog.ShowDialog() == true)
             {
                 eventAggregator.GetEvent<OpenWindowEvent>().Publish(new OpenWindowEventArgs(PageName.CreateFileWindow, dialog));
-                //var file = dlg.OpenFile();
-
-                //var progress = new ProgressWindow { Content = "Закачиваем файл..." };
-                //progress.Show();
-
-                //var task = await filesRepository.Create(file.OpenRead(), file.Name, "image/jpeg");
-
-                //if (task.Succeed)
-                //{
-                //    var fileId = task.Result;
-                //    var task2 = await productsRepository.AttachFile(productId, fileId);
-                //    if (task2.Succeed)
-                //    {
-                //        await LoadFiles();
-                //    }
-                //}
-
-                //progress.Close();
             }
         }
     }

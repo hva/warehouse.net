@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
@@ -171,31 +170,6 @@ namespace Warehouse.Server.Controllers
         }
 
         [Route("api/products/{id}/files")]
-        [HttpPost]
-        public HttpResponseMessage AttachFile(string id, FormDataCollection form)
-        {
-            var fileId = form.Get("fileId");
-
-            var file = context.Database.GridFS.FindOneById(new ObjectId(fileId));
-            if (file == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            var meta = new FileMetadata
-            {
-                ProductIds = new HashSet<ObjectId>
-                {
-                    new ObjectId(id)
-                }
-            };
-
-            context.Database.GridFS.SetMetadata(file, meta.ToBsonDocument());
-
-            return Request.CreateResponse(HttpStatusCode.Created);
-        }
-
-        [Route("api/products/{id}/files")]
         [HttpGet]
         public HttpResponseMessage GetFiles(string id)
         {
@@ -214,25 +188,5 @@ namespace Warehouse.Server.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
-
-        [Route("api/products/{id}/files")]
-        [HttpDelete]
-        public HttpResponseMessage DeleteFiles(string ids)
-        {
-            if (ids == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            var arr = ids.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
-            if (arr.Length > 0)
-            {
-                var objectIds = arr.Select(x => new ObjectId(x));
-                var query = Query.In("_id", new BsonArray(objectIds));
-                context.Database.GridFS.Delete(query);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
     }
 }

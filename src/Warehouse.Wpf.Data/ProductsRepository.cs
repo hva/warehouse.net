@@ -154,25 +154,6 @@ namespace Warehouse.Wpf.Data
             return new AsyncResult { Succeed = succeed };
         }
 
-        public async Task<AsyncResult> AttachFile(string productId, string fileId)
-        {
-            using (var client = httpClientFactory())
-            {
-                var uriString = string.Format("api/products/{0}/files", productId);
-                var uri = new Uri(uriString, UriKind.Relative);
-                var data = new Dictionary<string, string> { {"fileId", fileId} };
-                using (var content = new FormUrlEncodedContent(data))
-                {
-                    var resp = await client.PostAsync(uri, content);
-                    if (resp.StatusCode == HttpStatusCode.Created)
-                    {
-                        return new AsyncResult { Succeed = true };
-                    }
-                }
-            }
-            return new AsyncResult { Succeed = false };
-        }
-
         public async Task<AsyncResult<FileDescription[]>> GetFiles(string productId)
         {
             using (var client = httpClientFactory())
@@ -182,18 +163,6 @@ namespace Warehouse.Wpf.Data
                 var str = await client.GetStringAsync(uri);
                 var res = JsonConvert.DeserializeObject<FileDescription[]>(str);
                 return new AsyncResult<FileDescription[]> { Result = res, Succeed = true };
-            }
-        }
-
-        public async Task<AsyncResult> DetachFiles(string productId, string[] fileIds)
-        {
-            using (var client = httpClientFactory())
-            {
-                var q = string.Join(",", fileIds);
-                var uriString = string.Format("api/products/{0}/files?ids={1}", productId, q);
-                var uri = new Uri(uriString, UriKind.Relative);
-                var resp = await client.DeleteAsync(uri);
-                return new AsyncResult { Succeed = resp.StatusCode == HttpStatusCode.OK };
             }
         }
     }

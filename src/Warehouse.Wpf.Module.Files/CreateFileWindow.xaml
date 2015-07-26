@@ -11,9 +11,14 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ir="http://www.codeplex.com/prism"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:CreateFileWindowViewModel}">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
 
     <i:Interaction.Behaviors>
         <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
@@ -72,10 +77,14 @@
         <Border Grid.Row="3" Style="{StaticResource FormButtons}">
             <StackPanel Orientation="Horizontal">
                 <!--<controls:ProgressRing IsActive="{Binding IsBusy}" />-->
-                <Button Content="Сохранить" />
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
                 <Rectangle Width="10" />
                 <Button Content="Отмена" Command="{Binding CancelCommand}" />
             </StackPanel>
+        </Border>
+
+        <Border Grid.RowSpan="4" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <controls:ProgressRing IsActive="True" />
         </Border>
     </Grid>
 
