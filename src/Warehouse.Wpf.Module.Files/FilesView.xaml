@@ -24,9 +24,19 @@
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
+
         <interactionRequest:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
             <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
         </interactionRequest:InteractionRequestTrigger>
+
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding EditRequest}">
+            <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <interactionRequest:PopupWindowAction.WindowContent>
+                    <local:EditFileView />
+                </interactionRequest:PopupWindowAction.WindowContent>
+            </interactionRequest:PopupWindowAction>
+        </interactionRequest:InteractionRequestTrigger>
+
     </i:Interaction.Triggers>
 
     <Grid>
@@ -61,7 +71,7 @@
             BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <i:Interaction.Behaviors>
-                <!--<behaviors:ListViewDoubleClickBehavior Command="{Binding OpenProductCommand}" />-->
+                <behaviors:ListViewDoubleClickBehavior Command="{Binding EditCommand}" />
                 <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
             <ListView.View>

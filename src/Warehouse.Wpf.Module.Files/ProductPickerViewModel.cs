@@ -32,6 +32,8 @@ namespace Warehouse.Wpf.Module.Files
             items = new ObservableCollection<ProductName>();
             cvs = new CollectionViewSource { Source = items };
             cvs.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+
+            Title = "Товарные позиции";
         }
 
         public ICommand CancelCommand { get; private set; }

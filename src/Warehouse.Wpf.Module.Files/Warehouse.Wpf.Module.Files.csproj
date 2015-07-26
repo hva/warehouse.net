@@ -71,10 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
-    <Compile Include="CreateFileWindow.xaml.cs">
-      <DependentUpon>CreateFileWindow.xaml</DependentUpon>
+    <Compile Include="CreateFileViewModel.cs" />
+    <Compile Include="EditFileView.xaml.cs">
+      <DependentUpon>EditFileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFileWindowViewModel.cs" />
+    <Compile Include="EditFileViewModel.cs" />
     <Compile Include="FilesView.xaml.cs">
       <DependentUpon>FilesView.xaml</DependentUpon>
     </Compile>
@@ -108,7 +109,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CreateFileWindow.xaml">
+    <Page Include="EditFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
