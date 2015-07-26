@@ -124,19 +124,19 @@ namespace Warehouse.Server.Controllers
         [HttpPost]
         public HttpResponseMessage AttachProducts(string id, string[] productIds)
         {
+            if (productIds == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
             var file = context.Database.GridFS.FindOneById(new ObjectId(id));
             if (file == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            var meta = new FileMetadata
-            {
-                ProductIds = new HashSet<ObjectId>
-                {
-                    new ObjectId(id)
-                }
-            };
+            var ids = productIds.Select(x => new ObjectId(x));
+            var meta = new FileMetadata { ProductIds = new HashSet<ObjectId>(ids) };
 
             context.Database.GridFS.SetMetadata(file, meta.ToBsonDocument());
 
