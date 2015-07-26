@@ -16,6 +16,7 @@ namespace Warehouse.Wpf.Module.Files
         private string shortName;
         private string fullName;
         private string title;
+        private ProductName[] products;
         private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
         private readonly Func<ProductPickerViewModel> pickerFactory;
 
@@ -42,10 +43,7 @@ namespace Warehouse.Wpf.Module.Files
             set { SetProperty(ref title, value); }
         }
 
-        private Product[] products;
-
-
-        public Product[] Products
+        public ProductName[] Products
         {
             get { return products; }
             set { SetProperty(ref products, value); }

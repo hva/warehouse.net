@@ -13,7 +13,7 @@ namespace Warehouse.Wpf.Module.Files
     public class ProductPickerViewModel : BindableBase, IConfirmation, IInteractionRequestAware
     {
         private readonly IProductsRepository productsRepository;
-        private Product[] items;
+        private ProductName[] items;
 
         public ProductPickerViewModel(IProductsRepository productsRepository)
         {
@@ -26,9 +26,9 @@ namespace Warehouse.Wpf.Module.Files
         public ICommand CancelCommand { get; private set; }
         public ICommand PickCommand { get; private set; }
         public object[] SelectedItems { get; set; }
-        public Product[] SelectedProducts { get; private set; }
+        public ProductName[] SelectedProducts { get; private set; }
 
-        public Product[] Items
+        public ProductName[] Items
         {
             get { return items; }
             set { SetProperty(ref items, value); }
@@ -50,7 +50,7 @@ namespace Warehouse.Wpf.Module.Files
             var task = await productsRepository.GetNamesAsync();
             if (task.Succeed)
             {
-                Items = task.Result.OrderBy(x => x.Name).ToArray();
+                Items = task.Result.ToArray();
             }
         }
 
@@ -66,7 +66,7 @@ namespace Warehouse.Wpf.Module.Files
         {
             if (SelectedItems != null)
             {
-                SelectedProducts = SelectedItems.OfType<Product>().ToArray();
+                SelectedProducts = SelectedItems.OfType<ProductName>().ToArray();
                 if (SelectedProducts.Length > 0)
                 {
                     Confirmed = true;

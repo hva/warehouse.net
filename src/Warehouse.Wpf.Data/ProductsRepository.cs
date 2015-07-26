@@ -59,13 +59,13 @@ namespace Warehouse.Wpf.Data
             }
         }
 
-        public async Task<AsyncResult<Product[]>> GetNamesAsync()
+        public async Task<AsyncResult<ProductName[]>> GetNamesAsync()
         {
             using (var client = httpClientFactory())
             {
                 var str = await client.GetStringAsync(new Uri("api/products/getNames", UriKind.Relative));
-                var res = JsonConvert.DeserializeObject<Product[]>(str);
-                return new AsyncResult<Product[]> { Result = res, Succeed = true };
+                var res = JsonConvert.DeserializeObject<ProductName[]>(str);
+                return new AsyncResult<ProductName[]> { Result = res, Succeed = true };
             }
         }
 
