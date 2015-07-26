@@ -13,17 +13,20 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding Items}" SelectionMode="Extended" DisplayMemberPath="Name">
+        <TextBox Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" />
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="Extended" DisplayMemberPath="Name">
             <i:Interaction.Behaviors>
                 <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
         </ListBox>
 
-        <Border Grid.Row="1" Style="{StaticResource FormButtons}">
+        <Border Grid.Row="2" Style="{StaticResource FormButtons}">
             <StackPanel Orientation="Horizontal">
                 <!--<controls:ProgressRing IsActive="{Binding IsBusy}" />-->
                 <Button Content="Выбрать" Command="{Binding PickCommand}" />
