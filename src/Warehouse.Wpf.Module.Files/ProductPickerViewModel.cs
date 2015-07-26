@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -63,13 +64,14 @@ namespace Warehouse.Wpf.Module.Files
         public bool Confirmed { get; set; }
         #endregion
 
-        public async Task InitAsync()
+        public async Task InitAsync(IEnumerable<ProductName> excluded)
         {
             var task = await productsRepository.GetNamesAsync();
             if (task.Succeed)
             {
                 items.Clear();
-                items.AddRange(task.Result);
+                var included = task.Result.Except(excluded, new ProductNameComparer());
+                items.AddRange(included);
 
                 cvs.Filter -= OnFilter;
                 cvs.Filter += OnFilter;

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Win32;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 
@@ -16,20 +19,25 @@ namespace Warehouse.Wpf.Module.Files
         private string shortName;
         private string fullName;
         private string title;
-        private ProductName[] products;
+        private object[] selectedProducts;
         private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
+        private readonly DelegateCommand deleteProductCommand;
         private readonly Func<ProductPickerViewModel> pickerFactory;
 
         public CreateFileWindowViewModel(Func<ProductPickerViewModel> pickerFactory)
         {
             this.pickerFactory = pickerFactory;
 
+            Products = new ObservableCollection<ProductName>();
             addProductRequest = new InteractionRequest<ProductPickerViewModel>();
             AddProductCommand = new DelegateCommand(AddProduct);
+            deleteProductCommand = new DelegateCommand(DeleteProduct, CanDeleteProduct);
         }
 
         public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
         public ICommand AddProductCommand { get; private set; }
+        public ICommand DeleteProductCommand { get { return deleteProductCommand; } }
+        public ObservableCollection<ProductName> Products { get; private set; }
 
         public BitmapImage ImageSource
         {
@@ -43,10 +51,14 @@ namespace Warehouse.Wpf.Module.Files
             set { SetProperty(ref title, value); }
         }
 
-        public ProductName[] Products
+        public object[] SelectedProducts
         {
-            get { return products; }
-            set { SetProperty(ref products, value); }
+            get { return selectedProducts; }
+            set
+            {
+                selectedProducts = value;
+                deleteProductCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public void OnNavigatedTo(object param)
@@ -70,14 +82,27 @@ namespace Warehouse.Wpf.Module.Files
         {
             var context = pickerFactory();
             context.Title = "Товарные позиции";
-            await context.InitAsync();
+            await context.InitAsync(Products);
             addProductRequest.Raise(context, x =>
             {
                 if (x.Confirmed)
                 {
-                    Products = x.SelectedProducts;
+                    Products.AddRange(x.SelectedProducts);
                 }
             });
+        }
+
+        private void DeleteProduct()
+        {
+            foreach (var x in selectedProducts.OfType<ProductName>())
+            {
+                Products.Remove(x);
+            }
+        }
+
+        private bool CanDeleteProduct()
+        {
+            return selectedProducts != null && selectedProducts.OfType<ProductName>().Any();
         }
     }
 }
