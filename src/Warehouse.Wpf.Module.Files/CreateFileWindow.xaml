@@ -15,6 +15,10 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:CreateFileWindowViewModel}">
 
+    <i:Interaction.Behaviors>
+        <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
+
     <i:Interaction.Triggers>
         <ir:InteractionRequestTrigger SourceObject="{Binding AddProductRequest}">
             <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
@@ -25,25 +29,27 @@
         </ir:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="10">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="10">
             <Button Content="Добавить" Command="{Binding AddProductCommand}" />
             <Rectangle Width="10" />
             <Button Content="Удалить" Command="{Binding DeleteProductCommand}" />
         </StackPanel>
+
         <ListBox
             x:Name="productsList"
             Grid.Row="1"
             ItemsSource="{Binding Products}"
             SelectionMode="Extended"
             DisplayMemberPath="Name"
-            Margin="0,10"
+            Margin="10,0"
             BorderBrush="{x:Null}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
@@ -61,7 +67,16 @@
             </i:Interaction.Behaviors>
         </ListBox>
 
-        <Image Grid.Row="2" Source="{Binding ImageSource}" />
+        <Image Grid.Row="2" Source="{Binding ImageSource}" Margin="10" />
+
+        <Border Grid.Row="3" Style="{StaticResource FormButtons}">
+            <StackPanel Orientation="Horizontal">
+                <!--<controls:ProgressRing IsActive="{Binding IsBusy}" />-->
+                <Button Content="Сохранить" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
     </Grid>
 
 </Window>

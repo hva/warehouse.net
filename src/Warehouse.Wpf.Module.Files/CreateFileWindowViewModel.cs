@@ -20,6 +20,7 @@ namespace Warehouse.Wpf.Module.Files
         private string fullName;
         private string title;
         private object[] selectedProducts;
+        private bool isWindowOpen = true;
         private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
         private readonly DelegateCommand deleteProductCommand;
         private readonly Func<ProductPickerViewModel> pickerFactory;
@@ -32,11 +33,13 @@ namespace Warehouse.Wpf.Module.Files
             addProductRequest = new InteractionRequest<ProductPickerViewModel>();
             AddProductCommand = new DelegateCommand(AddProduct);
             deleteProductCommand = new DelegateCommand(DeleteProduct, CanDeleteProduct);
+            CancelCommand = new DelegateCommand(Close);
         }
 
         public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
         public ICommand AddProductCommand { get; private set; }
         public ICommand DeleteProductCommand { get { return deleteProductCommand; } }
+        public ICommand CancelCommand { get; private set; }
         public ObservableCollection<ProductName> Products { get; private set; }
 
         public BitmapImage ImageSource
@@ -49,6 +52,12 @@ namespace Warehouse.Wpf.Module.Files
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        public bool IsWindowOpen
+        {
+            get { return isWindowOpen; }
+            set { SetProperty(ref isWindowOpen, value); }
         }
 
         public object[] SelectedProducts
@@ -103,6 +112,11 @@ namespace Warehouse.Wpf.Module.Files
         private bool CanDeleteProduct()
         {
             return selectedProducts != null && selectedProducts.OfType<ProductName>().Any();
+        }
+
+        private void Close()
+        {
+            IsWindowOpen = false;
         }
     }
 }
