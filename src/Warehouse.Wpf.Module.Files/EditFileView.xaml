@@ -18,7 +18,8 @@
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
-        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding AddProductRequest}">
+        <!--SourceObject is attached in code behind-->
+        <interactionRequest:InteractionRequestTrigger x:Name="trigger">
             <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
                 <interactionRequest:PopupWindowAction.WindowContent>
                     <local:ProductPickerView />
