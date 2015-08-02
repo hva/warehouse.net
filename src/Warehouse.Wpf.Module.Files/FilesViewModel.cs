@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -12,6 +15,7 @@ using Microsoft.Win32;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 
@@ -19,7 +23,8 @@ namespace Warehouse.Wpf.Module.Files
 {
     public class FilesViewModel : BindableBase, INavigationAware
     {
-        private FileDescription[] items;
+        private readonly ObservableCollection<FileDescription> items;
+        private readonly CollectionViewSource cvs;
         private IDictionary<string, string> names;
         private bool isBusy;
         private IList selectedItems;
@@ -47,6 +52,12 @@ namespace Warehouse.Wpf.Module.Files
                 IsAdmin = token.IsAdmin();
             }
 
+            cvs = new CollectionViewSource();
+            items = new ObservableCollection<FileDescription>();
+            cvs.Source = items;
+            cvs.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            cvs.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+
             editRequest = new InteractionRequest<IConfirmation>();
             BrowseCommand = new DelegateCommand(Browse);
             EditCommand = new DelegateCommand<FileDescription>(Edit);
@@ -63,12 +74,7 @@ namespace Warehouse.Wpf.Module.Files
         public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
         public ICommand EditCommand { get; private set; }
         public IInteractionRequest EditRequest { get { return editRequest; } }
-
-        public FileDescription[] Items
-        {
-            get { return items; }
-            set { SetProperty(ref items, value); }
-        }
+        public ICollectionView Items { get { return cvs.View; } }
 
         public bool IsBusy
         {
@@ -116,7 +122,8 @@ namespace Warehouse.Wpf.Module.Files
 
                 PopulateNames(task.Result);
 
-                Items = task.Result;
+                items.Clear();
+                items.AddRange(task.Result);
             }
 
             IsBusy = false;
