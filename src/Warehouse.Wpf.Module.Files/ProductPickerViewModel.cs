@@ -50,6 +50,12 @@ namespace Warehouse.Wpf.Module.Files
                 if (searchQuery != value)
                 {
                     searchQuery = value;
+
+                    cvs.Filter -= OnFilter;
+                    if (!string.IsNullOrEmpty(SearchQuery))
+                    {
+                        cvs.Filter += OnFilter;
+                    }
                     cvs.View.Refresh();
                 }
             }
@@ -74,23 +80,18 @@ namespace Warehouse.Wpf.Module.Files
                 items.Clear();
                 var included = task.Result.Except(excluded, new ProductNameComparer());
                 items.AddRange(included);
-
-                cvs.Filter -= OnFilter;
-                cvs.Filter += OnFilter;
             }
         }
 
         private void OnFilter(object sender, FilterEventArgs e)
         {
-            if (string.IsNullOrEmpty(searchQuery))
-            {
-                return;
-            }
-
             var item = e.Item as ProductName;
             if (item != null)
             {
-                e.Accepted = item.Name.IndexOf(searchQuery, StringComparison.InvariantCultureIgnoreCase) >= 0;
+                if (!item.Name.ContainsIgnoreKey(searchQuery))
+                {
+                    e.Accepted = false;
+                }
             }
         }
 

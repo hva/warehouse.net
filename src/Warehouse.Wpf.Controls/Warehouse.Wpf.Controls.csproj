@@ -59,7 +59,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\CurrencyFormatTextBoxBehavior.cs" />
-    <Compile Include="Behaviors\ListViewDoubleClickBehavior.cs" />
+    <Compile Include="Behaviors\DoubleClick\ListBoxDoubleClickBehavior.cs" />
+    <Compile Include="Behaviors\DoubleClick\ListViewDoubleClickBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="Behaviors\SelectedItems\ListBoxSelectedItemsBehavior.cs" />
     <Compile Include="Behaviors\SelectedItems\ListViewSelectedItemsBehavior.cs" />

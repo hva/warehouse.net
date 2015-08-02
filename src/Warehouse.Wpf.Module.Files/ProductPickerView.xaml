@@ -23,6 +23,7 @@
         <ListBox Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="Extended" DisplayMemberPath="Name">
             <i:Interaction.Behaviors>
                 <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+                <behaviors:ListBoxDoubleClickBehavior Command="{Binding PickCommand}" />
             </i:Interaction.Behaviors>
         </ListBox>
 
