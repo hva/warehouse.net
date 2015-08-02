@@ -28,6 +28,7 @@ namespace Warehouse.Wpf.Module.Files
         private IDictionary<string, string> names;
         private bool isBusy;
         private IList selectedItems;
+        private string searchQuery;
         private readonly DelegateCommand deleteCommand;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly InteractionRequest<IConfirmation> editRequest;
@@ -89,6 +90,41 @@ namespace Warehouse.Wpf.Module.Files
             {
                 selectedItems = value;
                 deleteCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string SearchQuery
+        {
+            get { return searchQuery; }
+            set
+            {
+                if (searchQuery != value)
+                {
+                    searchQuery = value;
+                    cvs.Filter -= OnFilter;
+                    if (!string.IsNullOrEmpty(searchQuery))
+                    {
+                        cvs.Filter += OnFilter;
+                    }
+                    cvs.View.Refresh();
+                }
+            }
+        }
+
+        private void OnFilter(object sender, FilterEventArgs e)
+        {
+            var description = e.Item as FileDescription;
+            if (description != null)
+            {
+                IEnumerable<string> searchStrings = new[] { description.Name };
+                if (description.Metadata != null)
+                {
+                    searchStrings = searchStrings.Concat(description.Metadata.ProductNames);
+                }
+                if (searchStrings.All(x => !x.ContainsIgnoreKey(searchQuery)))
+                {
+                    e.Accepted = false;
+                }
             }
         }
 

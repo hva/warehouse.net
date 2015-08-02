@@ -47,24 +47,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Margin="10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <Button
-                    Content="Загрузить"
-                    Command="{Binding BrowseCommand}"
-                    Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Rectangle Width="10" />
-                <Button
-                    Content="Удалить"
-                    Command="{Binding DeleteCommand}"
-                    Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            </StackPanel>
-        </Grid>
+        <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button
+                Content="Загрузить"
+                Command="{Binding BrowseCommand}"
+                Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Rectangle Width="10" />
+            <Button
+                Content="Удалить"
+                Command="{Binding DeleteCommand}"
+                Visibility="{Binding IsEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Rectangle Width="40" />
+            <TextBox Width="200" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
 
         <ListView
             Grid.Row="2"
