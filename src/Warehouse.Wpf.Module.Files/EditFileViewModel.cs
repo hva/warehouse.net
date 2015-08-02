@@ -9,18 +9,23 @@ using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.Module.Files
 {
-    public class EditFileViewModel : CreateFileViewModel
+    public class EditFileViewModel : FileViewModel
     {
+        private readonly IFilesRepository filesRepository;
         private readonly IApplicationSettings settings;
+        private string fileId;
 
-        public EditFileViewModel(IFilesRepository filesRepository, Func<ProductPickerViewModel> pickerFactory, IApplicationSettings settings)
-            : base(filesRepository, pickerFactory)
+        public EditFileViewModel(IFilesRepository filesRepository, IApplicationSettings settings, Func<ProductPickerViewModel> pickerFactory)
+            : base(pickerFactory)
         {
+            this.filesRepository = filesRepository;
             this.settings = settings;
         }
 
         public void Init(FileDescription file, IDictionary<string, string> names)
         {
+            fileId = file.Id;
+
             if (file.Metadata != null)
             {
                 var products = from x in  file.Metadata.ProductIds
@@ -32,6 +37,22 @@ namespace Warehouse.Wpf.Module.Files
             var uriString = string.Concat(settings.Endpoint, "api/files/", file.Id);
             var uri = new Uri(uriString, UriKind.Absolute);
             ImageSource = new BitmapImage(uri);
+        }
+
+        protected async override void Save()
+        {
+            IsBusy = true;
+
+            var productIds = Products.Select(x => x.Id).ToArray();
+            var task = await filesRepository.AttachProducts(fileId, productIds);
+            if (task.Succeed)
+            {
+                Confirmed = true;
+                Close();
+            }
+
+            IsBusy = false;
+
         }
     }
 }

@@ -178,16 +178,16 @@ namespace Warehouse.Wpf.Module.Files
                 {
                     if (x.Metadata != null)
                     {
-                        var sb = new StringBuilder();
+                        var productsNames = new List<string>();
                         foreach (var id in x.Metadata.ProductIds)
                         {
                             string name;
                             if (names.TryGetValue(id, out name))
                             {
-                                sb.AppendLine(name);
+                                productsNames.Add(name);
                             }
                         }
-                        x.Metadata.ProductNames = sb.ToString().TrimEnd();
+                        x.Metadata.ProductNames = productsNames.ToArray();
                     }
                 }
             }

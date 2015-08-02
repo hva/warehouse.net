@@ -70,10 +70,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\StringJoinConverter.cs" />
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
+    <Compile Include="FileViewModel.cs" />
     <Compile Include="CreateFileViewModel.cs" />
-    <Compile Include="EditFileView.xaml.cs">
-      <DependentUpon>EditFileView.xaml</DependentUpon>
+    <Compile Include="FileView.xaml.cs">
+      <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditFileViewModel.cs" />
     <Compile Include="FilesView.xaml.cs">
@@ -109,7 +111,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EditFileView.xaml">
+    <Page Include="FileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

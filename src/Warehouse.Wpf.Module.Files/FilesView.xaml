@@ -21,6 +21,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:LongToFileSizeConverter x:Key="LongToFileSizeConverter" />
+        <converters:StringJoinConverter x:Key="StringJoinConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -32,7 +33,7 @@
         <interactionRequest:InteractionRequestTrigger SourceObject="{Binding EditRequest}">
             <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
                 <interactionRequest:PopupWindowAction.WindowContent>
-                    <local:EditFileView />
+                    <local:FileView />
                 </interactionRequest:PopupWindowAction.WindowContent>
             </interactionRequest:PopupWindowAction>
         </interactionRequest:InteractionRequestTrigger>
@@ -86,7 +87,7 @@
                     <GridViewColumn Header="Позиция">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Metadata.ProductNames}" d:DataContext="{d:DesignInstance Type=models:FileDescription}" />
+                                <TextBlock Text="{Binding Metadata.ProductNames, Converter={StaticResource StringJoinConverter}}" d:DataContext="{d:DesignInstance Type=models:FileDescription}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

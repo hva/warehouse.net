@@ -4,9 +4,9 @@ using System.Windows.Interactivity;
 
 namespace Warehouse.Wpf.Module.Files
 {
-    public partial class EditFileView : UserControl
+    public partial class FileView : UserControl
     {
-        public EditFileView()
+        public FileView()
         {
             InitializeComponent();
 
@@ -18,7 +18,7 @@ namespace Warehouse.Wpf.Module.Files
             // InteractionRequestTrigger works only once for windows created by another InteractionRequestTrigger
             // Hot fix: attaching trigger manually
             // TODO: check why it happens
-            var context = DataContext as CreateFileViewModel;
+            var context = DataContext as FileViewModel;
             if (context != null)
             {
                 var triggers = Interaction.GetTriggers(this);
