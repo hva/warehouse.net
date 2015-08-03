@@ -28,8 +28,11 @@ namespace Warehouse.Wpf.Module.Files
 
             if (file.Metadata != null)
             {
-                var products = from x in  file.Metadata.ProductIds
-                               select new ProductName { Id = x, Name = names[x] };
+                string str;
+                var products = from x in file.Metadata.ProductIds
+                               let name = names.TryGetValue(x, out str) ? str : null
+                               where name != null
+                               select new ProductName { Id = x, Name = name };
                 Products.AddRange(products);
             }
 
