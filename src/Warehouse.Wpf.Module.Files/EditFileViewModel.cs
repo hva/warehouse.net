@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media.Imaging;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
@@ -38,8 +37,7 @@ namespace Warehouse.Wpf.Module.Files
 
             Title = file.Name;
             var uriString = string.Concat(settings.Endpoint, "api/files/", file.Id);
-            var uri = new Uri(uriString, UriKind.Absolute);
-            ImageSource = new BitmapImage(uri);
+            Uri = new Uri(uriString, UriKind.Absolute);
         }
 
         protected async override void Save()

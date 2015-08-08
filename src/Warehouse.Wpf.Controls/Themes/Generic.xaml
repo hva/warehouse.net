@@ -239,4 +239,61 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ZoomButton" TargetType="Button">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Height" Value="30" />
+    </Style>
+
+    <Style TargetType="local:ZoomImage">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ZoomImage">
+                    <Grid>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <Canvas x:Name="Canvas">
+                                <Image x:Name="Image" Stretch="Uniform">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform x:Name="RotateTransform" />
+                                            <TranslateTransform x:Name="TranslateTransform" />
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Canvas>
+                        </ScrollViewer>
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30">
+                            <Button x:Name="ZoomInButton" Style="{StaticResource ZoomButton}">
+                                <Button.Content>
+                                    <Canvas Width="30" Height="30">
+                                        <Path Width="15" Height="15" Canvas.Left="7.5" Canvas.Top="7.5" Stretch="Fill" Fill="#FF000000" Data="F1 M 13.8158,7.5L 16.1842,7.5L 16.1842,13.8158L 22.5,13.8158L 22.5,16.1842L 16.1842,16.1842L 16.1842,22.5L 13.8158,22.5L 13.8158,16.1842L 7.5,16.1842L 7.5,13.8158L 13.8158,13.8158L 13.8158,7.5 Z "/>
+                                    </Canvas>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="ZoomOutButton" Style="{StaticResource ZoomButton}">
+                                <Button.Content>
+                                    <Canvas Width="30" Height="30">
+                                        <Path Width="15" Height="2.36842" Canvas.Left="7.5" Canvas.Top="15" Stretch="Fill" Fill="#FF000000" Data="F1 M 7.50001,15L 22.5,15L 22.5,17.3684L 7.5,17.3684L 7.50001,15 Z "/>
+                                    </Canvas>
+                                </Button.Content>
+                            </Button>
+                            <Rectangle Height="5" />
+                            <Button x:Name="RotateButton" Style="{StaticResource ZoomButton}">
+                                <Button.Content>
+                                    <Canvas Width="30" Height="30">
+                                        <Path Width="15" Height="15" Canvas.Left="7.5" Canvas.Top="7.5" Stretch="Fill" Fill="#FF000000" Data="F1 M 22.5,22.5L 16.5789,22.5L 16.5789,16.5789L 18.6286,18.6286C 19.5572,17.6999 20.1316,16.417 20.1316,15C 20.1316,12.1659 17.8341,9.86843 15,9.86843C 12.1659,9.86843 9.86842,12.1659 9.86842,15C 9.86842,16.8212 10.8172,18.4208 12.2474,19.3316L 10.5449,21.034C 8.69772,19.6679 7.5,17.4738 7.5,15C 7.5,10.8579 10.8579,7.5 15,7.5C 19.1421,7.5 22.5,10.8579 22.5,15C 22.5,17.0711 21.6605,18.9461 20.3033,20.3033L 22.5,22.5 Z "/>
+                                    </Canvas>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

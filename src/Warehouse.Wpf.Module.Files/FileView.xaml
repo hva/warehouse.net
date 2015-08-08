@@ -65,8 +65,10 @@
             </i:Interaction.Behaviors>
         </ListBox>
 
-        <Border Grid.Row="2" Margin="10" x:Name="imageContainer">
-            <Image  Source="{Binding ImageSource}" MinHeight="400" MaxHeight="{Binding ActualHeight, ElementName=imageContainer}" />
+        <Border Grid.Row="2" Margin="10">
+            <!--x:Name="imageContainer"-->
+            <!--<Image Source="{Binding ImageSource}" MinHeight="400" MaxHeight="{Binding ActualHeight, ElementName=imageContainer}" />-->
+            <controls:ZoomImage Uri="{Binding Uri}" />
         </Border>
 
         <Border Grid.Row="3" Style="{StaticResource FormButtons}">

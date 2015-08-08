@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Warehouse.Wpf.Data.Interfaces;
 
@@ -20,7 +19,7 @@ namespace Warehouse.Wpf.Module.Files
         public void Init(OpenFileDialog d)
         {
             dialog = d;
-            ImageSource = new BitmapImage(new Uri(dialog.FileName));
+            Uri = new Uri(dialog.FileName);
             Title = dialog.SafeFileName + "*";
         }
 

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
@@ -13,7 +12,7 @@ namespace Warehouse.Wpf.Module.Files
 {
     public abstract class FileViewModel : BindableBase, IConfirmation, IInteractionRequestAware
     {
-        private BitmapImage imageSource;
+        private Uri uri;
         private object[] selectedProducts;
         private bool isBusy;
         private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
@@ -47,10 +46,10 @@ namespace Warehouse.Wpf.Module.Files
         public ObservableCollection<ProductName> Products { get; private set; }
         public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
 
-        public BitmapImage ImageSource
+        public Uri Uri
         {
-            get { return imageSource; }
-            set { SetProperty(ref imageSource, value); }
+            get { return uri; }
+            set { SetProperty(ref uri, value); }
         }
 
         public bool IsBusy
