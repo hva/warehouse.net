@@ -85,7 +85,15 @@ namespace Warehouse.Wpf.Controls
             }
 
             bitmapImage = new BitmapImage(Uri);
-            bitmapImage.DownloadCompleted += OnImageOpened;
+            if (bitmapImage.IsDownloading)
+            {
+                bitmapImage.DownloadCompleted += OnImageOpened;
+            }
+            else
+            {
+                OnImageOpened(bitmapImage, EventArgs.Empty);
+            }
+
             image.Source = bitmapImage;
         }
 
