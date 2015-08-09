@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
@@ -29,6 +33,7 @@ namespace Warehouse.Wpf.Module.Files
             deleteProductCommand = new DelegateCommand(DeleteProduct, CanDeleteProduct);
             CancelCommand = new DelegateCommand(Close);
             SaveCommand = new DelegateCommand(Save);
+            PrintCommand = new DelegateCommand(Print);
         }
 
         #region IConfirmation, IInteractionRequestAware
@@ -43,6 +48,7 @@ namespace Warehouse.Wpf.Module.Files
         public ICommand DeleteProductCommand { get { return deleteProductCommand; } }
         public ICommand CancelCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
+        public ICommand PrintCommand { get; private set; }
         public ObservableCollection<ProductName> Products { get; private set; }
         public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
 
@@ -103,6 +109,37 @@ namespace Warehouse.Wpf.Module.Files
         private bool CanDeleteProduct()
         {
             return selectedProducts != null && selectedProducts.OfType<ProductName>().Any();
+        }
+
+        private void Print()
+        {
+            var bitmapImage = new BitmapImage(Uri);
+            if (bitmapImage.IsDownloading)
+            {
+                bitmapImage.DownloadCompleted += (s, e) => PrintImage(bitmapImage);
+            }
+            else
+            {
+                PrintImage(bitmapImage);
+            }
+        }
+
+        private void PrintImage(BitmapSource bitmapImage)
+        {
+            var printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                var image = new Image { Source = bitmapImage };
+                if (bitmapImage.PixelWidth > bitmapImage.PixelHeight)
+                {
+                    image.LayoutTransform = new RotateTransform(90);
+                }
+
+                var pageSize = new Size { Height = printDialog.PrintableAreaHeight, Width = printDialog.PrintableAreaWidth };
+                image.Measure(pageSize);
+                image.UpdateLayout();
+                printDialog.PrintVisual(image, Title);
+            }
         }
     }
 }
