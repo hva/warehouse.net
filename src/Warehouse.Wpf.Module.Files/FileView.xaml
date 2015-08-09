@@ -65,19 +65,22 @@
             </i:Interaction.Behaviors>
         </ListBox>
 
-        <Border Grid.Row="2" Margin="10">
-            <!--x:Name="imageContainer"-->
-            <!--<Image Source="{Binding ImageSource}" MinHeight="400" MaxHeight="{Binding ActualHeight, ElementName=imageContainer}" />-->
-            <controls:ZoomImage Uri="{Binding Uri}" />
-        </Border>
+        <controls:ZoomImage Grid.Row="2" Uri="{Binding Uri}" Margin="10" MinWidth="400" />
 
         <Border Grid.Row="3" Style="{StaticResource FormButtons}">
-            <StackPanel Orientation="Horizontal">
-                <!--<controls:ProgressRing IsActive="{Binding IsBusy}" />-->
-                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
-                <Rectangle Width="10" />
-                <Button Content="Отмена" Command="{Binding CancelCommand}" />
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Печать" HorizontalAlignment="Left" Margin="10,0" />
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                    <Rectangle Width="10" />
+                    <Button Content="Отмена" Command="{Binding CancelCommand}" />
+                </StackPanel>
+            </Grid>
         </Border>
 
         <Border Grid.RowSpan="4" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
