@@ -5,8 +5,8 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
+using Warehouse.Wpf.Infrastructure.Converters;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.Users.Converters;
 using Warehouse.Wpf.Mvvm;
 
 namespace Warehouse.Wpf.Module.Users

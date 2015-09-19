@@ -38,14 +38,14 @@
                     <controls:TopMenuItem Content="Сертификаты" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.FilesList}" />
                     <controls:TopMenuDivider />
                     <StackPanel Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal">
-                        <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.UsersList}" />
+                        <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.Users}" />
                         <controls:TopMenuDivider />
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <controls:TopMenuDivider />
-                    <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="SettingsView" />
+                    <controls:TopMenuItem Content="Настройки" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.Settings}" />
                     <controls:TopMenuDivider />
                     <controls:TopMenuItem Content="Выйти" Command="{Binding LogoutCommand}" />
                     <controls:TopMenuDivider />

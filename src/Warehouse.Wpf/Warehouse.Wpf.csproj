@@ -212,6 +212,10 @@
       <Project>{E4E36694-80E5-47B2-A11C-C48346489AB5}</Project>
       <Name>Warehouse.Wpf.Module.ProductDetail</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Module.Settings\Warehouse.Wpf.Module.Settings.csproj">
+      <Project>{55CE2EEB-8297-48C9-8E4A-44343D683109}</Project>
+      <Name>Warehouse.Wpf.Module.Settings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Module.Shell\Warehouse.Wpf.Module.Shell.csproj">
       <Project>{458c0dc6-d383-42fe-8bbf-83544fe22619}</Project>
       <Name>Warehouse.Wpf.Module.Shell</Name>

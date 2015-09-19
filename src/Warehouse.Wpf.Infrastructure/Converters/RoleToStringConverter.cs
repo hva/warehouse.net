@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using Warehouse.Wpf.Infrastructure;
 
-namespace Warehouse.Wpf.Module.Users.Converters
+namespace Warehouse.Wpf.Infrastructure.Converters
 {
     public class RoleToStringConverter : IValueConverter
     {

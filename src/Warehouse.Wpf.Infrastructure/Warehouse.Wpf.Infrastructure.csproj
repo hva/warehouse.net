@@ -43,6 +43,7 @@
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="AsyncResult.cs" />
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="Converters\RoleToStringConverter.cs" />
     <Compile Include="Converters\ZeroToStringConverter.cs" />
     <Compile Include="Interfaces\IApplicationSettings.cs" />
     <Compile Include="Interfaces\INavigationAware.cs" />

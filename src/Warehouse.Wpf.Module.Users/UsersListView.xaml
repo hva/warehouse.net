@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Users.Converters"
     xmlns:users="clr-namespace:Warehouse.Wpf.Module.Users"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     xmlns:ir="http://www.codeplex.com/prism"
+    xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance Type=users:UsersListViewModel}"
@@ -51,7 +51,7 @@
             <Button Content="Создать" Command="{Binding CreateUserCommand}" />
         </StackPanel>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Users}">
+        <ListView Grid.Row="2" ItemsSource="{Binding Users}" VerticalAlignment="Top" BorderThickness="1,0,1,1">
             <i:Interaction.Behaviors>
                 <behaviors:ListViewDoubleClickBehavior Command="{Binding EditUserCommand}" />
             </i:Interaction.Behaviors>

@@ -16,6 +16,7 @@ using Warehouse.Wpf.Module.Files;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
+using Warehouse.Wpf.Module.Settings;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Module.Users;
 using Warehouse.Wpf.SignalR;
@@ -45,7 +46,8 @@ namespace Warehouse.Wpf
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
             PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
-            PageLocator.Register<UsersListView>(PageName.UsersList);
+            PageLocator.Register<UsersListView>(PageName.Users);
+            PageLocator.Register<SettingsView>(PageName.Settings);
         }
 
         protected override DependencyObject CreateShell()

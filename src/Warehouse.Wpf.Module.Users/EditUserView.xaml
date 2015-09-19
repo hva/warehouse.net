@@ -10,19 +10,6 @@
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance Type=users:EditUserViewModel}">
 
-    <UserControl.Resources>
-        <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource Label_Default}">
-            <Setter Property="Width" Value="50" />
-        </Style>-->
-        <!--<Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Default}">
-            <Setter Property="Width" Value="200" />
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Width" Value="200" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>-->
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
