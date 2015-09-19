@@ -1,0 +1,80 @@
+﻿<UserControl
+    x:Class="Warehouse.Wpf.Module.Users.UsersListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="clr-namespace:Warehouse.Wpf.Module.Users.Converters"
+    xmlns:users="clr-namespace:Warehouse.Wpf.Module.Users"
+    xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
+    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:ir="http://www.codeplex.com/prism"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance Type=users:UsersListViewModel}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+
+        <ir:InteractionRequestTrigger SourceObject="{Binding CreateUserRequest}">
+            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <ir:PopupWindowAction.WindowContent>
+                    <users:CreateUserView />
+                </ir:PopupWindowAction.WindowContent>
+            </ir:PopupWindowAction>
+        </ir:InteractionRequestTrigger>
+
+        <ir:InteractionRequestTrigger SourceObject="{Binding EditUserRequest}">
+            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <ir:PopupWindowAction.WindowContent>
+                    <users:EditUserView />
+                </ir:PopupWindowAction.WindowContent>
+            </ir:PopupWindowAction>
+        </ir:InteractionRequestTrigger>
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="Создать" Command="{Binding CreateUserCommand}" />
+        </StackPanel>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Users}">
+            <i:Interaction.Behaviors>
+                <behaviors:ListViewDoubleClickBehavior Command="{Binding EditUserCommand}" />
+            </i:Interaction.Behaviors>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Логин">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding UserName}" d:DataContext="{d:DesignInstance Type=models:User}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Роль">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Roles, Converter={StaticResource RoleToStringConverter}}" d:DataContext="{d:DesignInstance Type=models:User}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+
+</UserControl>

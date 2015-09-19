@@ -61,11 +61,7 @@
             <TextBox Width="200" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
-        <ListView
-            Grid.Row="2"
-            ItemsSource="{Binding Items}"
-            BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
-            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListView Grid.Row="2" ItemsSource="{Binding Items}">
             <i:Interaction.Behaviors>
                 <behaviors:ListViewDoubleClickBehavior Command="{Binding EditCommand}" />
                 <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />

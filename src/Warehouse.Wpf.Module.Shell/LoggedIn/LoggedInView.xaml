@@ -37,8 +37,10 @@
                     <controls:TopMenuDivider />
                     <controls:TopMenuItem Content="Сертификаты" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.FilesList}" />
                     <controls:TopMenuDivider />
-                    <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="UsersView" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <controls:TopMenuDivider Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <StackPanel Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal">
+                        <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.UsersList}" />
+                        <controls:TopMenuDivider />
+                    </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal">

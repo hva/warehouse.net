@@ -39,6 +39,12 @@
         <Setter Property="Width" Value="150" />
     </Style>
 
+    <!--ComboBox-->
+    <Style TargetType="ComboBox">
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="Width" Value="150" />
+    </Style>
+
     <!-- ProgressRing -->
     <Style x:Key="FormProgressRing" TargetType="controls:ProgressRing">
         <Setter Property="HorizontalAlignment" Value="Left" />

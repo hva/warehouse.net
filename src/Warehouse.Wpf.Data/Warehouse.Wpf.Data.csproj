@@ -48,8 +48,10 @@
     <Compile Include="FilesRepository.cs" />
     <Compile Include="Interfaces\IFilesRepository.cs" />
     <Compile Include="Interfaces\IProductsRepository.cs" />
+    <Compile Include="Interfaces\IUsersRepository.cs" />
     <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">

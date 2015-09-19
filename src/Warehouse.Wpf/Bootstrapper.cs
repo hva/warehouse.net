@@ -17,6 +17,7 @@ using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
 using Warehouse.Wpf.Module.Shell;
+using Warehouse.Wpf.Module.Users;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.SignalR.Interfaces;
 
@@ -34,6 +35,7 @@ namespace Warehouse.Wpf
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IProductsRepository, ProductsRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(ResolveViewTypeFromViewModelType);
@@ -43,6 +45,7 @@ namespace Warehouse.Wpf
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
             PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
+            PageLocator.Register<UsersListView>(PageName.UsersList);
         }
 
         protected override DependencyObject CreateShell()

@@ -65,11 +65,7 @@
             <TextBlock Grid.Column="2" Text="{Binding TotalWeight, StringFormat='{}Всего: {0:0.##} т'}" Opacity="0.6" />
         </Grid>
 
-        <ListView
-            Grid.Row="2"
-            ItemsSource="{Binding Items}"
-            BorderThickness="1,0,0,1" BorderBrush="#F0F0F0"
-            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListView Grid.Row="2" ItemsSource="{Binding Items}">
             <i:Interaction.Behaviors>
                 <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenProductCommand}" />
                 <behaviors:ListViewSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />

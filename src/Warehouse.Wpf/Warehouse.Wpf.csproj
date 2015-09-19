@@ -216,6 +216,10 @@
       <Project>{458c0dc6-d383-42fe-8bbf-83544fe22619}</Project>
       <Name>Warehouse.Wpf.Module.Shell</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Module.Users\Warehouse.Wpf.Module.Users.csproj">
+      <Project>{35A76651-9C8D-4F1C-A5BD-1BA7524F5195}</Project>
+      <Name>Warehouse.Wpf.Module.Users</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
       <Project>{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA}</Project>
       <Name>Warehouse.Wpf.SignalR</Name>
