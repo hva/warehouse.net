@@ -20,7 +20,9 @@ namespace Warehouse.Wpf.Module.Settings
             this.changePasswordFactory = changePasswordFactory;
 
             var v = Assembly.GetEntryAssembly().GetName().Version;
-            Version = string.Join(".", new[] { v.Major, v.Minor, v.Build });
+            Version = (v.Build > 0)
+                ? string.Join(".", new[] { v.Major, v.Minor, v.Build })
+                : string.Join(".", new[] { v.Major, v.Minor });
 
             changePasswordRequest = new InteractionRequest<IConfirmation>();
             ChangePasswordCommand = new DelegateCommand(ChangePassword);

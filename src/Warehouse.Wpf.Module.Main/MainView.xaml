@@ -12,6 +12,7 @@
     xmlns:infrastructure="clr-namespace:Warehouse.Wpf.Infrastructure;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -181,6 +182,10 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+
+        <Border Grid.RowSpan="5" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <controls:ProgressRing IsActive="True" />
+        </Border>
 
     </Grid>
 

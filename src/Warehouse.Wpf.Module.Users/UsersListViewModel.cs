@@ -13,6 +13,7 @@ namespace Warehouse.Wpf.Module.Users
     {
         private readonly IUsersRepository usersRepository;
         private User[] users;
+        private bool isBusy;
         private readonly InteractionRequest<CreateUserViewModel> createUserRequest;
         private readonly InteractionRequest<EditUserViewModel> editUserRequest;
 
@@ -40,11 +41,17 @@ namespace Warehouse.Wpf.Module.Users
         public IInteractionRequest CreateUserRequest { get { return createUserRequest; } }
         public IInteractionRequest EditUserRequest { get { return editUserRequest; } }
 
-        public bool KeepAlive { get { return false; } }
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
 
         private async void LoadData()
         {
+            IsBusy = true;
             var task = await usersRepository.GetUsers();
+            IsBusy = false;
             if (task.Succeed)
             {
                 Users = task.Result;

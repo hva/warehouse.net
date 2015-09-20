@@ -33,6 +33,7 @@ namespace Warehouse.Wpf.Module.Main
         private readonly DelegateCommand changePriceCommand;
         private readonly DelegateCommand deleteCommand;
         private double totalWeight;
+        private bool isBusy;
 
         public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
             IProductsRepository productsRepository)
@@ -71,6 +72,12 @@ namespace Warehouse.Wpf.Module.Main
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
 
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
+
         public IList SelectedItems
         {
             get { return selectedItems; }
@@ -92,7 +99,9 @@ namespace Warehouse.Wpf.Module.Main
 
         public async void OnProductUpdated(ProductUpdatedEventArgs e)
         {
+            IsBusy = true;
             var task = await productsRepository.GetAsync(e.ProductId);
+            IsBusy = false;
             if (task.Succeed)
             {
                 UpdateProductItem(task.Result);
@@ -121,7 +130,9 @@ namespace Warehouse.Wpf.Module.Main
         {
             if (args == null || args.ProductIds == null) return;
 
+            IsBusy = true;
             var task = await productsRepository.GetManyAsync(args.ProductIds);
+            IsBusy = false;
             if (task.Succeed)
             {
                 foreach (var product in task.Result)
@@ -168,7 +179,9 @@ namespace Warehouse.Wpf.Module.Main
 
         private async Task LoadData()
         {
+            IsBusy = true;
             var task = await productsRepository.GetAsync();
+            IsBusy = false;
             if (task.Succeed)
             {
                 items.AddRange(task.Result);
@@ -234,7 +247,9 @@ namespace Warehouse.Wpf.Module.Main
             if (conf.Confirmed)
             {
                 var ids = selectedItems.OfType<Product>().Select(x => x.Id).ToList();
+                IsBusy = true;
                 var task = await productsRepository.Delete(ids);
+                IsBusy = false;
                 if (task.Succeed)
                 {
                     var args = new ProductDeletedBatchEventArgs(ids, false);
