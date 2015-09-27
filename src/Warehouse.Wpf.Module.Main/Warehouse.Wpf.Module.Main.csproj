@@ -65,14 +65,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attachments\AttachmentDetailView.xaml.cs">
-      <DependentUpon>AttachmentDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Attachments\AttachmentDetailViewModel.cs" />
-    <Compile Include="Attachments\AttachmentsView.xaml.cs">
-      <DependentUpon>AttachmentsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Attachments\AttachmentsViewModel.cs" />
     <Compile Include="Converters\NdValueConverter.cs" />
     <Compile Include="Converters\NdVisibilityConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
@@ -83,14 +75,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Attachments\AttachmentDetailView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Attachments\AttachmentsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -69,24 +69,6 @@ namespace Warehouse.Wpf.Data
             }
         }
 
-        //public async Task<AsyncResult<Product[]>> GetNamesAsync(List<string> ids)
-        //{
-        //    using (var client = httpClientFactory())
-        //    {
-        //        var data = JsonConvert.SerializeObject(ids);
-        //        using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
-        //        {
-        //            var uri = new Uri("api/products/getNames", UriKind.Relative);
-        //            using (var resp = await client.PostAsync(uri, content))
-        //            {
-        //                var str = await resp.Content.ReadAsStringAsync();
-        //                var res = JsonConvert.DeserializeObject<Product[]>(str);
-        //                return new AsyncResult<Product[]> { Result = res, Succeed = true };
-        //            }
-        //        }
-        //    }
-        //}
-
         public async Task<AsyncResult<string>> SaveAsync(Product product)
         {
             using (var client = httpClientFactory())
@@ -152,18 +134,6 @@ namespace Warehouse.Wpf.Data
                 }
             }
             return new AsyncResult { Succeed = succeed };
-        }
-
-        public async Task<AsyncResult<FileDescription[]>> GetFiles(string productId)
-        {
-            using (var client = httpClientFactory())
-            {
-                var uriString = string.Format("api/products/{0}/files", productId);
-                var uri = new Uri(uriString, UriKind.Relative);
-                var str = await client.GetStringAsync(uri);
-                var res = JsonConvert.DeserializeObject<FileDescription[]>(str);
-                return new AsyncResult<FileDescription[]> { Result = res, Succeed = true };
-            }
         }
     }
 }
