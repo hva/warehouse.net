@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using Warehouse.Api.Data;
 
 namespace Warehouse.Api.Providers
 {

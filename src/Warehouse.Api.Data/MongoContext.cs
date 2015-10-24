@@ -1,15 +1,12 @@
-﻿using System.Configuration;
-using MongoDB.Driver;
-using Warehouse.Api.Entities;
-using Warehouse.Api.Interfaces;
+﻿using MongoDB.Driver;
+using Warehouse.Api.Data.Entities;
 
-namespace Warehouse.Api
+namespace Warehouse.Api.Data
 {
     public class MongoContext : IMongoContext
     {
-        public MongoContext()
+        public MongoContext(string connectionString)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
             var url = new MongoUrl(connectionString);
             var client = new MongoClient(url);
             Database = client.GetDatabase(url.DatabaseName);

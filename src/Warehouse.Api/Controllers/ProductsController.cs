@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Warehouse.Api.Entities;
-using Warehouse.Api.Interfaces;
+using Warehouse.Api.Data;
+using Warehouse.Api.Data.Entities;
 using Warehouse.Api.Models;
 
 namespace Warehouse.Api.Controllers

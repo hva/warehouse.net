@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
-using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
-using Warehouse.Server.Data;
-using Warehouse.Server.Identity;
+using Warehouse.Api.Data;
+using Warehouse.Api.Data.Entities;
 
 namespace Warehouse.Utils.CreateUser
 {
@@ -25,12 +25,12 @@ namespace Warehouse.Utils.CreateUser
             var password = args[1];
             var role = args[2];
 
-            var mongoContext = new MongoContext();
-            var identityContext = new ApplicationIdentityContext(mongoContext);
-            var store = new UserStore<ApplicationUser>(identityContext);
-            var manager = new ApplicationUserManager(store);
+            var connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
 
-            var user = new ApplicationUser { UserName = username };
+            var mongoContext = new MongoContext(connectionString);
+            var manager = new ApplicationUserManager(mongoContext);
+
+            var user = new User { UserName = username };
             var result = manager.Create(user, password);
             if (result.Succeeded)
             {

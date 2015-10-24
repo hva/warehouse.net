@@ -1,8 +1,9 @@
-﻿using System.Web.Http;
+﻿using System.Configuration;
+using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
-using Unity.WebApi;
-using Warehouse.Api.Interfaces;
+using Microsoft.Practices.Unity.WebApi;
+using Warehouse.Api.Data;
 using Warehouse.Api.Providers;
 
 namespace Warehouse.Api
@@ -13,7 +14,9 @@ namespace Warehouse.Api
         {
             Container = new UnityContainer();
 
-            Container.RegisterType<IMongoContext, MongoContext>(new HierarchicalLifetimeManager());
+            var connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
+
+            Container.RegisterType<IMongoContext, MongoContext>(new HierarchicalLifetimeManager(), new InjectionConstructor(connectionString));
             Container.RegisterType<IOAuthAuthorizationServerProvider, SimpleAuthorizationServerProvider>();
 
             config.DependencyResolver = new UnityDependencyResolver(Container);

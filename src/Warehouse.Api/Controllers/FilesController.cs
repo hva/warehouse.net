@@ -13,7 +13,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
-using Warehouse.Api.Interfaces;
+using Warehouse.Api.Data;
 using Warehouse.Api.Models;
 
 namespace Warehouse.Api.Controllers

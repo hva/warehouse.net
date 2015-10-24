@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace Warehouse.Api.Entities
+namespace Warehouse.Api.Data.Entities
 {
     public class Product
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Warehouse.Api.Models
+namespace Warehouse.Api.Data.Models
 {
     public class CreateUserModel : UpdateUserModel
     {

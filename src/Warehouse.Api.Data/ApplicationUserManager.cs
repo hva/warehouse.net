@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
-using Warehouse.Api.Entities;
-using Warehouse.Api.Interfaces;
+using Warehouse.Api.Data.Entities;
 
-namespace Warehouse.Api
+namespace Warehouse.Api.Data
 {
     public class ApplicationUserManager : UserManager<User>
     {

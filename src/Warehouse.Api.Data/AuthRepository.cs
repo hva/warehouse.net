@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Warehouse.Api.Entities;
-using Warehouse.Api.Models;
+using Warehouse.Api.Data.Entities;
+using Warehouse.Api.Data.Models;
 
-namespace Warehouse.Api
+namespace Warehouse.Api.Data
 {
     public class AuthRepository
     {

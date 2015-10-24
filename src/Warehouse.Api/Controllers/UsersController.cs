@@ -4,8 +4,9 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Warehouse.Api.Entities;
-using Warehouse.Api.Interfaces;
+using Warehouse.Api.Data;
+using Warehouse.Api.Data.Entities;
+using Warehouse.Api.Data.Models;
 using Warehouse.Api.Models;
 
 namespace Warehouse.Api.Controllers

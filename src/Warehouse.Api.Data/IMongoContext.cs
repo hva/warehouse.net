@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
-using Warehouse.Api.Entities;
+using Warehouse.Api.Data.Entities;
 
-namespace Warehouse.Api.Interfaces
+namespace Warehouse.Api.Data
 {
     public interface IMongoContext
     {
