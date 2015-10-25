@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Modules\OperationsModule\OperationEditViewModel.cs" />
     <Compile Include="Modules\OperationsModule\OperationsListView.xaml.cs">
       <DependentUpon>OperationsListView.xaml</DependentUpon>
     </Compile>

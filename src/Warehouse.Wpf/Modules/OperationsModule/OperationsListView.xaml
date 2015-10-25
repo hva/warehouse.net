@@ -7,11 +7,19 @@
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
     xmlns:local="clr-namespace:Warehouse.Wpf.Modules.OperationsModule"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ir="http://www.codeplex.com/prism"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:OperationsListViewModel}">
 
+    <i:Interaction.Triggers>
+        <ir:InteractionRequestTrigger SourceObject="{Binding CreateRequest}">
+            <ir:PopupWindowAction CenterOverAssociatedObject="True" />
+        </ir:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
@@ -24,9 +32,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Загрузить" />
-            <Rectangle Width="10" />
-            <Button Content="Удалить" />
+            <Button Content="Создать" Command="{Binding CreateCommand}" />
         </StackPanel>
 
         <ListView Grid.Row="2">

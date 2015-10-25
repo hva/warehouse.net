@@ -35,9 +35,9 @@
                     <controls:TopMenuDivider />
                     <controls:TopMenuItem Content="Остатки" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.ProductsList}" />
                     <controls:TopMenuDivider />
-                    <controls:TopMenuItem Content="Сертификаты" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.FilesList}" />
-                    <controls:TopMenuDivider />
                     <controls:TopMenuItem Content="Накладные" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.OperationsList}" />
+                    <controls:TopMenuDivider />
+                    <controls:TopMenuItem Content="Сертификаты" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.FilesList}" />
                     <controls:TopMenuDivider />
                     <StackPanel Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal">
                         <controls:TopMenuItem Content="Пользователи" Command="{Binding NavigateToPageCommand}" CommandParameter="{x:Static infrastructure:PageName.Users}" />
