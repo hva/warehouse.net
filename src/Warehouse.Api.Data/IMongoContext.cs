@@ -8,5 +8,6 @@ namespace Warehouse.Api.Data
         IMongoDatabase Database { get; }
         IMongoCollection<User> Users { get; }
         IMongoCollection<Product> Products { get; }
+        IMongoCollection<Operation> Operations { get; }
     }
 }

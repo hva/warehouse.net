@@ -13,10 +13,12 @@ namespace Warehouse.Api.Data
 
             Users = Database.GetCollection<User>(nameof(Users).ToLower());
             Products = Database.GetCollection<Product>(nameof(Products).ToLower());
+            Operations = Database.GetCollection<Operation>(nameof(Operations).ToLower());
         }
 
         public IMongoDatabase Database { get; }
         public IMongoCollection<User> Users { get; }
         public IMongoCollection<Product> Products { get; }
+        public IMongoCollection<Operation> Operations { get; }
     }
 }

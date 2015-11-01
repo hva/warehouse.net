@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="AuthRepository.cs" />
+    <Compile Include="Entities\Operation.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="IMongoContext.cs" />

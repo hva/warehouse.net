@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.IsolatedStorage;
 using Newtonsoft.Json;
 using Warehouse.Wpf.Auth.Interfaces;
@@ -10,12 +9,6 @@ namespace Warehouse.Wpf.Auth
     {
         private const string TokenFileName = "auth_token";
         private AuthToken inMemoryToken;
-        //private readonly ILoggerFacade logger;
-
-        public AuthStore(/*ILoggerFacade logger*/)
-        {
-            //this.logger = logger;
-        }
 
         public void SaveToken(AuthToken token)
         {
@@ -29,7 +22,7 @@ namespace Warehouse.Wpf.Auth
                     serializer.Serialize(writer, token);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 //logger.Log(e.Message, Category.Exception, Priority.None);
                 inMemoryToken = token;
@@ -54,7 +47,7 @@ namespace Warehouse.Wpf.Auth
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 //logger.Log(e.Message, Category.Exception, Priority.None);
             }
@@ -79,7 +72,7 @@ namespace Warehouse.Wpf.Auth
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 //logger.Log(e.Message, Category.Exception, Priority.None);
             }

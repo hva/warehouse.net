@@ -19,7 +19,7 @@ using Warehouse.Wpf.Module.ProductDetail.Edit;
 using Warehouse.Wpf.Module.Settings;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Module.Users;
-using Warehouse.Wpf.Modules.OperationsModule;
+using Warehouse.Wpf.Modules.Operations;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.SignalR.Interfaces;
 

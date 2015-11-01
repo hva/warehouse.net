@@ -1,0 +1,64 @@
+﻿<UserControl
+    x:Class="Warehouse.Wpf.Modules.Operations.OperationsListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:local="clr-namespace:Warehouse.Wpf.Modules.Operations"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ir="http://www.codeplex.com/prism"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance Type=local:OperationsListViewModel}">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="DialogStyle" TargetType="Window">
+            <Setter Property="Width" Value="400" />
+            <Setter Property="MinWidth" Value="400" />
+            <Setter Property="Height" Value="300" />
+            <Setter Property="MinHeight" Value="300" />
+        </Style>
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <ir:InteractionRequestTrigger SourceObject="{Binding CreateRequest}">
+            <ir:PopupWindowAction CenterOverAssociatedObject="True" IsModal="True" WindowStyle="{StaticResource DialogStyle}">
+                <ir:PopupWindowAction.WindowContent>
+                    <local:OperationEditView />
+                </ir:PopupWindowAction.WindowContent>
+            </ir:PopupWindowAction>
+        </ir:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="Создать" Command="{Binding CreateCommand}" />
+        </StackPanel>
+
+        <ListView Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Файл">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Name" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Border Grid.RowSpan="3" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <controls:ProgressRing IsActive="True" />
+        </Border>
+    </Grid>
+</UserControl>

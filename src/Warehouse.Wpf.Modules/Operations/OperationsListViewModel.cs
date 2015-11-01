@@ -1,17 +1,21 @@
-﻿using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
 
-namespace Warehouse.Wpf.Modules.OperationsModule
+namespace Warehouse.Wpf.Modules.Operations
 {
     public class OperationsListViewModel : BindableBase
     {
         private bool isBusy;
         private readonly InteractionRequest<OperationEditViewModel> createRequest;
+        private readonly Func<OperationEditViewModel> editFactory;
 
-        public OperationsListViewModel()
+        public OperationsListViewModel(Func<OperationEditViewModel> editFactory)
         {
+            this.editFactory = editFactory;
             CreateCommand = new DelegateCommand(Create);
             createRequest = new InteractionRequest<OperationEditViewModel>();
         }
@@ -28,7 +32,9 @@ namespace Warehouse.Wpf.Modules.OperationsModule
 
         private void Create()
         {
-            createRequest.Raise(new OperationEditViewModel());
+            var context = editFactory();
+            context.Init();
+            createRequest.Raise(context);
         }
     }
 }
