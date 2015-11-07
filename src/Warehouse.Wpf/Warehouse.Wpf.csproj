@@ -71,22 +71,6 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetProjects.DataVisualization.Toolkit, Version=5.0.25.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.25\lib\net40\DotNetProjects.DataVisualization.Toolkit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DotNetProjects.Input.Toolkit, Version=5.0.25.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.25\lib\net40\DotNetProjects.Input.Toolkit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DotNetProjects.Layout.Toolkit, Version=5.0.25.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.25\lib\net40\DotNetProjects.Layout.Toolkit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DotNetProjects.WPF.Themes, Version=5.0.25.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.25\lib\net40\DotNetProjects.WPF.Themes.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
@@ -241,13 +225,13 @@
       <Project>{35A76651-9C8D-4F1C-A5BD-1BA7524F5195}</Project>
       <Name>Warehouse.Wpf.Module.Users</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Modules\Warehouse.Wpf.Modules.csproj">
-      <Project>{faab0cbd-4a0e-4195-a504-38cbaec588d9}</Project>
-      <Name>Warehouse.Wpf.Modules</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
       <Project>{E6A0BB68-A5DE-4FE8-9C3E-EC60CC089FBA}</Project>
       <Name>Warehouse.Wpf.SignalR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.UI\Warehouse.Wpf.UI.csproj">
+      <Project>{3b39b590-44e5-4497-b145-b43ab374feb2}</Project>
+      <Name>Warehouse.Wpf.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

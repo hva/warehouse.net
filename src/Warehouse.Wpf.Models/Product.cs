@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Warehouse.Wpf.Models
+﻿namespace Warehouse.Wpf.Models
 {
     public class Product
     {
@@ -18,7 +16,5 @@ namespace Warehouse.Wpf.Models
         public string Internal { get; set; }
         public bool IsSheet { get; set; }
         public string Firma { get; set; }
-
-        public double NdTotal { get { return Nd == null ? 0 : Nd.Sum(); } }
     }
 }

@@ -1,0 +1,133 @@
+﻿<UserControl
+    x:Class="Warehouse.Wpf.UI.Modules.Transactions.Details.TransactionDetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions.Details"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:interactionRequest="http://prismlibrary.com/"
+    xmlns:memo="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions.MemoDetails"
+    xmlns:models="clr-namespace:Warehouse.SharedModels;assembly=Warehouse.SharedModels"
+    xmlns:converters="clr-namespace:Warehouse.Wpf.UI.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance Type=local:TransactionDetailsViewModel}"
+    Language="ru-RU">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
+        <Style x:Key="WindowStyle" TargetType="Window">
+            <Setter Property="Width" Value="750" />
+            <Setter Property="Height" Value="500" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+        </Style>
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding MemoDetailsRequest}">
+            <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" WindowStyle="{StaticResource WindowStyle}">
+                <interactionRequest:PopupWindowAction.WindowContent>
+                    <memo:MemoDetailsView />
+                </interactionRequest:PopupWindowAction.WindowContent>
+            </interactionRequest:PopupWindowAction>
+        </interactionRequest:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Сотрудник" />
+                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Покупатель" />
+                <TextBox />
+            </StackPanel>
+            <Rectangle Height="20" />
+            <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Добавить" Command="{Binding AddItemCommand}" />
+            </StackPanel>
+        </StackPanel>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Items}">
+            <i:Interaction.Behaviors>
+                <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenItemCommand}" />
+            </i:Interaction.Behaviors>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle Width="10" Height="10" Fill="{Binding Product, Converter={StaticResource ProductFirmaToBrushConverter}}" Opacity="0.8" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Наимнование" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.Name}" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Размер" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.Size}" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="K">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.K, StringFormat='{}{0:0.##;#;#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Цена оптовая">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriceOpt, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Цена розничная">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriceRozn, StringFormat='{}{0:##,#}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Наценка">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Margin, StringFormat='{}{0:0.##%;-0.##%;0%}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Border Grid.Row="2" Style="{StaticResource FormButtons}">
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.RowSpan="3" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <controls:ProgressRing IsActive="True" />
+        </Border>
+    </Grid>
+</UserControl>

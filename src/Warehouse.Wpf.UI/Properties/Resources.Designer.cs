@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Warehouse.Wpf.Modules.Properties {
-    using System;
+namespace Warehouse.Wpf.UI.Properties {
     
     
     /// <summary>
@@ -38,8 +37,8 @@ namespace Warehouse.Wpf.Modules.Properties {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Warehouse.Wpf.Modules.Properties.Resources", typeof(Resources).Assembly);
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Warehouse.Wpf.UI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

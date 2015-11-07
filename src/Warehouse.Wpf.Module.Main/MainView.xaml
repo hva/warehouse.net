@@ -23,6 +23,7 @@
         <converters:NdVisibilityConverter x:Key="NdVisibilityConverter" />
         <converters:NdValueConverter x:Key="NdValueConverter" />
         <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
+        <converters:NdTotalConverter x:Key="NdTotalConverter" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -137,7 +138,7 @@
                                         Visibility="{Binding Nd, Converter={StaticResource NdVisibilityConverter}}"
                                         ToolTipService.ToolTip="{Binding Nd, Converter={StaticResource NdValueConverter}}"
                                         Background="#C9CACA" Opacity="0.6" />
-                                    <TextBlock IsHitTestVisible="False" Text="{Binding NdTotal, StringFormat='{}{0:0.##;#;#}'}" Margin="5,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    <TextBlock IsHitTestVisible="False" Text="{Binding Nd, StringFormat='{}{0:0.##;#;#}', Converter={StaticResource NdTotalConverter}}" Margin="5,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

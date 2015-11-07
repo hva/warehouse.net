@@ -19,5 +19,18 @@
         {
             return CalculatePriceRozn(p.PriceOpt, p.K, p.Length, p.IsSheet);
         }
+
+        public static double CalculateMargin(long before, long after)
+        {
+            var _before = new decimal(before);
+            var _after = new decimal(after);
+            var margin = (_after - _before) / _before;
+            return (double)margin;
+        }
+
+        public static string GetFullName(this Product p)
+        {
+            return $"{p.Name} {p.Size}";
+        }
     }
 }

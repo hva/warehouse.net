@@ -40,9 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateOperation.cs" />
-    <Compile Include="OperationProduct.cs" />
+    <Compile Include="MemoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Wpf.Models\Warehouse.Wpf.Models.csproj">
+      <Project>{b1784d93-0eb5-4b35-a40e-9fbc125d829c}</Project>
+      <Name>Warehouse.Wpf.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

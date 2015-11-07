@@ -19,7 +19,7 @@ using Warehouse.Wpf.Module.ProductDetail.Edit;
 using Warehouse.Wpf.Module.Settings;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Module.Users;
-using Warehouse.Wpf.Modules.Operations;
+using Warehouse.Wpf.UI.Modules.Transactions;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.SignalR.Interfaces;
 
@@ -47,7 +47,7 @@ namespace Warehouse.Wpf
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
             PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
-            PageLocator.Register<OperationsListView>(PageName.OperationsList);
+            PageLocator.Register<TransactionsView>(PageName.OperationsList);
             PageLocator.Register<UsersListView>(PageName.Users);
             PageLocator.Register<SettingsView>(PageName.Settings);
         }

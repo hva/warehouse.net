@@ -65,6 +65,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\NdTotalConverter.cs" />
     <Compile Include="Converters\NdValueConverter.cs" />
     <Compile Include="Converters\NdVisibilityConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
