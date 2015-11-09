@@ -89,7 +89,8 @@
   <ItemGroup>
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Modules\DialogViewModel.cs" />
-    <Compile Include="Modules\MvvmExtensions.cs" />
+    <Compile Include="Modules\ValidationDialogViewModel.cs" />
+    <Compile Include="Modules\ValidationExtensions.cs" />
     <Compile Include="Modules\Products\Picker\ProductsPickerView.xaml.cs">
       <DependentUpon>ProductsPickerView.xaml</DependentUpon>
     </Compile>

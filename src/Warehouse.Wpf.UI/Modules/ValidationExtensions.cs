@@ -5,7 +5,7 @@ using Prism.Mvvm;
 
 namespace Warehouse.Wpf.UI.Modules
 {
-    public static class MvvmExtensions
+    public static class ValidationExtensions
     {
         public static bool HasErrors<T>(this ErrorsContainer<T> container, params Expression<Func<T>>[] propertyExpressions)
         {

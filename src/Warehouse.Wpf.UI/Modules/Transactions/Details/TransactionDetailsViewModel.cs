@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Warehouse.SharedModels;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
+using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.UI.Modules.Transactions.MemoDetails;
 
 namespace Warehouse.Wpf.UI.Modules.Transactions.Details
 {
-    public class TransactionDetailsViewModel : DialogViewModel
+    public class TransactionDetailsViewModel : ValidationDialogViewModel
     {
+        private string customer;
+
         private readonly InteractionRequest<MemoDetailsViewModel> memoDetailsRequest;
         private readonly IAuthStore authStore;
         private readonly Func<MemoDetailsViewModel> memoFactory;
@@ -40,9 +44,54 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
             }
         }
 
-        public ObservableCollection<MemoModel> Items { get; }
         public ICommand OpenItemCommand { get; }
         public string UserName { get; private set; }
+
+        #region Items
+
+        public ObservableCollection<MemoModel> Items { get; }
+
+        private void ValidateItems()
+        {
+            errorsContainer.ClearErrors(() => Items);
+            if (Items.Count == 0)
+            {
+                errorsContainer.SetErrors(() => Items, new[] { "список не может быть пустым" });
+            }
+        }
+
+        #endregion
+
+        #region Customer
+
+        public string Customer
+        {
+            get { return customer; }
+            set
+            {
+                if (customer != value)
+                {
+                    customer = value;
+                    ValidateCustomer();
+                }
+            }
+        }
+
+        private void ValidateCustomer()
+        {
+            errorsContainer.ClearErrors(() => Customer);
+            errorsContainer.SetErrors(() => Customer, Validate.Required(Customer));
+        }
+
+        #endregion
+
+        protected override Task SaveAsync()
+        {
+            ValidateCustomer();
+            ValidateItems();
+
+            return base.SaveAsync();
+        }
 
         private void AddItem()
         {

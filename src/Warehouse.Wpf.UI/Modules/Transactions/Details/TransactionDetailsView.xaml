@@ -51,7 +51,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Покупатель" />
-                <TextBox />
+                <TextBox
+                    Text="{Binding Customer, Mode=TwoWay,
+                                   ValidatesOnDataErrors=True, NotifyOnValidationError=True,
+                                   UpdateSourceTrigger=Explicit}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:ThrottledTextBindingBehavior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
             </StackPanel>
             <Rectangle Height="20" />
             <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
@@ -59,7 +67,10 @@
             </StackPanel>
         </StackPanel>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Items}">
+        <ListView
+            Grid.Row="1"
+            ItemsSource="{Binding Items, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
             <i:Interaction.Behaviors>
                 <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenItemCommand}" />
             </i:Interaction.Behaviors>

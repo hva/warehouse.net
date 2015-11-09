@@ -18,7 +18,7 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.MemoDetails
             this.productsRepository = productsRepository;
             ProductsPickerViewModel = productsPickerViewModel;
 
-            Title = "Списание";
+            Title = "Выбор позиции";
         }
 
         public ProductsPickerViewModel ProductsPickerViewModel { get; }
