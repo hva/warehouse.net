@@ -16,7 +16,8 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
     {
         private string customer;
 
-        private readonly InteractionRequest<MemoDetailsViewModel> memoDetailsRequest;
+        private readonly InteractionRequest<MemoDetailsViewModel> memoCreateRequest;
+        private readonly InteractionRequest<MemoDetailsViewModel> memoEditRequest;
         private readonly IAuthStore authStore;
         private readonly Func<MemoDetailsViewModel> memoFactory;
 
@@ -28,11 +29,13 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
             Title = "Расходная накладная";
             Items = new ObservableCollection<MemoModel>();
             OpenItemCommand = new DelegateCommand<MemoModel>(OpenItem);
-            memoDetailsRequest = new InteractionRequest<MemoDetailsViewModel>();
+            memoCreateRequest = new InteractionRequest<MemoDetailsViewModel>();
+            memoEditRequest = new InteractionRequest<MemoDetailsViewModel>();
             AddItemCommand = new DelegateCommand(AddItem);
         }
 
-        public IInteractionRequest MemoDetailsRequest => memoDetailsRequest;
+        public IInteractionRequest MemoCreateRequest => memoCreateRequest;
+        public IInteractionRequest MemoEditRequest => memoEditRequest;
         public ICommand AddItemCommand { get; }
 
         public void Init()
@@ -97,7 +100,7 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
         {
             var context = memoFactory();
             context.Init(null);
-            memoDetailsRequest.Raise(context, OnItemAdded);
+            memoCreateRequest.Raise(context, OnItemAdded);
         }
 
         private void OnItemAdded(MemoDetailsViewModel vm)
@@ -112,7 +115,7 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
         {
             var context = memoFactory();
             context.Init(memo);
-            memoDetailsRequest.Raise(context, OnItemUpdated);
+            memoEditRequest.Raise(context, OnItemUpdated);
         }
 
         private void OnItemUpdated(MemoDetailsViewModel vm)
