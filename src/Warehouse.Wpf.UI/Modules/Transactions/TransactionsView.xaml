@@ -47,10 +47,15 @@
         <ListView Grid.Row="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Файл">
+                    <GridViewColumn Header="Сотрудник">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Name" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Покупатель">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

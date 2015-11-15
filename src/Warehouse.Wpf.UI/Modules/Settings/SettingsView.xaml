@@ -1,18 +1,16 @@
 ﻿<UserControl
-    x:Class="Warehouse.Wpf.Module.Settings.SettingsView"
+    x:Class="Warehouse.Wpf.UI.Modules.Settings.SettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
-    xmlns:mvvm="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
-    xmlns:local="clr-namespace:Warehouse.Wpf.Module.Settings"
+    xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Settings"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ir="http://www.codeplex.com/prism"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
-    mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:SettingsViewModel}">
 
     <UserControl.Resources>
@@ -32,6 +30,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -44,14 +46,20 @@
         </ir:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <StackPanel Width="400" HorizontalAlignment="Left">
+    <StackPanel Width="400" HorizontalAlignment="Left" Margin="20,0">
 
         <controls:AlertBox Type="Success" Content="{Binding SuccessMessage}" />
 
         <ContentControl Tag="О программе" Style="{StaticResource H1}">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Версия" />
-                <TextBlock Text="{Binding Version}" VerticalAlignment="Center" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Версия" />
+                    <TextBox Text="{Binding Version}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Сервер" />
+                    <TextBox Text="{Binding Endpoint}" />
+                </StackPanel>
             </StackPanel>
         </ContentControl>
 
@@ -59,11 +67,11 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Имя" />
-                    <TextBox Text="{Binding UserName}" IsReadOnly="True" />
+                    <TextBox Text="{Binding UserName}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Роль" />
-                    <TextBox Text="{Binding Role, Converter={StaticResource RoleToStringConverter}}" IsReadOnly="True" />
+                    <TextBox Text="{Binding Role, Converter={StaticResource RoleToStringConverter}}" />
                 </StackPanel>
                 <Rectangle Height="10" />
                 <Button Content="Сменить пароль" Command="{Binding ChangePasswordCommand}" Style="{StaticResource FormButton}" Width="120" />

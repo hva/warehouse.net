@@ -16,12 +16,12 @@ using Warehouse.Wpf.Module.Files;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
-using Warehouse.Wpf.Module.Settings;
 using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Module.Users;
 using Warehouse.Wpf.UI.Modules.Transactions;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.SignalR.Interfaces;
+using Warehouse.Wpf.UI.Modules.Settings;
 
 namespace Warehouse.Wpf
 {

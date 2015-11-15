@@ -65,6 +65,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Settings\ChangePasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Settings\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Transactions\Details\TransactionDetailsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,6 +97,15 @@
   <ItemGroup>
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Modules\DialogViewModel.cs" />
+    <Compile Include="Modules\Settings\ChangePasswordArgs.cs" />
+    <Compile Include="Modules\Settings\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\ChangePasswordViewModel.cs" />
+    <Compile Include="Modules\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\SettingsViewModel.cs" />
     <Compile Include="Modules\ValidationDialogViewModel.cs" />
     <Compile Include="Modules\ValidationExtensions.cs" />
     <Compile Include="Modules\Products\Picker\ProductsPickerView.xaml.cs">
@@ -162,6 +179,7 @@
       <Name>Warehouse.Wpf.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

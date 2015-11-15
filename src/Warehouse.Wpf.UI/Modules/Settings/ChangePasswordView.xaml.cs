@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Warehouse.Wpf.Module.Settings
+namespace Warehouse.Wpf.UI.Modules.Settings
 {
     public partial class ChangePasswordView : UserControl
     {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
+using Warehouse.Wpf.Infrastructure.Interfaces;
 
-namespace Warehouse.Wpf.Module.Settings
+namespace Warehouse.Wpf.UI.Modules.Settings
 {
     public class SettingsViewModel : BindableBase
     {
@@ -15,7 +16,8 @@ namespace Warehouse.Wpf.Module.Settings
         private readonly Func<ChangePasswordViewModel> changePasswordFactory;
         private string successMessage;
 
-        public SettingsViewModel(IAuthStore authStore, Func<ChangePasswordViewModel> changePasswordFactory)
+        public SettingsViewModel(IAuthStore authStore, IApplicationSettings settings,
+            Func<ChangePasswordViewModel> changePasswordFactory)
         {
             this.changePasswordFactory = changePasswordFactory;
 
@@ -23,6 +25,8 @@ namespace Warehouse.Wpf.Module.Settings
             Version = (v.Build > 0)
                 ? string.Join(".", new[] { v.Major, v.Minor, v.Build })
                 : string.Join(".", new[] { v.Major, v.Minor });
+
+            Endpoint = settings.Endpoint.TrimEnd("/".ToCharArray());
 
             changePasswordRequest = new InteractionRequest<IConfirmation>();
             ChangePasswordCommand = new DelegateCommand(ChangePassword);
@@ -51,6 +55,7 @@ namespace Warehouse.Wpf.Module.Settings
         }
 
         public string Version { get; private set; }
+        public string Endpoint { get; private set; }
         public ICommand ChangePasswordCommand { get; private set; }
         public IInteractionRequest ChangePasswordRequest { get { return changePasswordRequest; } }
 

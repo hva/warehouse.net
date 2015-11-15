@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Warehouse.Wpf.Module.Settings
+namespace Warehouse.Wpf.UI.Modules.Settings
 {
     public class ChangePasswordArgs
     {
