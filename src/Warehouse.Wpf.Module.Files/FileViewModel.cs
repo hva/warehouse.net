@@ -93,7 +93,7 @@ namespace Warehouse.Wpf.Module.Files
             {
                 if (x.Confirmed)
                 {
-                    Products.AddRange(x.SelectedProducts);
+                    Products.AddRange2(x.SelectedProducts);
                 }
             });
         }

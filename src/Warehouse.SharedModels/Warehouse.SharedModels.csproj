@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="MemoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transactions\TransactionModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Wpf.Models\Warehouse.Wpf.Models.csproj">

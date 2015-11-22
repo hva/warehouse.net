@@ -74,6 +74,7 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="IMongoContext.cs" />
+    <Compile Include="Entities\Converters\ObjectIdConverter.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\UpdateUserModel.cs" />
     <Compile Include="MongoContext.cs" />

@@ -10,7 +10,7 @@
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     xmlns:interactionRequest="http://prismlibrary.com/"
     xmlns:memo="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions.MemoDetails"
-    xmlns:models="clr-namespace:Warehouse.SharedModels;assembly=Warehouse.SharedModels"
+    xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:converters="clr-namespace:Warehouse.Wpf.UI.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
@@ -20,6 +20,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
+        <converters:MemoMarginConverter x:Key="MemoMarginConverter" />
         <Style x:Key="CreateWindowStyle" TargetType="Window">
             <Setter Property="Width" Value="750" />
             <Setter Property="Height" Value="500" />
@@ -76,6 +77,8 @@
             <Rectangle Height="20" />
             <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Content="Добавить" Command="{Binding AddItemCommand}" />
+                <Rectangle Width="10" />
+                <Button Content="Удалить" Command="{Binding DeleteItemsCommand}" />
             </StackPanel>
         </StackPanel>
 
@@ -85,6 +88,7 @@
             Validation.ErrorTemplate="{StaticResource ErrorTemplateSilverlightStyle}">
             <i:Interaction.Behaviors>
                 <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenItemCommand}" />
+                <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
             <ListView.View>
                 <GridView>
@@ -133,7 +137,7 @@
                     <GridViewColumn Header="Наценка">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Margin, StringFormat='{}{0:0.##%;-0.##%;0%}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
+                                <TextBlock Text="{Binding Converter={StaticResource MemoMarginConverter} ,StringFormat='{}{0:0.##%;-0.##%;0%}'}" HorizontalAlignment="Right" d:DataContext="{d:DesignInstance Type=models:MemoModel}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -142,11 +146,20 @@
         </ListView>
 
         <Border Grid.Row="2" Style="{StaticResource FormButtons}">
-            <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
-                <Rectangle Width="10" />
-                <Button Content="Отмена" Command="{Binding CancelCommand}" />
-            </StackPanel>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                    <CheckBox Content="Черновик" IsChecked="{Binding IsDraft, Mode=TwoWay}" />
+                    <Rectangle Width="60" />
+                    <RadioButton GroupName="status" Content="Реализация" IsChecked="{Binding IsForSale, Mode=TwoWay}" IsEnabled="{Binding IsNotDraft}" />
+                    <Rectangle Width="20" />
+                    <RadioButton GroupName="status" Content="Резерв" IsEnabled="{Binding IsNotDraft}" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="{Binding SaveButtonContent}" Command="{Binding SaveCommand}" Width="150" />
+                    <Rectangle Width="10" />
+                    <Button Content="Отмена" Command="{Binding CancelCommand}" />
+                </StackPanel>
+            </Grid>
         </Border>
 
         <Border Grid.RowSpan="3" Background="#99FFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">

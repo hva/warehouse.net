@@ -95,7 +95,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\MemoMarginConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
+    <Compile Include="Converters\RelativeTimeConverter.cs" />
+    <Compile Include="Converters\TransactionStatusConverter.cs" />
     <Compile Include="Modules\DialogViewModel.cs" />
     <Compile Include="Modules\Settings\ChangePasswordArgs.cs" />
     <Compile Include="Modules\Settings\ChangePasswordView.xaml.cs">
@@ -154,10 +157,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Warehouse.SharedModels\Warehouse.SharedModels.csproj">
-      <Project>{538CD76B-C3FF-490F-9EC4-089795892DDF}</Project>
-      <Name>Warehouse.SharedModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Auth\Warehouse.Wpf.Auth.csproj">
       <Project>{23d2c7e0-9521-452c-b3ee-f01cba79e300}</Project>
       <Name>Warehouse.Wpf.Auth</Name>

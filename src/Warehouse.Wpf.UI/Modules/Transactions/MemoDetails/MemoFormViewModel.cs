@@ -1,5 +1,4 @@
-﻿using Warehouse.SharedModels;
-using Warehouse.Wpf.Infrastructure;
+﻿using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
 
 namespace Warehouse.Wpf.UI.Modules.Transactions.MemoDetails
@@ -34,7 +33,6 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.MemoDetails
         {
             Memo.PriceOpt = long.Parse(priceOpt);
             Memo.PriceRozn = priceRozn;
-            Memo.Margin = margin;
             return Memo;
         }
 
@@ -79,7 +77,11 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.MemoDetails
             }
             else
             {
-                PriceRozn = ProductExtensions.CalculatePriceRozn(long.Parse(priceOpt), Memo.Product.K, Memo.Product.Length, false);
+                var _priceOpt = long.Parse(priceOpt);
+                var k = Memo.Product.K;
+                var length = Memo.Product.Length;
+                var isSheet = Memo.Product.IsSheet;
+                PriceRozn = ProductExtensions.CalculatePriceRozn(_priceOpt, k, length, isSheet);
             }
         }
 

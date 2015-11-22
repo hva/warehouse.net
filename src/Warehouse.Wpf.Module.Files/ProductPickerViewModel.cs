@@ -79,7 +79,7 @@ namespace Warehouse.Wpf.Module.Files
             {
                 items.Clear();
                 var included = task.Result.Except(excluded, new ProductNameComparer());
-                items.AddRange(included);
+                items.AddRange2(included);
             }
         }
 

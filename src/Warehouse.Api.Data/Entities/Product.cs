@@ -1,12 +1,13 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using Warehouse.Api.Data.Entities.Converters;
 
 namespace Warehouse.Api.Data.Entities
 {
     public class Product
     {
-        [BsonId]
+        [BsonId, JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 
         [BsonElement("name")]

@@ -9,12 +9,17 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ir="http://prismlibrary.com/"
     xmlns:details="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions.Details"
+    xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:converters="clr-namespace:Warehouse.Wpf.UI.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance Type=local:TransactionsViewModel}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:RelativeTimeConverter x:Key="RelativeTimeConverter" />
+        <converters:TransactionStatusConverter x:Key="TransactionStatusConverter" />
         <Style x:Key="DialogStyle" TargetType="Window">
             <Setter Property="Width" Value="700" />
             <Setter Property="MinWidth" Value="700" />
@@ -42,20 +47,42 @@
 
         <StackPanel Margin="10,0" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button Content="Расходная накладная" Command="{Binding CreateCommand}" Width="160" />
+            <Rectangle Width="30" />
+            <Button Content="Удалить" Command="{Binding DeleteCommand}" />
         </StackPanel>
 
-        <ListView Grid.Row="2">
+        <ListView Grid.Row="2" ItemsSource="{Binding Items}">
+            <i:Interaction.Behaviors>
+                <behaviors:ListViewDoubleClickBehavior Command="{Binding OpenCommand}" />
+                <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+            </i:Interaction.Behaviors>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Сотрудник">
+                    <GridViewColumn Header="Дата/Время" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
+                                <TextBlock Text="{Binding DateTime, Converter={StaticResource RelativeTimeConverter}}" d:DataContext="{d:DesignInstance Type=models:TransactionModel}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Покупатель">
+                    <GridViewColumn Header="Сотрудник" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
+                                <TextBlock Text="{Binding Employee}" d:DataContext="{d:DesignInstance Type=models:TransactionModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Статус" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status, Converter={StaticResource TransactionStatusConverter}}" d:DataContext="{d:DesignInstance Type=models:TransactionModel}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Покупатель" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Customer}" d:DataContext="{d:DesignInstance Type=models:TransactionModel}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -32,7 +32,7 @@ namespace Warehouse.Wpf.Module.Files
                                let name = names.TryGetValue(x, out str) ? str : null
                                where name != null
                                select new ProductName { Id = x, Name = name };
-                Products.AddRange(products);
+                Products.AddRange2(products);
             }
 
             Title = file.Name;

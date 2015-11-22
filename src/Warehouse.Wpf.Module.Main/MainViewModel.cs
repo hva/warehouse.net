@@ -184,7 +184,7 @@ namespace Warehouse.Wpf.Module.Main
             IsBusy = false;
             if (task.Succeed)
             {
-                items.AddRange(task.Result);
+                items.AddRange2(task.Result);
                 UpdateTotalWeight();
             }
         }

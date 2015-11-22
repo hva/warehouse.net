@@ -159,7 +159,7 @@ namespace Warehouse.Wpf.Module.Files
                 PopulateNames(task.Result);
 
                 items.Clear();
-                items.AddRange(task.Result);
+                items.AddRange2(task.Result);
             }
 
             IsBusy = false;

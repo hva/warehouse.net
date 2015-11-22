@@ -200,10 +200,6 @@
       <Project>{dd67bf1d-8644-4d72-ab21-7c0efb77026a}</Project>
       <Name>Warehouse.Api.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.SharedModels\Warehouse.SharedModels.csproj">
-      <Project>{538cd76b-c3ff-490f-9ec4-089795892ddf}</Project>
-      <Name>Warehouse.SharedModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

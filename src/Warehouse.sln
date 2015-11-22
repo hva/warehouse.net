@@ -49,8 +49,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Api.Data", "Wareh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Utils.CreateUser", "Warehouse.Utils.CreateUser\Warehouse.Utils.CreateUser.csproj", "{CCD31145-D7C7-485A-B71C-3FE237053D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.SharedModels", "Warehouse.SharedModels\Warehouse.SharedModels.csproj", "{538CD76B-C3FF-490F-9EC4-089795892DDF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Wpf.UI", "Warehouse.Wpf.UI\Warehouse.Wpf.UI.csproj", "{3B39B590-44E5-4497-B145-B43AB374FEB2}"
 EndProject
 Global
@@ -135,10 +133,6 @@ Global
 		{CCD31145-D7C7-485A-B71C-3FE237053D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD31145-D7C7-485A-B71C-3FE237053D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCD31145-D7C7-485A-B71C-3FE237053D89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{538CD76B-C3FF-490F-9EC4-089795892DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{538CD76B-C3FF-490F-9EC4-089795892DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{538CD76B-C3FF-490F-9EC4-089795892DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{538CD76B-C3FF-490F-9EC4-089795892DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B39B590-44E5-4497-B145-B43AB374FEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B39B590-44E5-4497-B145-B43AB374FEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B39B590-44E5-4497-B145-B43AB374FEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU

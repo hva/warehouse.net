@@ -38,6 +38,7 @@ namespace Warehouse.Wpf
             Container.RegisterType<IProductsRepository, ProductsRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IFilesRepository, FilesRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ITransactionsRepository, TransactionsRepository>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(ResolveViewTypeFromViewModelType);
