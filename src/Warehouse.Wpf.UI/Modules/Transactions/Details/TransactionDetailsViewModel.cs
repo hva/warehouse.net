@@ -155,6 +155,8 @@ namespace Warehouse.Wpf.UI.Modules.Transactions.Details
             ValidateCustomer();
             ValidateItems();
 
+            if (HasErrors) return;
+
             var t = new TransactionModel
             {
                 Id = id,
