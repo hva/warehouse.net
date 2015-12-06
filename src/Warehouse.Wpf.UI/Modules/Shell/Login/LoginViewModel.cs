@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Commands;
+using Prism.Mvvm;
 
-namespace Warehouse.Wpf.Module.Shell.Login
+namespace Warehouse.Wpf.UI.Modules.Shell.Login
 {
     public class LoginViewModel : BindableBase
     {

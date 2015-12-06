@@ -16,8 +16,8 @@ using Warehouse.Wpf.Module.Files;
 using Warehouse.Wpf.Module.Main;
 using Warehouse.Wpf.Module.ProductDetail.Create;
 using Warehouse.Wpf.Module.ProductDetail.Edit;
-using Warehouse.Wpf.Module.Shell;
 using Warehouse.Wpf.Module.Users;
+using Warehouse.Wpf.UI.Modules.Shell;
 using Warehouse.Wpf.UI.Modules.Transactions;
 using Warehouse.Wpf.SignalR;
 using Warehouse.Wpf.SignalR.Interfaces;
@@ -64,7 +64,6 @@ namespace Warehouse.Wpf
 
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
-            ViewModelLocator.SetAutoWireViewModel(Shell, true);
         }
 
         private Type ResolveViewTypeFromViewModelType(Type viewType)

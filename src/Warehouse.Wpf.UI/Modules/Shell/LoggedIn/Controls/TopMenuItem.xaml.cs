@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Module.Shell.LoggedIn.Controls
+﻿namespace Warehouse.Wpf.UI.Modules.Shell.LoggedIn.Controls
 {
     public partial class TopMenuItem
     {

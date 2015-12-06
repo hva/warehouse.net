@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Warehouse.Wpf.Module.Shell.LoggedIn;
-using Warehouse.Wpf.Module.Shell.Login;
+using Warehouse.Wpf.UI.Modules.Shell.LoggedIn;
+using Warehouse.Wpf.UI.Modules.Shell.Login;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.UI.Modules.Shell
 {
     public class ShellTemplateSelector : DataTemplateSelector
     {

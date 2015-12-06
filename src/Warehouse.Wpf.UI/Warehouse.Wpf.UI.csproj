@@ -73,6 +73,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\Shell\LoggedIn\Controls\TopMenuDivider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Shell\LoggedIn\Controls\TopMenuItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Shell\LoggedIn\LoggedInView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Shell\Login\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Shell\Shell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Transactions\Details\TransactionDetailsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +129,25 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Settings\SettingsViewModel.cs" />
+    <Compile Include="Modules\Shell\LoggedIn\Controls\TopMenuDivider.xaml.cs">
+      <DependentUpon>TopMenuDivider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Shell\LoggedIn\Controls\TopMenuItem.xaml.cs">
+      <DependentUpon>TopMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Shell\LoggedIn\LoggedInView.xaml.cs">
+      <DependentUpon>LoggedInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Shell\LoggedIn\LoggedInViewModel.cs" />
+    <Compile Include="Modules\Shell\Login\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Shell\Login\LoginViewModel.cs" />
+    <Compile Include="Modules\Shell\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Shell\ShellTemplateSelector.cs" />
+    <Compile Include="Modules\Shell\ShellViewModel.cs" />
     <Compile Include="Modules\ValidationDialogViewModel.cs" />
     <Compile Include="Modules\ValidationExtensions.cs" />
     <Compile Include="Modules\Products\Picker\ProductsPickerView.xaml.cs">

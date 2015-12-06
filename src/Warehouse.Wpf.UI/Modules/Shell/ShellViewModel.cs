@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
-using Warehouse.Wpf.Module.Shell.LoggedIn;
-using Warehouse.Wpf.Module.Shell.Login;
-using Warehouse.Wpf.SignalR.Interfaces;
+using Warehouse.Wpf.UI.Modules.Shell.LoggedIn;
+using Warehouse.Wpf.UI.Modules.Shell.Login;
 
-namespace Warehouse.Wpf.Module.Shell
+namespace Warehouse.Wpf.UI.Modules.Shell
 {
     public class ShellViewModel : BindableBase
     {
@@ -15,16 +14,14 @@ namespace Warehouse.Wpf.Module.Shell
 
         private readonly IAuthStore authStore;
         private readonly IAuthService authService;
-        private readonly ISignalRClient signalRClient;
         private readonly Func<LoginViewModel> loginFactory;
         private readonly Func<LoggedInViewModel> loggedInFactory;
 
-        public ShellViewModel(IAuthStore authStore, IAuthService authService, ISignalRClient signalRClient,
+        public ShellViewModel(IAuthStore authStore, IAuthService authService,
             Func<LoginViewModel> loginFactory, Func<LoggedInViewModel> loggedInFactory)
         {
             this.authStore = authStore;
             this.authService = authService;
-            this.signalRClient = signalRClient;
             this.loginFactory = loginFactory;
             this.loggedInFactory = loggedInFactory;
 
@@ -55,7 +52,7 @@ namespace Warehouse.Wpf.Module.Shell
             var task = await authService.Login(login, password);
             if (task.Succeed)
             {
-                await signalRClient.StartAsync();
+                //await signalRClient.StartAsync();
                 Refresh();
             }
             return task.Succeed;
@@ -64,7 +61,7 @@ namespace Warehouse.Wpf.Module.Shell
         private void DoLogout()
         {
             authStore.ClearToken();
-            signalRClient.Stop();
+            //signalRClient.Stop();
             Refresh();
         }
     }
