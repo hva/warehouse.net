@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Converters;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Mvvm;
 
-namespace Warehouse.Wpf.Module.Users
+namespace Warehouse.Wpf.UI.Modules.Users
 {
     public class CreateUserViewModel : ValidationObject, IConfirmation, IInteractionRequestAware
     {

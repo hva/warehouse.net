@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Users
+namespace Warehouse.Wpf.UI.Modules.Users
 {
     public class UsersListViewModel : BindableBase
     {

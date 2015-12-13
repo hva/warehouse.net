@@ -1,14 +1,14 @@
 ﻿<UserControl
-    x:Class="Warehouse.Wpf.Module.Users.EditUserView"
+    x:Class="Warehouse.Wpf.UI.Modules.Users.CreateUserView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
-    xmlns:users="clr-namespace:Warehouse.Wpf.Module.Users"
+    xmlns:users="clr-namespace:Warehouse.Wpf.UI.Modules.Users"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
-    d:DataContext="{d:DesignInstance Type=users:EditUserViewModel}">
+    d:DataContext="{d:DesignInstance Type=users:CreateUserViewModel}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,10 +18,23 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Роль" />
-            <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" />
-            <Rectangle Width="10" />
+        <StackPanel Margin="0,0,10,0">
+            <controls:AlertBox Content="{Binding Error}" />
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Логин" />
+                <TextBox Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Пароль" />
+                <TextBox Text="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Роль" />
+                <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding Role, Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" />
+            </StackPanel>
         </StackPanel>
 
         <Border Grid.Row="3" Style="{StaticResource FormButtons}">

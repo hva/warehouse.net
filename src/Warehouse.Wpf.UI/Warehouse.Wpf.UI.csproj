@@ -109,6 +109,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\Users\CreateUserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Users\EditUserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Users\UsersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +160,18 @@
     </Compile>
     <Compile Include="Modules\Shell\ShellTemplateSelector.cs" />
     <Compile Include="Modules\Shell\ShellViewModel.cs" />
+    <Compile Include="Modules\Users\CreateUserView.xaml.cs">
+      <DependentUpon>CreateUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Users\CreateUserViewModel.cs" />
+    <Compile Include="Modules\Users\EditUserView.xaml.cs">
+      <DependentUpon>EditUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Users\EditUserViewModel.cs" />
+    <Compile Include="Modules\Users\UsersListView.xaml.cs">
+      <DependentUpon>UsersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Users\UsersListViewModel.cs" />
     <Compile Include="Modules\ValidationDialogViewModel.cs" />
     <Compile Include="Modules\ValidationExtensions.cs" />
     <Compile Include="Modules\Products\Picker\ProductsPickerView.xaml.cs">
