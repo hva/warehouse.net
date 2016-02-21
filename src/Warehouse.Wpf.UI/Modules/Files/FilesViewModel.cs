@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Win32;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
@@ -19,7 +19,7 @@ using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
     public class FilesViewModel : BindableBase, INavigationAware
     {

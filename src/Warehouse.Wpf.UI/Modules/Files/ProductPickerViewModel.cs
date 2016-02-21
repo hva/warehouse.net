@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
-    public class ProductPickerViewModel : BindableBase, IConfirmation, IInteractionRequestAware
+    public class ProductPickerViewModel : DialogViewModel
     {
         private readonly IProductsRepository productsRepository;
         private string searchQuery;
@@ -26,9 +21,6 @@ namespace Warehouse.Wpf.Module.Files
         {
             this.productsRepository = productsRepository;
 
-            CancelCommand = new DelegateCommand(Close);
-            PickCommand = new DelegateCommand(Pick);
-
             items = new ObservableCollection<ProductName>();
             cvs = new CollectionViewSource { Source = items };
             cvs.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
@@ -36,8 +28,6 @@ namespace Warehouse.Wpf.Module.Files
             Title = "Товарные позиции";
         }
 
-        public ICommand CancelCommand { get; private set; }
-        public ICommand PickCommand { get; private set; }
         public object[] SelectedItems { get; set; }
         public ProductName[] SelectedProducts { get; private set; }
         public ICollectionView Items { get { return cvs.View; } }
@@ -60,17 +50,6 @@ namespace Warehouse.Wpf.Module.Files
                 }
             }
         }
-
-        #region IInteractionRequestAware
-        public INotification Notification { get; set; }
-        public Action FinishInteraction { get; set; }
-        #endregion
-
-        #region IConfirmation
-        public string Title { get; set; }
-        public object Content { get; set; }
-        public bool Confirmed { get; set; }
-        #endregion
 
         public async Task InitAsync(IEnumerable<ProductName> excluded)
         {
@@ -95,15 +74,7 @@ namespace Warehouse.Wpf.Module.Files
             }
         }
 
-        private void Close()
-        {
-            if (FinishInteraction != null)
-            {
-                FinishInteraction();
-            }
-        }
-
-        private void Pick()
+        protected override Task SaveAsync()
         {
             if (SelectedItems != null)
             {
@@ -114,6 +85,8 @@ namespace Warehouse.Wpf.Module.Files
                 }
             }
             Close();
+
+            return Task.FromResult<object>(null);
         }
     }
 }

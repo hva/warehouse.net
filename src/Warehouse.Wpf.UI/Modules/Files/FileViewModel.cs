@@ -6,19 +6,17 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
-    public abstract class FileViewModel : BindableBase, IConfirmation, IInteractionRequestAware
+    public abstract class FileViewModel : DialogViewModel
     {
         private Uri uri;
         private object[] selectedProducts;
-        private bool isBusy;
         private readonly InteractionRequest<ProductPickerViewModel> addProductRequest;
         private readonly DelegateCommand deleteProductCommand;
         private readonly Func<ProductPickerViewModel> pickerFactory;
@@ -31,37 +29,19 @@ namespace Warehouse.Wpf.Module.Files
             Products = new ObservableCollection<ProductName>();
             AddProductCommand = new DelegateCommand(AddProduct);
             deleteProductCommand = new DelegateCommand(DeleteProduct, CanDeleteProduct);
-            CancelCommand = new DelegateCommand(Close);
-            SaveCommand = new DelegateCommand(Save);
             PrintCommand = new DelegateCommand(Print);
         }
 
-        #region IConfirmation, IInteractionRequestAware
-        public string Title { get; set; }
-        public object Content { get; set; }
-        public bool Confirmed { get; set; }
-        public INotification Notification { get; set; }
-        public Action FinishInteraction { get; set; }
-        #endregion
-
         public ICommand AddProductCommand { get; private set; }
-        public ICommand DeleteProductCommand { get { return deleteProductCommand; } }
-        public ICommand CancelCommand { get; private set; }
-        public ICommand SaveCommand { get; private set; }
+        public ICommand DeleteProductCommand => deleteProductCommand;
         public ICommand PrintCommand { get; private set; }
-        public ObservableCollection<ProductName> Products { get; private set; }
-        public IInteractionRequest AddProductRequest { get { return addProductRequest; } }
+        public ObservableCollection<ProductName> Products { get; }
+        public IInteractionRequest AddProductRequest => addProductRequest;
 
         public Uri Uri
         {
             get { return uri; }
             set { SetProperty(ref uri, value); }
-        }
-
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
         }
 
         public object[] SelectedProducts
@@ -71,16 +51,6 @@ namespace Warehouse.Wpf.Module.Files
             {
                 selectedProducts = value;
                 deleteProductCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        protected abstract void Save();
-
-        protected void Close()
-        {
-            if (FinishInteraction != null)
-            {
-                FinishInteraction();
             }
         }
 

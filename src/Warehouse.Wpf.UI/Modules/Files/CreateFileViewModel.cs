@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Win32;
 using Warehouse.Wpf.Data.Interfaces;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
     public class CreateFileViewModel : FileViewModel
     {
@@ -23,7 +24,7 @@ namespace Warehouse.Wpf.Module.Files
             Title = dialog.SafeFileName + "*";
         }
 
-        protected async override void Save()
+        protected async override Task SaveAsync()
         {
             if (dialog != null)
             {

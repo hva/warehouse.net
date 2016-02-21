@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
     public class EditFileViewModel : FileViewModel
     {
@@ -40,7 +41,7 @@ namespace Warehouse.Wpf.Module.Files
             Uri = new Uri(uriString, UriKind.Absolute);
         }
 
-        protected async override void Save()
+        protected async override Task SaveAsync()
         {
             IsBusy = true;
 
@@ -53,7 +54,6 @@ namespace Warehouse.Wpf.Module.Files
             }
 
             IsBusy = false;
-
         }
     }
 }

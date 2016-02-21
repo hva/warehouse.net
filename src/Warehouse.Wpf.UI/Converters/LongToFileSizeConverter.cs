@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Warehouse.Wpf.Module.Files.Converters
+namespace Warehouse.Wpf.UI.Converters
 {
     public class LongToFileSizeConverter : IValueConverter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
     public partial class ProductPickerView : UserControl
     {

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
-namespace Warehouse.Wpf.Module.Files
+namespace Warehouse.Wpf.UI.Modules.Files
 {
     public partial class FileView : UserControl
     {

@@ -1,10 +1,10 @@
 ﻿<UserControl
-    x:Class="Warehouse.Wpf.Module.Files.ProductPickerView"
+    x:Class="Warehouse.Wpf.UI.Modules.Files.ProductPickerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Warehouse.Wpf.Module.Files"
+    xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Files"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
@@ -23,14 +23,14 @@
         <ListBox Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="Extended" DisplayMemberPath="Name">
             <i:Interaction.Behaviors>
                 <behaviors:ListBoxSelectedItemsBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-                <behaviors:ListBoxDoubleClickBehavior Command="{Binding PickCommand}" />
+                <behaviors:ListBoxDoubleClickBehavior Command="{Binding SaveCommand}" />
             </i:Interaction.Behaviors>
         </ListBox>
 
         <Border Grid.Row="2" Style="{StaticResource FormButtons}">
             <StackPanel Orientation="Horizontal">
                 <!--<controls:ProgressRing IsActive="{Binding IsBusy}" />-->
-                <Button Content="Выбрать" Command="{Binding PickCommand}" />
+                <Button Content="Выбрать" Command="{Binding SaveCommand}" />
                 <Rectangle Width="10" />
                 <Button Content="Отмена" Command="{Binding CancelCommand}" />
             </StackPanel>

@@ -61,6 +61,18 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Modules\Files\FilesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Files\FileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Files\ProductPickerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Products\Picker\ProductsPickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,11 +139,27 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\LongToFileSizeConverter.cs" />
     <Compile Include="Converters\MemoMarginConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Converters\RelativeTimeConverter.cs" />
+    <Compile Include="Converters\StringJoinConverter.cs" />
     <Compile Include="Converters\TransactionStatusConverter.cs" />
     <Compile Include="Modules\DialogViewModel.cs" />
+    <Compile Include="Modules\Files\CreateFileViewModel.cs" />
+    <Compile Include="Modules\Files\EditFileViewModel.cs" />
+    <Compile Include="Modules\Files\FilesView.xaml.cs">
+      <DependentUpon>FilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Files\FilesViewModel.cs" />
+    <Compile Include="Modules\Files\FileView.xaml.cs">
+      <DependentUpon>FileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Files\FileViewModel.cs" />
+    <Compile Include="Modules\Files\ProductPickerView.xaml.cs">
+      <DependentUpon>ProductPickerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Files\ProductPickerViewModel.cs" />
     <Compile Include="Modules\Settings\ChangePasswordArgs.cs" />
     <Compile Include="Modules\Settings\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
