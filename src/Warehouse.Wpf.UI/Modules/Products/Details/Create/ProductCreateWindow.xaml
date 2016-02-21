@@ -1,0 +1,51 @@
+﻿<Window
+    x:Class="Warehouse.Wpf.UI.Modules.Products.Details.Create.ProductCreateWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Products.Details.Create"
+    xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:mvvm="http://prismlibrary.com/"
+    xmlns:form="clr-namespace:Warehouse.Wpf.UI.Modules.Products.Details.Form"
+    mc:Ignorable="d"
+    Height="300" Width="300"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner"
+    Title="{Binding Title}"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    d:DataContext="{d:DesignInstance Type=local:ProductCreateWindowViewModel}">
+
+    <i:Interaction.Behaviors>
+        <behaviors:WindowBehavior IsWindowOpen="{Binding IsWindowOpen}" />
+    </i:Interaction.Behaviors>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Лист" Width="150" />
+            <CheckBox IsChecked="{Binding IsSheet, Mode=TwoWay}" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <form:ProductFormView Grid.Row="1" DataContext="{Binding Context}" />
+
+        <Border Grid.Row="3" Style="{StaticResource FormButtons}">
+            <StackPanel>
+                <controls:ProgressRing IsActive="{Binding IsBusy}" />
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" />
+                <Rectangle Width="10" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

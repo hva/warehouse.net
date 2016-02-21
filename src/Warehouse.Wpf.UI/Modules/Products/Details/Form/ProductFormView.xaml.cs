@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Wpf.Module.ProductDetail.Form
+﻿namespace Warehouse.Wpf.UI.Modules.Products.Details.Form
 {
     public partial class ProductFormView
     {

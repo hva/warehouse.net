@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.PubSubEvents;
+using Prism.Commands;
+using Prism.Events;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Mvvm;
 
-namespace Warehouse.Wpf.Module.ChangePrice
+namespace Warehouse.Wpf.UI.Modules.Products.ChangePrice
 {
     public class ChangePriceWindowViewModel : ValidationObject, INavigationAware
     {

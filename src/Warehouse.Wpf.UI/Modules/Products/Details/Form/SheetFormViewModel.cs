@@ -2,9 +2,8 @@
 using System.Linq;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Mvvm;
 
-namespace Warehouse.Wpf.Module.ProductDetail.Form
+namespace Warehouse.Wpf.UI.Modules.Products.Details.Form
 {
     public class SheetFormViewModel : ProductFormViewModel
     {
@@ -15,9 +14,9 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
         {
         }
 
-        public override string LenghtLabel { get { return "Площадь листа (м²)"; } }
-        public override bool IsLengthReadonly { get { return true; } }
-        public override string NdLabel  { get { return "Н/Д (м²)"; } }
+        public override string LenghtLabel => "Площадь листа (м²)";
+        public override bool IsLengthReadonly => true;
+        public override string NdLabel => "Н/Д (м²)";
 
         #region Size
 

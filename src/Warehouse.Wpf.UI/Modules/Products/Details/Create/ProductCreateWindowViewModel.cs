@@ -1,14 +1,14 @@
 ﻿using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.PubSubEvents;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.ProductDetail.Form;
+using Warehouse.Wpf.UI.Modules.Products.Details.Form;
 
-namespace Warehouse.Wpf.Module.ProductDetail.Create
+namespace Warehouse.Wpf.UI.Modules.Products.Details.Create
 {
     public class ProductCreateWindowViewModel : BindableBase, INavigationAware
     {
@@ -49,7 +49,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Create
             get
             {
                 var label = isSheet ? " (лист)" : string.Empty;
-                return string.Format("Новая позиция{0}", label);
+                return $"Новая позиция{label}";
             }
         }
 

@@ -1,17 +1,16 @@
 ﻿using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.PubSubEvents;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Module.ProductDetail.Form;
-//using Warehouse.Wpf.Module.Main.Attachments;
+using Warehouse.Wpf.UI.Modules.Products.Details.Form;
 
-namespace Warehouse.Wpf.Module.ProductDetail.Edit
+namespace Warehouse.Wpf.UI.Modules.Products.Details.Edit
 {
     public class ProductEditWindowViewModel : BindableBase, INavigationAware
     {
@@ -100,7 +99,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Edit
         {
             var p = (Product) param;
 
-            Title = string.Format("{0} {1}", p.Name, p.Size);
+            Title = $"{p.Name} {p.Size}";
 
             Context = (p.IsSheet)
                 ? new SheetFormViewModel(p, canEditPrice)

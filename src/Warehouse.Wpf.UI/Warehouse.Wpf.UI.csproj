@@ -73,6 +73,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\Products\ChangePrice\ChangePriceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Products\Details\Create\ProductCreateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Products\Details\Edit\ProductEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Products\Details\Form\ProductFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Products\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -167,6 +183,24 @@
       <DependentUpon>ProductPickerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Files\ProductPickerViewModel.cs" />
+    <Compile Include="Modules\Products\ChangePrice\ChangePriceItem.cs" />
+    <Compile Include="Modules\Products\ChangePrice\ChangePriceWindow.xaml.cs">
+      <DependentUpon>ChangePriceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\ChangePrice\ChangePriceWindowViewModel.cs" />
+    <Compile Include="Modules\Products\Details\Create\ProductCreateWindow.xaml.cs">
+      <DependentUpon>ProductCreateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\Details\Create\ProductCreateWindowViewModel.cs" />
+    <Compile Include="Modules\Products\Details\Edit\ProductEditWindow.xaml.cs">
+      <DependentUpon>ProductEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\Details\Edit\ProductEditWindowViewModel.cs" />
+    <Compile Include="Modules\Products\Details\Form\ProductFormView.xaml.cs">
+      <DependentUpon>ProductFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\Details\Form\ProductFormViewModel.cs" />
+    <Compile Include="Modules\Products\Details\Form\SheetFormViewModel.cs" />
     <Compile Include="Modules\Products\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

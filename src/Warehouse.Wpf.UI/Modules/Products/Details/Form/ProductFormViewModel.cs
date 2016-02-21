@@ -3,9 +3,8 @@ using System.Globalization;
 using System.Linq;
 using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Models;
-using Warehouse.Wpf.Mvvm;
 
-namespace Warehouse.Wpf.Module.ProductDetail.Form
+namespace Warehouse.Wpf.UI.Modules.Products.Details.Form
 {
     public class ProductFormViewModel : ValidationObject
     {
@@ -272,7 +271,7 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
             }
         }
 
-        public virtual string NdLabel { get { return "Н/Д (м)"; } }
+        public virtual string NdLabel => "Н/Д (м)";
 
         #endregion
 
@@ -299,9 +298,9 @@ namespace Warehouse.Wpf.Module.ProductDetail.Form
             errorsContainer.SetErrors(() => Length, Validate.Double(Length));
         }
 
-        public virtual string LenghtLabel { get { return "Длина штанги (м)"; } }
+        public virtual string LenghtLabel => "Длина штанги (м)";
 
-        public virtual bool IsLengthReadonly { get { return false;} }
+        public virtual bool IsLengthReadonly => false;
 
         #endregion
 

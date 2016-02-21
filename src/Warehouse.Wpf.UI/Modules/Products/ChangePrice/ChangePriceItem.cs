@@ -1,7 +1,7 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Warehouse.Wpf.Models;
 
-namespace Warehouse.Wpf.Module.ChangePrice
+namespace Warehouse.Wpf.UI.Modules.Products.ChangePrice
 {
     public class ChangePriceItem : BindableBase
     {
@@ -13,7 +13,7 @@ namespace Warehouse.Wpf.Module.ChangePrice
             Product = p;
         }
 
-        public Product Product { get; private set; }
+        public Product Product { get; }
 
         public long NewPriceOpt
         {
