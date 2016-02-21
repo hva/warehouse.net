@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Warehouse.Wpf.UI.Modules.Products
 {
@@ -8,7 +7,6 @@ namespace Warehouse.Wpf.UI.Modules.Products
         public MainView()
         {
             InitializeComponent();
-            DataContext = ServiceLocator.Current.TryResolve<MainViewModel>();
         }
     }
 }

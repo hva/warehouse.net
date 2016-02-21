@@ -7,10 +7,11 @@
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Settings"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:ir="http://www.codeplex.com/prism"
+    xmlns:prism="http://www.codeplex.com/prism"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:SettingsViewModel}">
 
     <UserControl.Resources>
@@ -37,13 +38,13 @@
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
-        <ir:InteractionRequestTrigger SourceObject="{Binding ChangePasswordRequest}">
-            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <ir:PopupWindowAction.WindowContent>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ChangePasswordRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
                     <local:ChangePasswordView />
-                </ir:PopupWindowAction.WindowContent>
-            </ir:PopupWindowAction>
-        </ir:InteractionRequestTrigger>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
     <StackPanel Width="400" HorizontalAlignment="Left" Margin="20,0">

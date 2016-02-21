@@ -8,12 +8,13 @@
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     xmlns:converters="clr-namespace:Warehouse.Wpf.UI.Converters"
-    xmlns:interactionRequest="http://www.codeplex.com/prism"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
+    xmlns:prism="http://prismlibrary.com/"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance Type=local:FilesViewModel}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Language="ru-RU">
 
     <UserControl.Resources>
@@ -24,17 +25,17 @@
 
     <i:Interaction.Triggers>
 
-        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
-            <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
-        </interactionRequest:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
+        </prism:InteractionRequestTrigger>
 
-        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding EditRequest}">
-            <interactionRequest:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <interactionRequest:PopupWindowAction.WindowContent>
+        <prism:InteractionRequestTrigger SourceObject="{Binding EditRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
                     <local:FileView />
-                </interactionRequest:PopupWindowAction.WindowContent>
-            </interactionRequest:PopupWindowAction>
-        </interactionRequest:InteractionRequestTrigger>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
 
     </i:Interaction.Triggers>
 

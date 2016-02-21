@@ -8,11 +8,12 @@
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
-    xmlns:ir="http://www.codeplex.com/prism"
+    xmlns:prism="http://www.codeplex.com/prism"
     xmlns:converters="clr-namespace:Warehouse.Wpf.Infrastructure.Converters;assembly=Warehouse.Wpf.Infrastructure"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=users:UsersListViewModel}">
 
     <UserControl.Resources>
@@ -22,21 +23,21 @@
 
     <i:Interaction.Triggers>
 
-        <ir:InteractionRequestTrigger SourceObject="{Binding CreateUserRequest}">
-            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <ir:PopupWindowAction.WindowContent>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CreateUserRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
                     <users:CreateUserView />
-                </ir:PopupWindowAction.WindowContent>
-            </ir:PopupWindowAction>
-        </ir:InteractionRequestTrigger>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
 
-        <ir:InteractionRequestTrigger SourceObject="{Binding EditUserRequest}">
-            <ir:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <ir:PopupWindowAction.WindowContent>
+        <prism:InteractionRequestTrigger SourceObject="{Binding EditUserRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
                     <users:EditUserView />
-                </ir:PopupWindowAction.WindowContent>
-            </ir:PopupWindowAction>
-        </ir:InteractionRequestTrigger>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
 
     </i:Interaction.Triggers>
 

@@ -7,13 +7,14 @@
     xmlns:local="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:ir="http://prismlibrary.com/"
+    xmlns:prism="http://prismlibrary.com/"
     xmlns:details="clr-namespace:Warehouse.Wpf.UI.Modules.Transactions.Details"
     xmlns:models="clr-namespace:Warehouse.Wpf.Models;assembly=Warehouse.Wpf.Models"
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     xmlns:converters="clr-namespace:Warehouse.Wpf.UI.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance Type=local:TransactionsViewModel}">
 
     <UserControl.Resources>
@@ -29,13 +30,13 @@
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
-        <ir:InteractionRequestTrigger SourceObject="{Binding CreateRequest}">
-            <ir:PopupWindowAction CenterOverAssociatedObject="True" IsModal="True" WindowStyle="{StaticResource DialogStyle}">
-                <ir:PopupWindowAction.WindowContent>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CreateRequest}">
+            <prism:PopupWindowAction CenterOverAssociatedObject="True" IsModal="True" WindowStyle="{StaticResource DialogStyle}">
+                <prism:PopupWindowAction.WindowContent>
                     <details:TransactionDetailsView />
-                </ir:PopupWindowAction.WindowContent>
-            </ir:PopupWindowAction>
-        </ir:InteractionRequestTrigger>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
     <Grid>

@@ -36,9 +36,6 @@ namespace Warehouse.Wpf
             Container.RegisterType<IUsersRepository, UsersRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ITransactionsRepository, TransactionsRepository>(new ContainerControlledLifetimeManager());
 
-            //ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
-            //ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(ResolveViewTypeFromViewModelType);
-
             PageLocator.Register<MainView>(PageName.ProductsList);
             PageLocator.Register<FilesView>(PageName.FilesList);
             PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
@@ -61,15 +58,5 @@ namespace Warehouse.Wpf
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
-
-        //private Type ResolveViewTypeFromViewModelType(Type viewType)
-        //{
-        //    var viewName = viewType.FullName;
-        //    viewName = viewName.Replace(".Views.", ".ViewModels.");
-        //    var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-        //    var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
-        //    viewModelName = viewModelName.Replace("ViewViewModel", "ViewModel");
-        //    return Type.GetType(viewModelName);
-        //}
     }
 }

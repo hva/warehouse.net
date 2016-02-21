@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Warehouse.Wpf.UI.Modules.Users
 {
@@ -8,8 +7,6 @@ namespace Warehouse.Wpf.UI.Modules.Users
         public UsersListView()
         {
             InitializeComponent();
-
-            DataContext = ServiceLocator.Current.TryResolve<UsersListViewModel>();
         }
     }
 }
