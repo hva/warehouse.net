@@ -82,7 +82,8 @@ namespace Warehouse.Wpf.Data
                         var resp = await client.PostAsync(uri, content);
                         if (resp.StatusCode == HttpStatusCode.Created)
                         {
-                            var id = await resp.Content.ReadAsStringAsync();
+                            var str = await resp.Content.ReadAsStringAsync();
+                            var id = JsonConvert.DeserializeObject<string>(str);
                             return new AsyncResult<string> { Result = id, Succeed = true };
                         }
                     }

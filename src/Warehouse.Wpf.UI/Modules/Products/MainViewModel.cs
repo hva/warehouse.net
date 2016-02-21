@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -18,31 +19,43 @@ using Warehouse.Wpf.Infrastructure;
 using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.SignalR.Interfaces;
+using Warehouse.Wpf.UI.Modules.Products.Details;
 
 namespace Warehouse.Wpf.UI.Modules.Products
 {
     public class MainViewModel : BindableBase, INavigationAware
     {
-        private readonly IEventAggregator eventAggregator;
-        private readonly ISignalRClient signalRClient;
-        private readonly IProductsRepository productsRepository;
+        private double totalWeight;
+        private bool isBusy;
+        private IList selectedItems;
+
+        private readonly Func<CreateProductViewModel> createFactory;
+        private readonly InteractionRequest<CreateProductViewModel> createRequest;
         private readonly InteractionRequest<Confirmation> deleteRequest;
         private readonly CollectionViewSource cvs;
         private readonly ObservableCollection<Product> items;
-        private IList selectedItems;
         private readonly DelegateCommand changePriceCommand;
         private readonly DelegateCommand deleteCommand;
-        private double totalWeight;
-        private bool isBusy;
 
-        public MainViewModel(IEventAggregator eventAggregator, ISignalRClient signalRClient, IAuthStore authStore,
-            IProductsRepository productsRepository)
+        private readonly IEventAggregator eventAggregator;
+        private readonly ISignalRClient signalRClient;
+        private readonly IProductsRepository productsRepository;
+
+        public MainViewModel(
+            IEventAggregator eventAggregator,
+            ISignalRClient signalRClient,
+            IAuthStore authStore,
+            IProductsRepository productsRepository,
+            Func<CreateProductViewModel> createFactory)
         {
             this.eventAggregator = eventAggregator;
             this.signalRClient = signalRClient;
             this.productsRepository = productsRepository;
+            this.createFactory = createFactory;
 
+            createRequest = new InteractionRequest<CreateProductViewModel>();
             deleteRequest = new InteractionRequest<Confirmation>();
+
             CreateProductCommand = new DelegateCommand(CreateProduct);
             OpenProductCommand = new DelegateCommand<Product>(EditProduct);
             changePriceCommand = new DelegateCommand(ChangePrice, HasSelectedProducts);
@@ -67,7 +80,7 @@ namespace Warehouse.Wpf.UI.Modules.Products
         public ICommand CreateProductCommand { get; private set; }
         public ICommand ChangePriceCommand => changePriceCommand;
         public ICommand DeleteCommand => deleteCommand;
-        //public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
+        public IInteractionRequest CreateRequest => createRequest;
         public IInteractionRequest DeleteRequest => deleteRequest;
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
@@ -204,8 +217,9 @@ namespace Warehouse.Wpf.UI.Modules.Products
 
         private void CreateProduct()
         {
-            var args = new OpenWindowEventArgs(PageName.ProductCreateWindow, null);
-            eventAggregator.GetEvent<OpenWindowEvent>().Publish(args);
+            var vm = createFactory();
+            vm.Init();
+            createRequest.Raise(vm);
         }
 
         private void EditProduct(Product p)

@@ -30,7 +30,7 @@ namespace Warehouse.Wpf.UI.Modules.Files
 
         public object[] SelectedItems { get; set; }
         public ProductName[] SelectedProducts { get; private set; }
-        public ICollectionView Items { get { return cvs.View; } }
+        public ICollectionView Items => cvs.View;
 
         public string SearchQuery
         {

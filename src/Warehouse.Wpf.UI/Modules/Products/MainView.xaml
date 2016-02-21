@@ -12,6 +12,7 @@
     xmlns:behaviors="clr-namespace:Warehouse.Wpf.Controls.Behaviors;assembly=Warehouse.Wpf.Controls"
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:controls="clr-namespace:Warehouse.Wpf.Controls;assembly=Warehouse.Wpf.Controls"
+    xmlns:details="clr-namespace:Warehouse.Wpf.UI.Modules.Products.Details"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
@@ -23,9 +24,21 @@
         <converters:NdValueConverter x:Key="NdValueConverter" />
         <converters:ProductFirmaToBrushConverter x:Key="ProductFirmaToBrushConverter" />
         <converters:NdTotalConverter x:Key="NdTotalConverter" />
+        <Style x:Key="CreateWindowStyle" TargetType="Window">
+            <Setter Property="Width" Value="400" />
+            <Setter Property="Height" Value="480" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+        </Style>
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CreateRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" WindowStyle="{StaticResource CreateWindowStyle}">
+                <prism:PopupWindowAction.WindowContent>
+                    <details:CreateProductView />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding DeleteRequest}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
         </prism:InteractionRequestTrigger>

@@ -94,7 +94,7 @@ namespace Warehouse.Api.Controllers
         public async Task<IHttpActionResult> Post([FromBody] Product product)
         {
             await context.Products.InsertOneAsync(product);
-            return Ok(product.Id);
+            return Created(string.Empty, product.Id);
         }
 
         public async Task<IHttpActionResult> Delete(string ids)

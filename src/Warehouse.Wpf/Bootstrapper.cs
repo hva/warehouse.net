@@ -12,7 +12,6 @@ using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.UI.Modules.Files;
 using Warehouse.Wpf.UI.Modules.Products;
 using Warehouse.Wpf.UI.Modules.Products.ChangePrice;
-using Warehouse.Wpf.UI.Modules.Products.Details.Create;
 using Warehouse.Wpf.UI.Modules.Products.Details.Edit;
 using Warehouse.Wpf.UI.Modules.Shell;
 using Warehouse.Wpf.UI.Modules.Transactions;
@@ -37,10 +36,11 @@ namespace Warehouse.Wpf
             Container.RegisterType<ITransactionsRepository, TransactionsRepository>(new ContainerControlledLifetimeManager());
 
             PageLocator.Register<MainView>(PageName.ProductsList);
-            PageLocator.Register<FilesView>(PageName.FilesList);
-            PageLocator.Register<ProductCreateWindow>(PageName.ProductCreateWindow);
+
             PageLocator.Register<ProductEditWindow>(PageName.ProductEditWindow);
             PageLocator.Register<ChangePriceWindow>(PageName.ChangePriceWindow);
+
+            PageLocator.Register<FilesView>(PageName.FilesList);
             PageLocator.Register<TransactionsView>(PageName.OperationsList);
             PageLocator.Register<UsersListView>(PageName.Users);
             PageLocator.Register<SettingsView>(PageName.Settings);

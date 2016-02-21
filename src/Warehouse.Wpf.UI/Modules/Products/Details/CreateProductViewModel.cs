@@ -1,62 +1,34 @@
-﻿using System.Windows.Input;
-using Prism.Commands;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using Prism.Events;
-using Prism.Mvvm;
 using Warehouse.Wpf.Data.Interfaces;
 using Warehouse.Wpf.Events;
-using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.UI.Modules.Products.Details.Form;
 
-namespace Warehouse.Wpf.UI.Modules.Products.Details.Create
+namespace Warehouse.Wpf.UI.Modules.Products.Details
 {
-    public class ProductCreateWindowViewModel : BindableBase, INavigationAware
+    public class CreateProductViewModel : DialogViewModel
     {
         private readonly IProductsRepository repository;
         private readonly IEventAggregator eventAggregator;
 
         private bool isSheet;
-        private bool isBusy;
         private ProductFormViewModel context;
-        private bool isWindowOpen = true;
 
-        public ProductCreateWindowViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
+        public CreateProductViewModel(IProductsRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
 
-            SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => IsWindowOpen = false);
+            Title = GetTitle();
         }
-
-        public ICommand SaveCommand { get; private set; }
-        public ICommand CancelCommand { get; private set; }
 
         public ProductFormViewModel Context
         {
             get { return context; }
             set { SetProperty(ref context, value); }
-        }
-
-        public bool IsWindowOpen
-        {
-            get { return isWindowOpen; }
-            set { SetProperty(ref isWindowOpen, value); }
-        }
-
-        public string Title
-        {
-            get
-            {
-                var label = isSheet ? " (лист)" : string.Empty;
-                return $"Новая позиция{label}";
-            }
-        }
-
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
         }
 
         public bool IsSheet
@@ -67,11 +39,17 @@ namespace Warehouse.Wpf.UI.Modules.Products.Details.Create
                 if (SetProperty(ref isSheet, value))
                 {
                     UpdateContext();
+                    UpdateTitle();
                 }
             }
         }
 
-        private async void Save()
+        public void Init()
+        {
+            UpdateContext();
+        }
+
+        protected async override Task SaveAsync()
         {
             if (context.IsValid())
             {
@@ -84,7 +62,7 @@ namespace Warehouse.Wpf.UI.Modules.Products.Details.Create
                 {
                     var args = new ProductUpdatedEventArgs(task.Result, false);
                     eventAggregator.GetEvent<ProductUpdatedEvent>().Publish(args);
-                    IsWindowOpen = false;
+                    Close();
                 }
             }
         }
@@ -97,13 +75,19 @@ namespace Warehouse.Wpf.UI.Modules.Products.Details.Create
                 : new ProductFormViewModel(product, true);
         }
 
-        public void OnNavigatedTo(object param)
+        private void UpdateTitle()
         {
-            UpdateContext();
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            if (window != null)
+            {
+                window.Title = GetTitle();
+            }
         }
 
-        public void OnNavigatedFrom()
+        private string GetTitle()
         {
+            var label = isSheet ? " (лист)" : string.Empty;
+            return $"Новая позиция{label}";
         }
     }
 }

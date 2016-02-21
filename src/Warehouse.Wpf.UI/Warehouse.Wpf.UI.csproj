@@ -77,9 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Products\Details\Create\ProductCreateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Modules\Products\Details\CreateProductView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Products\Details\Edit\ProductEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -188,10 +188,10 @@
       <DependentUpon>ChangePriceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Products\ChangePrice\ChangePriceWindowViewModel.cs" />
-    <Compile Include="Modules\Products\Details\Create\ProductCreateWindow.xaml.cs">
-      <DependentUpon>ProductCreateWindow.xaml</DependentUpon>
+    <Compile Include="Modules\Products\Details\CreateProductView.xaml.cs">
+      <DependentUpon>CreateProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Products\Details\Create\ProductCreateWindowViewModel.cs" />
+    <Compile Include="Modules\Products\Details\CreateProductViewModel.cs" />
     <Compile Include="Modules\Products\Details\Edit\ProductEditWindow.xaml.cs">
       <DependentUpon>ProductEditWindow.xaml</DependentUpon>
     </Compile>
