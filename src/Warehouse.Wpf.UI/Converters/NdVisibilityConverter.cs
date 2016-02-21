@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Warehouse.Wpf.Module.Main.Converters
+namespace Warehouse.Wpf.UI.Converters
 {
     public class NdVisibilityConverter : IValueConverter
     {

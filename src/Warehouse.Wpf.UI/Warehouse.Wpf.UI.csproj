@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\Products\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Products\Picker\ProductsPickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +145,9 @@
   <ItemGroup>
     <Compile Include="Converters\LongToFileSizeConverter.cs" />
     <Compile Include="Converters\MemoMarginConverter.cs" />
+    <Compile Include="Converters\NdTotalConverter.cs" />
+    <Compile Include="Converters\NdValueConverter.cs" />
+    <Compile Include="Converters\NdVisibilityConverter.cs" />
     <Compile Include="Converters\ProductFirmaToBrushConverter.cs" />
     <Compile Include="Converters\RelativeTimeConverter.cs" />
     <Compile Include="Converters\StringJoinConverter.cs" />
@@ -160,6 +167,10 @@
       <DependentUpon>ProductPickerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Files\ProductPickerViewModel.cs" />
+    <Compile Include="Modules\Products\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\MainViewModel.cs" />
     <Compile Include="Modules\Settings\ChangePasswordArgs.cs" />
     <Compile Include="Modules\Settings\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
@@ -260,6 +271,10 @@
       <Project>{84faa228-9c42-48b7-923c-bcc6ec9f10f7}</Project>
       <Name>Warehouse.Wpf.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.Events\Warehouse.Wpf.Events.csproj">
+      <Project>{bfad256a-278f-4289-a267-131911df50c0}</Project>
+      <Name>Warehouse.Wpf.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Infrastructure\Warehouse.Wpf.Infrastructure.csproj">
       <Project>{75a26dfe-9711-4e5c-bc3d-50d2f8292391}</Project>
       <Name>Warehouse.Wpf.Infrastructure</Name>
@@ -267,6 +282,10 @@
     <ProjectReference Include="..\Warehouse.Wpf.Models\Warehouse.Wpf.Models.csproj">
       <Project>{b1784d93-0eb5-4b35-a40e-9fbc125d829c}</Project>
       <Name>Warehouse.Wpf.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Wpf.SignalR\Warehouse.Wpf.SignalR.csproj">
+      <Project>{e6a0bb68-a5de-4fe8-9c3e-ec60cc089fba}</Project>
+      <Name>Warehouse.Wpf.SignalR</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

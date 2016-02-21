@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.PubSubEvents;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
 using Warehouse.Wpf.Auth;
 using Warehouse.Wpf.Auth.Interfaces;
 using Warehouse.Wpf.Data.Interfaces;
@@ -19,7 +19,7 @@ using Warehouse.Wpf.Infrastructure.Interfaces;
 using Warehouse.Wpf.Models;
 using Warehouse.Wpf.SignalR.Interfaces;
 
-namespace Warehouse.Wpf.Module.Main
+namespace Warehouse.Wpf.UI.Modules.Products
 {
     public class MainViewModel : BindableBase, INavigationAware
     {
@@ -62,13 +62,13 @@ namespace Warehouse.Wpf.Module.Main
             }
         }
 
-        public ICollectionView Items { get { return cvs.View; } }
+        public ICollectionView Items => cvs.View;
         public ICommand OpenProductCommand { get; private set; }
         public ICommand CreateProductCommand { get; private set; }
-        public ICommand ChangePriceCommand { get { return changePriceCommand; } }
-        public ICommand DeleteCommand { get { return deleteCommand; } }
+        public ICommand ChangePriceCommand => changePriceCommand;
+        public ICommand DeleteCommand => deleteCommand;
         //public IInteractionRequest ChangePriceRequest { get { return changePriceRequest; } }
-        public IInteractionRequest DeleteRequest { get { return deleteRequest; } }
+        public IInteractionRequest DeleteRequest => deleteRequest;
         public bool IsEditor { get; private set; }
         public bool IsAdmin { get; private set; }
 

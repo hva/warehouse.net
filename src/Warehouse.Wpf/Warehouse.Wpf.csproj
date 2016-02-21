@@ -201,10 +201,6 @@
       <Project>{f8fbae74-cc03-4e38-8762-3de33f2a83cd}</Project>
       <Name>Warehouse.Wpf.Module.ChangePrice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warehouse.Wpf.Module.Main\Warehouse.Wpf.Module.Main.csproj">
-      <Project>{F575F4B8-5B11-4D82-8367-ED16D7F0B46C}</Project>
-      <Name>Warehouse.Wpf.Module.Main</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warehouse.Wpf.Module.ProductDetail\Warehouse.Wpf.Module.ProductDetail.csproj">
       <Project>{E4E36694-80E5-47B2-A11C-C48346489AB5}</Project>
       <Name>Warehouse.Wpf.Module.ProductDetail</Name>
