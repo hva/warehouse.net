@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using System.Configuration;
+using MongoDB.Driver;
 using Warehouse.Server.Models;
 
 namespace Warehouse.Server.Data
@@ -9,7 +10,8 @@ namespace Warehouse.Server.Data
 
         public MongoContext()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
+            var connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
+            var client = new MongoClient(connectionString);
             var server = client.GetServer();
             database = server.GetDatabase("skill");
         }
