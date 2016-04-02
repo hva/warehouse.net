@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Warehouse.Utils.Backup
 {
@@ -99,15 +100,7 @@ namespace Warehouse.Utils.Backup
 
         private void LoadToken()
         {
-            var fileName = Path.Combine(appPath, "token.txt");
-            if (!File.Exists(fileName))
-            {
-                throw new FileNotFoundException("file not found", fileName) ;
-            }
-            using (var reader = new StreamReader(fileName))
-            {
-                token = reader.ReadLine();
-            }
+            token = ConfigurationManager.AppSettings["token"];
             if (string.IsNullOrEmpty(token))
             {
                 throw new Exception("token is empty");
@@ -163,8 +156,11 @@ namespace Warehouse.Utils.Backup
 
         private async Task UploadFile()
         {
+            var timeoutString = ConfigurationManager.AppSettings["uploadTimeout"];
+            var timeout = TimeSpan.Parse(timeoutString);
+
             var zipFullPath = Path.Combine(appPath, zipFile);
-            using (var client = new HttpClient())
+            using (var client = new HttpClient { Timeout = timeout})
             using (var stream = File.OpenRead(zipFullPath))
             using (var content = new StreamContent(stream))
             {
