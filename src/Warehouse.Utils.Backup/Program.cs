@@ -22,7 +22,10 @@ namespace Warehouse.Utils.Backup
 
         private static void ServiceSetup(ISchedulingService service)
         {
-            service.At("0 22 * * *").Run<Job>();
+            service
+                .At("0 22 * * *")
+                .Run<Job>()
+                .Named("mongo");
         }
     }
 }

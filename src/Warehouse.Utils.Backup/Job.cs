@@ -29,6 +29,13 @@ namespace Warehouse.Utils.Backup
                 var task = ExecuteAsync();
                 task.Wait();
             }
+            catch (AggregateException e)
+            {
+                foreach (var inner in e.Flatten().InnerExceptions)
+                {
+                    logger.Error(inner.Message);
+                }
+            }
             catch (Exception e)
             {
                 logger.Error(e.Message);
@@ -109,7 +116,7 @@ namespace Warehouse.Utils.Backup
 
         private async Task CreateUploadPath()
         {
-            uploadPath = string.Format("skill-backup/{0:yyyy_MMM}", customerTime);
+            uploadPath = string.Format("skill-backup/{0:yyyy_MM}", customerTime);
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", token);
