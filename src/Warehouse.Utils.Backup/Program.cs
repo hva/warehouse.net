@@ -1,4 +1,5 @@
-﻿using NCron.Fluent.Crontab;
+﻿using System.Configuration;
+using NCron.Fluent.Crontab;
 using NCron.Fluent.Generics;
 using NCron.Service;
 using System.Diagnostics;
@@ -22,8 +23,9 @@ namespace Warehouse.Utils.Backup
 
         private static void ServiceSetup(ISchedulingService service)
         {
+            var crontab = ConfigurationManager.AppSettings["crontab"];
             service
-                .At("0 22 * * *")
+                .At(crontab)
                 .Run<Job>()
                 .Named("mongo");
         }

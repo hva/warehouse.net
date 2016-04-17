@@ -21,7 +21,7 @@ namespace Warehouse.Utils.Backup
         private string token;
         private string uploadLink;
         private string uploadPath;
-        private readonly DateTime customerTime = DateTime.UtcNow.AddHours(3);
+        private readonly DateTime customerTime = DateTime.UtcNow;
 
         public override void Execute()
         {
